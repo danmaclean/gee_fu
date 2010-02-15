@@ -1,0 +1,24 @@
+--- 
+institution: 
+  name: your institute name
+  url: http://www.your_institute.org
+  logo: images/institute_logo.png
+service: 
+  title: My Great Genome Browser
+  version: 0.00000000001 alpha
+  description: A browser with all my best genes in it
+  access: public
+  format: Unspecified
+  server: Unspecified
+engineer: 
+  name: David Bowie
+  email: ziggy@plays.guit.ar!
+genome: 
+  assemblies: 
+  - size: 30427671
+    id: Chr1
+  - size: 20316570
+    id: Chr2
+  version: 0.1
+  description: My great genome
+  species: Modelus organisma

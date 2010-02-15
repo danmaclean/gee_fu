@@ -1,0 +1,140 @@
+/*
+plugins
+
+Created by macleand on 2010-01-07.
+Copyright (c) 2010 __MyCompanyName__. All rights reserved.
+*/
+
+.highlighted { 
+	background-color:yellow!important;
+	opacity:.4;
+	filter:alpha(opacity=40);
+}
+
+.container { position:absolute; height:8px; cursor:pointer; border-collapse:collapse; }
+/* .container .arrow_right { background: url('http://www.annoj.org/img/sprites_small_models.png') 0px -112px; height:8px; width:5px; }
+.container .arrow_left  { background: url('http://www.annoj.org/img/sprites_small_models.png') 0px -122px; height:8px; width:5px; } */
+.container .title {	font-family:arial, verdana, helvetica; font-size:10px; height:10px; padding:0px 4px;}
+.container .body { height:8px; }
+.container .body .model { height:8px; position:relative; }
+.container .body .model .component { height:8px; position:absolute; top:0px; }
+
+.label {
+	padding-left  : 2px;
+	padding-right : 2px;
+	font-family : arial,helvetica,monospace;
+}
+.arrowLeft  { background: url('../images/left.png');  }
+.arrowRight { background: url('../images/right.png'); }
+
+.mRNA            { background: url('../images/bar.png') repeat-x; }
+.five_prime_UTR  { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px;}
+.three_prime_UTR { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px;}
+.CDS             { background: url('../images/green.png') repeat-x; border-style:solid; border-width: 1px;}
+/*.exon            { background: url('http://www.annoj.org/img/models/purple.gif') repeat-x; }
+.polypeptide     { background: url('http://www.annoj.org/img/models/orange.gif') repeat-x; } */
+.gene            { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px; }
+.repeat_region   { background: url('../images/orange.png') repeat-x; border-style:solid; border-width: 1px;}
+.ncRNA  { background: url('../images/bar.png') repeat-x; }
+.tRNA   { background: url('../images/bar.png') repeat-x; }
+.snoRNA { background: url('../images/bar.png') repeat-x; }
+.miRNA  { background: url('../images/bar.png') repeat-x; }
+.snRNA  { background: url('../images/bar.png') repeat-x; }
+.rRNA   { background: url('../images/bar.png') repeat-x; }
+
+.pseudogenic_exon       { background: url('../images/grey.png') repeat-x; }
+.pseudogenic_transcript { background: url('../images/grey.png') repeat-x;  }
+
+.line_above {background-color:rgb(144,100,100);}
+.line_below {background-color:rgb(100,144,100);}
+
+#repeats .cds, .mule { background: url('../images/orange.png') repeat-x; }
+#repeats .mRNA, .tr     { background: url('../images/purple.png') repeat-x; }
+#repeats .mask, .mask { background: url('../images/grey.png')   repeat-x; }
+
+.gi { font-family:arial, verdana, helvetica; font-size:10px; top:2px; border-bottom:dotted black 1px;}
+
+
+/*
+	Styles for the Solexa reads plugin (includes boxes of stacked reads and a histogram)
+*/
+.AJ_above .read {
+	background-color:rgb(34,76,171);
+	border:solid rgb(0,0,0) 1px;
+}
+.AJ_below .read {
+	background-color:rgb(140,100,100);
+	border:solid rgb(226,167,0) 1px;
+}
+.multi_mapper {
+	opacity:.4;
+	filter:alpha(opacity=40);
+}
+.multi_copies {
+	border:solid black 1px !important;
+}
+.sm21mers {
+	background-color:blue !important;
+}
+.sm22mers {
+	background-color:green !important;
+}
+.sm23mers {
+	background-color:orange !important;
+}
+.sm24mers {
+	background-color:red !important;
+}
+.Others {
+	background-color:yellow !important;
+}
+
+
+.A { 
+	background-color:rgb(255,255,45);
+	background-image:url('../images/A.png');
+}
+.T { 
+	background-color:rgb(255,36,18);
+	background-image:url('../images/T.png');
+}
+.C { 
+	background-color:rgb(33,244,67);
+	background-image:url('../images/C.png');
+}
+.G { 
+	background-color:rgb(45,60,255);
+	background-image:url('../images/G.png');
+}
+.N { 
+	background-color:rgb(125,125,125);
+	background-image:url('../images/N.png');
+}
+
+/*
+	Styles for the WGTA track
+*/
+.AJ_xslider_bg {
+	position:relative;
+	height:16px;
+	width:80px;
+	background:url('http://www.annoj.org/img/sprites_slider.png') 0px -1px;
+}
+.AJ_xslider_fg {
+	position:absolute;
+	top:0px;
+	left:0px;
+	background:url('http://www.annoj.org/img/sprites_slider.png') 0px -18px;
+	cursor:pointer;
+	height:16px;
+	width:14px;
+}
+.CG {
+	background-color:rgb(180,180,100);
+}
+.CHH {
+	background-color:rgb(180,150,150);
+}
+.CHG {
+	background-color:rgb(100,100,180);
+}
