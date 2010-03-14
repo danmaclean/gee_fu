@@ -81,7 +81,7 @@ namespace :add do
 
      
      gff_id = record.attributes.select { |a| a.first.match('ID') }
-     gff_id = gff_id.last if gff_id#flatten.delete_if{|x| x == "ID"} #get rid of the ID part of the array
+     gff_id = gff_id.flatten.last if gff_id #flatten.delete_if{|x| x == "ID"} #get rid of the ID part of the array
 
 
      note = record.attributes.select{|a| a.first.match('Note')}
@@ -89,7 +89,7 @@ namespace :add do
      qual = nil
 
      if note
-       note = note.last.to_s #flatten.delete_if{|x| x == "Note"}.to_s
+       note = note.flatten.last.to_s #flatten.delete_if{|x| x == "Note"}.to_s
        note.match(/<sequence>(.*)<\/sequence>/)
        seq = $1
        note.match(/<quality>(.*)<\/quality>/)
