@@ -1,3 +1,21 @@
+namespace :filter do
+  desc "filters non annoJ supported feature types from a gene models gff"
+  task :gene_model_features => :environment do
+    require 'bio'
+    require 'json'
+    unless ENV['gff']
+      puts "Need a gff file gff=some_file "
+      exit
+    end
+    allowed_features = %w{CDS gene mRNA five_prime_UTR three_prime_utr} 
+    File.open( "#{ENV['gff']}" ).each do |entry|
+      record = Bio::GFF::GFF3::Record.new(entry)
+      puts record if allowed_features.include?(record.feature)
+    end  
+  end
+end
+
+
 namespace :add do
   desc "add features in an experiment (track) to the database"
   task :features => :environment do

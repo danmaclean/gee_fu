@@ -76,58 +76,100 @@ class FeaturesController < ApplicationController
     return response
   end
   def get_histogram(features)
-    return [] if features.empty?
-    start = features.first.start
-    pluses = Array.new(features.last.end - features.first.start + 1, 0)
-    minuses = Array.new(features.last.end - features.first.start + 1, 0)
-    features.each do |f|
-      for i in f.start .. f.end
-        case f.strand
-        when '+'
-          pluses[i - start] = pluses[i - start] + 1
-        else
-          minuses[i - start] = minuses[i - start] + 1
-        end
-      end
-    end
-    result = Array.new
-    while start < features.last.end
-      result << [start, pluses.slice!(0 .. 9).max, minuses.slice!(0 .. 9).max]
-      start += 10
-    end
-    return result
-    #hist = {}
-    #for pos in features.first.start .. features.last.end
-    #  hist[pos] = {}
-    #  hist[pos]['+'] = 0
-    #  hist[pos]['-'] = 0
-    #end
-    #features.each do |f|
-    #  for pos in f.start .. f.end
-    #    hist[pos][f.strand] = hist[pos][f.strand] + 1 
-    #  end
-    #end
-    #result = hist  
-    #result = []
-    ####go through the hist and send [start, plus_intens, minus_intens] for each window of bases
-      ##send max intensity in steps of ten
- 
-    #start = features.first.start.to_i
-    #while start < features.last.end
-    #  plus_intens = 0
-    #  minus_intens = 0
-    #  for pos in start .. (start + 9)
+     return [] if features.empty?
+     results = []
+     #lower limit
+     left = features.first.start - (features.first.start % 10)
+     #upper limit
+     right = features.last.end + (features.last.end % 10)
+     #number of arrays
+     start = left
+     while start <= right
+       results << [start, 0, 0]
+       start += 10
+     end
+     features.each do |f|
+       window = f.start - (f.start % 10)
+       start_index = nil
+       if window == left 
+          start_index = 0
+       else
+         start_index = (window - left) / 10
+       end
+       end_index = start_index + (((f.end - f.start) - ((f.end - f.start) % 10)) / 10)
+       for index in start_index .. end_index
+         break if index > results.length
+         if f.strand.match(/\+/)
+           results[index][1] += 1 
+         else
+           results[index][2] += 1
+         end
+       end
+     end
+     #temp = [start, 0, 0]
+     #features.each do |f|
+      # if f.start > start + 10
+      #   results << temp
+      #   start = start + 10
+      #   temp = [start, 0,0]
+      # end
+      # if f.strand.match(/\+/)
+      #   temp[1] += 1
+      # else
+      #   temp[2] += 1
+      # end
+     #end
+     return results
+     #pluses = Array.new(features.last.end - features.first.start + 1, 0)
+     #minuses = Array.new(features.last.end - features.first.start + 1, 0)
+     #features.each do |f|
+     #  for i in f.start .. f.end
+     #    case f.strand
+     #    when '+'
+     #      pluses[i - start] = pluses[i - start] + 1
+     #   else
+     #      minuses[i - start] = minuses[i - start] + 1
+     #    end
+     #  end
+     #end
+     #result = Array.new
+     #while start < features.last.end
+     #  result << [start, pluses.slice!(0 .. 8).max, minuses.slice!(0 .. 8).max]
+     #  start += 10
+     #end
+     #return result
+     #hist = {}
+     #for pos in features.first.start .. features.last.end
+     #  hist[pos] = {}
+     #  hist[pos]['+'] = 0
+     #  hist[pos]['-'] = 0
+     #end
+     #features.each do |f|
+     #  for pos in f.start .. f.end
+     #    hist[pos][f.strand] = hist[pos][f.strand] + 1 
+     #  end
+     #end
+     #result = hist  
+     #result = []
+     ####go through the hist and send [start, plus_intens, minus_intens] for each window of bases
+       ##send max intensity in steps of ten
 
-    #    break if pos > features.last.end
-    #    plus_intens = hist[pos]['+'] if hist[pos]['+'] > plus_intens      
-    #    minus_intens = hist[pos]['-'] if hist[pos]['-'] > minus_intens
-    #  end
+     #start = features.first.start.to_i
+     #while start < features.last.end
+     #  plus_intens = 0
+     #  minus_intens = 0
+     #  for pos in start .. (start + 9)
 
-    #  result << [start, plus_intens, minus_intens]
-    #  start += 10
-    #end
-    #return result
-  end
+     #    break if pos > features.last.end
+     #    plus_intens = hist[pos]['+'] if hist[pos]['+'] > plus_intens      
+     #    minus_intens = hist[pos]['-'] if hist[pos]['-'] > minus_intens
+     #  end
+
+     #  result << [start, plus_intens, minus_intens]
+     #  start += 10
+     #end
+     #return result
+   end
   def get_boxes(features)
     result = {}
     result[:watson] = features.select{|f| f.strand == '+' }.collect{|e| e.to_box}
