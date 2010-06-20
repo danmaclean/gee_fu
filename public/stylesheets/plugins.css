@@ -31,9 +31,13 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 .five_prime_UTR  { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px;}
 .three_prime_UTR { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px;}
 .CDS             { background: url('../images/green.png') repeat-x; border-style:solid; border-width: 1px;}
+.exon             { background: url('../images/green.png') repeat-x; border-style:solid; border-width: 1px;}
 /*.exon            { background: url('http://www.annoj.org/img/models/purple.gif') repeat-x; }
 .polypeptide     { background: url('http://www.annoj.org/img/models/orange.gif') repeat-x; } */
 .gene            { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px; }
+.sequence_feature   { background: url('../images/orange.png') repeat-x; border-style:solid; border-width: 1px;}
+.match {background: url('../images/bar.png') repeat-x;}
+.match_part   { background: url('../images/yellow.png') repeat-x; border-style:solid; border-width: 1px;}
 .repeat_region   { background: url('../images/orange.png') repeat-x; border-style:solid; border-width: 1px;}
 .ncRNA  { background: url('../images/bar.png') repeat-x; }
 .tRNA   { background: url('../images/bar.png') repeat-x; }
@@ -41,6 +45,8 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 .miRNA  { background: url('../images/bar.png') repeat-x; }
 .snRNA  { background: url('../images/bar.png') repeat-x; }
 .rRNA   { background: url('../images/bar.png') repeat-x; }
+.start_codon   { background: url('../images/yellow.png') repeat-x; border-style:solid; border-width: 1px;}
+.stop_codon   { background: url('../images/yellow.png') repeat-x; border-style:solid; border-width: 1px;}
 
 .pseudogenic_exon       { background: url('../images/grey.png') repeat-x; }
 .pseudogenic_transcript { background: url('../images/grey.png') repeat-x;  }

@@ -1,0 +1,16 @@
+<h1>Gee-fu tools</h1>
+<h2>extract some genomic sequence</h2>
+<%= form_tag( {:controller => "tools", :action => "genomic_sequence"}, :method => "post", :multipart => true ) %>
+<h3>Select one of the variants of the genome in the database</h3>
+<% @genomes.each do |g| %>
+	<%= radio_button_tag("id", "#{g.id}") %>  <%= label_tag(:id, "ID = #{g.id}") %>
+<% end %>
+<h3>Enter a reference sequence from which to extract .. </h3>
+<%= text_area_tag(:reference, "Enter name of reference sequence here", :size => "40 x 1") %>
+<h3>Enter a start and end position</h3>
+<%= text_area_tag(:start, "start", :size => "10 x 1")%> <%= text_area_tag(:end, "end", :size => "10 x 1")%>
+<h3>Select strand</h3>
+<%= radio_button_tag(:strand, '+') %>  <%= label_tag(:strand_plus, '+') %>
+<%= radio_button_tag(:strand, '-') %>  <%= label_tag(:strand_minus, '-') %>
+<br />
+<%= submit_tag "extract this sequence" %>

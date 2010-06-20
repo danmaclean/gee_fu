@@ -3,24 +3,23 @@ tracks:
       name: My Gene Models Track
       type: ModelsTrack
       path: Gene Models
-      data: /features/lane/1
+      data: /features/annoj/1
       showControls: true
       height: 80
     - id: 2
-      name: Repeats
-      type: MaskTrack
-      path: Repeats
-      data: /features/lane/2
-      showControls: true
-      minHeight: 20
-      maxHeight: 60
-      height: 20
-      single: true
-    - id: 3
-      name: Reads
+      name: Reads from an RDBMS provided experiment loaded via gff
       type: ReadsTrack
       path: Reads
-      data: /features/lane/3
+      data: /features/annoj/2
+      showControls: true
+      minHeight: 20
+      maxHeight: 500
+      height: 70
+    - id: 3
+      name: Reads from a bam file stored in public/bam
+      type: ReadsTrack
+      path: Reads
+      data: /features/annoj/3
       maxHeight: 500
       height: 70
 #A list of tracks that will be active by default (use the ID of the track)
@@ -29,7 +28,7 @@ active:
     - 2
     - 3
 #genome - the service that knows about the genome
-genome: genomes/1
+genome: genomes/annoj/1
 # bookmarks - the service that keeps the bookmarks
 bookmarks: 
 #css - a list of services or locations for css (optional)

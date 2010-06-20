@@ -9,14 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100130212311) do
+ActiveRecord::Schema.define(:version => 20100614184007) do
 
   create_table "experiments", :force => true do |t|
-    t.string "name",                        :null => false
-    t.string "description", :limit => 1024, :null => false
-    t.text   "institution"
-    t.text   "engineer"
-    t.text   "service"
+    t.string  "name",                                                      :null => false
+    t.string  "description",    :limit => 1024,                            :null => false
+    t.text    "institution"
+    t.text    "engineer"
+    t.text    "service"
+    t.boolean "uses_bam_file",                 :default => false
+    t.string  "bam_file_path",                  :default => "public/bam/"
+    t.integer "genome_id", :null => false
   end
 
   create_table "features", :force => true do |t|
@@ -34,9 +37,10 @@ ActiveRecord::Schema.define(:version => 20100130212311) do
     t.text    "sequence"
     t.text    "read_id"
     t.text    "quality"
+    t.integer "reference_id"
   end
 
-  add_index "features", ["experiment_id", "reference", "start", "end"], :name => "index_features_on_experiment_id_and_reference_and_start_and_end"
+  add_index "features", ["experiment_id", "reference", "start", "end"], :name => "index_features_on_ref_exp_start_and_end"
 
   create_table "features_parents", :id => false, :force => true do |t|
     t.integer "feature_id"
@@ -49,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20100130212311) do
     t.string "engineer"
     t.string "service"
     t.string "institution"
-    t.text "genome"
+    t.text   "genome"
   end
 
   create_table "parents", :force => true do |t|
@@ -57,5 +61,16 @@ ActiveRecord::Schema.define(:version => 20100130212311) do
   end
 
   add_index "parents", ["parent_feature"], :name => "index_parents_on_parent_feature"
+
+  create_table "references", :force => true do |t|
+    t.string  "name",      :null => false
+    t.integer "length",    :null => false
+    t.integer "genome_id", :null => false
+  end
+
+  create_table "sequences", :force => true do |t|
+    t.binary  "sequence",     :limit => 2147483647
+    t.integer "reference_id"
+  end
 
 end

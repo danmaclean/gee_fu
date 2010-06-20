@@ -1,0 +1,6 @@
+<div style="font-family: monospace">
+<% id = @result[:name] + ' ' + @result[:start].to_s + '..' + @result[:end].to_s %>
+<% require 'bio' %> 
+<% seq = Bio::Sequence::NA.new(@result[:sequence].to_s) %>
+<%= seq.to_fasta(id, 100).to_s.sub!(/\n/, "<br />") %>
+</div>

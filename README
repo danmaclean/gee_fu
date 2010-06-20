@@ -12,7 +12,12 @@ gee_fu requires a working internet connection and the following software and pac
 
 Ruby  1.8.7 or later
 Rails  2.3.4 or later
-BioRuby  1.3.1 or later
+
+These rubygems
+BioRuby 1.3.1 or later
+JSON 
+FFI 0.6.3 or later
+
 You will also require a RDBMS such as mySQL, ORACLE, PostGreSQL 
 
 
@@ -24,3 +29,17 @@ You can extend the database exactly as if it were any other Rails application. S
 
 Where to find more info
 If you get really frustrated with the software, feel free to complain to me dan.maclean@tsl.ac.uk. I freely admit its early days for this project so it is likely to wobble, however, a lot of your initial problems will be answered in the Rails community pages, please look there if your problem looks like it might be on related to Rails more directly than this particular instance of a Rails app.
+
+
+
+Setup.
+rake db:create
+rake add:assembly_to_yml fasta=public/sequences/sample_reference_TAIR9_Chr1.fna
+rake db:schema:load
+rake add:config_to_db
+rake create:config
+rake add:features desc="TAIR 9 Sample Features" exp="gene_models" gff=public/sample_gffs/sample_features.gff genome=1
+rake add:features desc="sample_reads" exp="gff_format_reads_from_rdbms" gff=public/sample_gffs/sample_reads.gff genome=1
+rake add:features bam=public/bam/aln.sort.bam exp='bam format sample reads from bam file' desc='sample reads from bam' genome=1 
+
+

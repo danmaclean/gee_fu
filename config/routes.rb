@@ -1,8 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
   
   
-  map.resources :features, :genomes
+  map.resources :features, :genomes, :experiments, :references, :tools 
   
+  map.connect 'features/objects', :controller => 'features', :action => 'objects'
+  map.connect 'features/depth', :controller => 'features', :action => 'depth'
+  map.connect 'tools/genomic_sequence', :controller => 'tools', :action => 'genomic_sequence'
+  
+  #map.connect 'experiments/index', :controller => 'experiments', :action => 'list'
+  #map.connect 'genomes/index', :controller => 'genomes', :action => 'list'  
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -45,4 +51,5 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing or commenting them out if you're using named routes and resources.
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format' 
+  map.connect ':controller/:action.:format'
   end

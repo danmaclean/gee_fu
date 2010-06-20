@@ -1,24 +1,22 @@
 --- 
 institution: 
-  name: your institute name
-  url: http://www.your_institute.org
+  name: Your Institute
   logo: images/institute_logo.png
+  url: http://www.your_place.etc
 service: 
-  title: My Great Genome Browser
-  version: 0.00000000001 alpha
-  description: A browser with all my best genes in it
-  access: public
   format: Unspecified
+  title: Sample GeeFu served browser (TAIR 9 Gene Models)
   server: Unspecified
-engineer: 
-  name: David Bowie
-  email: ziggy@plays.guit.ar!
+  version: Vers 1
+  access: public
+  description: Free text description of the service
 genome: 
   assemblies: 
   - size: 30427671
     id: Chr1
-  - size: 20316570
-    id: Chr2
-  version: 0.1
-  description: My great genome
-  species: Modelus organisma
+  version: TAIR9
+  description: Chr1 from TAIR9
+  species: Arabidopsis thaliana
+engineer: 
+  name: Mick Jagger
+  email: street.fighting.man@stones.net
