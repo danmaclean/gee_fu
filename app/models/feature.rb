@@ -1,4 +1,4 @@
-class Feature < ActiveRecord::Base
+class Feature <
   belongs_to :assembly
   belongs_to :experiment
   has_and_belongs_to_many :parents
@@ -13,7 +13,8 @@ class Feature < ActiveRecord::Base
     sam = Bio::DB::Sam.new({:bam=>bam_file_path})
     features = []
     sam.open
-    sam.fetch(reference, start, stop).each do |a|
+      
+    fetchAlignment = Proc.new do |a|
       a.query_strand ? strand = '+'  : strand = '-'
       features << Feature.new (
         :reference => reference,
@@ -28,10 +29,14 @@ class Feature < ActiveRecord::Base
         :score => '.',
         :experiment_id => experiment_id,
         :gff_id => nil,
-        :reference_id =>  reference.id
-        
-      )
+        :reference_id =>  reference.id 
+      )   
+      0  
     end
+      
+    
+    sam.fetch_with_function(reference, start, stop, fetchAlignment)
+    
     sam.close
     features
   end
