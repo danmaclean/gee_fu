@@ -3,7 +3,7 @@ class Feature < ActiveRecord::Base
   belongs_to :experiment
   has_and_belongs_to_many :parents
   before_destroy :destroy_parents
-  
+  require 'MD5'
   class << self; attr_accessor :allowed_read_types end
   @allowed_read_types = %w[SO:0001423 dye_terminator_read SO:0001424 pyrosequenced_read SO:0001425 ligation_based_read SO:0001426 polymerase_synthesis_read SO:0000150 read]
 
@@ -13,11 +13,12 @@ class Feature < ActiveRecord::Base
     sam = Bio::DB::Sam.new({:bam=>bam_file_path})
     features = []
     sam.open
-    sam.fetch(reference, start, stop).each do |a|
+    sam.fetch(reference.name, start, stop).each do |a|
       a.query_strand ? strand = '+'  : strand = '-'
-      features << Feature.new (
-        :reference => reference,
-        :start => a.pos,
+      
+      features << Feature.new(
+        :reference => reference.name,
+        :start => a.pos - 1,
         :end => a.calend,
         :strand => strand,
         :sequence => a.seq,
@@ -72,10 +73,18 @@ class Feature < ActiveRecord::Base
     not self.parents[0].nil?
   end
   def to_box
-    [self.id, self.start, (self.end - self.start) - 1, '1', '1', ""]
+    if self.id.nil?
+      [self.object_id.to_s, self.start, (self.end - self.start) - 1, '1', '1', ""]
+    else
+      [self.id, self.start, (self.end - self.start) - 1, '1', '1', ""]
+    end
   end
   def to_read
+    if self.id.nil? 
+      [self.object_id.to_s, self.start, (self.end - self.start) - 1, '1', '1', self.sequence]
+    else
       [self.id, self.start, (self.end - self.start) - 1, '1', '1', self.sequence]
+    end
   end
   def to_annoj
       case self.feature
