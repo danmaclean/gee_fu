@@ -9,15 +9,16 @@ class Feature < ActiveRecord::Base
 
   def self.find_by_bam(reference,start,stop,bam_file_path,experiment_id,genome_id)
     require "#{RAILS_ROOT}/lib/bio/db/sam"
-    reference = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ reference }", "#{genome_id}"])
+    ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ reference }", "#{genome_id}"])
     sam = Bio::DB::Sam.new({:bam=>bam_file_path})
     features = []
     sam.open
-    sam.fetch(reference.name, start, stop).each do |a|
+      
+    fetchAlignment = Proc.new do |a|
       a.query_strand ? strand = '+'  : strand = '-'
       
       features << Feature.new(
-        :reference => reference.name,
+        :reference => ref.name,
         :start => a.pos - 1,
         :end => a.calend,
         :strand => strand,
@@ -29,10 +30,14 @@ class Feature < ActiveRecord::Base
         :score => '.',
         :experiment_id => experiment_id,
         :gff_id => nil,
-        :reference_id =>  reference.id
-        
-      )
+        :reference_id =>  ref.id 
+      )   
+      0  
     end
+      
+    
+    sam.fetch_with_function(reference, start, stop, fetchAlignment)
+    
     sam.close
     features
   end
