@@ -6,7 +6,7 @@ module Bio
     module SAM
       module Tools
         extend FFI::Library
-        ffi_lib 'libbam'
+        ffi_lib'libbam'
         attach_function :fai_build, [ :string ], :int
         attach_function :fai_destroy, [ :pointer ], :void
         attach_function :fai_load, [ :string ], :pointer

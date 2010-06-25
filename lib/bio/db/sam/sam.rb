@@ -5,14 +5,14 @@
 #  Created by Ricardo Ramirez on 3/25/10.
 #
 require 'rubygems'
-require 'ffi'
+require'ffi'
 require 'bio/db/sam/bam'
 module Bio
   module DB
     module SAM
       module Tools
         extend FFI::Library
-        ffi_lib 'libbam'
+        ffi_lib'libbam'
 
 #        typedef struct {
 #        	int32_t n_targets;
