@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_histogram (FeaturesController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 197</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
+     <span class="ruby-keyword kw">return</span> [] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">features</span>.<span class="ruby-identifier">empty?</span>
+     <span class="ruby-identifier">results</span> = []
+     <span class="ruby-comment cmt">#lower limit</span>
+     <span class="ruby-identifier">left</span> = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
+     <span class="ruby-comment cmt">#upper limit</span>
+     <span class="ruby-identifier">right</span> = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">features</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
+     <span class="ruby-comment cmt">#number of arrays</span>
+     <span class="ruby-identifier">start</span> = <span class="ruby-identifier">left</span>
+     <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">right</span>
+       <span class="ruby-identifier">results</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">start</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>]
+       <span class="ruby-identifier">start</span> <span class="ruby-operator">+=</span> <span class="ruby-value">10</span>
+     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-identifier">features</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+       <span class="ruby-identifier">window</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
+       <span class="ruby-identifier">start_index</span> = <span class="ruby-keyword kw">nil</span>
+       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">window</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">left</span> 
+          <span class="ruby-identifier">start_index</span> = <span class="ruby-value">0</span>
+       <span class="ruby-keyword kw">else</span>
+         <span class="ruby-identifier">start_index</span> = (<span class="ruby-identifier">window</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span>) <span class="ruby-operator">/</span> <span class="ruby-value">10</span>
+       <span class="ruby-keyword kw">end</span>
+       <span class="ruby-identifier">end_index</span> = <span class="ruby-identifier">start_index</span> <span class="ruby-operator">+</span> (((<span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>) <span class="ruby-operator">-</span> ((<span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>) <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)) <span class="ruby-operator">/</span> <span class="ruby-value">10</span>)
+       <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">index</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">start_index</span> <span class="ruby-operator">..</span> <span class="ruby-identifier">end_index</span>
+         <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">length</span>
+         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\+/</span>)
+           <span class="ruby-identifier">results</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+         <span class="ruby-keyword kw">else</span>
+           <span class="ruby-identifier">results</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+         <span class="ruby-keyword kw">end</span>
+       <span class="ruby-keyword kw">end</span>
+     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt">#temp = [start, 0, 0]</span>
+     <span class="ruby-comment cmt">#features.each do |f|</span>
+      <span class="ruby-comment cmt"># if f.start &gt; start + 10</span>
+      <span class="ruby-comment cmt">#   results &lt;&lt; temp</span>
+      <span class="ruby-comment cmt">#   start = start + 10</span>
+      <span class="ruby-comment cmt">#   temp = [start, 0,0]</span>
+      <span class="ruby-comment cmt"># end</span>
+      <span class="ruby-comment cmt"># if f.strand.match(/\+/)</span>
+      <span class="ruby-comment cmt">#   temp[1] += 1</span>
+      <span class="ruby-comment cmt"># else</span>
+      <span class="ruby-comment cmt">#   temp[2] += 1</span>
+      <span class="ruby-comment cmt"># end</span>
+     <span class="ruby-comment cmt">#end</span>
+     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">results</span>
+     <span class="ruby-comment cmt">#pluses = Array.new(features.last.end - features.first.start + 1, 0)</span>
+     <span class="ruby-comment cmt">#minuses = Array.new(features.last.end - features.first.start + 1, 0)</span>
+     <span class="ruby-comment cmt">#features.each do |f|</span>
+     <span class="ruby-comment cmt">#  for i in f.start .. f.end</span>
+     <span class="ruby-comment cmt">#    case f.strand</span>
+     <span class="ruby-comment cmt">#    when '+'</span>
+     <span class="ruby-comment cmt">#      pluses[i - start] = pluses[i - start] + 1</span>
+     <span class="ruby-comment cmt">#   else</span>
+     <span class="ruby-comment cmt">#      minuses[i - start] = minuses[i - start] + 1</span>
+     <span class="ruby-comment cmt">#    end</span>
+     <span class="ruby-comment cmt">#  end</span>
+     <span class="ruby-comment cmt">#end</span>
+     <span class="ruby-comment cmt">#result = Array.new</span>
+     <span class="ruby-comment cmt">#while start &lt; features.last.end</span>
+     <span class="ruby-comment cmt">#  result &lt;&lt; [start, pluses.slice!(0 .. 8).max, minuses.slice!(0 .. 8).max]</span>
+     <span class="ruby-comment cmt">#  start += 10</span>
+     <span class="ruby-comment cmt">#end</span>
+     <span class="ruby-comment cmt">#return result</span>
+     <span class="ruby-comment cmt">#hist = {}</span>
+     <span class="ruby-comment cmt">#for pos in features.first.start .. features.last.end</span>
+     <span class="ruby-comment cmt">#  hist[pos] = {}</span>
+     <span class="ruby-comment cmt">#  hist[pos]['+'] = 0</span>
+     <span class="ruby-comment cmt">#  hist[pos]['-'] = 0</span>
+     <span class="ruby-comment cmt">#end</span>
+     <span class="ruby-comment cmt">#features.each do |f|</span>
+     <span class="ruby-comment cmt">#  for pos in f.start .. f.end</span>
+     <span class="ruby-comment cmt">#    hist[pos][f.strand] = hist[pos][f.strand] + 1 </span>
+     <span class="ruby-comment cmt">#  end</span>
+     <span class="ruby-comment cmt">#end</span>
+     <span class="ruby-comment cmt">#result = hist  </span>
+     <span class="ruby-comment cmt">#result = []</span>
+     <span class="ruby-comment cmt">####go through the hist and send [start, plus_intens, minus_intens] for each window of bases</span>
+       <span class="ruby-comment cmt">##send max intensity in steps of ten</span>
+
+     <span class="ruby-comment cmt">#start = features.first.start.to_i</span>
+     <span class="ruby-comment cmt">#while start &lt; features.last.end</span>
+     <span class="ruby-comment cmt">#  plus_intens = 0</span>
+     <span class="ruby-comment cmt">#  minus_intens = 0</span>
+     <span class="ruby-comment cmt">#  for pos in start .. (start + 9)</span>
+
+     <span class="ruby-comment cmt">#    break if pos &gt; features.last.end</span>
+     <span class="ruby-comment cmt">#    plus_intens = hist[pos]['+'] if hist[pos]['+'] &gt; plus_intens      </span>
+     <span class="ruby-comment cmt">#    minus_intens = hist[pos]['-'] if hist[pos]['-'] &gt; minus_intens</span>
+     <span class="ruby-comment cmt">#  end</span>
+
+     <span class="ruby-comment cmt">#  result &lt;&lt; [start, plus_intens, minus_intens]</span>
+     <span class="ruby-comment cmt">#  start += 10</span>
+     <span class="ruby-comment cmt">#end</span>
+     <span class="ruby-comment cmt">#return result</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

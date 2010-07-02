@@ -1,59 +1,78 @@
+#Defines the URL methods that co-ordinate and respond to requests
+
 class FeaturesController < ApplicationController
-  # GET /features
-  # GET /features.xml
-  #require "bio/db/sam"
-  
+
+  #Standard REST request method 
+  #returns a hash summarising depth of feature object coverage for a nucleotides between start and stop on reference in experiment id
+  # => use /features/depth/id?params
+  # => required params: reference, start, end, id
+  # => optional params: format (xml/json default = xml),  
   def depth
-    nucleotide_hash = {'A' => 0, 'T' => 0, 'G' => 0, 'C' => 0, 'N' => 0, 'total' => 0}
+  
     comp_hash = {'A' => 'T', 'T' => 'A', 'G' => 'C', 'C' => 'G', 'N' => 'N'}
-    positions = Hash.new {|h,k| h[k] = nucleotide_hash}
-    features = find_in_range(params[:reference],params[:start],params[:end],params[:id])
+    positions = Hash.new {|h,k| h[k] = {
+        '+' => {
+          'A' => 0, 
+          'T' => 0, 
+          'G' => 0, 
+          'C' => 0, 
+          'N' => 0, 
+          'strand_total' => 0
+          }, 
+        '-' => {
+          'A' => 0, 
+          'T' => 0, 
+          'G' => 0, 
+          'C' => 0, 
+          'N' => 0, 
+          'strand_total' => 0
+          }, 
+        'position_total' => 0
+      } 
+    }
+    positions['region_total'] = 0
+    
+    features = Feature.find_in_range_no_overlap(params[:reference],params[:start],params[:end],params[:id])
     features.each do |f|
       if (f.sequence.match(/\w/))
-        #positions["#{f.start}"] = 1
-      f.sequence.split(//).each_index do |idx|
-        positions[idx] = 1
-      #  next if f.start.to_i + idx < params[:start].to_i or idx + f.start.to_i > params[:stop].to_i 
-      #    f.strand.match(/\+/) ? positions[idx + f.start.to_i][f.sequence[idx,1].upcase] += 1 : positions[idx + f.start.to_i][comp_hash[f.sequence[idx,1].upcase]] += 1 
-      #    positions[idx + f.start.to_i]['total'] += 1
+        (f.start .. f.end - 1).each_with_index do |i, idx|
+            positions[i][f.strand][f.sequence[idx,1]] += 1
+            positions[i][f.strand]['strand_total'] += 1
+            positions[i]['position_total'] += 1
+            positions['region_total'] += 1
         end
-      else
-        #positions = params
-        pos = f.start.to_i
-        stop = f.end.to_i
-        while pos <= stop do
-      #    next if f.start.to_i + idx < params[:start].to_i or idx + f.start.to_i > params[:stop].to_i
-          positions[pos] = 1
-          pos += 1
-       end
       end
     end
-    #positions = features
     respond(positions, params[:format])
   end
   
-  
+  #Standard REST request method 
+  #returns array of feature objects within or overlapping the given start and end on the reference in experiment
+  # => use /features/objects/id?params
+  # => required params: reference, start, end, id
+  # => optional params: format (xml or json, default xml), overlap (true or false, default = false), type (some GFF feature type) restrict objects by feature type  
   def objects
     objects = []
     params[:format] = 'xml' unless params[:format]
     if !params[:overlap].nil? and params[:overlap] == "true" #if we want to include objects that can fall onto the edge of the range
-      objects = find_in_range(params[:reference],params[:start],params[:end],params[:id])
+      objects = Feature.find_in_range(params[:reference],params[:start],params[:end],params[:id])
     else #if we want to include only objects entirely within the range
-      objects = find_in_range_no_overlap(params[:reference],params[:start],params[:end],params[:id])
-      #objects = params#find_in_range('chr1',3000,7000,1)
+      objects = Feature.find_in_range_no_overlap(params[:reference],params[:start],params[:end],params[:id])
     end
-  
     objects.delete_if {|obj| obj.feature != params[:type] } if !params[:type].nil?
-    #objects = params#find_in_range('chr1',3000,7000,1)
     respond(objects, params[:format])
   end
   
+  #Standard REST request method, not normally called directly
+  #takes provided objects and converts them to format before returning
   def respond(objects,format)
     respond_to do |format|
       format.json { render :json => objects, :layout => false }
       format.xml  { render :xml => objects, :layout => false }
     end
-  end 
+  end
+  #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
+  # => use /features/annoj/id 
   def annoj
     #annoj does this funny, makes posts for just getting information .. meh 
     #we dont want this sooo need to separate out the annoj get from the proper
@@ -82,6 +101,8 @@ class FeaturesController < ApplicationController
         render :json => @response, :layout => false
       end
   end
+  #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets reference track that is saved as experiment at id
+  # => use /features/chromosome/id
   def chromosome
     
     #a method for returning chromosome sequence as if it were a read to trick annoj into showing a reference sequence...
@@ -103,7 +124,7 @@ class FeaturesController < ApplicationController
       if annoj_params['action'] == 'range'
           #remember params[:id] is genome id and annoj_params['assembly'] is the chromosome
           sequence = Reference.find(:first, :conditions => {:genome_id => params[:id], :name => annoj_params['assembly']}).sequence.sequence
-          subseq = sequence[annoj_params['left'].to_i - 1..annoj_params['right'].to_i - 1]
+          subseq = sequence[annoj_params['left'].to_i..annoj_params['right'].to_i]
           f = Feature.new(
             :group => '.',
             :feature => 'chromosome',
@@ -148,6 +169,7 @@ class FeaturesController < ApplicationController
       render :json => @response, :layout => false
     end
   end
+  #AnnoJ request method, returns metadata on a track required by AnnoJ
   def syndicate(id)
     experiment = Experiment.find(id) 
     response = new_response
@@ -157,10 +179,11 @@ class FeaturesController < ApplicationController
     response[:data][:service] = YAML::load( "#{experiment.service}")
     return response
   end
+  #AnnoJ request method, returns data formatted as per request parameters for particular view 
   def range(assembly, left, right, id, bases, pixels)
     zoom_factor = bases.to_i / pixels.to_i
     response = new_response
-    features = find_in_range_no_overlap(assembly, left, right, id)
+    features = Feature.find_in_range_no_overlap(assembly, left, right, id)
     return response if features.empty?
     #case features.first.feature
     
@@ -187,6 +210,7 @@ class FeaturesController < ApplicationController
     end
     return response
   end
+  # Formatting method for range, AnnoJ only
   def get_histogram(features)
      return [] if features.empty?
      results = []
@@ -282,18 +306,21 @@ class FeaturesController < ApplicationController
      #end
      #return result
   end
+  # Formatting method for range, AnnoJ only
   def get_boxes(features)
     result = {}
     result[:watson] = features.select{|f| f.strand == '+' }.collect{|e| e.to_box}
     result[:crick] = features.select{|f| f.strand == '-' }.collect{|e| e.to_box}
     return result
   end
+  # Formatting method for range, AnnoJ only
   def get_reads(features)
     result = {}
     result[:watson] = features.select{|f| f.strand == '+' }.collect{|e| e.to_read}
     result[:crick] = features.select{|f| f.strand == '-' }.collect{|e| e.to_read}
     return result
   end
+  # Feature Metadata accessor, AnnoJ only
   def describe(id)
     f = Feature.find(:first, :conditions => {:gff_id => id} )
     response = new_response
@@ -305,6 +332,7 @@ class FeaturesController < ApplicationController
     response[:data][:description] = f.description
     return response
   end
+  # Feature metadata accessor, AnnoJ only
   def lookup(query, id)
     response = new_response
     rows = Feature.find(:all, :conditions => ["experiment_id = ? and features.group like ?", id, "%" + query + "%"]).collect! {|f| f.to_lookup}
@@ -312,36 +340,7 @@ class FeaturesController < ApplicationController
     response[:rows] = rows
     return response
   end
-  def find_in_range_no_overlap(reference, start, stop, id)
-    experiment = Experiment.find(id)
-      if experiment.uses_bam_file?
-        Feature.find_by_bam(reference,start,stop,experiment.bam_file_path,id,experiment.genome_id)
-      else
-       Feature.find_by_sql(
-      "select * from features where 
-      reference = '#{reference}' and 
-      start <= '#{stop}' and 
-      start >= '#{start}' and
-      end >= '#{start}' and 
-      end <= '#{stop}' and 
-      experiment_id = '#{id}'  
-      order by start asc, end desc")
-    end
-  end
-  def find_in_range(reference, start, stop, id)
-    if experiment.uses_bam_file?
-      Feature.find_by_bam(reference,start,stop, experiment.bam_file_path,id, experiment.genome_id)
-    else
-      Feature.find_by_sql(
-      "select * from features where 
-      reference = '#{reference}' and 
-      start <= '#{stop}' and 
-      end >= '#{start}' and 
-      experiment_id = '#{id}'  
-      order by start asc, end desc"
-      )
-    end
-  end
+  #Empty response, AnnoJ only
   def new_response
     {:success => true }
   end

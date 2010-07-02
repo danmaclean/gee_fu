@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>genomic_sequence (ToolsController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/tools_controller.rb, line 7</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">genomic_sequence</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-value str">'bio'</span>
+
+    <span class="ruby-identifier">ref</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:reference</span>] , <span class="ruby-identifier">:genome_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>] } ) 
+    
+    <span class="ruby-ivar">@result</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    
+    <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{ref.sequence.sequence.to_s}&quot;</span>)
+      <span class="ruby-identifier">start</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:start</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">||=</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">stop</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:end</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
+      <span class="ruby-identifier">subseq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
+      <span class="ruby-identifier">strand</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:strand</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'plus'</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'minus'</span>
+        <span class="ruby-identifier">subseq</span> = <span class="ruby-identifier">subseq</span>.<span class="ruby-identifier">complement</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:sequence</span>] = <span class="ruby-identifier">subseq</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:name</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:reference</span>]
+      <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:start</span>] = <span class="ruby-identifier">start</span>
+      <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:end</span>] = <span class="ruby-identifier">stop</span>
+      <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:strand</span>] = <span class="ruby-identifier">strand</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:html</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@result</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> } 
+    <span class="ruby-keyword kw">end</span>
+    
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

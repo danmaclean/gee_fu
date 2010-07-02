@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>chromosome (FeaturesController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 92</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">chromosome</span>
+    
+    <span class="ruby-comment cmt">#a method for returning chromosome sequence as if it were a read to trick annoj into showing a reference sequence...</span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">get?</span>
+      <span class="ruby-comment cmt">##sort out the params from annoj's get</span>
+      <span class="ruby-identifier">annoj_params</span> = <span class="ruby-constant">CGI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">url</span>).<span class="ruby-identifier">query</span>)
+      <span class="ruby-identifier">annoj_params</span>.<span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_s</span>}
+      <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'action'</span>]
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;syndicate&quot;</span>
+          <span class="ruby-ivar">@response</span> = <span class="ruby-identifier">syndicate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+        <span class="ruby-keyword kw">when</span> <span class="ruby-value str">&quot;describe&quot;</span>
+          <span class="ruby-ivar">@response</span> = [] <span class="ruby-comment cmt">##to be done... </span>
+      <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@response</span>,  <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">post?</span>
+      <span class="ruby-identifier">annoj_params</span> = <span class="ruby-constant">CGI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">raw_post</span>)
+      <span class="ruby-identifier">annoj_params</span>.<span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_s</span>}
+        <span class="ruby-comment cmt">#now do the specific stuff based on the annoj action... </span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'action'</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'range'</span>
+          <span class="ruby-comment cmt">#remember params[:id] is genome id and annoj_params['assembly'] is the chromosome</span>
+          <span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:genome_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>], <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'assembly'</span>]}).<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">sequence</span>
+          <span class="ruby-identifier">subseq</span> = <span class="ruby-identifier">sequence</span>[<span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'left'</span>].<span class="ruby-identifier">to_i</span><span class="ruby-operator">..</span><span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'right'</span>].<span class="ruby-identifier">to_i</span>]
+          <span class="ruby-identifier">f</span> = <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">new</span>(
+            <span class="ruby-identifier">:group</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'.'</span>,
+            <span class="ruby-identifier">:feature</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'chromosome'</span>,
+            <span class="ruby-identifier">:source</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'.'</span>,
+            <span class="ruby-identifier">:start</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'left'</span>].<span class="ruby-identifier">to_i</span>,
+            <span class="ruby-identifier">:end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'right'</span>].<span class="ruby-identifier">to_i</span>, 
+            <span class="ruby-identifier">:strand</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'+'</span>,
+            <span class="ruby-identifier">:phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'.'</span>,
+            <span class="ruby-identifier">:reference</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'assembly'</span>],
+            <span class="ruby-identifier">:score</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'.'</span>,
+            <span class="ruby-identifier">:experiment_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
+            <span class="ruby-identifier">:gff_id</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">nil</span>,
+            <span class="ruby-identifier">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{subseq}&quot;</span>,
+            <span class="ruby-identifier">:quality</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
+            <span class="ruby-identifier">:reference_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>
+          )
+          <span class="ruby-identifier">zoom_factor</span> = <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'bases'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'pixels'</span>].<span class="ruby-identifier">to_i</span>
+          <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
+          <span class="ruby-identifier">features</span> = [<span class="ruby-identifier">f</span>]
+          <span class="ruby-comment cmt">#@response = #range(annoj_params['assembly'], annoj_params['left'], annoj_params['right'], params[:id], annoj_params['bases'], annoj_params['pixels'])</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">10</span>
+            <span class="ruby-identifier">hist_data</span> = <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
+             <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+             <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">hist_data</span> 
+
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">10</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>
+              <span class="ruby-identifier">box_data</span> = <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
+              <span class="ruby-identifier">box_data</span>[<span class="ruby-identifier">:watson</span>][<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reference</span>
+              <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+              <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">box_data</span>
+          <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">read_data</span> = <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
+              <span class="ruby-identifier">read_data</span>[<span class="ruby-identifier">:watson</span>][<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reference</span>
+              <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+              <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">read_data</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-ivar">@response</span> = <span class="ruby-identifier">response</span>
+
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">&quot;action&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;lookup&quot;</span>
+            <span class="ruby-ivar">@response</span> = [] <span class="ruby-comment cmt">#to be done also #lookup(annoj_params[&quot;query&quot;], params[:id])</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@response</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

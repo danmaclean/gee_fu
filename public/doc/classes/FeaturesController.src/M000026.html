@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>range (FeaturesController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 167</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">range</span>(<span class="ruby-identifier">assembly</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">bases</span>, <span class="ruby-identifier">pixels</span>)
+    <span class="ruby-identifier">zoom_factor</span> = <span class="ruby-identifier">bases</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">pixels</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
+    <span class="ruby-identifier">features</span> = <span class="ruby-identifier">find_in_range_no_overlap</span>(<span class="ruby-identifier">assembly</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">id</span>)
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">features</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-comment cmt">#case features.first.feature</span>
+    
+    <span class="ruby-comment cmt">#when </span>
+    <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">allowed_read_types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">feature</span>) <span class="ruby-comment cmt">#'polymerase_synthesis_read'</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">10</span>
+       <span class="ruby-identifier">hist_data</span> = <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
+       <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+       <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">hist_data</span> 
+       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+      <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">10</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>
+        <span class="ruby-identifier">box_data</span> = <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
+        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">box_data</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">read_data</span> = <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
+        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">read_data</span>
+      <span class="ruby-keyword kw">end</span>   
+       
+    <span class="ruby-keyword kw">else</span>
+      <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = []
+      <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">collect!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_annoj</span> }
+    <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_reads (FeaturesController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 298</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
+    <span class="ruby-identifier">result</span> = {}
+    <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:watson</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'+'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_read</span>}
+    <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:crick</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_read</span>}
+    <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

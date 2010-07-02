@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>index (GenomesController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 16</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span> <span class="ruby-comment cmt">#regular web request method</span>
+    <span class="ruby-ivar">@genomes</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">h</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>]={}}
+    <span class="ruby-ivar">@genomes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gen</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">result</span>[<span class="ruby-value str">'gen-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{gen.id}&quot;</span>][<span class="ruby-value str">&quot;institution&quot;</span>] = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>(<span class="ruby-node">&quot;#{gen.institution}&quot;</span>)
+      <span class="ruby-identifier">result</span>[<span class="ruby-value str">'gen-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{gen.id}&quot;</span>][<span class="ruby-value str">&quot;engineer&quot;</span>] = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>(<span class="ruby-node">&quot;#{gen.engineer}&quot;</span>)
+      <span class="ruby-identifier">result</span>[<span class="ruby-value str">'gen-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{gen.id}&quot;</span>][<span class="ruby-value str">&quot;service&quot;</span>] = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>(<span class="ruby-node">&quot;#{gen.service}&quot;</span>)
+      <span class="ruby-identifier">result</span>[<span class="ruby-value str">'gen-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{gen.id}&quot;</span>][<span class="ruby-value str">&quot;genome&quot;</span>] = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>(<span class="ruby-node">&quot;#{gen.genome}&quot;</span>)
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

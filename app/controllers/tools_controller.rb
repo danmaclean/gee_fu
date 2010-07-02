@@ -1,9 +1,11 @@
+#Implements a controller for custom web tools that act on the database
 class ToolsController < ApplicationController
   
   def index
     @genomes = Genome.find(:all)
   end
-  
+  #Returns a web form view that allows definition of a section of genomic reference sequence
+  # use /tools/genome_sequence
   def genomic_sequence
     require 'bio'
 

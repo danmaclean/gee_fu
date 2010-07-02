@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>show (ReferencesController)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/controllers/references_controller.rb, line 17</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span> <span class="ruby-comment cmt">#regular web request for individual reference set slightly different in that it returns not by reference id, but by the</span>
+            <span class="ruby-comment cmt">#id of the genome the reference belongs to ... </span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">h</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>]={}}
+    <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:name</span>]
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+        <span class="ruby-ivar">@reference</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:genome_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>], <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:name</span>] } )
+        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@reference</span>
+          <span class="ruby-identifier">result</span>[<span class="ruby-value str">'ref-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{@reference.id}&quot;</span>][<span class="ruby-value str">&quot;name&quot;</span>] = <span class="ruby-node">&quot;#{@reference.name}&quot;</span>
+          <span class="ruby-identifier">result</span>[<span class="ruby-value str">'ref-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{@reference.id}&quot;</span>][<span class="ruby-value str">&quot;length&quot;</span>] = <span class="ruby-node">&quot;#{@reference.length}&quot;</span>
+          <span class="ruby-identifier">result</span>[<span class="ruby-value str">'ref-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{@reference.id}&quot;</span>][<span class="ruby-value str">&quot;sequence&quot;</span>] = <span class="ruby-node">&quot;#{@reference.sequence.sequence}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:sequence</span>]
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">else</span>  
+      <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+        <span class="ruby-ivar">@references</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:genome_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>]} )
+        <span class="ruby-ivar">@references</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ref</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">result</span>[<span class="ruby-value str">'ref-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{ref.id}&quot;</span>][<span class="ruby-value str">&quot;name&quot;</span>] = <span class="ruby-node">&quot;#{ref.name}&quot;</span>
+          <span class="ruby-identifier">result</span>[<span class="ruby-value str">'ref-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{ref.id}&quot;</span>][<span class="ruby-value str">&quot;length&quot;</span>] = <span class="ruby-node">&quot;#{ref.length}&quot;</span>
+          <span class="ruby-identifier">result</span>[<span class="ruby-value str">'ref-'</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{ref.id}&quot;</span>][<span class="ruby-value str">&quot;sequence&quot;</span>] = <span class="ruby-node">&quot;#{ref.sequence.sequence}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:sequence</span>]
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+    
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+    <span class="ruby-keyword kw">end</span>
+    
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

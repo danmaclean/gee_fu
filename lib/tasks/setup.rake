@@ -221,7 +221,7 @@ namespace :add do
         feature.save unless practice
       end
     end
-end
+  end
   desc "add assembly information to genome.yml from fasta file"
   task :assembly_to_yml => :environment do
     

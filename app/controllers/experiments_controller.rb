@@ -1,6 +1,11 @@
+#Implements the REST and AnnoJ requests for the Experiments table/model
+# access via url
 class ExperimentsController < ApplicationController
   
-  def index #a method for the regular web service
+  #returns the list of experiments and associated meta-data in the database
+  # use /experiments.format
+  # where format = xml or json
+  def index
 
     @experiments = Experiment.all
     result = Hash.new {|h,k| h[k]={}}
@@ -18,14 +23,19 @@ class ExperimentsController < ApplicationController
     end
   end
   
+  #returns metadata for a selected experiment 
+  # use /experiments/id.format
+  # where format = xml or json
   def show 
-    @experiment = Experiment.find(params[:id])
     result = {}
-    result["institution"] = YAML::load("#{@experiment.institution}") || "nil"
-    result["engineer"] = YAML::load("#{@experiment.engineer}") || "nil"
-    result["service"] = YAML::load("#{@experiment.service}") || "nil"
-    result["description"] = YAML::load("#{@experiment.description}") || "nil"
-    result["name"] = YAML::load("#{@experiment.name}") || "nil"
+    if Experiment.exists?(params[:id])
+      @experiment = Experiment.find(params[:id])
+      result["institution"] = YAML::load("#{@experiment.institution}") || "nil"
+      result["engineer"] = YAML::load("#{@experiment.engineer}") || "nil"
+      result["service"] = YAML::load("#{@experiment.service}") || "nil"
+      result["description"] = YAML::load("#{@experiment.description}") || "nil"
+      result["name"] = YAML::load("#{@experiment.name}") || "nil"
+    end
     respond_to do |format|
       format.json { render :json => result, :layout => false }
       format.xml  { render :xml => result, :layout => false }

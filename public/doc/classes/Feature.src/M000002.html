@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>find_in_range_no_overlap (Feature)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File app/models/feature.rb, line 28</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_in_range_no_overlap</span>(<span class="ruby-identifier">reference</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">id</span>)
+    <span class="ruby-identifier">experiment</span> = <span class="ruby-constant">Experiment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">experiment</span>.<span class="ruby-identifier">uses_bam_file?</span>
+        <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find_by_bam</span>(<span class="ruby-identifier">reference</span>,<span class="ruby-identifier">start</span>,<span class="ruby-identifier">stop</span>,<span class="ruby-identifier">experiment</span>.<span class="ruby-identifier">bam_file_path</span>,<span class="ruby-identifier">id</span>,<span class="ruby-identifier">experiment</span>.<span class="ruby-identifier">genome_id</span>)
+      <span class="ruby-keyword kw">else</span>
+       <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find_by_sql</span>(
+      <span class="ruby-node">&quot;select * from features where 
+      reference = '#{reference}' and 
+      start &lt;= '#{stop}' and 
+      start &gt;= '#{start}' and
+      end &gt;= '#{start}' and 
+      end &lt;= '#{stop}' and 
+      experiment_id = '#{id}'  
+      order by start asc, end desc&quot;</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,8 +1,6 @@
 /*
 plugins
-
-Created by macleand on 2010-01-07.
-Copyright (c) 2010 __MyCompanyName__. All rights reserved.
+From an AnnoJ original file
 */
 
 .highlighted { 
@@ -24,10 +22,12 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 	padding-right : 2px;
 	font-family : arial,helvetica,monospace;
 }
+
+
+/* Feature CSS */
 .arrowLeft  { background: url('../images/left.png');  }
 .arrowRight { background: url('../images/right.png'); }
-
-.mRNA            { background: url('../images/bar.png') repeat-x; }
+.mRNA            { background: url('../images/bar.png') repeat-x; border-style:solid; border-width: 1px;}
 .five_prime_UTR  { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px;}
 .three_prime_UTR { background: url('../images/red.png') repeat-x; border-style:solid; border-width: 1px;}
 .CDS             { background: url('../images/green.png') repeat-x; border-style:solid; border-width: 1px;}
@@ -38,13 +38,6 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 .sequence_feature   { background: url('../images/orange.png') repeat-x; border-style:solid; border-width: 1px;}
 .match {background: url('../images/bar.png') repeat-x;}
 .match_part   { background: url('../images/yellow.png') repeat-x; border-style:solid; border-width: 1px;}
-.repeat_region   { background: url('../images/orange.png') repeat-x; border-style:solid; border-width: 1px;}
-.ncRNA  { background: url('../images/bar.png') repeat-x; }
-.tRNA   { background: url('../images/bar.png') repeat-x; }
-.snoRNA { background: url('../images/bar.png') repeat-x; }
-.miRNA  { background: url('../images/bar.png') repeat-x; }
-.snRNA  { background: url('../images/bar.png') repeat-x; }
-.rRNA   { background: url('../images/bar.png') repeat-x; }
 .start_codon   { background: url('../images/yellow.png') repeat-x; border-style:solid; border-width: 1px;}
 .stop_codon   { background: url('../images/yellow.png') repeat-x; border-style:solid; border-width: 1px;}
 
@@ -62,7 +55,7 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 
 
 /*
-	Styles for the Solexa reads plugin (includes boxes of stacked reads and a histogram)
+	Styles for the reads (includes boxes of stacked reads and a histogram)
 */
 .AJ_above .read {
 	background-color:rgb(34,76,171);
@@ -95,6 +88,7 @@ Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 	background-color:yellow !important;
 }
 
+/* individual base styles */
 
 .A { 
 	background-color:rgb(255,255,45);
