@@ -83,7 +83,7 @@
     <div id="description">
       <p>
 Defines the URL methods that co-ordinate and <a
-href="FeaturesController.html#M000022">respond</a> to requests
+href="FeaturesController.html#M000030">respond</a> to requests
 </p>
 
     </div>
@@ -95,19 +95,19 @@ href="FeaturesController.html#M000022">respond</a> to requests
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000023">annoj</a>&nbsp;&nbsp;
-      <a href="#M000024">chromosome</a>&nbsp;&nbsp;
-      <a href="#M000020">depth</a>&nbsp;&nbsp;
-      <a href="#M000030">describe</a>&nbsp;&nbsp;
-      <a href="#M000028">get_boxes</a>&nbsp;&nbsp;
-      <a href="#M000027">get_histogram</a>&nbsp;&nbsp;
-      <a href="#M000029">get_reads</a>&nbsp;&nbsp;
-      <a href="#M000031">lookup</a>&nbsp;&nbsp;
-      <a href="#M000032">new_response</a>&nbsp;&nbsp;
-      <a href="#M000021">objects</a>&nbsp;&nbsp;
-      <a href="#M000026">range</a>&nbsp;&nbsp;
-      <a href="#M000022">respond</a>&nbsp;&nbsp;
-      <a href="#M000025">syndicate</a>&nbsp;&nbsp;
+      <a href="#M000031">annoj</a>&nbsp;&nbsp;
+      <a href="#M000032">chromosome</a>&nbsp;&nbsp;
+      <a href="#M000028">depth</a>&nbsp;&nbsp;
+      <a href="#M000038">describe</a>&nbsp;&nbsp;
+      <a href="#M000036">get_boxes</a>&nbsp;&nbsp;
+      <a href="#M000035">get_histogram</a>&nbsp;&nbsp;
+      <a href="#M000037">get_reads</a>&nbsp;&nbsp;
+      <a href="#M000039">lookup</a>&nbsp;&nbsp;
+      <a href="#M000040">new_response</a>&nbsp;&nbsp;
+      <a href="#M000029">objects</a>&nbsp;&nbsp;
+      <a href="#M000034">range</a>&nbsp;&nbsp;
+      <a href="#M000030">respond</a>&nbsp;&nbsp;
+      <a href="#M000033">syndicate</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -129,11 +129,11 @@ href="FeaturesController.html#M000022">respond</a> to requests
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000023" class="method-detail">
-        <a name="M000023"></a>
+      <div id="method-M000031" class="method-detail">
+        <a name="M000031"></a>
 
         <div class="method-heading">
-          <a href="#M000023" class="method-signature">
+          <a href="#M000031" class="method-signature">
           <span class="method-name">annoj</span><span class="method-args">()</span>
           </a>
         </div>
@@ -147,8 +147,8 @@ config.js. Gets features for an experiment at id
  =&gt; use /features/annoj/id
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000023-source">
+            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000031-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 76</span>
  76:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">annoj</span>
@@ -184,11 +184,11 @@ config.js. Gets features for an experiment at id
         </div>
       </div>
 
-      <div id="method-M000024" class="method-detail">
-        <a name="M000024"></a>
+      <div id="method-M000032" class="method-detail">
+        <a name="M000032"></a>
 
         <div class="method-heading">
-          <a href="#M000024" class="method-signature">
+          <a href="#M000032" class="method-signature">
           <span class="method-name">chromosome</span><span class="method-args">()</span>
           </a>
         </div>
@@ -202,8 +202,8 @@ config.js. Gets reference track that is saved as experiment at id
  =&gt; use /features/chromosome/id
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000024-source">
+            onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000032-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 106</span>
 106:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">chromosome</span>
@@ -236,7 +236,7 @@ config.js. Gets reference track that is saved as experiment at id
 133:             <span class="ruby-identifier">:end</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'right'</span>].<span class="ruby-identifier">to_i</span>, 
 134:             <span class="ruby-identifier">:strand</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'+'</span>,
 135:             <span class="ruby-identifier">:phase</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'.'</span>,
-136:             <span class="ruby-identifier">:reference</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'assembly'</span>],
+136:             <span class="ruby-identifier">:seqid</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">annoj_params</span>[<span class="ruby-value str">'assembly'</span>],
 137:             <span class="ruby-identifier">:score</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'.'</span>,
 138:             <span class="ruby-identifier">:experiment_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
 139:             <span class="ruby-identifier">:gff_id</span> =<span class="ruby-operator">&gt;</span>  <span class="ruby-keyword kw">nil</span>,
@@ -255,12 +255,12 @@ config.js. Gets reference track that is saved as experiment at id
 152: 
 153:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">10</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>
 154:               <span class="ruby-identifier">box_data</span> = <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
-155:               <span class="ruby-identifier">box_data</span>[<span class="ruby-identifier">:watson</span>][<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reference</span>
+155:               <span class="ruby-identifier">box_data</span>[<span class="ruby-identifier">:watson</span>][<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">seqid</span>
 156:               <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
 157:               <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">box_data</span>
 158:           <span class="ruby-keyword kw">else</span>
 159:               <span class="ruby-identifier">read_data</span> = <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
-160:               <span class="ruby-identifier">read_data</span>[<span class="ruby-identifier">:watson</span>][<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reference</span>
+160:               <span class="ruby-identifier">read_data</span>[<span class="ruby-identifier">:watson</span>][<span class="ruby-value">0</span>][<span class="ruby-value">0</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">seqid</span>
 161:               <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
 162:               <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">read_data</span>
 163:           <span class="ruby-keyword kw">end</span>
@@ -277,11 +277,11 @@ config.js. Gets reference track that is saved as experiment at id
         </div>
       </div>
 
-      <div id="method-M000020" class="method-detail">
-        <a name="M000020"></a>
+      <div id="method-M000028" class="method-detail">
+        <a name="M000028"></a>
 
         <div class="method-heading">
-          <a href="#M000020" class="method-signature">
+          <a href="#M000028" class="method-signature">
           <span class="method-name">depth</span><span class="method-args">()</span>
           </a>
         </div>
@@ -289,7 +289,7 @@ config.js. Gets reference track that is saved as experiment at id
         <div class="method-description">
           <p>
 Standard REST request method returns a hash summarising <a
-href="FeaturesController.html#M000020">depth</a> of feature object coverage
+href="FeaturesController.html#M000028">depth</a> of feature object coverage
 for a nucleotides between start and stop on reference in experiment id
 </p>
 <pre>
@@ -298,8 +298,8 @@ for a nucleotides between start and stop on reference in experiment id
  =&gt; optional params: format (xml/json default = xml),
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000020-source">
+            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000028-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 10</span>
 10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">depth</span>
@@ -345,11 +345,11 @@ for a nucleotides between start and stop on reference in experiment id
         </div>
       </div>
 
-      <div id="method-M000030" class="method-detail">
-        <a name="M000030"></a>
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
 
         <div class="method-heading">
-          <a href="#M000030" class="method-signature">
+          <a href="#M000038" class="method-signature">
           <span class="method-name">describe</span><span class="method-args">(id)</span>
           </a>
         </div>
@@ -359,170 +359,256 @@ for a nucleotides between start and stop on reference in experiment id
 <a href="Feature.html">Feature</a> Metadata accessor, AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000030-source">
+            onclick="toggleCode('M000038-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000038-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 324</span>
-324:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">describe</span>(<span class="ruby-identifier">id</span>)
-325:     <span class="ruby-identifier">f</span> = <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:gff_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>} )
-326:     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
-327:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
-328:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:id</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">gff_id</span>
-329:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:assembly</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">reference</span>
-330:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:start</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>
-331:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:end</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span>
-332:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:description</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">description</span>
-333:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
-334:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 326</span>
+326:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">describe</span>(<span class="ruby-identifier">id</span>)
+327:     <span class="ruby-identifier">f</span> = <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:gff_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>} )
+328:     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
+329:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+330:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:id</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">gff_id</span>
+331:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:assembly</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">seqid</span>
+332:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:start</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>
+333:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:end</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span>
+334:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:description</span>] = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">description</span>
+335:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+336:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000028" class="method-detail">
-        <a name="M000028"></a>
+      <div id="method-M000036" class="method-detail">
+        <a name="M000036"></a>
 
         <div class="method-heading">
-          <a href="#M000028" class="method-signature">
+          <a href="#M000036" class="method-signature">
           <span class="method-name">get_boxes</span><span class="method-args">(features)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Formatting method for <a href="FeaturesController.html#M000026">range</a>,
+Formatting method for <a href="FeaturesController.html#M000034">range</a>,
 AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000028-source">
+            onclick="toggleCode('M000036-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000036-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 310</span>
-310:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
-311:     <span class="ruby-identifier">result</span> = {}
-312:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:watson</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'+'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_box</span>}
-313:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:crick</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_box</span>}
-314:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
-315:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 312</span>
+312:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
+313:     <span class="ruby-identifier">result</span> = {}
+314:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:watson</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'+'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_box</span>}
+315:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:crick</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_box</span>}
+316:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+317:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000027" class="method-detail">
-        <a name="M000027"></a>
+      <div id="method-M000035" class="method-detail">
+        <a name="M000035"></a>
 
         <div class="method-heading">
-          <a href="#M000027" class="method-signature">
+          <a href="#M000035" class="method-signature">
           <span class="method-name">get_histogram</span><span class="method-args">(features)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Formatting method for <a href="FeaturesController.html#M000026">range</a>,
+Formatting method for <a href="FeaturesController.html#M000034">range</a>,
 AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000027-source">
+            onclick="toggleCode('M000035-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000035-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 214</span>
-214:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
-215:      <span class="ruby-keyword kw">return</span> [] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">features</span>.<span class="ruby-identifier">empty?</span>
-216:      <span class="ruby-identifier">results</span> = []
-217:      <span class="ruby-comment cmt">#lower limit</span>
-218:      <span class="ruby-identifier">left</span> = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
-219:      <span class="ruby-comment cmt">#upper limit</span>
-220:      <span class="ruby-identifier">right</span> = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">features</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
-221:      <span class="ruby-comment cmt">#number of arrays</span>
-222:      <span class="ruby-identifier">start</span> = <span class="ruby-identifier">left</span>
-223:      <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">right</span>
-224:        <span class="ruby-identifier">results</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">start</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>]
-225:        <span class="ruby-identifier">start</span> <span class="ruby-operator">+=</span> <span class="ruby-value">10</span>
-226:      <span class="ruby-keyword kw">end</span>
-227:      <span class="ruby-identifier">features</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-228:        <span class="ruby-identifier">window</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
-229:        <span class="ruby-identifier">start_index</span> = <span class="ruby-keyword kw">nil</span>
-230:        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">window</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">left</span> 
-231:           <span class="ruby-identifier">start_index</span> = <span class="ruby-value">0</span>
-232:        <span class="ruby-keyword kw">else</span>
-233:          <span class="ruby-identifier">start_index</span> = (<span class="ruby-identifier">window</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span>) <span class="ruby-operator">/</span> <span class="ruby-value">10</span>
-234:        <span class="ruby-keyword kw">end</span>
-235:        <span class="ruby-identifier">end_index</span> = <span class="ruby-identifier">start_index</span> <span class="ruby-operator">+</span> (((<span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>) <span class="ruby-operator">-</span> ((<span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>) <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)) <span class="ruby-operator">/</span> <span class="ruby-value">10</span>)
-236:        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">index</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">start_index</span> <span class="ruby-operator">..</span> <span class="ruby-identifier">end_index</span>
-237:          <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">length</span>
-238:          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\+/</span>)
-239:            <span class="ruby-identifier">results</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
-240:          <span class="ruby-keyword kw">else</span>
-241:            <span class="ruby-identifier">results</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-242:          <span class="ruby-keyword kw">end</span>
-243:        <span class="ruby-keyword kw">end</span>
-244:      <span class="ruby-keyword kw">end</span>
-245:      <span class="ruby-comment cmt">#temp = [start, 0, 0]</span>
-246:      <span class="ruby-comment cmt">#features.each do |f|</span>
-247:       <span class="ruby-comment cmt"># if f.start &gt; start + 10</span>
-248:       <span class="ruby-comment cmt">#   results &lt;&lt; temp</span>
-249:       <span class="ruby-comment cmt">#   start = start + 10</span>
-250:       <span class="ruby-comment cmt">#   temp = [start, 0,0]</span>
-251:       <span class="ruby-comment cmt"># end</span>
-252:       <span class="ruby-comment cmt"># if f.strand.match(/\+/)</span>
-253:       <span class="ruby-comment cmt">#   temp[1] += 1</span>
-254:       <span class="ruby-comment cmt"># else</span>
-255:       <span class="ruby-comment cmt">#   temp[2] += 1</span>
-256:       <span class="ruby-comment cmt"># end</span>
-257:      <span class="ruby-comment cmt">#end</span>
-258:      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">results</span>
-259:      <span class="ruby-comment cmt">#pluses = Array.new(features.last.end - features.first.start + 1, 0)</span>
-260:      <span class="ruby-comment cmt">#minuses = Array.new(features.last.end - features.first.start + 1, 0)</span>
-261:      <span class="ruby-comment cmt">#features.each do |f|</span>
-262:      <span class="ruby-comment cmt">#  for i in f.start .. f.end</span>
-263:      <span class="ruby-comment cmt">#    case f.strand</span>
-264:      <span class="ruby-comment cmt">#    when '+'</span>
-265:      <span class="ruby-comment cmt">#      pluses[i - start] = pluses[i - start] + 1</span>
-266:      <span class="ruby-comment cmt">#   else</span>
-267:      <span class="ruby-comment cmt">#      minuses[i - start] = minuses[i - start] + 1</span>
-268:      <span class="ruby-comment cmt">#    end</span>
-269:      <span class="ruby-comment cmt">#  end</span>
-270:      <span class="ruby-comment cmt">#end</span>
-271:      <span class="ruby-comment cmt">#result = Array.new</span>
-272:      <span class="ruby-comment cmt">#while start &lt; features.last.end</span>
-273:      <span class="ruby-comment cmt">#  result &lt;&lt; [start, pluses.slice!(0 .. 8).max, minuses.slice!(0 .. 8).max]</span>
-274:      <span class="ruby-comment cmt">#  start += 10</span>
-275:      <span class="ruby-comment cmt">#end</span>
-276:      <span class="ruby-comment cmt">#return result</span>
-277:      <span class="ruby-comment cmt">#hist = {}</span>
-278:      <span class="ruby-comment cmt">#for pos in features.first.start .. features.last.end</span>
-279:      <span class="ruby-comment cmt">#  hist[pos] = {}</span>
-280:      <span class="ruby-comment cmt">#  hist[pos]['+'] = 0</span>
-281:      <span class="ruby-comment cmt">#  hist[pos]['-'] = 0</span>
-282:      <span class="ruby-comment cmt">#end</span>
-283:      <span class="ruby-comment cmt">#features.each do |f|</span>
-284:      <span class="ruby-comment cmt">#  for pos in f.start .. f.end</span>
-285:      <span class="ruby-comment cmt">#    hist[pos][f.strand] = hist[pos][f.strand] + 1 </span>
-286:      <span class="ruby-comment cmt">#  end</span>
-287:      <span class="ruby-comment cmt">#end</span>
-288:      <span class="ruby-comment cmt">#result = hist  </span>
-289:      <span class="ruby-comment cmt">#result = []</span>
-290:      <span class="ruby-comment cmt">####go through the hist and send [start, plus_intens, minus_intens] for each window of bases</span>
-291:        <span class="ruby-comment cmt">##send max intensity in steps of ten</span>
-292: 
-293:      <span class="ruby-comment cmt">#start = features.first.start.to_i</span>
-294:      <span class="ruby-comment cmt">#while start &lt; features.last.end</span>
-295:      <span class="ruby-comment cmt">#  plus_intens = 0</span>
-296:      <span class="ruby-comment cmt">#  minus_intens = 0</span>
-297:      <span class="ruby-comment cmt">#  for pos in start .. (start + 9)</span>
-298: 
-299:      <span class="ruby-comment cmt">#    break if pos &gt; features.last.end</span>
-300:      <span class="ruby-comment cmt">#    plus_intens = hist[pos]['+'] if hist[pos]['+'] &gt; plus_intens      </span>
-301:      <span class="ruby-comment cmt">#    minus_intens = hist[pos]['-'] if hist[pos]['-'] &gt; minus_intens</span>
-302:      <span class="ruby-comment cmt">#  end</span>
-303: 
-304:      <span class="ruby-comment cmt">#  result &lt;&lt; [start, plus_intens, minus_intens]</span>
-305:      <span class="ruby-comment cmt">#  start += 10</span>
-306:      <span class="ruby-comment cmt">#end</span>
-307:      <span class="ruby-comment cmt">#return result</span>
-308:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 216</span>
+216:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
+217:      <span class="ruby-keyword kw">return</span> [] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">features</span>.<span class="ruby-identifier">empty?</span>
+218:      <span class="ruby-identifier">results</span> = []
+219:      <span class="ruby-comment cmt">#lower limit</span>
+220:      <span class="ruby-identifier">left</span> = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
+221:      <span class="ruby-comment cmt">#upper limit</span>
+222:      <span class="ruby-identifier">right</span> = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">features</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
+223:      <span class="ruby-comment cmt">#number of arrays</span>
+224:      <span class="ruby-identifier">start</span> = <span class="ruby-identifier">left</span>
+225:      <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">start</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">right</span>
+226:        <span class="ruby-identifier">results</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">start</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>]
+227:        <span class="ruby-identifier">start</span> <span class="ruby-operator">+=</span> <span class="ruby-value">10</span>
+228:      <span class="ruby-keyword kw">end</span>
+229:      <span class="ruby-identifier">features</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+230:        <span class="ruby-identifier">window</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)
+231:        <span class="ruby-identifier">start_index</span> = <span class="ruby-keyword kw">nil</span>
+232:        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">window</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">left</span> 
+233:           <span class="ruby-identifier">start_index</span> = <span class="ruby-value">0</span>
+234:        <span class="ruby-keyword kw">else</span>
+235:          <span class="ruby-identifier">start_index</span> = (<span class="ruby-identifier">window</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">left</span>) <span class="ruby-operator">/</span> <span class="ruby-value">10</span>
+236:        <span class="ruby-keyword kw">end</span>
+237:        <span class="ruby-identifier">end_index</span> = <span class="ruby-identifier">start_index</span> <span class="ruby-operator">+</span> (((<span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>) <span class="ruby-operator">-</span> ((<span class="ruby-identifier">f</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">start</span>) <span class="ruby-operator">%</span> <span class="ruby-value">10</span>)) <span class="ruby-operator">/</span> <span class="ruby-value">10</span>)
+238:        <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">index</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">start_index</span> <span class="ruby-operator">..</span> <span class="ruby-identifier">end_index</span>
+239:          <span class="ruby-keyword kw">break</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">length</span>
+240:          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/\+/</span>)
+241:            <span class="ruby-identifier">results</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> 
+242:          <span class="ruby-keyword kw">else</span>
+243:            <span class="ruby-identifier">results</span>[<span class="ruby-identifier">index</span>][<span class="ruby-value">2</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+244:          <span class="ruby-keyword kw">end</span>
+245:        <span class="ruby-keyword kw">end</span>
+246:      <span class="ruby-keyword kw">end</span>
+247:      <span class="ruby-comment cmt">#temp = [start, 0, 0]</span>
+248:      <span class="ruby-comment cmt">#features.each do |f|</span>
+249:       <span class="ruby-comment cmt"># if f.start &gt; start + 10</span>
+250:       <span class="ruby-comment cmt">#   results &lt;&lt; temp</span>
+251:       <span class="ruby-comment cmt">#   start = start + 10</span>
+252:       <span class="ruby-comment cmt">#   temp = [start, 0,0]</span>
+253:       <span class="ruby-comment cmt"># end</span>
+254:       <span class="ruby-comment cmt"># if f.strand.match(/\+/)</span>
+255:       <span class="ruby-comment cmt">#   temp[1] += 1</span>
+256:       <span class="ruby-comment cmt"># else</span>
+257:       <span class="ruby-comment cmt">#   temp[2] += 1</span>
+258:       <span class="ruby-comment cmt"># end</span>
+259:      <span class="ruby-comment cmt">#end</span>
+260:      <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">results</span>
+261:      <span class="ruby-comment cmt">#pluses = Array.new(features.last.end - features.first.start + 1, 0)</span>
+262:      <span class="ruby-comment cmt">#minuses = Array.new(features.last.end - features.first.start + 1, 0)</span>
+263:      <span class="ruby-comment cmt">#features.each do |f|</span>
+264:      <span class="ruby-comment cmt">#  for i in f.start .. f.end</span>
+265:      <span class="ruby-comment cmt">#    case f.strand</span>
+266:      <span class="ruby-comment cmt">#    when '+'</span>
+267:      <span class="ruby-comment cmt">#      pluses[i - start] = pluses[i - start] + 1</span>
+268:      <span class="ruby-comment cmt">#   else</span>
+269:      <span class="ruby-comment cmt">#      minuses[i - start] = minuses[i - start] + 1</span>
+270:      <span class="ruby-comment cmt">#    end</span>
+271:      <span class="ruby-comment cmt">#  end</span>
+272:      <span class="ruby-comment cmt">#end</span>
+273:      <span class="ruby-comment cmt">#result = Array.new</span>
+274:      <span class="ruby-comment cmt">#while start &lt; features.last.end</span>
+275:      <span class="ruby-comment cmt">#  result &lt;&lt; [start, pluses.slice!(0 .. 8).max, minuses.slice!(0 .. 8).max]</span>
+276:      <span class="ruby-comment cmt">#  start += 10</span>
+277:      <span class="ruby-comment cmt">#end</span>
+278:      <span class="ruby-comment cmt">#return result</span>
+279:      <span class="ruby-comment cmt">#hist = {}</span>
+280:      <span class="ruby-comment cmt">#for pos in features.first.start .. features.last.end</span>
+281:      <span class="ruby-comment cmt">#  hist[pos] = {}</span>
+282:      <span class="ruby-comment cmt">#  hist[pos]['+'] = 0</span>
+283:      <span class="ruby-comment cmt">#  hist[pos]['-'] = 0</span>
+284:      <span class="ruby-comment cmt">#end</span>
+285:      <span class="ruby-comment cmt">#features.each do |f|</span>
+286:      <span class="ruby-comment cmt">#  for pos in f.start .. f.end</span>
+287:      <span class="ruby-comment cmt">#    hist[pos][f.strand] = hist[pos][f.strand] + 1 </span>
+288:      <span class="ruby-comment cmt">#  end</span>
+289:      <span class="ruby-comment cmt">#end</span>
+290:      <span class="ruby-comment cmt">#result = hist  </span>
+291:      <span class="ruby-comment cmt">#result = []</span>
+292:      <span class="ruby-comment cmt">####go through the hist and send [start, plus_intens, minus_intens] for each window of bases</span>
+293:        <span class="ruby-comment cmt">##send max intensity in steps of ten</span>
+294: 
+295:      <span class="ruby-comment cmt">#start = features.first.start.to_i</span>
+296:      <span class="ruby-comment cmt">#while start &lt; features.last.end</span>
+297:      <span class="ruby-comment cmt">#  plus_intens = 0</span>
+298:      <span class="ruby-comment cmt">#  minus_intens = 0</span>
+299:      <span class="ruby-comment cmt">#  for pos in start .. (start + 9)</span>
+300: 
+301:      <span class="ruby-comment cmt">#    break if pos &gt; features.last.end</span>
+302:      <span class="ruby-comment cmt">#    plus_intens = hist[pos]['+'] if hist[pos]['+'] &gt; plus_intens      </span>
+303:      <span class="ruby-comment cmt">#    minus_intens = hist[pos]['-'] if hist[pos]['-'] &gt; minus_intens</span>
+304:      <span class="ruby-comment cmt">#  end</span>
+305: 
+306:      <span class="ruby-comment cmt">#  result &lt;&lt; [start, plus_intens, minus_intens]</span>
+307:      <span class="ruby-comment cmt">#  start += 10</span>
+308:      <span class="ruby-comment cmt">#end</span>
+309:      <span class="ruby-comment cmt">#return result</span>
+310:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000037" class="method-detail">
+        <a name="M000037"></a>
+
+        <div class="method-heading">
+          <a href="#M000037" class="method-signature">
+          <span class="method-name">get_reads</span><span class="method-args">(features)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Formatting method for <a href="FeaturesController.html#M000034">range</a>,
+AnnoJ only
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000037-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000037-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 319</span>
+319:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
+320:     <span class="ruby-identifier">result</span> = {}
+321:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:watson</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'+'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_read</span>}
+322:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:crick</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_read</span>}
+323:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
+324:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
+
+        <div class="method-heading">
+          <a href="#M000039" class="method-signature">
+          <span class="method-name">lookup</span><span class="method-args">(query, id)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+<a href="Feature.html">Feature</a> metadata accessor, AnnoJ only
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000039-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 338</span>
+338:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">id</span>)
+339:     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
+340:     <span class="ruby-identifier">rows</span> = <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;experiment_id = ? and features.group like ?&quot;</span>, <span class="ruby-identifier">id</span>, <span class="ruby-value str">&quot;%&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">query</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;%&quot;</span>]).<span class="ruby-identifier">collect!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_lookup</span>}
+341:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:count</span>] = <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">length</span>
+342:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:rows</span>] = <span class="ruby-identifier">rows</span>
+343:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+344:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
+
+        <div class="method-heading">
+          <a href="#M000040" class="method-signature">
+          <span class="method-name">new_response</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Empty response, AnnoJ only
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000040-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 346</span>
+346:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_response</span>
+347:     {<span class="ruby-identifier">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span> }
+348:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -533,92 +619,6 @@ AnnoJ only
 
         <div class="method-heading">
           <a href="#M000029" class="method-signature">
-          <span class="method-name">get_reads</span><span class="method-args">(features)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Formatting method for <a href="FeaturesController.html#M000026">range</a>,
-AnnoJ only
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000029-source">
-<pre>
-     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 317</span>
-317:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
-318:     <span class="ruby-identifier">result</span> = {}
-319:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:watson</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'+'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_read</span>}
-320:     <span class="ruby-identifier">result</span>[<span class="ruby-identifier">:crick</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span> }.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_read</span>}
-321:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">result</span>
-322:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000031" class="method-detail">
-        <a name="M000031"></a>
-
-        <div class="method-heading">
-          <a href="#M000031" class="method-signature">
-          <span class="method-name">lookup</span><span class="method-args">(query, id)</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-<a href="Feature.html">Feature</a> metadata accessor, AnnoJ only
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000031-source">
-<pre>
-     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 336</span>
-336:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">id</span>)
-337:     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
-338:     <span class="ruby-identifier">rows</span> = <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;experiment_id = ? and features.group like ?&quot;</span>, <span class="ruby-identifier">id</span>, <span class="ruby-value str">&quot;%&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">query</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;%&quot;</span>]).<span class="ruby-identifier">collect!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_lookup</span>}
-339:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:count</span>] = <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">length</span>
-340:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:rows</span>] = <span class="ruby-identifier">rows</span>
-341:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
-342:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000032" class="method-detail">
-        <a name="M000032"></a>
-
-        <div class="method-heading">
-          <a href="#M000032" class="method-signature">
-          <span class="method-name">new_response</span><span class="method-args">()</span>
-          </a>
-        </div>
-      
-        <div class="method-description">
-          <p>
-Empty response, AnnoJ only
-</p>
-          <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000032-source">
-<pre>
-     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 344</span>
-344:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_response</span>
-345:     {<span class="ruby-identifier">:success</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span> }
-346:   <span class="ruby-keyword kw">end</span>
-</pre>
-          </div>
-        </div>
-      </div>
-
-      <div id="method-M000021" class="method-detail">
-        <a name="M000021"></a>
-
-        <div class="method-heading">
-          <a href="#M000021" class="method-signature">
           <span class="method-name">objects</span><span class="method-args">()</span>
           </a>
         </div>
@@ -626,7 +626,7 @@ Empty response, AnnoJ only
         <div class="method-description">
           <p>
 Standard REST request method returns array of feature <a
-href="FeaturesController.html#M000021">objects</a> within or overlapping
+href="FeaturesController.html#M000029">objects</a> within or overlapping
 the given start and end on the reference in experiment
 </p>
 <pre>
@@ -635,8 +635,8 @@ the given start and end on the reference in experiment
  =&gt; optional params: format (xml or json, default xml), overlap (true or false, default = false), type (some GFF feature type) restrict objects by feature type
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000021-source">
+            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000029-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 54</span>
 54:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">objects</span>
@@ -655,11 +655,11 @@ the given start and end on the reference in experiment
         </div>
       </div>
 
-      <div id="method-M000026" class="method-detail">
-        <a name="M000026"></a>
+      <div id="method-M000034" class="method-detail">
+        <a name="M000034"></a>
 
         <div class="method-heading">
-          <a href="#M000026" class="method-signature">
+          <a href="#M000034" class="method-signature">
           <span class="method-name">range</span><span class="method-args">(assembly, left, right, id, bases, pixels)</span>
           </a>
         </div>
@@ -670,50 +670,50 @@ AnnoJ request method, returns data formatted as per request parameters for
 particular view
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000026-source">
+            onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000034-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 183</span>
-183:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">range</span>(<span class="ruby-identifier">assembly</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">bases</span>, <span class="ruby-identifier">pixels</span>)
-184:     <span class="ruby-identifier">zoom_factor</span> = <span class="ruby-identifier">bases</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">pixels</span>.<span class="ruby-identifier">to_i</span>
-185:     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
-186:     <span class="ruby-identifier">features</span> = <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find_in_range_no_overlap</span>(<span class="ruby-identifier">assembly</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">id</span>)
-187:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">features</span>.<span class="ruby-identifier">empty?</span>
-188:     <span class="ruby-comment cmt">#case features.first.feature</span>
-189:     
-190:     <span class="ruby-comment cmt">#when </span>
-191:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">allowed_read_types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">feature</span>) <span class="ruby-comment cmt">#'polymerase_synthesis_read'</span>
-192:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">10</span>
-193:        <span class="ruby-identifier">hist_data</span> = <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
-194:        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
-195:        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">hist_data</span> 
-196:        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
-197:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">10</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>
-198:         <span class="ruby-identifier">box_data</span> = <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
-199:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
-200:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">box_data</span>
-201:       <span class="ruby-keyword kw">else</span>
-202:         <span class="ruby-identifier">read_data</span> = <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
-203:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
-204:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">read_data</span>
-205:       <span class="ruby-keyword kw">end</span>   
-206:        
-207:     <span class="ruby-keyword kw">else</span>
-208:       <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = []
-209:       <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">collect!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_annoj</span> }
-210:     <span class="ruby-keyword kw">end</span>
-211:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
-212:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 185</span>
+185:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">range</span>(<span class="ruby-identifier">assembly</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">bases</span>, <span class="ruby-identifier">pixels</span>)
+186:     <span class="ruby-identifier">zoom_factor</span> = <span class="ruby-identifier">bases</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">pixels</span>.<span class="ruby-identifier">to_i</span>
+187:     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
+188:     <span class="ruby-identifier">features</span> = <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find_in_range_no_overlap</span>(<span class="ruby-identifier">assembly</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">id</span>)
+189:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">features</span>.<span class="ruby-identifier">empty?</span>
+190:     <span class="ruby-comment cmt">#case features.first.feature</span>
+191:     
+192:     <span class="ruby-comment cmt">#when </span>
+193:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Feature</span>.<span class="ruby-identifier">allowed_read_types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">features</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">feature</span>) <span class="ruby-comment cmt">#'polymerase_synthesis_read'</span>
+194:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">10</span>
+195:        <span class="ruby-identifier">hist_data</span> = <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
+196:        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+197:        <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">hist_data</span> 
+198:        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+199:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">10</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">zoom_factor</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>
+200:         <span class="ruby-identifier">box_data</span> = <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
+201:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+202:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">box_data</span>
+203:       <span class="ruby-keyword kw">else</span>
+204:         <span class="ruby-identifier">read_data</span> = <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
+205:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
+206:         <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:read</span>] = <span class="ruby-identifier">read_data</span>
+207:       <span class="ruby-keyword kw">end</span>   
+208:        
+209:     <span class="ruby-keyword kw">else</span>
+210:       <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = []
+211:       <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = <span class="ruby-identifier">features</span>.<span class="ruby-identifier">collect!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_annoj</span> }
+212:     <span class="ruby-keyword kw">end</span>
+213:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
+214:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000022" class="method-detail">
-        <a name="M000022"></a>
+      <div id="method-M000030" class="method-detail">
+        <a name="M000030"></a>
 
         <div class="method-heading">
-          <a href="#M000022" class="method-signature">
+          <a href="#M000030" class="method-signature">
           <span class="method-name">respond</span><span class="method-args">(objects,format)</span>
           </a>
         </div>
@@ -721,12 +721,12 @@ particular view
         <div class="method-description">
           <p>
 Standard REST request method, not normally called directly takes provided
-<a href="FeaturesController.html#M000021">objects</a> and converts them to
+<a href="FeaturesController.html#M000029">objects</a> and converts them to
 format before returning
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000022-source">
+            onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000030-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 68</span>
 68:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">respond</span>(<span class="ruby-identifier">objects</span>,<span class="ruby-identifier">format</span>)
@@ -740,11 +740,11 @@ format before returning
         </div>
       </div>
 
-      <div id="method-M000025" class="method-detail">
-        <a name="M000025"></a>
+      <div id="method-M000033" class="method-detail">
+        <a name="M000033"></a>
 
         <div class="method-heading">
-          <a href="#M000025" class="method-signature">
+          <a href="#M000033" class="method-signature">
           <span class="method-name">syndicate</span><span class="method-args">(id)</span>
           </a>
         </div>
@@ -754,19 +754,21 @@ format before returning
 AnnoJ request method, returns metadata on a track required by AnnoJ
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000025-source">
+            onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000033-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 173</span>
 173:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">syndicate</span>(<span class="ruby-identifier">id</span>)
 174:     <span class="ruby-identifier">experiment</span> = <span class="ruby-constant">Experiment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>) 
 175:     <span class="ruby-identifier">response</span> = <span class="ruby-identifier">new_response</span>
 176:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = {}
-177:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:institution</span>] = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>( <span class="ruby-node">&quot;#{experiment.institution}&quot;</span>)
-178:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:engineer</span>] = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>( <span class="ruby-node">&quot;#{experiment.engineer}&quot;</span>)
-179:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>][<span class="ruby-identifier">:service</span>] = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load</span>( <span class="ruby-node">&quot;#{experiment.service}&quot;</span>)
-180:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">response</span>
-181:   <span class="ruby-keyword kw">end</span>
+177:     <span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-identifier">parse</span>( <span class="ruby-node">&quot;#{experiment.meta}&quot;</span> )
+178:     
+179:     <span class="ruby-identifier">response</span>[<span class="ruby-identifier">:data</span>] = <span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-identifier">parse</span>( <span class="ruby-node">&quot;#{experiment.meta}&quot;</span> )
+180:     <span class="ruby-comment cmt">#response[:data][:engineer] = YAML::load( &quot;#{experiment.engineer}&quot;)</span>
+181:     <span class="ruby-comment cmt">#response[:data][:service] = YAML::load( &quot;#{experiment.service}&quot;)</span>
+182:     <span class="ruby-identifier">response</span>
+183:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

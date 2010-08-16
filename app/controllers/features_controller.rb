@@ -133,7 +133,7 @@ class FeaturesController < ApplicationController
             :end => annoj_params['right'].to_i, 
             :strand => '+',
             :phase => '.',
-            :reference => annoj_params['assembly'],
+            :seqid => annoj_params['assembly'],
             :score => '.',
             :experiment_id => nil,
             :gff_id =>  nil,
@@ -152,12 +152,12 @@ class FeaturesController < ApplicationController
 
           elsif zoom_factor < 10 and zoom_factor > 0.1
               box_data = get_boxes(features)
-              box_data[:watson][0][0] = f.reference
+              box_data[:watson][0][0] = f.seqid
               response[:data] = {}
               response[:data][:read] = box_data
           else
               read_data = get_reads(features)
-              read_data[:watson][0][0] = f.reference
+              read_data[:watson][0][0] = f.seqid
               response[:data] = {}
               response[:data][:read] = read_data
           end
@@ -174,10 +174,12 @@ class FeaturesController < ApplicationController
     experiment = Experiment.find(id) 
     response = new_response
     response[:data] = {}
-    response[:data][:institution] = YAML::load( "#{experiment.institution}")
-    response[:data][:engineer] = YAML::load( "#{experiment.engineer}")
-    response[:data][:service] = YAML::load( "#{experiment.service}")
-    return response
+    JSON::parse( "#{experiment.meta}" )
+    
+    response[:data] = JSON::parse( "#{experiment.meta}" )
+    #response[:data][:engineer] = YAML::load( "#{experiment.engineer}")
+    #response[:data][:service] = YAML::load( "#{experiment.service}")
+    response
   end
   #AnnoJ request method, returns data formatted as per request parameters for particular view 
   def range(assembly, left, right, id, bases, pixels)
@@ -326,7 +328,7 @@ class FeaturesController < ApplicationController
     response = new_response
     response[:data] = {}
     response[:data][:id] = f.gff_id
-    response[:data][:assembly] = f.reference
+    response[:data][:assembly] = f.seqid
     response[:data][:start] = f.start
     response[:data][:end] = f.end
     response[:data][:description] = f.description

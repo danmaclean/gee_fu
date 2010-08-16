@@ -1,0 +1,16 @@
+<table>
+	<tr>
+	<th>Genus</th><th>Species</th><th>strain</th><th>pathovar</th><th>NCBI Taxonomy ID</th>
+	</tr>
+	
+	
+	<tr>
+		<td><%= @organism.genus %></td>
+		<td><%= @organism.species %></td>
+		<td><%= @organism.strain %></td>
+		<td><%= @organism.pv %></td>
+		<td><%= @organism.taxid %></td>
+	 </tr> 
+</table>
+<%= link_to 'Edit', edit_organism_path(@organism) %> |
+<%= link_to 'Back', organisms_path %>

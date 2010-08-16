@@ -1,4 +1,4 @@
-body { background-color: #fff; color: #333; }
+body { background-color: #fafafa; color: #000; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -12,16 +12,60 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
-a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+a { color: #000099; }
+a:visited { color: #0000ff; }
+a:hover {  background-color:#ffff99; }
 
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
   display: table;
 }
+form {
+		background-color: #faf0e6;
+		padding: 5px;
+		-moz-box-shadow: 3px 3px 3px #666;
+		-webkit-box-shadow: 3px 3px 3px #666;
+		box-shadow: 3px 3px 3px #666;
+		border-width: 5px;
+		border-style: solid;
+		border-color: white;
+}
+p.show {
+	background-color: #faf0e6;
+	padding: 5px;
+	-moz-box-shadow: 3px 3px 3px #666;
+	-webkit-box-shadow: 3px 3px 3px #666;
+	box-shadow: 3px 3px 3px #666;
+		
+}
+table {
+	border-width: 2px;
+	border-spacing: ;
+	border-style: solid;
+	border-color: gray;
+	border-collapse: collapse;
+	background-color: white;
+	-moz-box-shadow: 3px 3px 3px #666;
+	-webkit-box-shadow: 3px 3px 3px #666;
+	box-shadow: 3px 3px 3px #666;
+	
+}
+table th {
+	border-width: 5px;
+	padding: 4px;
+	border-style: solid;
+	border-color: white;
+	background-color: #ccc;
 
+}
+table td {
+	border-width: 5px;
+	padding: 4px;
+	border-style: solid;
+	border-color: white;
+	background-color: #faf0e6;
+}
 #errorExplanation {
   width: 400px;
   border: 2px solid red;
@@ -29,6 +73,10 @@ a:hover { color: #fff; background-color:#000; }
   padding-bottom: 12px;
   margin-bottom: 20px;
   background-color: #f0f0f0;
+	-moz-box-shadow: 3px 3px 3px #666;
+	-webkit-box-shadow: 3px 3px 3px #666;
+	box-shadow: 3px 3px 3px #666;
+
 }
 
 #errorExplanation h2 {

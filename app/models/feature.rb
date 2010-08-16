@@ -1,3 +1,6 @@
+#require "#{RAILS_ROOT}/lib/bio/db/sam"
+#require 'json'
+
 #Defines the Feature object. 
 #Implements methods for finding features in ranges and returning information.
 #Also defines some methods for AnnoJ formatting
@@ -8,7 +11,7 @@ class Feature < ActiveRecord::Base
   before_destroy :destroy_parents
 
   class << self;
-    #The read types classed as valid: SO:0001423 dye_terminator_read SO:0001424 pyrosequenced_read SO:0001425 ligation_based_read SO:0001426 polymerase_synthesis_read SO:0000150 read 
+  #  #The read types classed as valid: SO:0001423 dye_terminator_read SO:0001424 pyrosequenced_read SO:0001425 ligation_based_read SO:0001426 polymerase_synthesis_read SO:0000150 read 
     attr_accessor :allowed_read_types 
   end
   @allowed_read_types = %w[SO:0001423 dye_terminator_read SO:0001424 pyrosequenced_read SO:0001425 ligation_based_read SO:0001426 polymerase_synthesis_read SO:0000150 read]
@@ -16,14 +19,14 @@ class Feature < ActiveRecord::Base
   #Returns an array of feature objects in experiment id on reference between start and stop. 
   # use Feature.find_in_range(Chr1, 1000, 2000, 3). 
   # Returned features may overlap the start and stop
-  def self.find_in_range(reference, start, stop, id) 
+  def self.find_in_range(seqid, start, stop, id) 
      experiment = Experiment.find(id)
      if experiment.uses_bam_file?
-       Feature.find_by_bam(reference,start,stop,id)
+       Feature.find_by_bam(seqid,start,stop,id)
      else
        Feature.find_by_sql(
        "select * from features where 
-       reference = '#{reference}' and 
+       seqid = '#{seqid}' and 
        start <= '#{stop}' and 
        end >= '#{start}' and 
        experiment_id = '#{id}'  
@@ -35,14 +38,14 @@ class Feature < ActiveRecord::Base
   #Returns an array of feature objects in experiment id on reference between start and stop. 
   # use Feature.find_in_range(Chr1, 1000, 2000, 3). 
   # Returned features are fully contained within start and stop
-  def self.find_in_range_no_overlap(reference, start, stop, id)
+  def self.find_in_range_no_overlap(seqid, start, stop, id)
         experiment = Experiment.find(id)
         if experiment.uses_bam_file?
-          Feature.find_by_bam(reference,start,stop,id)
+          Feature.find_by_bam(seqid,start,stop,id)
         else
           Feature.find_by_sql(
           "select * from features where 
-          reference = '#{reference}' and 
+          seqid = '#{seqid}' and 
           start <= '#{stop}' and 
           start >= '#{start}' and
           end >= '#{start}' and 
@@ -55,17 +58,17 @@ class Feature < ActiveRecord::Base
   #Returns an array of feature objects from a BAM file on reference between start and stop. 
   # use Feature.find_by_bam_file(Chr1, 1000, 2000, 3). 
   # Not normally called manually, usually called via Feature.find_in_range or Feature.find_in_range_no_overlap Returned features may overlap the start and stop
-  def self.find_by_bam(reference,start,stop,id)
-       require "#{RAILS_ROOT}/lib/bio/db/sam"
+  def self.find_by_bam(seqid,start,stop,id)
+      require "#{RAILS_ROOT}/lib/bio/db/sam"
        experiment = Experiment.find(id)
-       ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ reference }", "#{experiment.genome_id}"])
+       ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ seqid }", "#{experiment.genome_id}"])
        sam = Bio::DB::Sam.new({:bam=>experiment.bam_file_path})
        features = []
        sam.open       
        fetchAlignment = Proc.new do |a|
          a.query_strand ? strand = '+'  : strand = '-'       
          features << Feature.new(
-           :reference => ref.name,
+           :seqid => ref.name,
            :start => a.pos - 1,
            :end => a.calend,
            :strand => strand,
@@ -83,7 +86,7 @@ class Feature < ActiveRecord::Base
        end
       
        
-       sam.fetch_with_function(reference, start, stop, fetchAlignment)
+       sam.fetch_with_function(ref.name, start, stop, fetchAlignment)
        
        sam.close
        features
@@ -101,7 +104,6 @@ class Feature < ActiveRecord::Base
   #If Name is not defined returns the string ‘no name’ 
   # use feature.name => ‘RuBisCo
   def name
-  require 'json'
     JSON.parse(self.group).each{|a| return a.last if a.include?('Name')}
     'no name'
   end
@@ -111,16 +113,20 @@ class Feature < ActiveRecord::Base
   #EG feature.description => ‘Ribulose-1,5-bisphosphate carboxylase oxygenase, enzyme involved in the Calvin cycle‘
   def description
     require 'json'
-    JSON.parse(self.group).each{|a| return a.last if a.first.match('Description') }
+    attributes = JSON.parse(self.group)
+    b = []
+    attributes.each {|a| b << a.join(" = ") }
+    b.join("\n")
+    
   end
   #Returns a hash formatted version of the current object for AnnoJ, not normally used outside this context
   def to_lookup
     row = {}
     row[:id] = self.gff_id
-    row[:assembly] = self.reference
+    row[:assembly] = self.seqid
     row[:start] = self.start
     row[:description] = self.description
-    return row
+    row
   end
   #Deprecated, use has_parent? instead
   def has_parents?

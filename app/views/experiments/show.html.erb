@@ -1,0 +1,12 @@
+<h1>Experiment ID <%= @experiment.id%></h1>
+
+	<p class="show">DB ID: <%= @experiment.id %></p>
+	<p class="show">Name: <%= @experiment.name %></p>
+	<p class="show">Description: <%= @experiment.description %></p>
+	<p class="show">Experiment uses a BAM file:
+	<%= @experiment.uses_bam_file ? "true" : "false"%></p>
+	<p class="show">Number of features in this experiment: <%= @experiment.features.length%></p>
+	<p class="show">Meta data: <%= @experiment.html_meta %></p>
+
+<%= link_to 'Edit', edit_experiment_path(@experiment) %> |
+<%= link_to 'Back', experiments_path %>
