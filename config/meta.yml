@@ -1,0 +1,19 @@
+--- 
+institution: 
+  name: Your Institute
+  logo: images/institute_logo.png
+  url: http://www.your_place.etc
+service: 
+  format: Unspecified
+  title: Sample GeeFu served browser (TAIR 9 Gene Models)
+  server: Unspecified
+  version: Vers 1
+  access: public
+  description: Free text description of the service
+engineer: 
+  name: Mick Jagger
+  email: street.fighting.man@stones.net
+genome: 
+  version: TAIR9
+  description: Chr1 from TAIR9
+  species: Arabidopsis thaliana

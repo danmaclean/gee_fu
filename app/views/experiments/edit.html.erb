@@ -28,9 +28,9 @@
 		<% end %><br />  
 	Find parents for the features in this file? (Upload is quicker if all the features are parentless)<br />
 	<%= f.label :find_parents, "Yes"%>
-	<%= f.radio_button :find_parents, :true, :checked => true %>
+	<%= f.radio_button :find_parents, "find_parents", :checked => true %>
 	<%= f.label :find_parents, "No"%>
-	<%= f.radio_button :find_parents,  :false %><br />	
+	<%= f.radio_button :find_parents,  "dont_find" %><br />	
 	<%= f.hidden_field :expected_file, :value => "gff" %>
 </p>
  <p>  <%= f.submit "Update" %>  </p> 

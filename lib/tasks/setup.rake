@@ -17,7 +17,27 @@ end
 
 
 namespace :add do
-  desc "add fasta sequences for the reference track"
+  desc "add a species definition"
+  task :species => :environment do
+    unless ENV['genus'] and ENV['species']
+      puts "dont have a genus and species definition"
+      exit
+    end
+    s = Organism.new (
+                :genus => ENV['genus'],
+                :species => ENV['species'],
+                :strain => ENV['strain'],
+                :pv => ENV['pv'],
+                :taxid => ENV['taxid']
+                )
+    if s.save
+      puts "saved species #{s.inspect} to the database"
+    else 
+      puts "Error saving"
+    end
+  end
+  
+  desc "add fasta sequences for the references"
   task :sequences => :environment do
     unless ENV['fasta']
       puts "Need an input fasta file containing the reference sequences"
@@ -59,6 +79,47 @@ namespace :add do
     
   end
   
+  desc "add reference sequence information (not actual sequences) to the database"
+  task :reference_info => :environment do 
+    require 'bio'
+    unless ENV['genome']
+      puts "no genome explicitly defined, assuming id is 1 ... "
+    end
+    genome_id = 1
+    genome_id = ENV['genome'] if ENV['genome']
+    genome = Genome.find(:first, :conditions => ["id = ?", "#{genome_id}"])
+    exit "can't find genome with id #{genome_id} ... " unless genome
+    
+    puts "adding reference sequence information to database"
+    Bio::FastaFormat.open("#{ENV['fasta']}").each do |entry|
+      reference = Reference.new( 
+                                  :name => entry.entry_id, 
+                                 :length => entry.length,
+                                 :genome_id => genome_id 
+                                )
+      reference.save                          
+    end
+  end
+  
+  desc "add a genome version to the database"
+  task :genome => :environment do 
+    build_version = nil
+    unless ENV['build_version']
+      puts 'a genome build must be defined'
+      exit
+    end
+    build_version = ENV['build_version']
+    if build_version
+      meta = nil 
+      meta = YAML.load_file("#{ENV['meta']}").to_json if ENV['meta']
+      genome = Genome.new(
+                          :build_version => build_version,
+                          :meta => meta
+                          )
+      genome.save 
+    end
+    
+  end
   
   desc "add features in an experiment (track) to the database"
   task :features => :environment do
@@ -75,7 +136,6 @@ namespace :add do
     genome_id = ENV['genome'] if ENV['genome']
     genome = Genome.find(:first, :conditions => ["id = ?", "#{genome_id}"])
     exit "can't find genome with id #{genome_id} ... " unless genome
-
     
     unless ENV['exp']
       puts "Need an experiment name exp='experiment' "
@@ -91,35 +151,29 @@ namespace :add do
     puts "looking for experiment #{ENV['exp']} in database"
     escaped_exp = ENV['exp'].gsub ('%', '\%').gsub ('_', '\_')
     exp = nil
-    if (!Experiment.find(:first, :conditions => ['name LIKE ?', "%#{escaped_exp}%"]).nil?)
+    if (!Experiment.find(:first, :conditions => ['name = ?', "#{escaped_exp}"]).nil?)
       puts "We have an experiment with that name already.. Do you want to add these features? (y/n)..."
       answer = $stdin.gets.chomp
       if answer.match('n')
         "Aborting without update"
         exit
       else
-        exp = Experiment.find(:first, :conditions => ['name LIKE ?', "%#{escaped_exp}%"])
+        exp = Experiment.find(:first, :conditions => ['name = ?', "%#{escaped_exp}%"])
       end
     else
       puts "not found, creating new experiment"
-      unless ENV['desc']
-        ENV['desc'] = 'not given'
-      end
+        ENV['desc'] = nil unless ENV['desc']
+
       exp = Experiment.new(:name => "#{ENV['exp']}", :description => "#{ENV['desc']}" )
       
       if ENV['trackinfo']
-        trackinfo = YAML.load_file("#{ENV['trackinfo']}")
-        exp.institution = trackinfo["institution"]
-        exp.engineer = trackinfo["engineer"]
-        exp.service = trackinfo["service"]
+        exp.meta = YAML.load_file("#{ENV['trackinfo']}").to_json
       else
-        exp.institution = genome.institution
-        exp.engineer = genome.engineer
-        exp.service = genome.service
+        exp.meta = genome.meta
       end
       exp.genome_id = genome.id
       
-      if exp.institution.nil? or exp.engineer.nil? or exp.service.nil?
+      if exp.meta.nil?
         puts "Looks like the track information is missing, and there is no genome default in the db already"
         puts "This may cause problems... "
       end
@@ -140,28 +194,20 @@ namespace :add do
       end
     end
     if ENV['gff']
-      allowed_features = YAML.load_file("#{RAILS_ROOT}/lib/song.yml")
- 
+
       puts "loading #{ENV['gff']}..."
-      File.open( "#{ENV['gff']}" ).each do |entry|
-        record = Bio::GFF::GFF3::Record.new(entry)
+      File.open( "#{ENV['gff']}" ).each do |line|
+        next if line =~ /^#/
+        break if line =~ /^##fasta/ or line =~ /^>/
+        record = Bio::GFF::GFF3::Record.new(line)
 
-        ###check that the GFF record contains an allowed feature term from the feature list
-      
-        unless allowed_features.include?(record.feature)
-          puts "unknown and unallowed feature type in gff file whilst examining record"
-          puts YAML.dump(record)
-          puts record
-          puts "aborting loading"
-          exit
-        end
-
-     
-        gff_id = record.attributes.select { |a| a.first.match('ID') }
-        gff_id = gff_id.flatten.last if gff_id #flatten.delete_if{|x| x == "ID"} #get rid of the ID part of the array
-
-
-        note = record.attributes.select{|a| a.first.match('Note')}
+        #use only the first gff id as the linking one ... 
+        gff_ids = record.attributes.select { |a| a.first == 'ID' }
+        gff_id = nil
+        gff_id = gff_ids[0][1] if ! gff_ids.empty?
+        
+        #get the sequence and quality if defined
+        note = record.attributes.select{|a| a.first == 'Note'}
         seq = nil
         qual = nil
 
@@ -175,7 +221,7 @@ namespace :add do
      
         attribute = JSON.generate(record.attributes)
       
-        ref_id = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome_id}"])
+        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome_id}"])
       
         feature = Feature.new (
           :group => "#{attribute}",
@@ -185,84 +231,44 @@ namespace :add do
           :end => "#{record.end}", 
           :strand => "#{record.strand}",
           :phase => "#{record.frame}",
-          :reference => "#{record.seqname}",
+          :seqid => "#{record.seqname}",
           :score => "#{record.score}",
           :experiment_id => "#{exp.id}",
           :gff_id =>  "#{gff_id}",
           :sequence => "#{seq}",
           :quality => "#{qual}",
-          :reference_id => "#{ref_id}"
+          :reference_id => "#{ref.id}"
         )
       
       
       #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
       #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
-      ###sort out the Parents if any
+      ###sort out the Parents if any, but only connects up the parent via the first gff id
         unless skip_parent_finding
-          parents = record.attributes.select { |a| a.first.match('Parent') }
+          parents = record.attributes.select { |a| a.first == 'Parent' }
           if !parents.empty?
-            parents = parents.flatten.delete_if{|x| x == 'Parent'}
-            parents.each do |parentFeature_gff_id|
-              parentFeat = Feature.find(:first, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
-              if (parentFeat)
-                parent = nil
-                parent = Parent.find(:first, :conditions => {:parent_feature => parentFeat.id})
-                if parent
-                  parent.save unless practice
-                else
-                  parent = Parent.new(:parent_feature => parentFeat.id)
-                  parent.save unless practice
-                end
-                feature.parents << parent
+            parents.each do |label, parentFeature_gff_id|
+              parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+              if (parentFeats)
+                parentFeats.each do |pf|
+                  parent = nil
+                  parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                  if parent
+                    parent.save unless practice
+                  else
+                    parent = Parent.new(:parent_feature => pf.id)
+                    parent.save unless practice
+                  end
+                 feature.parents << parent
               end
             end
           end
+        end
         end
         feature.save unless practice
       end
     end
   end
-  desc "add assembly information to genome.yml from fasta file"
-  task :assembly_to_yml => :environment do
-    
-    require 'bio'
-    assembly = []
-    puts "adding assembly information to genome.yml...."
-    Bio::FastaFormat.open("#{ENV['fasta']}").each do |entry|
-      assembly.push( { "id" => entry.entry_id, "size" => entry.length} )
-    end
-    config = YAML.load_file("#{RAILS_ROOT}/config/genome.yml")
-    config["genome"]["assemblies"] = assembly
-    File.open("#{RAILS_ROOT}/config/genome.yml", 'w') { |f| YAML.dump(config, f) }
-    puts "added"
-  end
-  
-  desc "load the config information into the database from the yaml file"
-  task :config_to_db => :environment do
-    ###load in the users config data
-    config = YAML.load_file("#{RAILS_ROOT}/config/genome.yml")
-  
-    ###use the config to populate the genome table
-
-    genome = Genome.new(:genome => config["genome"],
-                        :institution => config["institution"],
-                        :engineer => config["engineer"],
-                        :service => config["service"]
-                        )
-     genome.save
-     ###and to populate the reference table
-
-     config["genome"]["assemblies"].each do |entry|
-       ref = Reference.new(
-          :name => "#{entry["id"]}",
-          :length => "#{entry["size"]}",
-          :genome_id => "#{genome.id}"
-       
-       )
-       ref.save
-     end
-  end
-
 
 end
 
@@ -305,41 +311,14 @@ end
 
 namespace :create do
   desc "creates the AnnoJ config.js file based on the information in config.yml"
-  task :config do
-    
-    config_yml = {}
-    config_yml = YAML.load_file("#{RAILS_ROOT}/config/config.yml")
+  task :config => :environment do
+
+    config = YAML.load_file("#{RAILS_ROOT}/config/config.yml")
     config_js = File.new("#{RAILS_ROOT}/public/javascripts/config.js", 'w')
     config_js.puts('AnnoJ.config = ')
-    config_js.puts config_yml.to_json
-    
-    
-  end
-  
-  
-  desc "turns a DagEdit style file into YAML and puts it in the lib folder as song.yml. The file defines the terms that are allowed in the feature field of the gff file "
-  task :song_list => :environment do
-    unless ENV['dag']
-      raise ArgumentError "please provide a DagEdit file dag="
-    end
-    
-        file = File.open("#{ENV['dag']}").read
-    
-      
-        allowed = Array.new
-        file.scan(/\[Term\].*?\n\n/m).each do |term|
-          term.split(/\n/).each do |line|
-            if line =~ /id:.(SO:\d+)/
-              allowed << $1.to_s
-            elsif line =~ /name:\s(.*)/
-              allowed << $1.to_s 
-            end
-          end
-        end
-  
-    
-    File.open("#{RAILS_ROOT}/lib/song.yml", 'w') { |f| YAML.dump(allowed, f) }
-    
+    config_js.puts config.to_json
     
   end
+  
+
 end

@@ -149,7 +149,11 @@ class ExperimentsController < ApplicationController
     @experiment.yaml_file = params[:experiment][:yaml_file] 
     @experiment.gff_file = params[:experiment][:gff_file]
     @experiment.expected_file = params[:experiment][:expected_file]
-    @experiment.find_parents = params[:experiment][:find_parents]
+    if params[:experiment][:find_parents] == "find_parents"
+      @experiment.find_parents = true
+    else
+      @experiment.find_parents = false
+    end
     @experiment.merge = params[:experiment][:merge]
     
     #format the meta data string from a provided yaml file or get it from the parent genome

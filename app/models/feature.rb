@@ -158,15 +158,17 @@ class Feature < ActiveRecord::Base
   end
   #Returns an array formatted version of the current object for AnnoJ, not normally used outside this contex
   def to_annoj
-      case self.feature
-      when 'intron', 'exon', 'CDS', 'five_prime_UTR', 'three_prime_UTR', 'start_codon', 'stop_codon', 'match_part'
+     ##this is the list of features that will be grouped for parenting in AnnoJ. Can be extended...
+     ## why is there a list? why not all parented features??? 
+      #case self.feature
+      #when 'intron', 'exon', 'CDS', 'five_prime_UTR', 'three_prime_UTR', 'start_codon', 'stop_codon', 'match_part'
         if self.has_parent?
           [Feature.find(self.parents[0].parent_feature).gff_id, self.id, self.strand, self.feature, self.start, self.end - self.start + 1]
         else
           [nil, self.gff_id, self.strand, self.feature, self.start, self.end - self.start + 1]
         end
-      else
-       [nil, self.gff_id, self.strand, self.feature, self.start, self.end - self.start + 1]
-      end
+      #else
+      # [nil, self.gff_id, self.strand, self.feature, self.start, self.end - self.start + 1]
+      #end
   end
 end
