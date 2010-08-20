@@ -1,7 +1,7 @@
-body { background-color: #fefefe; color: #bbb; }
+body { background-color: #c0c0c0; color: #bbb; }
 
 body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
+  font-family: "Bitstream Vera Sans Mono", helvetica, verdana, arial, sans-serif;
   font-size:   13px;
   line-height: 18px;
 	color: black;
@@ -12,7 +12,19 @@ pre {
   padding: 10px;
   font-size: 11px;
 }
-
+#page_title {
+	font-size: 48px;
+	text-decoration: underline;
+}
+#page {
+	background-color: white;
+	padding: 20px;
+	width: 1000px;
+	
+	-moz-box-shadow: 3px 3px 3px #666;
+	-webkit-box-shadow: 3px 3px 3px #666;
+	box-shadow: 3px 3px 3px #666;
+}
 a { color: black; }
 
 .fieldWithErrors {
@@ -41,15 +53,15 @@ p.show {
 
 #nav_menu 
 {
-background-color:#6997d3;
--moz-box-shadow: 3px 3px 3px #666;
--webkit-box-shadow: 3px 3px 3px #666;
+
+text-align:right;
 }
 
 #nav_menu li 
 {
+color: black;
 font: 18px arial, sans-serif;
-background: #6997d3;
+background: white;
 /*height: 40px;
 line-height: 20px; */
 float: left;
@@ -61,7 +73,7 @@ display: block;
 
 }
 #nav_menu a{
-	color:white;
+	color:black;
 	text-decoration:none;
 }
 
@@ -74,6 +86,7 @@ padding-bottom: 75px;
 }
 
 table {
+	  font-size:   13px;
 	border-width: 2px;
 	border-spacing: ;
 	border-style: solid;

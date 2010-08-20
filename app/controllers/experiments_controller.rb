@@ -47,7 +47,7 @@ class ExperimentsController < ApplicationController
       @experiment.meta = genome.meta
     end
     
-    if @experiment.expected_file == "gff"
+    if @experiment.expected_file == "gff" and @experiment.gff_file
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/
         break if line =~ /^##fasta/ or line =~ /^>/
