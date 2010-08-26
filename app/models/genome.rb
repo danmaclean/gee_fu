@@ -1,5 +1,5 @@
 class Genome < ActiveRecord::Base
-  has_many :references
+  has_many :references, :dependent => :destroy
   validates_presence_of :build_version
   validates_presence_of :fasta_file
   

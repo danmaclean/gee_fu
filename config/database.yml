@@ -2,7 +2,7 @@
 #   gem install sqlite3-ruby (not necessary on OS X Leopard)
 development:
     adapter: mysql
-    database: sample
+    database: geefu_sample
     username: root
     password: ''
     host: localhost

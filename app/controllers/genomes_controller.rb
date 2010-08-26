@@ -49,6 +49,7 @@ class GenomesController < ApplicationController
     respond @genome
   end
   
+  
   def create
     require 'bio'
     @genome = Genome.new(params[:genome])

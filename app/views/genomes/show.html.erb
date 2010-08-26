@@ -1,8 +1,7 @@
 <h1>Genome ID <%= @genome.id%></h1>
 
-	<p class="show">Build version: <%= @genome.id %></p>
+	<p class="show">Build version: <%= @genome.build_version %></p>
 	<p class="show">Associated reference sequences: <%= @genome.references.length%></p>
 	<p class="show">Meta data: <%= @genome.html_meta %></p>
 
-<%= link_to 'Edit', edit_genome_path(@genome) %> |
 <%= link_to 'Back', genomes_path %>

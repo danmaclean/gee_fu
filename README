@@ -1,14 +1,14 @@
-What is gee_fu?
-gee_fu is a Ruby on Rails  based RESTful web-service application that serves genome feature data on request. It is ideally suited to serving large amounts of data such as those from high-throughput sequencing experiments. gee_fu can be used in conjunction with web-service viewports such as AnnoJ to create very fast, data-rich, attractive, RDBMS agnostic genome browsers that can be easily extended into fuller custom web-applications using the powerful Rails framework.
+What is GeeFu?
+GeeFu is a Ruby on Rails  based RESTful web-service application that serves genome feature data on request. It is ideally suited to serving large amounts of data such as those from high-throughput sequencing experiments. GeeFu can be used in conjunction with web-service viewports such as AnnoJ to create very fast, data-rich, attractive, RDBMS agnostic genome browsers that can be easily extended into fuller custom web-applications using the powerful Rails framework.
 
 
-How gee_fu fits into the web service world
-gee\_fu is an application centered around a database schema that holds GFF3 formatted data. It has been designed with the needs of researchers wanting to view high throughput sequencing data in a genome browser. In the jargon of web applications it is the Model and Controller of the Model View Controller framework.  On request from a web service it will search the database on the basis of the parameters of the request and return a result. As an instance of a Rails application gee_fu can be used with any type of RDBMS currently supported by Rails  without modification. At this stage in development gee_fu is capable of receiving and handling requests from AnnoJ , a web service based viewing engine for genomic data. It returns json  data which AnnoJ is able to render. We anticipate being able to serve up data in formats suitable for different applications as development progresses and we become aware of other rendering engines and web services that request data. Already gee_fu and AnnoJ make a powerful, fast and easily set up genome browser. 
+How GeeFu fits into the web service world
+GeeFu is an application centered around a database schema that holds GFF3 formatted data. It has been designed with the needs of researchers wanting to view high throughput sequencing data in a genome browser. In the jargon of web applications it is the Model and Controller of the Model View Controller framework.  On request from a web service it will search the database on the basis of the parameters of the request and return a result. As an instance of a Rails application GeeFu can be used with any type of RDBMS currently supported by Rails  without modification. At this stage in development GeeFu is capable of receiving and handling requests from AnnoJ , a web service based viewing engine for genomic data. It returns json  data which AnnoJ is able to render. We anticipate being able to serve up data in formats suitable for different applications as development progresses and we become aware of other rendering engines and web services that request data. Already GeeFu and AnnoJ make a powerful, fast and easily set up genome browser. 
 
 
-Setting up gee_fu
+Setting up GeeFu
 
-gee_fu requires a working internet connection and the following software and packages to be available before installation
+GeeFu requires a working internet connection and the following software and packages to be available before installation
 
 Ruby  1.8.7 or later
 Rails  2.3.4 or later
@@ -32,14 +32,13 @@ If you get really frustrated with the software, feel free to complain to me dan.
 
 
 
-Setup.
+Setup
 rake db:create
-rake add:assembly_to_yml fasta=public/sequences/sample_reference_TAIR9_Chr1.fna
 rake db:schema:load
-rake add:config_to_db
-rake create:config
-rake add:features desc="TAIR 9 Sample Features" exp="gene_models" gff=public/sample_gffs/sample_features.gff genome=1
-rake add:features desc="sample_reads" exp="gff_format_reads_from_rdbms" gff=public/sample_gffs/sample_reads.gff genome=1
-rake add:features bam=public/bam/aln.sort.bam exp='bam format sample reads from bam file' desc='sample reads from bam' genome=1 
+script/server
+..then upload data via web forms at http://localhost:3000/begin
+
+More Information
+Please read the PDF document, doc/manual.pdf
 
 

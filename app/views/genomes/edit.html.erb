@@ -3,11 +3,11 @@
 <% form_for(@genome) do |f| %>
   <%= f.error_messages %>
   <%= f.error_messages %>
-	<p>  <%= f.label "Build version (required)" %><br /> 
+	<p>  <%= f.label "Build version" %><br /> 
 		 <%= f.text_field :build_version %> <br />
-		<%= f.label "Fasta file of sequences (required)"%><br />
+		<%= f.label "Fasta file of sequences "%><br />
 		<%= f.file_field :fasta_file  %><br />
-		<%= f.label "YAML file of metadata about this genome (required for AnnoJ browsing only)"%><br />
+		<%= f.label "YAML file of metadata about this genome"%><br />
 		<%= f.file_field :yaml %><br />
 	</p>
   <p>
