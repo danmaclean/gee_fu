@@ -7,11 +7,12 @@ ActionController::Routing::Routes.draw do |map|
 
   
   
-  map.resources :features, :genomes, :experiments, :references, :tools 
+  map.resources :features, :genomes, :experiments, :references, :tools
   
   map.connect 'features/objects', :controller => 'features', :action => 'objects'
   map.connect 'features/depth', :controller => 'features', :action => 'depth'
   map.connect 'tools/genomic_sequence', :controller => 'tools', :action => 'genomic_sequence'
+  map.connect 'tools/export', :controller => 'tools', :action => 'export'
   map.connect 'begin', :controller => 'organisms', :action => 'index'
   #map.connect 'experiments/index', :controller => 'experiments', :action => 'list'
   #map.connect 'genomes/index', :controller => 'genomes', :action => 'list'  
