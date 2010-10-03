@@ -30,24 +30,21 @@ class ToolsController < ApplicationController
   end
   
   def export
-    @export = Export.new({'yaml_file' => params['yaml_file']['yaml_file'].path,
-                         'export_format' => params['export_format'],
+    @export = Export.new({'export_format' => params['export_format'],
                          'genome_id' => params['genome_id'],
                          'destination' => params['destination']}
                         )
-    
+    if params['yaml_file']                    
+      @export.yaml_file = params['yaml_file']['yaml_file'].path
+    else
+      @export.yaml_file = nil
+    end
     params.delete_if {|key, value| key !~ /^experiment/ }   #=> {"a"=>100}                   
     @export.experiment_ids = params.values.collect! {|v| v.to_i } 
-    #@export.filename = 'filename'
+
   
     @features = get_features(@export.genome_id, @export.experiment_ids) #[]
     if @export.export_format == 'gff' #and @export.destination == 'browser'
-      #g = Genome.find(@export.genome_id)
-      #g.references.each do |r| 
-      #  r.features.each do |feature|
-      #    @features << feature if @export.experiment_ids.include?(feature.experiment_id)
-      #  end
-      #end
       @features.collect! {|f| f.to_gff}
       if @export.destination == 'browser'
         render :text => @features.join("\n"), :content_type => 'text/plain'
@@ -59,9 +56,17 @@ class ToolsController < ApplicationController
           format.html 
         end
       end
-    elsif @export.export_format == 'embl'
+    elsif @export.export_format == 'embl' or @export.export_format == 'genbank'
+       m = MappedFeature.new(:embl)
        @results = []
-       @export.meta = YAML::load_file(@export.yaml_file)
+       if @export.yaml_file
+         @export.meta = YAML::load_file(@export.yaml_file)
+       else
+         @export.meta = {'references'=> [], 'data_class' => nil, 'topology' => nil, 'molecule_type' => nil, 
+                          'sequence_version' => nil, 'species' => nil, 'division' => nil, 'definition' => nil, 
+                          'keywords' => nil, 'comments' => 'nil'
+                        }
+        end
        reference_list = []
        @export.meta['references'].each {|r| reference_list << Bio::Reference.new(r) } if @export.meta['references'].instance_of?(Array)
        g = Genome.find(@export.genome_id)
@@ -77,17 +82,39 @@ class ToolsController < ApplicationController
          s.definition = @export.meta['definition']
          s.keywords = @export.meta['keywords']
          s.comments = @export.meta['comments']
-         #s.features = []
-         #r.features.each do |f|
-        #  feature = Bio::Feature.new(f.feature,"#{f.start}..#{f.end}")
-        #  attributes = JSON.parse(f.group)
-        #  attributes.each{|a| feature.append( Bio::Feature::Qualifier.new(a.first, a.last) )}
-        #  s.features << f
-        # end
-         @results << s.output(:embl)
+         s.features = []
+         r.features.each do |f|
+          next unless @export.experiment_ids.include?(f.experiment_id)
+          position = "#{f.start}..#{f.end}"
+          position =  "complement(#{f.start}..#{f.end})" if f.strand == '-'
+          
+          #map presumed SO term to embl term .. if no embl term use misc_feature
+          embl_term = m.map_term(f.feature) || 'misc_feature'
+          feature = Bio::Feature.new(embl_term,position)
+          attributes = JSON.parse(f.group)
+          attributes.each do |a|
+            #map gff attribute to qualifier if possible, if not and not a legal qualifier, skip
+            if m.mappable_gff_attribute(a.first) 
+              feature.append( Bio::Feature::Qualifier.new(m.mappable_gff_attribute(a.first), a.last) )
+            #else #optionally turn unmappable tags to note
+              #feature.append( Bio::Feature::Qualifier.new('note', a.join('-') ) )
+            end
+
+             
+          end
+          s.features << feature
+         end
+         @results << s.output(@export.export_format)
        end
        if @export.destination == 'browser'
           render :text => @results.join("\n"), :content_type => 'text/plain'
+       else
+         filename = Time.now.strftime("%H%M%S_%d%m%y") + '.txt'
+         File.open("#{RAILS_ROOT}/public/exports/#{filename}", 'w') {|f| f.write(@results.join("\n"))}
+         @export.filenames << filename
+         respond_to do |format|
+           format.html 
+         end
        end
     end
     
