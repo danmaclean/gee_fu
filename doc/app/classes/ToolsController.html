@@ -94,8 +94,9 @@ Implements a controller for custom web tools that act on the database
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000016">genomic_sequence</a>&nbsp;&nbsp;
-      <a href="#M000015">index</a>&nbsp;&nbsp;
+      <a href="#M000019">export</a>&nbsp;&nbsp;
+      <a href="#M000018">genomic_sequence</a>&nbsp;&nbsp;
+      <a href="#M000017">index</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -117,11 +118,123 @@ Implements a controller for custom web tools that act on the database
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000016" class="method-detail">
-        <a name="M000016"></a>
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
 
         <div class="method-heading">
-          <a href="#M000016" class="method-signature">
+          <a href="#M000019" class="method-signature">
+          <span class="method-name">export</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000019-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/controllers/tools_controller.rb, line 32</span>
+ 32:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">export</span>
+ 33:     <span class="ruby-ivar">@export</span> = <span class="ruby-constant">Export</span>.<span class="ruby-identifier">new</span>({<span class="ruby-value str">'export_format'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">'export_format'</span>],
+ 34:                          <span class="ruby-value str">'genome_id'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">'genome_id'</span>],
+ 35:                          <span class="ruby-value str">'destination'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">'destination'</span>]}
+ 36:                         )
+ 37:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">'yaml_file'</span>]                    
+ 38:       <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">yaml_file</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value str">'yaml_file'</span>][<span class="ruby-value str">'yaml_file'</span>].<span class="ruby-identifier">path</span>
+ 39:     <span class="ruby-keyword kw">else</span>
+ 40:       <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">yaml_file</span> = <span class="ruby-keyword kw">nil</span>
+ 41:     <span class="ruby-keyword kw">end</span>
+ 42:     <span class="ruby-identifier">params</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/^experiment/</span> }   <span class="ruby-comment cmt">#=&gt; {&quot;a&quot;=&gt;100}                   </span>
+ 43:     <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">experiment_ids</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">collect!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span> } 
+ 44: 
+ 45:   
+ 46:     <span class="ruby-ivar">@features</span> = <span class="ruby-identifier">get_features</span>(<span class="ruby-ivar">@export</span>.<span class="ruby-identifier">genome_id</span>, <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">experiment_ids</span>) <span class="ruby-comment cmt">#[]</span>
+ 47:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">export_format</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'gff'</span> <span class="ruby-comment cmt">#and @export.destination == 'browser'</span>
+ 48:       <span class="ruby-ivar">@features</span>.<span class="ruby-identifier">collect!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_gff</span>}
+ 49:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">destination</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'browser'</span>
+ 50:         <span class="ruby-identifier">render</span> <span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@features</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>), <span class="ruby-identifier">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>
+ 51:       <span class="ruby-keyword kw">else</span> <span class="ruby-comment cmt">#@export_destination == &quot;server_direct&quot;</span>
+ 52:         <span class="ruby-identifier">filename</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">&quot;%H%M%S_%d%m%y&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'.txt'</span>
+ 53:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{RAILS_ROOT}/public/exports/#{filename}&quot;</span>, <span class="ruby-value str">'w'</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@features</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>))}
+ 54:         <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">filenames</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filename</span>
+ 55:         <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+ 56:           <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> 
+ 57:         <span class="ruby-keyword kw">end</span>
+ 58:       <span class="ruby-keyword kw">end</span>
+ 59:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">export_format</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'embl'</span> <span class="ruby-keyword kw">or</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">export_format</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'genbank'</span>
+ 60:        <span class="ruby-identifier">m</span> = <span class="ruby-constant">MappedFeature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:embl</span>)
+ 61:        <span class="ruby-ivar">@results</span> = []
+ 62:        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">yaml_file</span>
+ 63:          <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span> = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_file</span>(<span class="ruby-ivar">@export</span>.<span class="ruby-identifier">yaml_file</span>)
+ 64:        <span class="ruby-keyword kw">else</span>
+ 65:          <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span> = {<span class="ruby-value str">'references'</span>=<span class="ruby-operator">&gt;</span> [], <span class="ruby-value str">'data_class'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'topology'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'molecule_type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, 
+ 66:                           <span class="ruby-value str">'sequence_version'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'species'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'division'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'definition'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, 
+ 67:                           <span class="ruby-value str">'keywords'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-value str">'comments'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'nil'</span>
+ 68:                         }
+ 69:         <span class="ruby-keyword kw">end</span>
+ 70:        <span class="ruby-identifier">reference_list</span> = []
+ 71:        <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'references'</span>].<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">reference_list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'references'</span>].<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">Array</span>)
+ 72:        <span class="ruby-identifier">g</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">find</span>(<span class="ruby-ivar">@export</span>.<span class="ruby-identifier">genome_id</span>)
+ 73:        <span class="ruby-identifier">g</span>.<span class="ruby-identifier">references</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+ 74:          <span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span>.<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">to_s</span>) 
+ 75:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">references</span> = <span class="ruby-identifier">reference_list</span>
+ 76:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">data_class</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'data_class'</span>]
+ 77:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">topology</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'topology'</span>]
+ 78:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">molecule_type</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'molecule_type'</span>]
+ 79:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sequence_version</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'sequence_version'</span>]
+ 80:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">species</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'species'</span>]
+ 81:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">division</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'division'</span>]
+ 82:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">definition</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'definition'</span>]
+ 83:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">keywords</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'keywords'</span>]
+ 84:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">comments</span> = <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">meta</span>[<span class="ruby-value str">'comments'</span>]
+ 85:          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">features</span> = []
+ 86:          <span class="ruby-identifier">r</span>.<span class="ruby-identifier">features</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+ 87:           <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">experiment_ids</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">experiment_id</span>)
+ 88:           <span class="ruby-identifier">position</span> = <span class="ruby-node">&quot;#{f.start}..#{f.end}&quot;</span>
+ 89:           <span class="ruby-identifier">position</span> =  <span class="ruby-node">&quot;complement(#{f.start}..#{f.end})&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'-'</span>
+ 90:           
+ 91:           <span class="ruby-comment cmt">#map presumed SO term to embl term .. if no embl term use misc_feature</span>
+ 92:           <span class="ruby-identifier">embl_term</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">map_term</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">feature</span>) <span class="ruby-operator">||</span> <span class="ruby-value str">'misc_feature'</span>
+ 93:           <span class="ruby-identifier">feature</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Feature</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">embl_term</span>,<span class="ruby-identifier">position</span>)
+ 94:           <span class="ruby-identifier">attributes</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">group</span>)
+ 95:           <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+ 96:             <span class="ruby-comment cmt">#map gff attribute to qualifier if possible, if not and not a legal qualifier, skip</span>
+ 97:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">mappable_gff_attribute</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">first</span>) 
+ 98:               <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">append</span>( <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Feature</span><span class="ruby-operator">::</span><span class="ruby-constant">Qualifier</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">m</span>.<span class="ruby-identifier">mappable_gff_attribute</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">first</span>), <span class="ruby-identifier">a</span>.<span class="ruby-identifier">last</span>) )
+ 99:             <span class="ruby-comment cmt">#else #optionally turn unmappable tags to note</span>
+100:               <span class="ruby-comment cmt">#feature.append( Bio::Feature::Qualifier.new('note', a.join('-') ) )</span>
+101:             <span class="ruby-keyword kw">end</span>
+102: 
+103:              
+104:           <span class="ruby-keyword kw">end</span>
+105:           <span class="ruby-identifier">s</span>.<span class="ruby-identifier">features</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">feature</span>
+106:          <span class="ruby-keyword kw">end</span>
+107:          <span class="ruby-ivar">@results</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(<span class="ruby-ivar">@export</span>.<span class="ruby-identifier">export_format</span>)
+108:        <span class="ruby-keyword kw">end</span>
+109:        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">destination</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'browser'</span>
+110:           <span class="ruby-identifier">render</span> <span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@results</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>), <span class="ruby-identifier">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>
+111:        <span class="ruby-keyword kw">else</span>
+112:          <span class="ruby-identifier">filename</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">&quot;%H%M%S_%d%m%y&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'.txt'</span>
+113:          <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{RAILS_ROOT}/public/exports/#{filename}&quot;</span>, <span class="ruby-value str">'w'</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@results</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n&quot;</span>))}
+114:          <span class="ruby-ivar">@export</span>.<span class="ruby-identifier">filenames</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">filename</span>
+115:          <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+116:            <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> 
+117:          <span class="ruby-keyword kw">end</span>
+118:        <span class="ruby-keyword kw">end</span>
+119:     <span class="ruby-keyword kw">end</span>
+120:     
+121:     
+122:     
+123:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="#M000018" class="method-signature">
           <span class="method-name">genomic_sequence</span><span class="method-args">()</span>
           </a>
         </div>
@@ -135,63 +248,55 @@ reference sequence
  use /tools/genome_sequence
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000016-source">
+            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000018-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/tools_controller.rb, line 9</span>
- 9:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">genomic_sequence</span>
-10:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'bio'</span>
-11: 
-12:     <span class="ruby-identifier">ref</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:reference</span>] , <span class="ruby-identifier">:genome_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>] } ) 
-13:     
-14:     <span class="ruby-ivar">@result</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-15:     
-16:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">nil?</span>
-17:       <span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{ref.sequence.sequence.to_s}&quot;</span>)
-18:       <span class="ruby-identifier">start</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:start</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">||=</span> <span class="ruby-value">1</span>
-19:       <span class="ruby-identifier">stop</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:end</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
-20:       <span class="ruby-identifier">subseq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
-21:       <span class="ruby-identifier">strand</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:strand</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'plus'</span>
-22:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'minus'</span>
-23:         <span class="ruby-identifier">subseq</span> = <span class="ruby-identifier">subseq</span>.<span class="ruby-identifier">complement</span>
-24:       <span class="ruby-keyword kw">end</span>
-25:       <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:sequence</span>] = <span class="ruby-identifier">subseq</span>.<span class="ruby-identifier">to_s</span>
-26:       <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:name</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:reference</span>]
-27:       <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:start</span>] = <span class="ruby-identifier">start</span>
-28:       <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:end</span>] = <span class="ruby-identifier">stop</span>
-29:       <span class="ruby-ivar">@result</span>[<span class="ruby-identifier">:strand</span>] = <span class="ruby-identifier">strand</span>
-30:     <span class="ruby-keyword kw">end</span>
-31:     
-32:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-33:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:html</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@result</span> }
-34:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
-35:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@result</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> } 
-36:     <span class="ruby-keyword kw">end</span>
-37:     
-38:   <span class="ruby-keyword kw">end</span>
+    <span class="ruby-comment cmt"># File app/controllers/tools_controller.rb, line 10</span>
+10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">genomic_sequence</span>
+11:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'bio'</span>
+12: 
+13:     <span class="ruby-identifier">ref</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:first</span>, <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:reference</span>] , <span class="ruby-identifier">:genome_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>] } ) 
+14:     
+15:     <span class="ruby-ivar">@result</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+16:     
+17:     <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">nil?</span>
+18:       <span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{ref.sequence.sequence.to_s}&quot;</span>)
+19:       <span class="ruby-identifier">start</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:start</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">||=</span> <span class="ruby-value">1</span>
+20:       <span class="ruby-identifier">stop</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:end</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
+21:       <span class="ruby-ivar">@subseq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
+22:       <span class="ruby-identifier">strand</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:strand</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'plus'</span>
+23:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'minus'</span>
+24:         <span class="ruby-ivar">@subseq</span> = <span class="ruby-ivar">@subseq</span>.<span class="ruby-identifier">reverse_complement</span>
+25:       <span class="ruby-keyword kw">end</span>
+26:     <span class="ruby-keyword kw">end</span>
+27:     <span class="ruby-identifier">id</span> = <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-value str">' '</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'..'</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">stop</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">' '</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strand</span>
+28:     <span class="ruby-identifier">render</span> <span class="ruby-identifier">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@subseq</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">id</span>, <span class="ruby-value">60</span>), <span class="ruby-identifier">:content_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/plain'</span>
+29:     
+30:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000015" class="method-detail">
-        <a name="M000015"></a>
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
 
         <div class="method-heading">
-          <a href="#M000015" class="method-signature">
+          <a href="#M000017" class="method-signature">
           <span class="method-name">index</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000015-source">
+            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000017-source">
 <pre>
    <span class="ruby-comment cmt"># File app/controllers/tools_controller.rb, line 4</span>
 4:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span>
 5:     <span class="ruby-ivar">@genomes</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
-6:   <span class="ruby-keyword kw">end</span>
+6:     <span class="ruby-ivar">@experiments</span> = <span class="ruby-constant">Experiment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>)
+7:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

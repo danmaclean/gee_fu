@@ -94,18 +94,19 @@ methods for AnnoJ formatting
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000008">description</a>&nbsp;&nbsp;
-      <a href="#M000006">destroy_parents</a>&nbsp;&nbsp;
-      <a href="#M000005">find_by_bam</a>&nbsp;&nbsp;
-      <a href="#M000003">find_in_range</a>&nbsp;&nbsp;
-      <a href="#M000004">find_in_range_no_overlap</a>&nbsp;&nbsp;
-      <a href="#M000011">has_parent?</a>&nbsp;&nbsp;
-      <a href="#M000010">has_parents?</a>&nbsp;&nbsp;
-      <a href="#M000007">name</a>&nbsp;&nbsp;
-      <a href="#M000014">to_annoj</a>&nbsp;&nbsp;
-      <a href="#M000012">to_box</a>&nbsp;&nbsp;
-      <a href="#M000009">to_lookup</a>&nbsp;&nbsp;
-      <a href="#M000013">to_read</a>&nbsp;&nbsp;
+      <a href="#M000009">description</a>&nbsp;&nbsp;
+      <a href="#M000007">destroy_parents</a>&nbsp;&nbsp;
+      <a href="#M000006">find_by_bam</a>&nbsp;&nbsp;
+      <a href="#M000004">find_in_range</a>&nbsp;&nbsp;
+      <a href="#M000005">find_in_range_no_overlap</a>&nbsp;&nbsp;
+      <a href="#M000012">has_parent?</a>&nbsp;&nbsp;
+      <a href="#M000011">has_parents?</a>&nbsp;&nbsp;
+      <a href="#M000008">name</a>&nbsp;&nbsp;
+      <a href="#M000015">to_annoj</a>&nbsp;&nbsp;
+      <a href="#M000013">to_box</a>&nbsp;&nbsp;
+      <a href="#M000016">to_gff</a>&nbsp;&nbsp;
+      <a href="#M000010">to_lookup</a>&nbsp;&nbsp;
+      <a href="#M000014">to_read</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -145,11 +146,11 @@ polymerase_synthesis_read SO:0000150 read
     <div id="methods">
       <h3 class="section-bar">Public Class methods</h3>
 
-      <div id="method-M000005" class="method-detail">
-        <a name="M000005"></a>
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
 
         <div class="method-heading">
-          <a href="#M000005" class="method-signature">
+          <a href="#M000006" class="method-signature">
           <span class="method-name">find_by_bam</span><span class="method-args">(seqid,start,stop,id)</span>
           </a>
         </div>
@@ -164,8 +165,8 @@ start and stop.
  Not normally called manually, usually called via Feature.find_in_range or Feature.find_in_range_no_overlap Returned features may overlap the start and stop
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000005-source">
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
 <pre>
     <span class="ruby-comment cmt"># File app/models/feature.rb, line 61</span>
 61:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_by_bam</span>(<span class="ruby-identifier">seqid</span>,<span class="ruby-identifier">start</span>,<span class="ruby-identifier">stop</span>,<span class="ruby-identifier">id</span>)
@@ -206,11 +207,11 @@ start and stop.
         </div>
       </div>
 
-      <div id="method-M000003" class="method-detail">
-        <a name="M000003"></a>
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
 
         <div class="method-heading">
-          <a href="#M000003" class="method-signature">
+          <a href="#M000004" class="method-signature">
           <span class="method-name">find_in_range</span><span class="method-args">(seqid, start, stop, id)</span>
           </a>
         </div>
@@ -225,8 +226,8 @@ start and stop.
  Returned features may overlap the start and stop
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000003-source">
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
 <pre>
     <span class="ruby-comment cmt"># File app/models/feature.rb, line 22</span>
 22:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_in_range</span>(<span class="ruby-identifier">seqid</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">id</span>) 
@@ -249,11 +250,11 @@ start and stop.
         </div>
       </div>
 
-      <div id="method-M000004" class="method-detail">
-        <a name="M000004"></a>
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
 
         <div class="method-heading">
-          <a href="#M000004" class="method-signature">
+          <a href="#M000005" class="method-signature">
           <span class="method-name">find_in_range_no_overlap</span><span class="method-args">(seqid, start, stop, id)</span>
           </a>
         </div>
@@ -268,8 +269,8 @@ start and stop.
  Returned features are fully contained within start and stop
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000004-source">
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
 <pre>
     <span class="ruby-comment cmt"># File app/models/feature.rb, line 41</span>
 41:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find_in_range_no_overlap</span>(<span class="ruby-identifier">seqid</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">id</span>)
@@ -295,11 +296,11 @@ start and stop.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000008" class="method-detail">
-        <a name="M000008"></a>
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
 
         <div class="method-heading">
-          <a href="#M000008" class="method-signature">
+          <a href="#M000009" class="method-signature">
           <span class="method-name">description</span><span class="method-args">()</span>
           </a>
         </div>
@@ -312,8 +313,8 @@ format EG feature.description =&gt; ‘Ribulose-1,5-bisphosphate
 carboxylase oxygenase, enzyme involved in the Calvin cycle‘
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000008-source">
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 114</span>
 114:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">description</span>
@@ -329,11 +330,11 @@ carboxylase oxygenase, enzyme involved in the Calvin cycle‘
         </div>
       </div>
 
-      <div id="method-M000006" class="method-detail">
-        <a name="M000006"></a>
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
 
         <div class="method-heading">
-          <a href="#M000006" class="method-signature">
+          <a href="#M000007" class="method-signature">
           <span class="method-name">destroy_parents</span><span class="method-args">()</span>
           </a>
         </div>
@@ -346,8 +347,8 @@ Removes the current objects parent features from the database.
  use feature.destroy_parents
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000006-source">
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 97</span>
  97:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy_parents</span>
@@ -359,11 +360,11 @@ Removes the current objects parent features from the database.
         </div>
       </div>
 
-      <div id="method-M000011" class="method-detail">
-        <a name="M000011"></a>
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
 
         <div class="method-heading">
-          <a href="#M000011" class="method-signature">
+          <a href="#M000012" class="method-signature">
           <span class="method-name">has_parent?</span><span class="method-args">()</span>
           </a>
         </div>
@@ -374,8 +375,8 @@ Checks to see whether the current object has a parent feature in the
 database. Returns true if it does, false otherwise
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000011-source">
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 140</span>
 140:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_parent?</span>
@@ -386,22 +387,22 @@ database. Returns true if it does, false otherwise
         </div>
       </div>
 
-      <div id="method-M000010" class="method-detail">
-        <a name="M000010"></a>
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
 
         <div class="method-heading">
-          <a href="#M000010" class="method-signature">
+          <a href="#M000011" class="method-signature">
           <span class="method-name">has_parents?</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Deprecated, use <a href="Feature.html#M000011">has_parent?</a> instead
+Deprecated, use <a href="Feature.html#M000012">has_parent?</a> instead
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000010-source">
+            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000011-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 132</span>
 132:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">has_parents?</span>
@@ -416,11 +417,11 @@ Deprecated, use <a href="Feature.html#M000011">has_parent?</a> instead
         </div>
       </div>
 
-      <div id="method-M000007" class="method-detail">
-        <a name="M000007"></a>
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
 
         <div class="method-heading">
-          <a href="#M000007" class="method-signature">
+          <a href="#M000008" class="method-signature">
           <span class="method-name">name</span><span class="method-args">()</span>
           </a>
         </div>
@@ -429,14 +430,14 @@ Deprecated, use <a href="Feature.html#M000011">has_parent?</a> instead
           <p>
 Returns the value of the GFF Name attribute for the current object. If Name
 is not defined returns the string ‘no <a
-href="Feature.html#M000007">name</a>’
+href="Feature.html#M000008">name</a>’
 </p>
 <pre>
  use feature.name =&gt; ‘RuBisCo
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000007-source">
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 106</span>
 106:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">name</span>
@@ -448,11 +449,11 @@ href="Feature.html#M000007">name</a>’
         </div>
       </div>
 
-      <div id="method-M000014" class="method-detail">
-        <a name="M000014"></a>
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
 
         <div class="method-heading">
-          <a href="#M000014" class="method-signature">
+          <a href="#M000015" class="method-signature">
           <span class="method-name">to_annoj</span><span class="method-args">()</span>
           </a>
         </div>
@@ -463,32 +464,35 @@ Returns an array formatted version of the current object for AnnoJ, not
 normally used outside this contex
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000014-source">
+            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000015-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 160</span>
 160:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_annoj</span>
-161:       <span class="ruby-keyword kw">case</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>
-162:       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'intron'</span>, <span class="ruby-value str">'exon'</span>, <span class="ruby-value str">'CDS'</span>, <span class="ruby-value str">'five_prime_UTR'</span>, <span class="ruby-value str">'three_prime_UTR'</span>, <span class="ruby-value str">'start_codon'</span>, <span class="ruby-value str">'stop_codon'</span>, <span class="ruby-value str">'match_part'</span>
-163:         <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">has_parent?</span>
-164:           [<span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">parents</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">parent_feature</span>).<span class="ruby-identifier">gff_id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
-165:         <span class="ruby-keyword kw">else</span>
-166:           [<span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gff_id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
-167:         <span class="ruby-keyword kw">end</span>
-168:       <span class="ruby-keyword kw">else</span>
-169:        [<span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gff_id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
-170:       <span class="ruby-keyword kw">end</span>
-171:   <span class="ruby-keyword kw">end</span>
+161:      <span class="ruby-comment cmt">##this is the list of features that will be grouped for parenting in AnnoJ. Can be extended...</span>
+162:      <span class="ruby-comment cmt">## why is there a list? why not all parented features??? - Its an AnnoJ thing, it overlies some valid features</span>
+163:      <span class="ruby-comment cmt">## with the same parent, this is a kludge for the most common feature types that will get parented.</span>
+164:       <span class="ruby-keyword kw">case</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>
+165:       <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'intron'</span>, <span class="ruby-value str">'exon'</span>, <span class="ruby-value str">'CDS'</span>, <span class="ruby-value str">'five_prime_UTR'</span>, <span class="ruby-value str">'three_prime_UTR'</span>, <span class="ruby-value str">'start_codon'</span>, <span class="ruby-value str">'stop_codon'</span>, <span class="ruby-value str">'match_part'</span>
+166:         <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">has_parent?</span>
+167:           [<span class="ruby-constant">Feature</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">parents</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">parent_feature</span>).<span class="ruby-identifier">gff_id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
+168:         <span class="ruby-keyword kw">else</span>
+169:           [<span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gff_id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
+170:         <span class="ruby-keyword kw">end</span>
+171:       <span class="ruby-keyword kw">else</span>
+172:        [<span class="ruby-keyword kw">nil</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gff_id</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>]
+173:       <span class="ruby-keyword kw">end</span>
+174:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000012" class="method-detail">
-        <a name="M000012"></a>
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
 
         <div class="method-heading">
-          <a href="#M000012" class="method-signature">
+          <a href="#M000013" class="method-signature">
           <span class="method-name">to_box</span><span class="method-args">()</span>
           </a>
         </div>
@@ -499,8 +503,8 @@ Returns an array formatted version of the current object for AnnoJ, not
 normally used outside this context
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000012-source">
+            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000013-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 144</span>
 144:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_box</span>
@@ -515,11 +519,51 @@ normally used outside this context
         </div>
       </div>
 
-      <div id="method-M000009" class="method-detail">
-        <a name="M000009"></a>
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
 
         <div class="method-heading">
-          <a href="#M000009" class="method-signature">
+          <a href="#M000016" class="method-signature">
+          <span class="method-name">to_gff</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns a &#8216;gff-like&#8217; tab delimited string version of the
+feature, I make no guarantees that this is fully gff3 compatible, its a
+utility method. GFF3 compliance is <b>your</b> responsiblity.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000016-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/feature.rb, line 176</span>
+176:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_gff</span>
+177:     <span class="ruby-identifier">ref</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">find</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">reference_id</span>)
+178:     <span class="ruby-identifier">attributes</span> = []
+179:     <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">group</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attributes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">'='</span>) }
+180:     <span class="ruby-identifier">name</span> = <span class="ruby-identifier">ref</span>.<span class="ruby-identifier">name</span>
+181:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">source</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">source</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span> 
+182:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+183:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+184:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+185:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">score</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">score</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+186:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+187:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phase</span> = <span class="ruby-value str">'.'</span> <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">phase</span> <span class="ruby-operator">==</span> <span class="ruby-value str">''</span>
+188:     
+189:     <span class="ruby-node">&quot;#{name}\t#{self.source}\t#{self.feature}\t#{self.start}\t#{self.end}\t#{self.score}\t#{self.strand}\t#{self.phase}\t#{attributes.join(';')}&quot;</span>
+190:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="#M000010" class="method-signature">
           <span class="method-name">to_lookup</span><span class="method-args">()</span>
           </a>
         </div>
@@ -530,8 +574,8 @@ Returns a hash formatted version of the current object for AnnoJ, not
 normally used outside this context
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000009-source">
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 123</span>
 123:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_lookup</span>
@@ -547,11 +591,11 @@ normally used outside this context
         </div>
       </div>
 
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
 
         <div class="method-heading">
-          <a href="#M000013" class="method-signature">
+          <a href="#M000014" class="method-signature">
           <span class="method-name">to_read</span><span class="method-args">()</span>
           </a>
         </div>
@@ -562,8 +606,8 @@ Returns an array formatted version of the current object for AnnoJ, not
 normally used outside this context
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000013-source">
+            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000014-source">
 <pre>
      <span class="ruby-comment cmt"># File app/models/feature.rb, line 152</span>
 152:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_read</span>

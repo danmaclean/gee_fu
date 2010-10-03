@@ -83,7 +83,7 @@
     <div id="description">
       <p>
 Defines the URL methods that co-ordinate and <a
-href="FeaturesController.html#M000030">respond</a> to requests
+href="FeaturesController.html#M000040">respond</a> to requests
 </p>
 
     </div>
@@ -95,19 +95,19 @@ href="FeaturesController.html#M000030">respond</a> to requests
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000031">annoj</a>&nbsp;&nbsp;
-      <a href="#M000032">chromosome</a>&nbsp;&nbsp;
-      <a href="#M000028">depth</a>&nbsp;&nbsp;
-      <a href="#M000038">describe</a>&nbsp;&nbsp;
-      <a href="#M000036">get_boxes</a>&nbsp;&nbsp;
-      <a href="#M000035">get_histogram</a>&nbsp;&nbsp;
-      <a href="#M000037">get_reads</a>&nbsp;&nbsp;
-      <a href="#M000039">lookup</a>&nbsp;&nbsp;
-      <a href="#M000040">new_response</a>&nbsp;&nbsp;
-      <a href="#M000029">objects</a>&nbsp;&nbsp;
-      <a href="#M000034">range</a>&nbsp;&nbsp;
-      <a href="#M000030">respond</a>&nbsp;&nbsp;
-      <a href="#M000033">syndicate</a>&nbsp;&nbsp;
+      <a href="#M000041">annoj</a>&nbsp;&nbsp;
+      <a href="#M000042">chromosome</a>&nbsp;&nbsp;
+      <a href="#M000038">depth</a>&nbsp;&nbsp;
+      <a href="#M000048">describe</a>&nbsp;&nbsp;
+      <a href="#M000046">get_boxes</a>&nbsp;&nbsp;
+      <a href="#M000045">get_histogram</a>&nbsp;&nbsp;
+      <a href="#M000047">get_reads</a>&nbsp;&nbsp;
+      <a href="#M000049">lookup</a>&nbsp;&nbsp;
+      <a href="#M000050">new_response</a>&nbsp;&nbsp;
+      <a href="#M000039">objects</a>&nbsp;&nbsp;
+      <a href="#M000044">range</a>&nbsp;&nbsp;
+      <a href="#M000040">respond</a>&nbsp;&nbsp;
+      <a href="#M000043">syndicate</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -129,11 +129,11 @@ href="FeaturesController.html#M000030">respond</a> to requests
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000031" class="method-detail">
-        <a name="M000031"></a>
+      <div id="method-M000041" class="method-detail">
+        <a name="M000041"></a>
 
         <div class="method-heading">
-          <a href="#M000031" class="method-signature">
+          <a href="#M000041" class="method-signature">
           <span class="method-name">annoj</span><span class="method-args">()</span>
           </a>
         </div>
@@ -147,8 +147,8 @@ config.js. Gets features for an experiment at id
  =&gt; use /features/annoj/id
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000031-source">
+            onclick="toggleCode('M000041-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000041-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 76</span>
  76:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">annoj</span>
@@ -184,11 +184,11 @@ config.js. Gets features for an experiment at id
         </div>
       </div>
 
-      <div id="method-M000032" class="method-detail">
-        <a name="M000032"></a>
+      <div id="method-M000042" class="method-detail">
+        <a name="M000042"></a>
 
         <div class="method-heading">
-          <a href="#M000032" class="method-signature">
+          <a href="#M000042" class="method-signature">
           <span class="method-name">chromosome</span><span class="method-args">()</span>
           </a>
         </div>
@@ -202,8 +202,8 @@ config.js. Gets reference track that is saved as experiment at id
  =&gt; use /features/chromosome/id
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000032-source">
+            onclick="toggleCode('M000042-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000042-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 106</span>
 106:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">chromosome</span>
@@ -277,11 +277,11 @@ config.js. Gets reference track that is saved as experiment at id
         </div>
       </div>
 
-      <div id="method-M000028" class="method-detail">
-        <a name="M000028"></a>
+      <div id="method-M000038" class="method-detail">
+        <a name="M000038"></a>
 
         <div class="method-heading">
-          <a href="#M000028" class="method-signature">
+          <a href="#M000038" class="method-signature">
           <span class="method-name">depth</span><span class="method-args">()</span>
           </a>
         </div>
@@ -289,7 +289,7 @@ config.js. Gets reference track that is saved as experiment at id
         <div class="method-description">
           <p>
 Standard REST request method returns a hash summarising <a
-href="FeaturesController.html#M000028">depth</a> of feature object coverage
+href="FeaturesController.html#M000038">depth</a> of feature object coverage
 for a nucleotides between start and stop on reference in experiment id
 </p>
 <pre>
@@ -298,8 +298,8 @@ for a nucleotides between start and stop on reference in experiment id
  =&gt; optional params: format (xml/json default = xml),
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000028-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000028-source">
+            onclick="toggleCode('M000038-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000038-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 10</span>
 10:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">depth</span>
@@ -345,11 +345,11 @@ for a nucleotides between start and stop on reference in experiment id
         </div>
       </div>
 
-      <div id="method-M000038" class="method-detail">
-        <a name="M000038"></a>
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
 
         <div class="method-heading">
-          <a href="#M000038" class="method-signature">
+          <a href="#M000048" class="method-signature">
           <span class="method-name">describe</span><span class="method-args">(id)</span>
           </a>
         </div>
@@ -359,8 +359,8 @@ for a nucleotides between start and stop on reference in experiment id
 <a href="Feature.html">Feature</a> Metadata accessor, AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000038-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000038-source">
+            onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000048-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 326</span>
 326:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">describe</span>(<span class="ruby-identifier">id</span>)
@@ -379,23 +379,23 @@ for a nucleotides between start and stop on reference in experiment id
         </div>
       </div>
 
-      <div id="method-M000036" class="method-detail">
-        <a name="M000036"></a>
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
 
         <div class="method-heading">
-          <a href="#M000036" class="method-signature">
+          <a href="#M000046" class="method-signature">
           <span class="method-name">get_boxes</span><span class="method-args">(features)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Formatting method for <a href="FeaturesController.html#M000034">range</a>,
+Formatting method for <a href="FeaturesController.html#M000044">range</a>,
 AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000036-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000036-source">
+            onclick="toggleCode('M000046-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000046-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 312</span>
 312:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_boxes</span>(<span class="ruby-identifier">features</span>)
@@ -409,23 +409,23 @@ AnnoJ only
         </div>
       </div>
 
-      <div id="method-M000035" class="method-detail">
-        <a name="M000035"></a>
+      <div id="method-M000045" class="method-detail">
+        <a name="M000045"></a>
 
         <div class="method-heading">
-          <a href="#M000035" class="method-signature">
+          <a href="#M000045" class="method-signature">
           <span class="method-name">get_histogram</span><span class="method-args">(features)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Formatting method for <a href="FeaturesController.html#M000034">range</a>,
+Formatting method for <a href="FeaturesController.html#M000044">range</a>,
 AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000035-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000035-source">
+            onclick="toggleCode('M000045-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000045-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 216</span>
 216:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_histogram</span>(<span class="ruby-identifier">features</span>)
@@ -528,23 +528,23 @@ AnnoJ only
         </div>
       </div>
 
-      <div id="method-M000037" class="method-detail">
-        <a name="M000037"></a>
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
 
         <div class="method-heading">
-          <a href="#M000037" class="method-signature">
+          <a href="#M000047" class="method-signature">
           <span class="method-name">get_reads</span><span class="method-args">(features)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Formatting method for <a href="FeaturesController.html#M000034">range</a>,
+Formatting method for <a href="FeaturesController.html#M000044">range</a>,
 AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000037-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000037-source">
+            onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000047-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 319</span>
 319:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_reads</span>(<span class="ruby-identifier">features</span>)
@@ -558,11 +558,11 @@ AnnoJ only
         </div>
       </div>
 
-      <div id="method-M000039" class="method-detail">
-        <a name="M000039"></a>
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
 
         <div class="method-heading">
-          <a href="#M000039" class="method-signature">
+          <a href="#M000049" class="method-signature">
           <span class="method-name">lookup</span><span class="method-args">(query, id)</span>
           </a>
         </div>
@@ -572,8 +572,8 @@ AnnoJ only
 <a href="Feature.html">Feature</a> metadata accessor, AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000039-source">
+            onclick="toggleCode('M000049-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000049-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 338</span>
 338:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">id</span>)
@@ -588,11 +588,11 @@ AnnoJ only
         </div>
       </div>
 
-      <div id="method-M000040" class="method-detail">
-        <a name="M000040"></a>
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
 
         <div class="method-heading">
-          <a href="#M000040" class="method-signature">
+          <a href="#M000050" class="method-signature">
           <span class="method-name">new_response</span><span class="method-args">()</span>
           </a>
         </div>
@@ -602,8 +602,8 @@ AnnoJ only
 Empty response, AnnoJ only
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000040-source">
+            onclick="toggleCode('M000050-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000050-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 346</span>
 346:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_response</span>
@@ -614,11 +614,11 @@ Empty response, AnnoJ only
         </div>
       </div>
 
-      <div id="method-M000029" class="method-detail">
-        <a name="M000029"></a>
+      <div id="method-M000039" class="method-detail">
+        <a name="M000039"></a>
 
         <div class="method-heading">
-          <a href="#M000029" class="method-signature">
+          <a href="#M000039" class="method-signature">
           <span class="method-name">objects</span><span class="method-args">()</span>
           </a>
         </div>
@@ -626,7 +626,7 @@ Empty response, AnnoJ only
         <div class="method-description">
           <p>
 Standard REST request method returns array of feature <a
-href="FeaturesController.html#M000029">objects</a> within or overlapping
+href="FeaturesController.html#M000039">objects</a> within or overlapping
 the given start and end on the reference in experiment
 </p>
 <pre>
@@ -635,8 +635,8 @@ the given start and end on the reference in experiment
  =&gt; optional params: format (xml or json, default xml), overlap (true or false, default = false), type (some GFF feature type) restrict objects by feature type
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000029-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000029-source">
+            onclick="toggleCode('M000039-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000039-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 54</span>
 54:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">objects</span>
@@ -655,11 +655,11 @@ the given start and end on the reference in experiment
         </div>
       </div>
 
-      <div id="method-M000034" class="method-detail">
-        <a name="M000034"></a>
+      <div id="method-M000044" class="method-detail">
+        <a name="M000044"></a>
 
         <div class="method-heading">
-          <a href="#M000034" class="method-signature">
+          <a href="#M000044" class="method-signature">
           <span class="method-name">range</span><span class="method-args">(assembly, left, right, id, bases, pixels)</span>
           </a>
         </div>
@@ -670,8 +670,8 @@ AnnoJ request method, returns data formatted as per request parameters for
 particular view
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000034-source">
+            onclick="toggleCode('M000044-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000044-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 185</span>
 185:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">range</span>(<span class="ruby-identifier">assembly</span>, <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">bases</span>, <span class="ruby-identifier">pixels</span>)
@@ -709,11 +709,11 @@ particular view
         </div>
       </div>
 
-      <div id="method-M000030" class="method-detail">
-        <a name="M000030"></a>
+      <div id="method-M000040" class="method-detail">
+        <a name="M000040"></a>
 
         <div class="method-heading">
-          <a href="#M000030" class="method-signature">
+          <a href="#M000040" class="method-signature">
           <span class="method-name">respond</span><span class="method-args">(objects,format)</span>
           </a>
         </div>
@@ -721,12 +721,12 @@ particular view
         <div class="method-description">
           <p>
 Standard REST request method, not normally called directly takes provided
-<a href="FeaturesController.html#M000029">objects</a> and converts them to
+<a href="FeaturesController.html#M000039">objects</a> and converts them to
 format before returning
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000030-source">
+            onclick="toggleCode('M000040-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000040-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 68</span>
 68:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">respond</span>(<span class="ruby-identifier">objects</span>,<span class="ruby-identifier">format</span>)
@@ -740,11 +740,11 @@ format before returning
         </div>
       </div>
 
-      <div id="method-M000033" class="method-detail">
-        <a name="M000033"></a>
+      <div id="method-M000043" class="method-detail">
+        <a name="M000043"></a>
 
         <div class="method-heading">
-          <a href="#M000033" class="method-signature">
+          <a href="#M000043" class="method-signature">
           <span class="method-name">syndicate</span><span class="method-args">(id)</span>
           </a>
         </div>
@@ -754,8 +754,8 @@ format before returning
 AnnoJ request method, returns metadata on a track required by AnnoJ
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000033-source">
+            onclick="toggleCode('M000043-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000043-source">
 <pre>
      <span class="ruby-comment cmt"># File app/controllers/features_controller.rb, line 173</span>
 173:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">syndicate</span>(<span class="ruby-identifier">id</span>)
