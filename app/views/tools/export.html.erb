@@ -1,0 +1,13 @@
+<p>Completed export to server directory public/exports.</p>
+<p>Created <%= "#{@export.filenames.length} #{@export.export_format}"  %> file(s): 
+	
+	<%= @export.filenames.each {|f| "#{f.to_s} <br />" }%>
+</p>
+<p><%if @export.yaml_file %>
+With metadata: <br />
+<%= @export.meta.to_yaml %>
+<% else %>
+With no metadata provided
+<% end %>	
+
+

@@ -4,3 +4,6 @@ v0.1.0  26th August 2010
   deleted rake tasks for data entry
   updated scaffold.css
   
+v0.1.1	3rd October 2010
+  added exports for embl, genbank and gff formats
+  -requires new mapped_feature.rb for mapping gff features to embl/genbank gff feature table
