@@ -96,6 +96,8 @@ class ToolsController < ApplicationController
             #map gff attribute to qualifier if possible, if not and not a legal qualifier, skip
             if m.mappable_gff_attribute(a.first) 
               feature.append( Bio::Feature::Qualifier.new(m.mappable_gff_attribute(a.first), a.last) )
+            elsif m.has_qualifier?(embl_term,a.first.downcase)
+              feature.append( Bio::Feature::Qualifier.new(a.first.downcase, a.last) )
             #else #optionally turn unmappable tags to note
               #feature.append( Bio::Feature::Qualifier.new('note', a.join('-') ) )
             end
