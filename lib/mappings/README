@@ -1,0 +1,6 @@
+This folder contains tables for mapping one feature set to another.
+
+FILE: embl_FT_SO.txt 
+MAPS: EMBL Feature table to Sequence Ontology.
+SOURCE: http://www.sequenceontology.org/resources/mapping/FT_SO.txt
+DATE UPDATED: 3rd Oct 2010
