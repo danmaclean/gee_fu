@@ -18,7 +18,7 @@ class MappedFeature
     @mapping = Hash.new {|h,k| h[k] = Hash.new }
     @feature_qualifiers = Hash.new {|h,k| h[k] = Array.new }
     case self.format
-    when :embl or :genbank
+    when :embl, :genbank
       File.open("#{RAILS_ROOT}/lib/mappings/embl_FT_SO.txt").each do |l|
         next if l.nil?
         e = l.split(/\t/)
@@ -57,7 +57,7 @@ class MappedFeature
   #provide a GFF attribute, will map to its selected feature table equivalent
   def mappable_gff_attribute(gff_attribute)
     case self.format
-    when :embl or :genbank
+    when :embl, :genbank
       GFF_ATTRIBUTE_TO_EMBL_QUALIFIER[gff_attribute]
     end
   end

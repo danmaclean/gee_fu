@@ -5,9 +5,17 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%= @page_title or "GeeFu: #{controller.action_name}" %></title>
-  <%= stylesheet_link_tag 'scaffold' %>
+  <%= stylesheet_link_tag 'scaffold', 'jquery.autocomplete' %>
+  <%= javascript_include_tag 'jquery-1.4.4.min', 'jquery-ui-1.8.8.min.js', 'jquery.bgiframe.min', 'jquery.autocomplete', 'application.js', 'gee_fu_render.js' %> 
+
+
+
+
+
+
 </head>
 <body>
+
 
 <div id="page">
 	<div>
@@ -19,18 +27,13 @@
 	<li><a href="/organisms">Organisms</a></li>
 	<li><a href="/genomes">Genomes</a></li>
 	<li><a href="/experiments">Experiments</a></li>
-	<li><a href="">Features</a></li>
+	<li><a href="/features">Features</a></li>
 	<li><a href="/tools">Tools</a></li>
 	<li><a href="/" target="_blank">Anno-J</a></li>
 </ul>
 
 <p style="color: green"><%= flash[:notice] %></p>
-
-
-
-
 <%= yield %>
-
 </div>
 
 </body>

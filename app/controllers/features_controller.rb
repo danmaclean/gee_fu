@@ -1,76 +1,287 @@
 #Defines the URL methods that co-ordinate and respond to requests
 
+
 class FeaturesController < ApplicationController
 
-  #Standard REST request method 
-  #returns a hash summarising depth of feature object coverage for a nucleotides between start and stop on reference in experiment id
-  # => use /features/depth/id?params
-  # => required params: reference, start, end, id
-  # => optional params: format (xml/json default = xml),  
-  def depth
+
+  def index
+    @genomes = Genome.all
+    @experiments = Experiment.all
+  end
   
-    comp_hash = {'A' => 'T', 'T' => 'A', 'G' => 'C', 'C' => 'G', 'N' => 'N'}
-    positions = Hash.new {|h,k| h[k] = {
-        '+' => {
-          'A' => 0, 
-          'T' => 0, 
-          'G' => 0, 
-          'C' => 0, 
-          'N' => 0, 
-          'strand_total' => 0
-          }, 
-        '-' => {
-          'A' => 0, 
-          'T' => 0, 
-          'G' => 0, 
-          'C' => 0, 
-          'N' => 0, 
-          'strand_total' => 0
-          }, 
-        'position_total' => 0
-      } 
-    }
-    positions['region_total'] = 0
+  def edit
+    @feature = Feature.find(params[:id])
+  end
+  
+  def update
     
-    features = Feature.find_in_range_no_overlap(params[:reference],params[:start],params[:end],params[:id])
-    features.each do |f|
-      if (f.sequence.match(/\w/))
-        (f.start .. f.end - 1).each_with_index do |i, idx|
-            positions[i][f.strand][f.sequence[idx,1]] += 1
-            positions[i][f.strand]['strand_total'] += 1
-            positions[i]['position_total'] += 1
-            positions['region_total'] += 1
+    ##make the new feature for saving
+    ##get the form stuff, use the old feature for missing or un-updatable fields
+    old_feature = Feature.find(params[:old_feature_id])
+    @feature = Feature.new
+    @feature.seqid = params[:feature][:seqid] || old_feature.seqid
+    @feature.source = params[:feature][:source] 
+    @feature.feature = params[:feature][:feature] || old_feature.feature
+    @feature.start = params[:feature][:start] || old_feature.start
+    @feature.end = params[:feature][:end] || old_feature.end
+    @feature.score = params[:feature][:score] 
+    
+    strand = nil
+    strand = params[:feature][:strand] == 'plus' ? '+' : '-' 
+    
+    @feature.strand = strand || old_feature.strand
+    @feature.phase = params[:feature][:phase] 
+    
+    
+    ##get the genome from the reference, only look in the same reference... 
+    genome_id = Reference.find(old_feature.reference_id).genome_id
+
+    @feature.reference_id = Reference.find(:first, :conditions => {:genome_id => genome_id, :name => @feature.seqid} ) || old_feature.ref_id
+    
+    @feature.group = []
+    if params[:feature][:group]
+      params[:feature][:group].keys.each do |old_group|
+        ##this is a little messy.. 
+        key = old_group.gsub(/"/,"").split(',')[0]
+        value = params[:feature][:group][old_group]
+        @feature.group << [key,value]
+      end
+    end
+    if params[:feature][:new_group]
+      params[:feature][:new_group].keys.each do |pair|
+        @feature.group << [params[:feature][:new_group][pair][:key], params[:feature][:new_group][pair][:value] ]
+      end
+    end
+    
+    ##fill in the uneditable fields
+    @feature.gff_id = old_feature.gff_id
+    @feature.experiment_id = old_feature.experiment_id
+    @feature.sequence = old_feature.sequence
+    @feature.read_id = old_feature.read_id
+    @feature.quality = old_feature.quality
+    
+    ##set up the parents of the new feature from the group info
+    parents = @feature.group.select { |a| a.first == 'Parent' }
+    puts "parents are #{parents}"
+    if !parents.empty?
+      parents.each do |label, parentFeature_gff_id|
+        parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+        if (parentFeats)
+          parentFeats.each do |pf|
+            parent = nil
+            parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+            if parent
+              parent.save 
+            else
+              parent = Parent.new(:parent_feature => pf.id)
+              parent.save 
+            end
+            @feature.parents << parent
+          end
         end
       end
     end
-    respond(positions, params[:format])
+    
+    @feature.group = JSON.generate(@feature.group)
+    
+    @feature.save
+    new_parent = Parent.new(:parent_feature => @feature.id)
+    new_parent.save
+
+    ##set up the children of the new feature from the old one..
+    old_feature.children.each do |child|
+      ##remove the old feature as a parent...
+      new_parent_list = [new_parent] 
+      child.parents.each do |parent|
+          new_parent_list << parent unless parent.parent_feature == old_feature.id   
+      end
+      ##add the new feature as a parent to that child...
+      child.parents = new_parent_list
+      child.save
+    end
+    
+    
+    ##setup the predecessor record from the old feature... 
+    predecessor = Predecessor.new(
+    :seqid => old_feature.seqid,
+    :source => old_feature.source,
+    :feature => old_feature.feature,
+    :start => old_feature.start,
+    :end => old_feature.end,
+    :score => old_feature.score,
+    :strand => old_feature.strand,
+    :phase => old_feature.phase,
+    :gff_id => old_feature.gff_id,
+    :reference_id => old_feature.reference_id,
+    :experiment_id => old_feature.experiment_id,
+    :created_at => old_feature.created_at,
+    :group => old_feature.group
+    )
+    predecessor.save
+    @feature.predecessors = [predecessor] + old_feature.predecessors
+
+    
+    respond_to do |format|
+      if @feature.save and old_feature.destroy
+        flash[:notice] = 'New feature was successfully created.'
+        format.html { redirect_to :action => :show, :id => @feature.id }
+      else
+        flash[:notice] = 'New feature failed to save...'
+        format.html { redirect_to :action => :edit, :id => params[:old_feature_id]}
+      end
+    end
+    
+  end
+
+  def show 
+      @feature = Feature.find(params[:id])
+      if Feature.exists?(params[:id])
+        @feature = Feature.find(params[:id])
+        @feature.group = JSON::parse(@feature.group)
+        respond @feature
+      else
+        respond :false
+      end
+  end
+
+  def destroy
+  ## gets the feature by id and deletes it and any relationships where it is a parent
+  ## this is a horrid way of doing this.. check for a better RAILS-Y way...
+  
+    feature = Feature.find(params[:id])
+    feature.children.each do |child|
+      ##remove the old feature as a parent...
+      new_parent_list = [] 
+      child.parents.each do |parent|
+          new_parent_list << parent unless parent.parent_feature == params[:id]   
+      end
+      ##add the updated feature list as a parent to the child...
+      child.parents = new_parent_list
+      child.save
+    end
+    if feature.destroy
+      flash[:notice] = 'Feature was successfully destroyed.'
+      redirect_to :action => :index 
+    else
+      flash[:notice] = 'Feature could not be deleted'
+       redirect_to :action => :show, :id => params[:id] 
+    end
+    
+  end
+
+  def graphic_range
+
+    flash[:error] = []
+    unless params[:genome_id]
+      flash[:error] << 'A genome build must be selected'
+    end
+    unless params[:experiment]
+      flash[:error] << 'An experiment must be selected'
+    end
+    if params[:reference].length == 0
+      flash[:error] << 'A reference sequence name must be provided' 
+    end
+    params[:start] = 0 if params[:start].nil?
+    params[:end] = 0 if params[:end].nil?
+    if params[:start] =~ /\D/
+      flash[:error] << 'Start must be a positive numeric value'
+    end
+    if params[:end] =~ /\D/
+      flash[:error] << 'End must be a positive numeric value'
+    end
+    
+    if params[:end] < params[:start]
+      flash[:error] << 'End value must be greater than (or equal to) start value'
+    end
+     
+    if not flash[:error].empty?
+      redirect_to :back
+      return
+    end
+    
+    
+
+    
+  #method for returning preformatted feature objects in a range for plotting by the javascript feature renderer. Groups features with a parent that have type in list Features::aggregate_features.
+    ref = Reference.find(:first, :conditions => {:genome_id => params[:genome_id], :name => params[:reference]})
+    @features = []
+    @start = params[:start]
+    @end = params[:end]
+    seen_features = []
+    Feature.find_in_range_no_overlap(ref.id, params[:start], params[:end], params[:experiment]).each do |f|
+      @features << f.descendants
+      #if we have already used 
+    end
+        
+  end
+  
+  #Standard REST request method 
+  #returns a hash summarising depth of feature object coverage for a nucleotides between start and stop on reference in experiment id
+  # => use /features/coverage/id.format?params
+  # => required params: reference_id, start, end, experiment_id  
+  def coverage
+    if Experiment.find(params[:id]).uses_bam_file  #return a pileup from samtools...
+
+    else #return a position keyed hash of Positions objects
+      features = Feature.find_in_range(params[:reference_id],params[:start],params[:end],params[:id])
+      sequence = Reference.find(params[:reference_id]).sequence.sequence[params[:start].to_i - 1,(params[:end].to_i - params[:start].to_i) ]
+      positions = SimpleDepth.new(params[:start],params[:end],sequence,features)
+    #comp_hash = {'A' => 'T', 'T' => 'A', 'G' => 'C', 'C' => 'G', 'N' => 'N'}
+    #positions = Hash.new {|h,k| h[k] = {
+     #   '+' => {
+    #      'A' => 0, 
+    #      'T' => 0, 
+    #      'G' => 0, 
+    #      'C' => 0, 
+    #      'N' => 0, 
+    #      'strand_total' => 0
+    #      }, 
+    #    '-' => {
+    #      'A' => 0, 
+    #      'T' => 0, 
+    #      'G' => 0, 
+     #     'C' => 0, 
+    #      'N' => 0, 
+    #      'strand_total' => 0
+    #      }, 
+    #    'position_total' => 0
+    #  } 
+    #}
+    #positions['region_total'] = 0
+    #positions['1'] = 1
+    #features = Feature.find_in_range_no_overlap(params[:reference_id],params[:start],params[:end],params[:id])
+    #features.each do |f|
+    #  if (f.sequence.match(/\w/))
+    #    (f.start .. f.end - 1).each_with_index do |i, idx|
+    #        positions[i][f.strand][f.sequence[idx,1]] += 1
+    #        positions[i][f.strand]['strand_total'] += 1
+    #        positions[i]['position_total'] += 1
+    #        positions['region_total'] += 1
+    #    end
+    #  end
+    end
+    respond(positions)
   end
   
   #Standard REST request method 
   #returns array of feature objects within or overlapping the given start and end on the reference in experiment
   # => use /features/objects/id?params
-  # => required params: reference, start, end, id
-  # => optional params: format (xml or json, default xml), overlap (true or false, default = false), type (some GFF feature type) restrict objects by feature type  
+  # => required params: reference_id, start, end, id
+  # => optional params: overlap (true or false, default = false), type (some GFF feature type) restrict objects by feature type  
   def objects
     objects = []
     params[:format] = 'xml' unless params[:format]
     if !params[:overlap].nil? and params[:overlap] == "true" #if we want to include objects that can fall onto the edge of the range
-      objects = Feature.find_in_range(params[:reference],params[:start],params[:end],params[:id])
+      objects = Feature.find_in_range(params[:reference_id],params[:start],params[:end],params[:id])
     else #if we want to include only objects entirely within the range
-      objects = Feature.find_in_range_no_overlap(params[:reference],params[:start],params[:end],params[:id])
+      objects = Feature.find_in_range_no_overlap(params[:reference_id],params[:start],params[:end],params[:id])
     end
     objects.delete_if {|obj| obj.feature != params[:type] } if !params[:type].nil?
-    respond(objects, params[:format])
+    #respond(objects, params[:format])
+    respond objects
   end
   
-  #Standard REST request method, not normally called directly
-  #takes provided objects and converts them to format before returning
-  def respond(objects,format)
-    respond_to do |format|
-      format.json { render :json => objects, :layout => false }
-      format.xml  { render :xml => objects, :layout => false }
-    end
-  end
+
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
   def annoj
@@ -125,7 +336,7 @@ class FeaturesController < ApplicationController
           #remember params[:id] is genome id and annoj_params['assembly'] is the chromosome
           sequence = Reference.find(:first, :conditions => {:genome_id => params[:id], :name => annoj_params['assembly']}).sequence.sequence
           subseq = sequence[annoj_params['left'].to_i..annoj_params['right'].to_i]
-          f = Feature.new(
+          f = LightFeature.new(
             :group => '.',
             :feature => 'chromosome',
             :source => '.',
@@ -182,10 +393,12 @@ class FeaturesController < ApplicationController
     response
   end
   #AnnoJ request method, returns data formatted as per request parameters for particular view 
-  def range(assembly, left, right, id, bases, pixels)
+  def range(assembly, left, right, experiment_id, bases, pixels)
     zoom_factor = bases.to_i / pixels.to_i
     response = new_response
-    features = Feature.find_in_range_no_overlap(assembly, left, right, id)
+    exp = Experiment.find(experiment_id)
+    reference = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ assembly }", "#{exp.genome_id}"])
+    features = Feature.find_in_range_no_overlap(reference.id, left, right, experiment_id)
     return response if features.empty?
     #case features.first.feature
     
@@ -346,9 +559,5 @@ class FeaturesController < ApplicationController
   def new_response
     {:success => true }
   end
-  
-
-  
-  
-
+ 
 end

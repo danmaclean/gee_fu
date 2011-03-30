@@ -5,10 +5,11 @@
 <%= label(:reference, :id, "Extract a genome sequence region") %><br />
 <%= label(:genome, :id, "Select genome build") %><br />
 <% @genomes.each do |g| %>
-	<%= radio_button_tag("id", "#{g.id}") %>  <%= label_tag(:id, "#{g.build_version}") %>
+	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />" %> 
+ <%= label_tag(:id, "#{g.build_version}") %>
 <% end %><br/>
 <%= label(:reference, :id, "Type in the reference sequence from which to extract") %><br />
-<%= text_area_tag(:reference, "Enter name of reference sequence here", :size => "40 x 1") %><br />
+<%= text_area_tag(:reference, "Enter name of reference sequence here", :size => "40 x 1", :id => 'chromosome_list') %><br />
 <%= label(:reference, :coord, "Type in the start and end") %><br />
 <%= text_area_tag(:start, "start", :size => "10 x 1")%> <%= text_area_tag(:end, "end", :size => "10 x 1")%><br />
 <%= label(:reference, :strand, "Select the strand") %><br />

@@ -7,3 +7,7 @@ v0.1.0  26th August 2010
 v0.1.1	3rd October 2010
   added exports for embl, genbank and gff formats
   -requires new mapped_feature.rb for mapping gff features to embl/genbank gff feature table
+
+v0.1.2	30th March 2011
+	added predecessors feature and preliminary visualisation of features in feature window
+	removed internal support for samtools-ruby, is now handled via the gem

@@ -18,8 +18,12 @@ class OrganismsController < ApplicationController
   # GET /organisms/1
   # GET /organisms/1.xml
   def show
-    @organism = Organism.find(params[:id])
-    respond @organism
+    if Organism.exists?(params[:id])
+      @organism = Organism.find(params[:id])
+      respond @organism
+    else
+      respond :false
+    end
   end
 
   # GET /organisms/new

@@ -14,17 +14,34 @@ class ReferencesController < ApplicationController
   # where format = xml or json
   # optional params: 
   # => name (some_reference_name) returns the reference with name
+  # => sequence=true  returns the reference sequence (if available..)
   def show  
-    #result = Hash.new {|h,k| h[k]={}}
+  
     if params[:name]
       if Genome.exists?(params[:id])
         @reference = Reference.find(:first, :conditions => {:genome_id => params[:id], :name => params[:name] } )
         if @reference
+          if params[:sequence] #fold in the reference sequence..
+            @reference = { :name => @reference.name,
+                    :id => @reference.id,
+                    :length => @reference.length,
+                    :genome_id => @reference.genome_id,
+                    :created_at => @reference.created_at,
+                    :sequence => @reference.sequence
+                }
+          end
+          #respond_to do |format|
+          #  format.json { render :json => @reference.to_json(:include => @reference.sequence) }
+          #  format.xml  { render :xml => @reference.to_xml(:include => @reference.sequence) }
+          #end
           respond @reference
         else
-          respond nil
+          respond :false
         end
+      else
+        respond :false
       end
+
     else  
       if Genome.exists?(params[:id])
         @references = Reference.find(:all, :conditions => {:genome_id => params[:id]} )

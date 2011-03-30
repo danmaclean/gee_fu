@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100814191202) do
+ActiveRecord::Schema.define(:version => 20110131094531) do
 
   create_table "experiments", :force => true do |t|
     t.string   "name",                                             :null => false
@@ -49,6 +49,11 @@ ActiveRecord::Schema.define(:version => 20100814191202) do
 
   add_index "features_parents", ["feature_id", "parent_id"], :name => "index_features_parents_on_feature_id_and_parent_id"
 
+  create_table "features_predecessors", :id => false, :force => true do |t|
+    t.integer "feature_id"
+    t.integer "predecessor_id"
+  end
+
   create_table "genomes", :force => true do |t|
     t.datetime "created_at"
     t.text     "build_version"
@@ -69,6 +74,25 @@ ActiveRecord::Schema.define(:version => 20100814191202) do
   end
 
   add_index "parents", ["parent_feature"], :name => "index_parents_on_parent_feature"
+
+  create_table "predecessors", :force => true do |t|
+    t.string   "seqid",                      :null => false
+    t.string   "source"
+    t.string   "feature"
+    t.integer  "start",                      :null => false
+    t.integer  "end",                        :null => false
+    t.string   "score"
+    t.string   "strand",        :limit => 1
+    t.string   "phase",         :limit => 1
+    t.string   "group"
+    t.string   "gff_id"
+    t.integer  "experiment_id",              :null => false
+    t.text     "sequence"
+    t.text     "read_id"
+    t.text     "quality"
+    t.integer  "reference_id"
+    t.datetime "created_at"
+  end
 
   create_table "references", :force => true do |t|
     t.string   "name",       :null => false

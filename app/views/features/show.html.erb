@@ -1,3 +1,28 @@
+<h2><%=" #{@feature.feature} feature: id #{@feature.id}"   %></h2>
+	
+	<table>
+		<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Created</th><th>Parent IDs</tr>
+			<% g = 'none' %>
+			<% if @feature.has_parent? %>
+				<% g = @feature.parents.collect {|x| '<a href=/features/' + x.parent_obj.id.to_s + '/edit>' + x.parent_obj.id.to_s + '</a>'}.join(',') %>
+			<% end %>
+		<tr><td><%= "<a href=\"#{@feature.id}/edit\">#{@feature.id}</a>" %></td><td><%= @feature.seqid %></td><td><%= @feature.feature %></td><td><%= @feature.start %></td><td><%= @feature.end %></td><td><%= @feature.strand %></td><td><%= @feature.description%></td><td><%= @feature.created_at.strftime("%R %A %B %Y") %><td><%= g %></td></tr>
+	</table>
 
-<%= link_to 'Edit', edit_feature_path(@feature) %> |
-<%= link_to 'Back', features_path %>
+<h3>Erase this feature ... </h3>
+<%= form_tag( {:controller => "features", :action => "destroy"}, :method => "post", :multipart => true, :id => "destroy" ) %>
+<p>This will delete the feature from the DB, remove any predecessors and unlink it as a parent of DB features</p>
+<%=	hidden_field_tag :id, @feature.id %>
+<%= submit_tag 'Destroy' %>
+</form>
+
+<% if not @feature.predecessors.empty?%>
+<h2>Predecessors </h2>
+
+<table>
+	<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Created</td></tr>
+	<% @feature.predecessors.each do |p| 	%>
+	<tr><td><%= p.id %></td><td><%= p.seqid %></td><td><%= p.feature %></td><td><%= p.start %></td><td><%= p.end %></td><td><%= p.strand %></td><td><%= p.description %></td><td><%= p.created_at.strftime("%R %A %B %Y") %></td>
+	<% end %>
+	</table>
+<% end %>		

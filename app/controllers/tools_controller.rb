@@ -64,10 +64,12 @@ class ToolsController < ApplicationController
        else
          @export.meta = {'references'=> [], 'data_class' => nil, 'topology' => nil, 'molecule_type' => nil, 
                           'sequence_version' => nil, 'species' => nil, 'division' => nil, 'definition' => nil, 
-                          'keywords' => nil, 'comments' => 'nil'
+                          'keywords' => nil, 'comments' => 'nil', 'locus_tag_prefix' => nil
                         }
         end
        reference_list = []
+       locus_number = 10
+       parent_features = Hash.new
        @export.meta['references'].each {|r| reference_list << Bio::Reference.new(r) } if @export.meta['references'].instance_of?(Array)
        g = Genome.find(@export.genome_id)
        g.references.each do |r|
@@ -84,27 +86,51 @@ class ToolsController < ApplicationController
          s.comments = @export.meta['comments']
          s.features = []
          r.features.each do |f|
+          locus_tag = "%06d" % locus_number 
           next unless @export.experiment_ids.include?(f.experiment_id)
+          #only gene features have 'children' in embl/genbank ie CDS,mRNA gets locus_tag of gene it is in, anything else gets locus_tag of its own
+          parent_features[f] = locus_number if f.feature == 'gene'
           position = "#{f.start}..#{f.end}"
           position =  "complement(#{f.start}..#{f.end})" if f.strand == '-'
           
           #map presumed SO term to embl term .. if no embl term use misc_feature
           embl_term = m.map_term(f.feature) || 'misc_feature'
           feature = Bio::Feature.new(embl_term,position)
-          attributes = JSON.parse(f.group)
+          attributes = []
+          begin 
+            attributes = JSON.parse(f.group)
+          rescue JSON::ParserError #weird characters screw this up sometimes...
+            #attributes = []
+          end
           attributes.each do |a|
             #map gff attribute to qualifier if possible, if not and not a legal qualifier, skip
-            if m.mappable_gff_attribute(a.first) 
+            if m.mappable_gff_attribute(a.first)
               feature.append( Bio::Feature::Qualifier.new(m.mappable_gff_attribute(a.first), a.last) )
             elsif m.has_qualifier?(embl_term,a.first.downcase)
               feature.append( Bio::Feature::Qualifier.new(a.first.downcase, a.last) )
-            #else #optionally turn unmappable tags to note
-              #feature.append( Bio::Feature::Qualifier.new('note', a.join('-') ) )
             end
-
-             
           end
+          #find or make and add the appropriate locus tag
+          if f.has_parent?
+            f.parents.each do |p|
+              o = Feature.find(p.parent_feature) ##mrna has gene as parent in gff
+              if o.feature == 'gene'
+                locus_tag = "%06d" % parent_features[o] #feature should only have one gene parent...  
+              elsif o.has_parent?
+                o.parents.each do |op|
+                  j = Feature.find(op.parent_feature) ##but cds has mRNA as parent.. so go 1 deeper...
+                  if j.feature == 'gene'
+                    locus_tag = "%06d" % parent_features[j]
+                  end
+                end
+              end
+            end
+          end
+          
+          locus_tag =  (@export.meta['locus_tag_prefix'] + '_' + locus_tag) if @export.meta['locus_tag_prefix'] 
+          feature.append( Bio::Feature::Qualifier.new('locus_tag', locus_tag) )
           s.features << feature
+          locus_number = locus_number + 10 unless f.has_parent?
          end
          @results << s.output(@export.export_format)
        end

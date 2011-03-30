@@ -270,6 +270,177 @@ namespace :add do
     end
   end
 
+  desc "fast add features in an experiment (track) to the database .. requires more memory than add"
+  task :features_fast => :environment do
+    require 'bio'
+    require 'json'
+    
+    child_feature_list = Hash.new {|h,k| h[k] = [] } 
+    parent_feature_list = Hash.new
+    parent_object_list = Hash.new
+    Parent.all.each do |p|
+      parent_object_list[p.parent_feature] = p
+    end
+    
+    if not ENV['gff'] and not ENV['bam'] or ENV['gff'] and ENV['bam']
+      puts "Need either a gff file gff=some_file OR a bam file bam=some_file, can't use both in a single track"
+      exit
+    end
+    unless ENV['genome']
+      puts "no genome explicitly defined, assuming id is 1 ... "
+    end
+    genome_id = 1
+    genome_id = ENV['genome'] if ENV['genome']
+    genome = Genome.find(:first, :conditions => ["id = ?", "#{genome_id}"])
+    exit "can't find genome with id #{genome_id} ... " unless genome
+
+    unless ENV['exp']
+      puts "Need an experiment name exp='experiment' "
+      exit
+    end
+
+    skip_parent_finding = true if ENV['no_parents'] == "true"
+
+    practice = true if ENV['practice'] == "true"    
+
+    puts "\nAttempting to add gff #{ENV['gff']} as experiment #{ENV['exp']}" 
+    puts "---------------------------------------------------------------"
+    puts "looking for experiment #{ENV['exp']} in database"
+    escaped_exp = ENV['exp'].gsub ('%', '\%').gsub ('_', '\_')
+    exp = nil
+    if (!Experiment.find(:first, :conditions => ['name = ?', "#{escaped_exp}"]).nil?)
+      puts "We have an experiment with that name already.. Do you want to add these features? (y/n)..."
+      answer = $stdin.gets.chomp
+      if answer.match('n')
+        "Aborting without update"
+        exit
+      else
+        exp = Experiment.find(:first, :conditions => ['name = ?', "#{escaped_exp}"])
+        ##get all the existing features for this experiment and add them to the parent_list
+        exp.features.each do |feature|
+          parent_feature_list[feature.gff_id] = feature if feature.gff_id
+          feature.parents.each do |parent|
+            child_feature_list[parent.parent_obj.gff_id] << feature
+          end
+        end
+      end
+    else
+      puts "not found, creating new experiment"
+        ENV['desc'] = nil unless ENV['desc']
+
+      exp = Experiment.new(:name => "#{ENV['exp']}", :description => "#{ENV['desc']}" )
+
+      if ENV['trackinfo']
+        exp.meta = YAML.load_file("#{ENV['trackinfo']}").to_json
+      else
+        exp.meta = genome.meta
+      end
+      exp.genome_id = genome.id
+
+      if exp.meta.nil?
+        puts "Looks like the track information is missing, and there is no genome default in the db already"
+        puts "This may cause problems... "
+      end
+
+      if ENV['bam']
+        exp.bam_file_path = ENV['bam']
+        exp.uses_bam_file = true
+      end
+
+      unless practice
+        if exp.save
+          puts "experiment #{ENV['exp']} added"
+          puts "---------------------------------------------------------------"
+        else 
+          puts "error saving experiment to database. Aborting without further update"
+          exit
+        end
+      end
+    end
+
+    if ENV['gff'] #env gff start 
+
+      puts "loading #{ENV['gff']}..."
+      File.open( "#{ENV['gff']}" ).each do |line|
+        next if line =~ /^#/
+        break if line =~ /^##fasta/ or line =~ /^>/
+        record = Bio::GFF::GFF3::Record.new(line)
+
+        #use only the first gff id as the linking one ... 
+        gff_ids = record.attributes.select { |a| a.first == 'ID' }
+        gff_id = nil
+        gff_id = gff_ids[0][1] if ! gff_ids.empty?
+
+        #get the sequence and quality if defined
+        note = record.attributes.select{|a| a.first == 'Note'}
+        seq = nil
+        qual = nil
+
+        if note
+          note = note.flatten.last.to_s #flatten.delete_if{|x| x == "Note"}.to_s
+          note.match(/<sequence>(.*)<\/sequence>/)
+          seq = $1
+          note.match(/<quality>(.*)<\/quality>/)
+          qual = $1
+        end
+
+        attribute = JSON.generate(record.attributes)
+
+        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome_id}"])
+
+        feature = Feature.new(
+          :group => "#{attribute}",
+          :feature => "#{record.feature}",
+          :source => "#{record.source}",
+          :start => "#{record.start}",
+          :end => "#{record.end}", 
+          :strand => "#{record.strand}",
+          :phase => "#{record.frame}",
+          :seqid => "#{record.seqname}",
+          :score => "#{record.score}",
+          :experiment_id => "#{exp.id}",
+          :gff_id =>  "#{gff_id}",
+          :sequence => "#{seq}",
+          :quality => "#{qual}",
+          :reference_id => "#{ref.id}"
+        )
+
+      #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
+      #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
+      ###sort out the Parents if any, but only connects up the parent via the first gff id
+        unless skip_parent_finding
+          parents = record.attributes.select { |a| a.first == 'Parent' }
+          if !parents.empty?
+            parents.each do |label, parentFeature_gff_id|
+              ## here preload all features in the experiment (if any) into a memory structure,
+              ## should save database lookups in the line below, add new parent features into the
+              ## structure as they are created and the db at the same time...
+              parentFeat = parent_feature_list[parentFeature_gff_id]#Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+              if (parentFeat)
+                  parent = nil
+                  ## same here, preload all the parent features... 
+                  parent = parent_object_list[parentFeat.id] #Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                  if parent
+                    parent.save unless practice
+                  else
+                    parent = Parent.new(:parent_feature => parentFeat.id)
+                    parent.save unless practice
+                    parent_object_list[parentFeat.id] = parent
+                  end
+                 feature.parents << parent
+
+              end
+            end
+          end
+        end
+        feature.save unless practice
+        parent_feature_list[feature.gff_id] = feature if feature.gff_id
+      end #file open end
+    end #env gff end
+
+  #end
+
+  end #task end
 end
 
 

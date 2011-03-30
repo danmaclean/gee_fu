@@ -51,6 +51,22 @@ p.show {
 
 }
 
+.accordion_element
+{
+	border-width: 1px;
+  border-style: solid;
+	border-color: black;
+	-moz-box-shadow: 3px 3px 3px #666;
+	-webkit-box-shadow: 3px 3px 3px #666;
+	box-shadow: 3px 3px 3px #666;
+	padding: 4px;
+
+}
+.edit_form_elements
+{
+	width: 150px;
+	float: left;
+}
 #nav_menu 
 {
 

@@ -49,7 +49,14 @@ class GenomesController < ApplicationController
     respond @genome
   end
   
-  
+  #returns a list of references for the genome for the ajax autofill box
+  def reference_list
+    genomes = Genome.find(params[:id])
+    respond genomes.references.collect {|x| x.name }.join(" ")
+  end
+
+
+
   def create
     require 'bio'
     @genome = Genome.new(params[:genome])
