@@ -6,7 +6,15 @@
 			<% if @feature.has_parent? %>
 				<% g = @feature.parents.collect {|x| '<a href=/features/' + x.parent_obj.id.to_s + '/edit>' + x.parent_obj.id.to_s + '</a>'}.join(',') %>
 			<% end %>
-		<tr><td><%= "<a href=\"#{@feature.id}/edit\">#{@feature.id}</a>" %></td><td><%= @feature.seqid %></td><td><%= @feature.feature %></td><td><%= @feature.start %></td><td><%= @feature.end %></td><td><%= @feature.strand %></td><td><%= @feature.description%></td><td><%= @feature.created_at.strftime("%R %A %B %Y") %><td><%= g %></td></tr>
+		<tr>
+			<td><%= "<a href=\"#{@feature.id}/edit\">#{@feature.id}</a>" %></td>
+			<td><%= @feature.seqid %></td><td><%= @feature.feature %></td>
+			<td><%= @feature.start %></td><td><%= @feature.end %></td>
+			<td><%= @feature.strand %></td>
+			<td><%= @feature.group.join(' ') %></td>
+			<td><%= @feature.created_at.strftime("%R %A %B %Y") %></td>
+			<td><%= g %></td>
+		</tr>
 	</table>
 
 <h3>Erase this feature ... </h3>
@@ -25,4 +33,4 @@
 	<tr><td><%= p.id %></td><td><%= p.seqid %></td><td><%= p.feature %></td><td><%= p.start %></td><td><%= p.end %></td><td><%= p.strand %></td><td><%= p.description %></td><td><%= p.created_at.strftime("%R %A %B %Y") %></td>
 	<% end %>
 	</table>
-<% end %>		
+<% end %>

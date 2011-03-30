@@ -1,5 +1,5 @@
 class Predecessor < ActiveRecord::Base
-  has_and_belongs_to_many :feaures
+  has_and_belongs_to_many :features
   
   def description
     require 'json'

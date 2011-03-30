@@ -94,14 +94,15 @@ Implements the REST requests for the Genomes table/model access via url
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000030">annoj</a>&nbsp;&nbsp;
-      <a href="#M000035">create</a>&nbsp;&nbsp;
-      <a href="#M000036">destroy</a>&nbsp;&nbsp;
-      <a href="#M000033">edit</a>&nbsp;&nbsp;
-      <a href="#M000031">index</a>&nbsp;&nbsp;
-      <a href="#M000034">new</a>&nbsp;&nbsp;
-      <a href="#M000037">respond</a>&nbsp;&nbsp;
-      <a href="#M000032">show</a>&nbsp;&nbsp;
+      <a href="#M000046">annoj</a>&nbsp;&nbsp;
+      <a href="#M000052">create</a>&nbsp;&nbsp;
+      <a href="#M000053">destroy</a>&nbsp;&nbsp;
+      <a href="#M000049">edit</a>&nbsp;&nbsp;
+      <a href="#M000047">index</a>&nbsp;&nbsp;
+      <a href="#M000050">new</a>&nbsp;&nbsp;
+      <a href="#M000051">reference_list</a>&nbsp;&nbsp;
+      <a href="#M000054">respond</a>&nbsp;&nbsp;
+      <a href="#M000048">show</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -123,11 +124,11 @@ Implements the REST requests for the Genomes table/model access via url
     <div id="methods">
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000030" class="method-detail">
-        <a name="M000030"></a>
+      <div id="method-M000046" class="method-detail">
+        <a name="M000046"></a>
 
         <div class="method-heading">
-          <a href="#M000030" class="method-signature">
+          <a href="#M000046" class="method-signature">
           <span class="method-name">annoj</span><span class="method-args">(</span>
           </a>
         </div>
@@ -140,8 +141,8 @@ returns the genome information on an AnnoJ genome request
  only for use by AnnoJ
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000030-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000030-source">
+            onclick="toggleCode('M000046-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000046-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 7</span>
  7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">annoj</span>  <span class="ruby-comment cmt">#a method for annoj</span>
@@ -160,103 +161,103 @@ returns the genome information on an AnnoJ genome request
         </div>
       </div>
 
-      <div id="method-M000035" class="method-detail">
-        <a name="M000035"></a>
+      <div id="method-M000052" class="method-detail">
+        <a name="M000052"></a>
 
         <div class="method-heading">
-          <a href="#M000035" class="method-signature">
+          <a href="#M000052" class="method-signature">
           <span class="method-name">create</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000035-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000035-source">
+            onclick="toggleCode('M000052-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000052-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 53</span>
-53:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
-54:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'bio'</span>
-55:     <span class="ruby-ivar">@genome</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:genome</span>])
-56:     
-57:     <span class="ruby-comment cmt">#fastasavename = rand(1000000).to_s</span>
-58:     <span class="ruby-comment cmt">#FileUtils.mv @genome.fasta_file.path, &quot;#{RAILS_ROOT}/tmp/#{fastasavename}&quot; if @genome.fasta_file</span>
-59:     <span class="ruby-comment cmt">#fasta = File.new(&quot;#{RAILS_ROOT}/tmp/#{savename}&quot;, &quot;r&quot;)</span>
-60:    
-61:     <span class="ruby-comment cmt">#fasta = params[:genome][:fasta_file]</span>
-62:     <span class="ruby-comment cmt">#yaml = params[:genome][:yaml]</span>
+    <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 60</span>
+60:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create</span>
+61:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'bio'</span>
+62:     <span class="ruby-ivar">@genome</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:genome</span>])
 63:     
-64:     <span class="ruby-comment cmt">#format the meta data string from a provided yaml file</span>
-65:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">yaml_file</span>
-66:       <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">meta</span> = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_file</span>(<span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">yaml_file</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_json</span> 
-67:     <span class="ruby-keyword kw">end</span>
-68:     
-69:     <span class="ruby-comment cmt">#add the reference objects and sequence objects for this file...</span>
-70:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">fasta_file</span>
-71: 
-72:       <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">fasta_file</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
-73:           <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_seq</span>
-74:           <span class="ruby-identifier">reference</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">entry_id</span>, <span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">length</span>)
-75:           <span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{seq.seq}&quot;</span>)
-76:           <span class="ruby-identifier">reference</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-identifier">sequence</span>        
-77:           <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">references</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">reference</span>
-78:         <span class="ruby-keyword kw">end</span>
-79:     <span class="ruby-keyword kw">end</span>
-80:     
-81:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-82:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">save</span>
-83:         <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-value str">&quot;Genome was successfully created.&quot;</span>
-84:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@genome</span>) }
-85:      <span class="ruby-keyword kw">else</span>
-86:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
-87:     <span class="ruby-keyword kw">end</span>
-88:     <span class="ruby-keyword kw">end</span>
-89:   <span class="ruby-keyword kw">end</span>
+64:     <span class="ruby-comment cmt">#fastasavename = rand(1000000).to_s</span>
+65:     <span class="ruby-comment cmt">#FileUtils.mv @genome.fasta_file.path, &quot;#{RAILS_ROOT}/tmp/#{fastasavename}&quot; if @genome.fasta_file</span>
+66:     <span class="ruby-comment cmt">#fasta = File.new(&quot;#{RAILS_ROOT}/tmp/#{savename}&quot;, &quot;r&quot;)</span>
+67:    
+68:     <span class="ruby-comment cmt">#fasta = params[:genome][:fasta_file]</span>
+69:     <span class="ruby-comment cmt">#yaml = params[:genome][:yaml]</span>
+70:     
+71:     <span class="ruby-comment cmt">#format the meta data string from a provided yaml file</span>
+72:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">yaml_file</span>
+73:       <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">meta</span> = <span class="ruby-constant">YAML</span><span class="ruby-operator">::</span><span class="ruby-identifier">load_file</span>(<span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">yaml_file</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">to_json</span> 
+74:     <span class="ruby-keyword kw">end</span>
+75:     
+76:     <span class="ruby-comment cmt">#add the reference objects and sequence objects for this file...</span>
+77:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">fasta_file</span>
+78: 
+79:       <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">fasta_file</span>.<span class="ruby-identifier">path</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+80:           <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_seq</span>
+81:           <span class="ruby-identifier">reference</span> = <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">entry_id</span>, <span class="ruby-identifier">:length</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">length</span>)
+82:           <span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:sequence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{seq.seq}&quot;</span>)
+83:           <span class="ruby-identifier">reference</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-identifier">sequence</span>        
+84:           <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">references</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">reference</span>
+85:         <span class="ruby-keyword kw">end</span>
+86:     <span class="ruby-keyword kw">end</span>
+87:     
+88:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+89:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">save</span>
+90:         <span class="ruby-identifier">flash</span>[<span class="ruby-identifier">:notice</span>] = <span class="ruby-value str">&quot;Genome was successfully created.&quot;</span>
+91:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@genome</span>) }
+92:      <span class="ruby-keyword kw">else</span>
+93:         <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;new&quot;</span> }
+94:     <span class="ruby-keyword kw">end</span>
+95:     <span class="ruby-keyword kw">end</span>
+96:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000036" class="method-detail">
-        <a name="M000036"></a>
+      <div id="method-M000053" class="method-detail">
+        <a name="M000053"></a>
 
         <div class="method-heading">
-          <a href="#M000036" class="method-signature">
+          <a href="#M000053" class="method-signature">
           <span class="method-name">destroy</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000036-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000036-source">
+            onclick="toggleCode('M000053-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000053-source">
 <pre>
-    <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 91</span>
-91:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
-92:     <span class="ruby-ivar">@genome</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
-93:     <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">destroy</span>
-94:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-95:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">genomes_url</span>) }
-96:     <span class="ruby-keyword kw">end</span>
-97:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 98</span>
+ 98:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destroy</span>
+ 99:     <span class="ruby-ivar">@genome</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+100:     <span class="ruby-ivar">@genome</span>.<span class="ruby-identifier">destroy</span>
+101:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+102:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">genomes_url</span>) }
+103:     <span class="ruby-keyword kw">end</span>
+104:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000033" class="method-detail">
-        <a name="M000033"></a>
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
 
         <div class="method-heading">
-          <a href="#M000033" class="method-signature">
+          <a href="#M000049" class="method-signature">
           <span class="method-name">edit</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000033-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000033-source">
+            onclick="toggleCode('M000049-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000049-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 43</span>
 43:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">edit</span>
@@ -267,11 +268,11 @@ returns the genome information on an AnnoJ genome request
         </div>
       </div>
 
-      <div id="method-M000031" class="method-detail">
-        <a name="M000031"></a>
+      <div id="method-M000047" class="method-detail">
+        <a name="M000047"></a>
 
         <div class="method-heading">
-          <a href="#M000031" class="method-signature">
+          <a href="#M000047" class="method-signature">
           <span class="method-name">index</span><span class="method-args">(</span>
           </a>
         </div>
@@ -285,8 +286,8 @@ returns the list of genomes and associated meta-data in the database
  where format = xml or js
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000031-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000031-source">
+            onclick="toggleCode('M000047-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000047-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 22</span>
 22:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">index</span> <span class="ruby-comment cmt">#regular web request method</span>
@@ -301,19 +302,19 @@ returns the list of genomes and associated meta-data in the database
         </div>
       </div>
 
-      <div id="method-M000034" class="method-detail">
-        <a name="M000034"></a>
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
 
         <div class="method-heading">
-          <a href="#M000034" class="method-signature">
+          <a href="#M000050" class="method-signature">
           <span class="method-name">new</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000034-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000034-source">
+            onclick="toggleCode('M000050-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000050-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 47</span>
 47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new</span>
@@ -325,38 +326,65 @@ returns the list of genomes and associated meta-data in the database
         </div>
       </div>
 
-      <div id="method-M000037" class="method-detail">
-        <a name="M000037"></a>
+      <div id="method-M000051" class="method-detail">
+        <a name="M000051"></a>
 
         <div class="method-heading">
-          <a href="#M000037" class="method-signature">
+          <a href="#M000051" class="method-signature">
+          <span class="method-name">reference_list</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns a list of references for the genome for the ajax autofill box
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000051-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000051-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 53</span>
+53:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reference_list</span>
+54:     <span class="ruby-identifier">genomes</span> = <span class="ruby-constant">Genome</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-identifier">:id</span>])
+55:     <span class="ruby-identifier">respond</span> <span class="ruby-identifier">genomes</span>.<span class="ruby-identifier">references</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">name</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>)
+56:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000054" class="method-detail">
+        <a name="M000054"></a>
+
+        <div class="method-heading">
+          <a href="#M000054" class="method-signature">
           <span class="method-name">respond</span><span class="method-args">(response)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000037-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000037-source">
+            onclick="toggleCode('M000054-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000054-source">
 <pre>
-     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 99</span>
- 99:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">respond</span>(<span class="ruby-identifier">response</span>)
-100:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-101:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
-102:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
-103:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
-104:     <span class="ruby-keyword kw">end</span>
-105:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 106</span>
+106:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">respond</span>(<span class="ruby-identifier">response</span>)
+107:     <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+108:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+109:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+110:       <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">:xml</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">:layout</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+111:     <span class="ruby-keyword kw">end</span>
+112:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000032" class="method-detail">
-        <a name="M000032"></a>
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
 
         <div class="method-heading">
-          <a href="#M000032" class="method-signature">
+          <a href="#M000048" class="method-signature">
           <span class="method-name">show</span><span class="method-args">()</span>
           </a>
         </div>
@@ -370,8 +398,8 @@ returns metadata for a selected genome
  where format = xml or json
 </pre>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000032-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000032-source">
+            onclick="toggleCode('M000048-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000048-source">
 <pre>
     <span class="ruby-comment cmt"># File app/controllers/genomes_controller.rb, line 33</span>
 33:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">show</span>
