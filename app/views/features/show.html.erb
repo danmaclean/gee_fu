@@ -1,3 +1,6 @@
+<%if @feature.nil? %>
+<h2>No feature with that ID</h2>
+<%else%> 
 <h2><%=" #{@feature.feature} feature: id #{@feature.id}"   %></h2>
 	
 	<table>
@@ -12,7 +15,7 @@
 			<td><%= @feature.start %></td><td><%= @feature.end %></td>
 			<td><%= @feature.strand %></td>
 			<td><%= @feature.group.join(' ') %></td>
-			<td><%= @feature.created_at.strftime("%R %A %B %Y") %></td>
+			<td><%= @feature.created_at.strftime("%R %A %d %B %Y") %></td>
 			<td><%= g %></td>
 		</tr>
 	</table>
@@ -30,7 +33,8 @@
 <table>
 	<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Created</td></tr>
 	<% @feature.predecessors.each do |p| 	%>
-	<tr><td><%= p.id %></td><td><%= p.seqid %></td><td><%= p.feature %></td><td><%= p.start %></td><td><%= p.end %></td><td><%= p.strand %></td><td><%= p.description %></td><td><%= p.created_at.strftime("%R %A %B %Y") %></td>
+	<tr><td><%= p.id %></td><td><%= p.seqid %></td><td><%= p.feature %></td><td><%= p.start %></td><td><%= p.end %></td><td><%= p.strand %></td><td><%= p.description %></td><td><%= p.created_at.strftime("%R %A %d %B %Y") %></td>
 	<% end %>
 	</table>
+<% end %>
 <% end %>

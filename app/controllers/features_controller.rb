@@ -115,7 +115,8 @@ class FeaturesController < ApplicationController
     :reference_id => old_feature.reference_id,
     :experiment_id => old_feature.experiment_id,
     :created_at => old_feature.created_at,
-    :group => old_feature.group
+    :group => old_feature.group,
+    :old_id => old_feature.id
     )
     predecessor.save
     @feature.predecessors = [predecessor] + old_feature.predecessors
@@ -134,12 +135,14 @@ class FeaturesController < ApplicationController
   end
 
   def show 
-      @feature = Feature.find(params[:id])
-      if Feature.exists?(params[:id])
+      begin 
         @feature = Feature.find(params[:id])
+        #if Feature.exists?(params[:id])
+        #  @feature = Feature.find(params[:id])
         @feature.group = JSON::parse(@feature.group)
         respond @feature
-      else
+      rescue
+      #else
         respond :false
       end
   end

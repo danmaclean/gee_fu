@@ -217,9 +217,13 @@ class Feature < ActiveRecord::Base
   end
   
   #returns a 'gff-like' tab delimited string version of the feature, I make no guarantees that this is fully gff3 compatible, its a utility method. GFF3 compliance is *your* responsiblity.
-  def to_gff
+  def to_gff(kw={})
+    
     ref = Reference.find(self.reference_id)
     attributes = []
+    if kw[:add_db_id_to_attrs]
+      attributes = ['gfu_id=' + self.id.to_s]
+    end
     JSON.parse(self.group).each {|x| attributes << x.join('=') }
     name = ref.name
     self.source = '.' if self.source == '' 

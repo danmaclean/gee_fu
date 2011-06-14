@@ -26,16 +26,20 @@
 <% end %><br/><br/>
 <%= label(:experiment, :id, "Select experiments to include in feature export (avoid including NGS read or BAM files)") %><br />
 <% @experiments.each do |e| %>
+	<% next if e.uses_bam_file? %>
 	<%= check_box_tag("experiment_#{e.id}", "#{e.id}") %> <%= label_tag( "#{e.id}", "#{e.name}")%>
 <% end %><br /><br/>
 <%= label(:export_format, :type, "Select export format") %><br />
 <% ["embl", "gff", "genbank"].each do |f| %>
 	<%= radio_button_tag("export_format", "#{f}") %>  <%= label_tag(:format, "#{f}") %>
-<% end %><br/><br/>
+<% end %><br/><br />
+
 <%= label(:destination, :type, "Select export destination") %><br />
 <% ["browser", "server_directory"].each do |d| %>
 	<%= radio_button_tag("destination", "#{d}") %>  <%= label_tag(:destination, "#{d}") %>
-<% end %><br/><br/>
+<% end %><br/>
+<%= check_box_tag("add_db_id_to_attrs", "yes")%>
+<%= label(:include_db, :id, "include db_id (required for external editing and importing back to this db)") %><br /><br />
 <%= label(:yaml_file, :yaml, "YAML file of metadata about this export (required for embl and genbank formats only)")%><br />
 <%= file_field :yaml_file, :yaml_file %><br /><br />
 <%= submit_tag "export" %>

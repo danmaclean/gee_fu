@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110131094531) do
+ActiveRecord::Schema.define(:version => 20110613111451) do
 
   create_table "experiments", :force => true do |t|
     t.string   "name",                                             :null => false
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20110131094531) do
     t.text     "quality"
     t.integer  "reference_id"
     t.datetime "created_at"
+    t.integer  "old_id"
   end
 
   create_table "references", :force => true do |t|

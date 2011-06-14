@@ -34,6 +34,7 @@ class ToolsController < ApplicationController
                          'genome_id' => params['genome_id'],
                          'destination' => params['destination']}
                         )
+    add_db_id_to_attrs = params['add_db_id_to_attrs'] == 'yes' ? true : false
     if params['yaml_file']                    
       @export.yaml_file = params['yaml_file']['yaml_file'].path
     else
@@ -45,7 +46,7 @@ class ToolsController < ApplicationController
   
     @features = get_features(@export.genome_id, @export.experiment_ids) #[]
     if @export.export_format == 'gff' #and @export.destination == 'browser'
-      @features.collect! {|f| f.to_gff}
+      @features.collect! {|f| f.to_gff(:add_db_id_to_attrs => add_db_id_to_attrs)}
       if @export.destination == 'browser'
         render :text => @features.join("\n"), :content_type => 'text/plain'
       else #@export_destination == "server_direct"

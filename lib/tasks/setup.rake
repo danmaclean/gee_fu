@@ -376,6 +376,9 @@ namespace :add do
         seq = nil
         qual = nil
 
+        #remove gfu_id attributes as they cannot be user specified
+        record.attributes.delete_if{|a| a[0] == 'gfu_id'}
+
         if note
           note = note.flatten.last.to_s #flatten.delete_if{|x| x == "Note"}.to_s
           note.match(/<sequence>(.*)<\/sequence>/)
@@ -468,6 +471,235 @@ namespace :remove do
       puts "Remove Aborted"
       
     end
+  end
+end
+
+namespace :update do
+  desc "update and version the features in an experiment from new versions in a gff file. Features not already in the db are created. uses internal db id to identify features"
+  task :features => :environment do
+
+    require 'bio'
+    require 'json'
+    if not ENV['gff']
+      $stderr.puts "Need a gff file gff=some_file"
+      exit
+    end
+
+    unless ENV['exp']
+      $stderr.puts "Need an experiment name exp='experiment' "
+      exit
+    end
+    
+    add_no_id_as_new = false
+    if ENV['add_new']
+      $stderr.puts "will add features with no gfu_id attribute as new features"
+      add_no_id_as_new = true
+    end
+
+    practice = true if ENV['practice'] == "true"    
+    skip_parent_finding = true if ENV['no_parents'] == "true"
+
+    $stderr.puts "\nAttempting to update features in gff #{ENV['gff']} in experiment #{ENV['exp']}" 
+    $stderr.puts "---------------------------------------------------------------"
+    $stderr.puts "looking for experiment #{ENV['exp']} in database"
+    escaped_exp = ENV['exp'].gsub ('%', '\%').gsub ('_', '\_')
+
+    exp = Experiment.find(:first, :conditions => ['name = ?', "#{escaped_exp}"])
+
+    unless (exp)
+      $stderr.puts "Can't find an experiment matching that name, exiting"
+      exit
+    end
+
+    ## get the feature from the db by gfu_id
+    ## if this doesn't exist, look in the predecessors, if it is there IE has been re-versioned, report a conflict for manual editing. if it isnt a predecessor, complain to user
+    $stderr.puts "loading #{ENV['gff']}..."
+    File.open( "#{ENV['gff']}" ).each do |line|
+      next if line =~ /^#/
+      break if line =~ /^##fasta/ or line =~ /^>/
+      record = Bio::GFF::GFF3::Record.new(line)
+
+      gff_ids = record.attributes.select { |a| a.first == 'ID' }
+      gff_id = nil
+      gff_id = gff_ids[0][1] if ! gff_ids.empty?
+
+      #use only the first gfu_id as the linking one ... 
+      gfu_ids = record.attributes.select { |a| a.first == 'gfu_id' }
+      gfu_id = nil
+      gfu_id = gfu_ids[0][1] if ! gfu_ids.empty?
+
+      #get the sequence and quality if defined
+      note = record.attributes.select{|a| a.first == 'Note'}
+      seq = nil
+      qual = nil
+
+      if note
+        note = note.flatten.last.to_s #flatten.delete_if{|x| x == "Note"}.to_s
+        note.match(/<sequence>(.*)<\/sequence>/)
+        seq = $1
+        note.match(/<quality>(.*)<\/quality>/)
+        qual = $1
+      end
+
+      record.attributes.delete_if{|a| a[0] == 'gfu_id'}
+
+      #puts "record = #{record.attributes.class}"
+      attribute = JSON.generate(record.attributes)
+      #puts "attribute = #{attribute.class}"
+      ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{exp.genome_id}"])
+
+      feature = Feature.new(
+        :group => "#{attribute}",
+        :feature => "#{record.feature}",
+        :source => "#{record.source}",
+        :start => "#{record.start}",
+        :end => "#{record.end}", 
+        :strand => "#{record.strand}",
+        :phase => "#{record.frame}",
+        :seqid => "#{record.seqname}",
+        :score => "#{record.score}",
+        :experiment_id => "#{exp.id}",
+        :gff_id =>  "#{gff_id}",
+        :sequence => "#{seq}",
+        :quality => "#{qual}",
+        :reference_id => "#{ref.id}"
+      )
+
+      if gfu_id.nil?
+        if not add_no_id_as_new
+          $stderr.puts "no gfu_id at line #{$.}, skipping feature"
+        else
+          $stderr.puts "no gfu_id at line #{$.}, saving feature as new one"
+          #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
+          #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
+          ###sort out the Parents if any, but only connects up the parent via the first gff id
+            unless skip_parent_finding
+              parents = record.attributes.select { |a| a.first == 'Parent' }
+              if !parents.empty?
+                parents.each do |label, parentFeature_gff_id|
+                  parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+                  if (parentFeats)
+                    parentFeats.each do |pf|
+                      parent = nil
+                      parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                      if parent
+                        parent.save unless practice
+                      else
+                        parent = Parent.new(:parent_feature => pf.id)
+                        parent.save unless practice
+                      end
+                      feature.parents << parent
+                    end
+                  end
+                end
+              end
+            end
+            feature.save unless practice
+        end
+      end 
+
+      next unless gfu_id #next record unless we have a gfu_id
+
+      old_feature = nil
+      begin 
+        old_feature = Feature.find(gfu_id)
+      rescue
+        old_feature = nil
+      end
+      if old_feature.nil?
+        ##no feature to update in feature table, look in predecessors
+        old_feature = Predecessor.find(:first, :conditions => {:old_id => gfu_id})
+        if old_feature 
+          puts "<CONFLICT>\n<COMMENT>gfu_id #{gfu_id} at line #{$.} is in the predecessors table.. conflict needs manual resolution</COMMENT>\n"
+
+          puts "<PREDECESSOR>#{old_feature.to_gff}</PREDECESSOR>\n"
+          puts "<COMMENT>features replacing this predecessor</COMMENT>\n"
+          old_feature.features.each do |f|
+            puts "<FEATURE>#{f.to_gff(:add_db_id_to_attrs=>true)}</FEATURE>\n"
+          end
+          puts "</CONFLICT>\n"
+          old_feature = false
+        else
+        # not in predecessors either, complain
+          puts "<ABSENT>\n<COMMENT>gfu_id #{gfu_id} not found in feature or predecessors table. If you meant this to be a new feature omit the gfu_id attribute</COMMENT>\n"
+          puts "<FEATURE>#{feature.to_gff}</FEATURE>\n"
+          puts "</ABSENT>\n"
+        end
+      end
+      next unless old_feature
+
+      ##we have an old feature.. do the update .. 
+       ##set up the parents of the new feature from the group info
+        parents = feature.group.select { |a| a.first == 'Parent' }
+        if !parents.empty?
+          parents.each do |label, parentFeature_gff_id|
+            parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+            if (parentFeats)
+              parentFeats.each do |pf|
+                parent = nil
+                parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                if parent
+                  parent.save
+                else
+                  parent = Parent.new(:parent_feature => pf.id)
+                  parent.save 
+                end
+                feature.parents << parent
+              end
+            end
+          end
+        end
+
+        #puts feature.group.class
+        #puts JSON.generate(feature.group)
+        #feature.group = JSON.generate(feature.group)
+        feature.save
+        new_parent = Parent.new(:parent_feature => feature.id)
+        new_parent.save
+
+        ##set up the children of the new feature from the old one..
+        old_feature.children.each do |child|
+          ##remove the old feature as a parent...
+          new_parent_list = [new_parent] 
+          child.parents.each do |parent|
+              new_parent_list << parent unless parent.parent_feature == old_feature.id   
+          end
+          ##add the new feature as a parent to that child...
+          child.parents = new_parent_list
+          child.save unless practice
+        end
+
+        original_id = 0
+        if old_feature.is_a?(Feature)
+          original_id = old_feature.id
+        elsif old_feature.is_a?(Predecessor)
+          original_id = gfu_id
+        end
+
+        ##setup the predecessor record from the old feature... 
+        predecessor = Predecessor.new(
+        :seqid => old_feature.seqid,
+        :source => old_feature.source,
+        :feature => old_feature.feature,
+        :start => old_feature.start,
+        :end => old_feature.end,
+        :score => old_feature.score,
+        :strand => old_feature.strand,
+        :phase => old_feature.phase,
+        :gff_id => old_feature.gff_id,
+        :reference_id => old_feature.reference_id,
+        :experiment_id => old_feature.experiment_id,
+        :created_at => old_feature.created_at,
+        :group => old_feature.group,
+        :old_id => original_id
+        )
+        predecessor.save unless practice
+        feature.predecessors = [predecessor] + old_feature.predecessors
+        feature.save unless practice
+        old_feature.destroy unless practice
+
+    end#end gff_file
+    
   end
 end
 
