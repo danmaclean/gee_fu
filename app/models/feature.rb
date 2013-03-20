@@ -75,7 +75,7 @@ class Feature < ActiveRecord::Base
          a.query_strand ? strand = '+'  : strand = '-'       
          features << LightFeature.new(
            :seqid => ref.name,
-           :start => a.pos - 1,
+           :start => a.pos,
            :end => a.calend,
            :strand => strand,
            :sequence => a.seq,
@@ -181,17 +181,17 @@ class Feature < ActiveRecord::Base
   #Returns an array formatted version of the current object for AnnoJ, not normally used outside this context
   def to_box
     if self.id.nil?
-      [self.object_id.to_s, self.start, (self.end - self.start) - 1, '1', '1', ""]
+      [self.object_id.to_s, self.start + 1, (self.end - self.start) - 1, '1', '1', ""]
     else
-      [self.id, self.start, (self.end - self.start) - 1, '1', '1', ""]
+      [self.id, self.start + 1, (self.end - self.start) - 1, '1', '1', ""]
     end
   end
   #Returns an array formatted version of the current object for AnnoJ, not normally used outside this context
   def to_read
     if self.id.nil? 
-      [self.object_id.to_s, self.start, (self.end - self.start) - 1, '1', '1', self.sequence]
+      [self.object_id.to_s, self.start + 1, (self.end - self.start) - 1, '1', '1', self.sequence]
     else
-      [self.id, self.start, (self.end - self.start) - 1, '1', '1', self.sequence]
+      [self.id, self.start + 1, (self.end - self.start) - 1, '1', '1', self.sequence]
     end
   end
   #Returns an array formatted version of the current object for AnnoJ, not normally used outside this contex

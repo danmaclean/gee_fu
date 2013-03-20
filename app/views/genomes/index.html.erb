@@ -1,9 +1,8 @@
-<h1>Listing genomes</h1>
+
 
 <table>
 	<tr>
-	<th>DB ID</th><th>Build version</th><th>Metadata</th><th>Created</th><th></th><th></th>
-  </tr>
+	<th>DB ID</th><th>Build version</th><th>Metadata</th><th>Created</th>
 
 <% @genomes.each do |genome| %>
   <tr>
@@ -11,12 +10,12 @@
 		<td><%= genome.build_version %></td>
 		<td><%= genome.html_meta %></td>
 		<td><%= genome.created_at.strftime("%a %d %B") %></td>
-	    <td><%= link_to 'Show', genome %></td>
-	    <td><%= link_to 'Destroy', genome, :confirm => 'Are you sure?', :method => :delete %></td>
+<!--	    <td><%= link_to 'Show', genome %></td>
+	    <td><%= link_to 'Destroy', genome, :confirm => 'Are you sure?', :method => :delete %></td> -->
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New genome', new_genome_path %>
+<!-- <%= link_to 'New genome', new_genome_path %> -->

@@ -1,0 +1,18 @@
+
+
+
+
+
+<table>
+	<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Experiment</th><th>Description</th>
+					
+
+<% @features.each do |f|%>
+
+
+					<tr><td><%= "<a href=\"#{f.id}/edit\">#{f.id} - edit</a> <a href=\"feature_summary/#{f.id}\">view</a>" %></td><td><%= f.seqid %></td><td><%= f.feature %><td><%= "<a href=/experiments/#{f.experiment_id}>#{f.experiment.name}</a>" %></td><td><%= f.description%></td></tr>
+<% end %>
+</ table >
+
+
+

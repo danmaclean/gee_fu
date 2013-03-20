@@ -75,7 +75,7 @@ class ExperimentsController < ApplicationController
 
         ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{@experiment.genome_id}"])
 
-        feature = Feature.new (
+        feature = Feature.new(
           :group => "#{attribute}",
           :feature => "#{record.feature}",
           :source => "#{record.source}",
