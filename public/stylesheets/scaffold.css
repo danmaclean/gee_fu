@@ -1,11 +1,12 @@
 body { background-color: #c0c0c0; color: #bbb; }
 
 body, p, ol, ul, td {
-  font-family: "Bitstream Vera Sans Mono", helvetica, verdana, arial, sans-serif;
+  font-family: helvetica, verdana, arial, sans-serif;
   font-size:   13px;
   line-height: 18px;
-	color: black;
+  color: #377687;
 }
+
 
 pre {
   background-color: #eee;
@@ -13,8 +14,9 @@ pre {
   font-size: 11px;
 }
 #page_title {
-	font-size: 48px;
-	text-decoration: underline;
+
+		color: #377687;
+
 }
 #page {
 	background-color: white;
@@ -75,8 +77,8 @@ text-align:right;
 
 #nav_menu li 
 {
-color: black;
-font: 18px arial, sans-serif;
+color: #377687;	
+font: 18px helvetica;
 background: white;
 /*height: 40px;
 line-height: 20px; */
@@ -89,7 +91,7 @@ display: block;
 
 }
 #nav_menu a{
-	color:black;
+	color: #377687;
 	text-decoration:none;
 }
 

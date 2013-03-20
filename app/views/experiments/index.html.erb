@@ -1,8 +1,8 @@
-<h1>Listing experiments</h1>
+
 
 <table>
   <tr>
-	<th>DB ID</th><th>Name</th><th>Description</th><th>Created</th><th>Features associated<th></th><th></th><th></th>
+	<th>DB ID</th><th>Name</th><th>Description</th><th>Created</th><th>Features associated</th>
 <% @experiments.each do |experiment| %>
   <tr>
 	<td><%= experiment.id %></td>
@@ -10,13 +10,12 @@
 	<td><%= experiment.description %></td>
 	<td><%= experiment.created_at.strftime("%a %d %B") %></td>
 	<td><%= experiment.features.length %></td>
-    <td><%= link_to 'Show', experiment %></td>
+    <!-- ><td><%= link_to 'Show', experiment %></td>
     <td><%= link_to 'Edit', edit_experiment_path(experiment) %></td>
-    <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+    <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td> -->
 <% end %>
 </table>
 
 
 
-<%= link_to 'New experiment', new_experiment_path %>
+<!-- <%= link_to 'New experiment', new_experiment_path %> -->

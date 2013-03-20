@@ -6,8 +6,31 @@
 <%= submit_tag "get feature" %>
 </form>
 
+<h2>Get features by annotation</h2>
+<%= form_tag( {:controller => "features", :action => :find_annotation}, :method => "post", :multipart => true, :id => 'by_annot')%>
+<% if flash[:error] %>
+	<% if not flash[:error].empty? %>
+	<div class"errorExplanation id = errorExplanation">
+		<h2><%= flash[:error].length %> errors prohibited the search from being executed</h2>
+
+<ul>
+			<% flash[:error].each do |e| %>
+			<li><%= e %></li>
+			<% end %>
+		</ul>
+      </div>
+	<%end%>
+<% end %>
+<br/>
+<%= label(:string_label, :string_label, "Enter the string to find") %><br />
+<%= text_area_tag(:search_string, "", :size => "40 x 1") %> <br />
+
+
+<br />
+<%= submit_tag "get features" %>
+</form>
 <h2>Get features by range </h2>
-<%= form_tag( {:controller => "features", :action => "graphic_range"}, :method => "post", :multipart => true, :id => "by_range" ) %>
+<%= form_tag( {:controller => "features", :action => "summary"}, :method => "post", :multipart => true, :id => "by_range" ) %>
 <% if flash[:error] %>
 	<% if not flash[:error].empty? %>
       <div class="errorExplanation" id="errorExplanation">

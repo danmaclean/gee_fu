@@ -1,8 +1,8 @@
-<h1>Listing organisms</h1>
+
 
 <table>
   <tr>
-	<th>DB ID</th><th>Genus</th><th>Species</th><th>strain</th><th>pathovar</th><th>Created </th><th></th><th></th><th></th>
+	<th>DB ID</th><th>Genus</th><th>Species</th><th>strain</th><th>pathovar</th><th>Created </th>
   </tr>
 
 <% @organisms.each do |organism| %>
@@ -13,14 +13,14 @@
 		<td><%= organism.strain %></td>
 		<td><%= organism.pv %></td>
 		<td><%= organism.created_at.strftime("%a %d %B") %></td>
-    <td><%= link_to 'Show', organism %></td>
+   <!-- <td><%= link_to 'Show', organism %></td>
     <td><%= link_to 'Edit', edit_organism_path(organism) %></td>
-    <td><%= link_to 'Destroy', organism, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', organism, :confirm => 'Are you sure?', :method => :delete %></td> -->
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New organism', new_organism_path %>
+<!-- <%= link_to 'New organism', new_organism_path %> -->
 
