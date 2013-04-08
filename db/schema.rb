@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(:version => 20110613111451) do
   end
 
   create_table "sequences", :force => true do |t|
-    t.binary   "sequence",     :limit => 2147483647
+    t.binary   "sequence"#,     :limit => 2147483647
     t.integer  "reference_id"
     t.datetime "created_at"
   end
