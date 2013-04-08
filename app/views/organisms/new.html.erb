@@ -4,9 +4,8 @@
 <h2>The database already carries <%= "#{number_of_organisms}" %> definition(s) </h2>
 <p>Think carefully before adding another</p>
 <% end %>
-<% form_for(@organism) do |f| %>
-  <%= f.error_messages %>
-	<p>  <%= f.label :genus, "Genus (required)" %><br /> 
+<%= form_for(@organism) do |f| %>
+  <p>  <%= f.label :genus, "Genus (required)" %><br /> 
 		 <%= f.text_field :genus %> 
 	</p>
 	<p>  <%= f.label :species, "Species (required)" %><br /> 
