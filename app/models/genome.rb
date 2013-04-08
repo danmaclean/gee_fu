@@ -4,6 +4,8 @@ class Genome < ActiveRecord::Base
   validates_presence_of :fasta_file
   
   attr_accessor :fasta_file, :yaml_file
+
+  attr_accessible :build_version, :fasta_file, :yaml_file, :meta
   
   def html_meta
     self.meta ? self.meta.to_yaml.gsub!(/\n/,"<br/>").gsub!(/\s/,"&nbsp;") : ''
