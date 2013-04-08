@@ -6,19 +6,19 @@
 <% end %>
 <% form_for(@organism) do |f| %>
   <%= f.error_messages %>
-	<p>  <%= f.label "Genus (required)" %><br /> 
+	<p>  <%= f.label :genus, "Genus (required)" %><br /> 
 		 <%= f.text_field :genus %> 
 	</p>
-	<p>  <%= f.label "Species (required)" %><br /> 
+	<p>  <%= f.label :species, "Species (required)" %><br /> 
 		 <%= f.text_field :species %> 
 	</p>
-	<p>  <%= f.label "strain (optional)" %><br /> 
+	<p>  <%= f.label :strain, "strain (optional)" %><br /> 
 		 <%= f.text_field :strain %> 
 	</p>
-	<p>  <%= f.label "pathovar (optional)" %><br /> 
+	<p>  <%= f.label :pv, "pathovar (optional)" %><br /> 
 		 <%= f.text_field :pv %> 
 	</p>
-	<p>  <%= f.label "NCBI taxonomy ID (optional)" %><br /> 
+	<p>  <%= f.label :taxid, "NCBI taxonomy ID (optional)" %><br /> 
 		 <%= f.text_field :taxid %> 
 	</p>
   <p>
