@@ -15,4 +15,9 @@ test:
   password:
 
 cucumber:
-  <<: *test
+  adapter: postgresql
+  encoding: unicode
+  database: gee_fu_test
+  pool: 5
+  username: gee_fu
+  password:
