@@ -1,13 +1,13 @@
 
 <h1>New genome</h1>
-<% form_for(@genome, :html => {:multipart => true} ) do |f| %>
+<%= form_for(@genome, :html => {:multipart => true} ) do |f| %>
 
-  <%= f.error_messages %>
-	<p>  <%= f.label "Build version (required)" %><br /> 
+  <%#= f.error_messages %>
+	<p>  <%= f.label :build_version, "Build version (required)" %><br /> 
 		 <%= f.text_field :build_version %> <br />
-		<%= f.label "Fasta file of sequences (required)"%><br />
+		<%= f.label :fasta_file, "Fasta file of sequences (required)"%><br />
 		<%= f.file_field :fasta_file  %><br />
-		<%= f.label "YAML file of metadata about this genome (required for AnnoJ browsing only)"%><br />
+		<%= f.label :yaml_file, "YAML file of metadata about this genome (required for AnnoJ browsing only)"%><br />
 		<%= f.file_field :yaml_file %><br />
 	</p>
   <p>
