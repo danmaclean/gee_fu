@@ -8,7 +8,7 @@ class Genome < ActiveRecord::Base
   attr_accessible :build_version, :fasta_file, :yaml_file, :meta
   
   def html_meta
-    self.meta ? self.meta.to_yaml.gsub!(/\n/,"<br/>").gsub!(/\s/,"&nbsp;") : ''
+    self.meta ? self.meta.to_yaml.gsub!(/\n/,"<br/>").gsub!(/\s/,"&nbsp;").html_safe : ''
   end
   
   def meta_as_data_structure
