@@ -8,23 +8,9 @@
 </head>
 <body>
 
-<div id="page">
-  <div>
-    <h1 id="page_title">OpenAshDieBack - Gee Fu</h1>
-  </div>
-  <ul id="nav_menu">
-    <li><a href="/organisms">Samples</a></li>
-    <li><a href="/genomes">Genome Builds</a></li>
-    <li><a href="/experiments">Annotation Experiments</a></li>
-    <li><a href="/features">Features</a></li>
-    <li><a href="/tools">Tools</a></li>
-    <li><a href="/browse" target="_blank">Gee Fu Browse </a></li>
-  </ul>
-  <% if notice.present? %>
-    <p class="notice"><%= notice %></p>
-  <% end %>
-  <% if alert.present? %>
-    <p class="alert"><%= alert %></p>
+<div id="page" class="container">
+  <% if user_signed_in? %>
+    <%= render partial: "layouts/navbar"%>
   <% end %>
   <%= yield %>
 </div>
