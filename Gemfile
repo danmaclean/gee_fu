@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 gem 'rails', '~>3.2'
 
 gem 'pg'
-gem 'thin'
-  
+gem 'unicorn-rails'
+gem 'foreman'
+
 gem 'bio'
 gem 'bio-samtools'
 gem 'jquery-rails'
