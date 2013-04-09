@@ -18,9 +18,14 @@
     <li><a href="/experiments">Annotation Experiments</a></li>
     <li><a href="/features">Features</a></li>
     <li><a href="/tools">Tools</a></li>
-    <li><a href="/" target="_blank">Gee Fu Browse </a></li>
+    <li><a href="/browse" target="_blank">Gee Fu Browse </a></li>
   </ul>
-  <p style="color: green"><%= notice %></p>
+  <% if notice.present? %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% if alert.present? %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
   <%= yield %>
 </div>
 </body>
