@@ -25,7 +25,7 @@ describe User do
     end
 
     it "isn't valid unless we have a last name" do
-      User.new(valid_attributes(last_name: "")).should_not be_valid
+      User.new(valid_attributes(last_name: " ")).should_not be_valid
     end
   end
 end
