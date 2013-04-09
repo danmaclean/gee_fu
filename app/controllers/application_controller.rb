@@ -10,4 +10,9 @@ class ApplicationController < ActionController::Base
       format.xml  { render :xml => response, :layout => false }
     end
   end
+
+  def after_sign_in_path_for(resource)
+    #  if resource is_admin? then redirect to somewhere else perhaps?
+    genomes_path
+  end
 end
