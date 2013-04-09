@@ -15,3 +15,8 @@ en:
       save: "Save"
       new: "New"
       delete: "Delete"
+  genomes:
+    index:
+      new: New genome
+    new:
+      title: New genome
