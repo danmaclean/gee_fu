@@ -9,12 +9,16 @@ When(/^I am ready to add a genome build$/) do
 end
 
 When(/^I add a genome build called "(.*?)" with Fasta file "(.*?)" and YAML file of "(.*?)"$/) do |name, fasta_file, config_file|
-  fill_in "Build version (required)", :with => name
-  attach_file "Fasta file of sequences (required)", "#{Rails.root}/#{fasta_file}"
-  attach_file "YAML file of metadata about this genome (required for AnnoJ browsing only)", "#{Rails.root}/#{config_file}"
-  click_button "Create"
+  add_genome_build(name, fasta_file, config_file)
 end
 
 Then(/^there should be a genome build called "(.*?)"$/) do |name|
-  Genome.first.build_version.should eq name
+  Genome.where(:build_version => name).count.should eq 1
+end
+
+Given(/^there is a genome build called "(.*?)" with Fasta file "(.*?)" and YAML file of "(.*?)"$/) do |genome_build, fasta_file, config_file|
+  Genome.where(:build_version => genome_build).count.should eq 0
+  step %Q{I am ready to add a genome build}
+  add_genome_build(genome_build, fasta_file, config_file)
+  Genome.where(:build_version => genome_build).count.should eq 1
 end

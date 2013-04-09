@@ -716,8 +716,8 @@ namespace :create do
   desc "creates the AnnoJ config.js file based on the information in config.yml"
   task :config => :environment do
 
-    config = YAML.load_file("#{RAILS_ROOT}/config/config.yml")
-    config_js = File.new("#{RAILS_ROOT}/public/javascripts/config.js", 'w')
+    config = YAML.load_file("#{Rails.root}/config/config.yml")
+    config_js = File.new("#{Rails.root}/public/javascripts/config.js", 'w')
     config_js.puts('AnnoJ.config = ')
     config_js.puts config.to_json
     
