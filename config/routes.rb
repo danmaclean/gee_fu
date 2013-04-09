@@ -1,7 +1,10 @@
 GeeFu::Application.routes.draw do
+
+  root :to => "pages#index"
+  
+  get "/browse", :to => "pages#browse" 
+
   resources :organisms
-
-
   resources :genomes
   resources :organisms
   resources :organisms
