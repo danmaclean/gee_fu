@@ -1,11 +1,9 @@
 Given(/^I am not logged in$/) do
-  # dummy step
+  visit "/users/sign_out"
 end
 
 Given(/^there are no users$/) do
-  # for now a dummy step
-  # User.count.should eq 0
-  # Admin.count.should eq 0
+  User.count.should eq 0
 end
 
 Then(/^I should be able to sign up$/) do
@@ -18,10 +16,10 @@ When(/^I sign up as "(.*?)" with email "(.*?)"$/) do |name, email|
   fill_in "Last name", :with => full_name[1]
   fill_in "Email address", :with => email
   fill_in "Password", :with => "password"
-  fill_in "Confirm your password", :with => "password"
+  fill_in "Password confirmation", :with => "password"
   click_button "Sign up"
 end
 
-Then(/^"(.*?)" should be a confirmed user$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^"(.*?)" should be a confirmed user$/) do |email|
+  User.where(:email => email).first.should be_confirmed
 end
