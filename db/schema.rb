@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20130409091138) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.string   "first_name",                             :null => false
     t.string   "last_name",                              :null => false
     t.string   "affiliation"

@@ -1,9 +1,10 @@
 GeeFu::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
   root :to => "pages#index"
   
-  get "/browse", :to => "pages#browse" 
+  get "/browse",    :to => "pages#browse" 
+  get "/signed_up", :to => "pages#signed_up", :as => :signed_up
 
   resources :organisms
   resources :genomes
