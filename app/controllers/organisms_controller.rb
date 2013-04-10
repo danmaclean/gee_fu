@@ -1,6 +1,8 @@
 class OrganismsController < ApplicationController
   # GET /organisms
   # GET /organisms.xml
+  before_filter :require_admin
+
   def respond(response)
     respond_to do |format|
       format.html
@@ -76,5 +78,11 @@ class OrganismsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(organisms_url) }
     end
+  end
+
+  def require_admin
+    return if current_user.admin?
+    sign_out current_user 
+    redirect_to root_path, flash: { notice: "You have been signed out for security reasons." }
   end
 end
