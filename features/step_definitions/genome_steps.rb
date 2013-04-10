@@ -3,7 +3,6 @@ Given(/^there are no genome builds$/) do
 end
 
 When(/^I am ready to add a genome build$/) do
-  visit "/begin"
   click_link "Genome Builds"
   click_link "New genome"
 end
@@ -21,4 +20,8 @@ Given(/^there is a genome build called "(.*?)" with Fasta file "(.*?)" and YAML 
   step %Q{I am ready to add a genome build}
   add_genome_build(genome_build, fasta_file, config_file)
   Genome.where(:build_version => genome_build).count.should eq 1
+end
+
+When(/^I try to add a genome directly$/) do
+  visit "/genomes"
 end
