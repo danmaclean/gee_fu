@@ -123,15 +123,11 @@ class ExperimentsController < ApplicationController
     elsif @experiment.expected_file == "bam"
       @experiment.uses_bam_file = true
     end
-      
-      
-    respond_to do |format|
-      if @experiment.save
-        flash[:notice] = "Experiment was successfully created."
-        format.html { redirect_to(@experiment) }
-     else
-        format.html { render :action => "new" }
-      end
+    
+    if @experiment.save
+      redirect_to experiment_path(@experiment), flash: { notice: "Experiment was successfully created."}
+    else
+      render :new
     end
 
   end
