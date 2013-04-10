@@ -7,10 +7,12 @@
     <%= f.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
     <%= f.text_field :first_name, :placeholder => 'First name' %>
     <%= f.text_field :last_name, :placeholder => 'Last name' %>
-    <button type="submit" name="commit" class='btn btn-success'>
-      <i class="icon-pencil icon-white"></i>
-      Sign up
-    </button>
+    <p>
+      <button type="submit" name="commit" class='btn btn-success'>
+        <i class="icon-pencil icon-white"></i>
+        Sign up
+      </button>
+    </p>
   <% end %>
   <%= render "devise/shared/links" %>
 </div>
