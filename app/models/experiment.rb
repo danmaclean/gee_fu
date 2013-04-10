@@ -6,7 +6,7 @@ class Experiment < ActiveRecord::Base
   
   attr_accessor :gff_file, :yaml_file, :expected_file, :find_parents, :merge
 
-  attr_accessible :name, :description, :gff_file, :genome_id, :find_parents, :expected_file
+  attr_accessible :name, :description, :gff_file, :bam_file_path, :genome_id, :find_parents, :expected_file
   
   def gff_file_or_bam_file_path_is_provided
     if self.expected_file == "gff"
