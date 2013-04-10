@@ -38,4 +38,30 @@ describe User do
     subject { User.create!(valid_attributes(role: "Scientist")) }
     its(:role) { should eq "Scientist" }
   end
+
+  describe "admin" do
+    it "is false by default" do
+      User.new(valid_attributes).should_not be_admin
+    end
+
+    it "can be set to true" do
+      user = User.new(valid_attributes)
+      user.admin = true
+      user.should be_admin
+    end
+
+    it "can be set to false, once true" do
+      user = User.new(valid_attributes)
+      user.admin = true
+      user.should be_admin
+      user.admin = false
+      user.should_not be_admin
+    end
+
+    it "can be set to by update_attributes" do
+      user = User.create!(valid_attributes)
+      user.update_attributes(admin: true)
+      User.find(user.id).should be_admin
+    end
+  end
 end
