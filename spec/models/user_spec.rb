@@ -28,4 +28,14 @@ describe User do
       User.new(valid_attributes(last_name: " ")).should_not be_valid
     end
   end
+
+  describe "affiliation (place of work)" do
+    subject { User.create!(valid_attributes(affiliation: "The Sainsbury Laboratory")) }
+    its(:affiliation) { should eq "The Sainsbury Laboratory" }
+  end
+
+  describe "role" do
+    subject { User.create!(valid_attributes(role: "Scientist")) }
+    its(:role) { should eq "Scientist" }
+  end
 end
