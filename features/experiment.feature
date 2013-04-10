@@ -19,7 +19,6 @@ Feature: Add experiment data
     Then I should be on the sign in page
     And I should see "You need to sign in or sign up before continuing."
   
-  @wip
   Scenario: Add experiment data from a BAM file when logged in
     Given there is no experiment data
     And there is a user called "Fred Bloggs" with email "fred@fred.com"
