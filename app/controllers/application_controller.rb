@@ -13,6 +13,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     #  if resource is_admin? then redirect to somewhere else perhaps?
-    genomes_path
+    root_path
   end
 end
