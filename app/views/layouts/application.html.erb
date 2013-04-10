@@ -10,9 +10,7 @@
 
 <div id="page" class="container">
   <%= bootstrap_flash %>
-  <% if user_signed_in? %>
-    <%= render partial: "layouts/navbar"%>
-  <% end %>
+  <%= render partial: "layouts/navbar"%>
   <%= yield %>
 </div>
 </body>
