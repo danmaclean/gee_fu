@@ -3,7 +3,7 @@ Given /^there are no organisms$/ do
 end
 
 When /^I am ready to add an organism$/ do
-  visit '/begin'
+  click_link 'Samples'
   click_link 'New organism'
 end
 
@@ -26,4 +26,8 @@ Then /^I should see the newly created organism of the "([^"]*)" genus and the "(
   page.should have_content "Organism was successfully created"
   page.should have_content genus
   page.should have_content species
+end
+
+When(/^I try to add an organism directly$/) do
+  visit "/organisms"
 end
