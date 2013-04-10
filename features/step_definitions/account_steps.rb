@@ -95,3 +95,8 @@ end
 Then(/^my role should be "(.*?)"$/) do |role|
   current_user.role.should eq role
 end
+
+Given(/^"(.*?)" is an admin user$/) do |email|
+  set_current_user_email(email)
+  current_user.update_attributes(admin: true)
+end
