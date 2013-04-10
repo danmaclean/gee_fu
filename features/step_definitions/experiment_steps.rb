@@ -29,7 +29,7 @@ When(/^I add an experiment called "(.*?)", described as "(.*?)" with BAM file "(
   within "div#bam_experiment_data" do
     fill_in("name (required)", :with => name)
     fill_in("description (required)", :with => description)
-    attach_file("BAM file of features (required)", "#{Rails.root}/#{bam_file}")
+    fill_in("BAM file of features (required)", :with => "#{Rails.root}/#{bam_file}")
     choose(genome_build)
     click_button "Create"
   end
