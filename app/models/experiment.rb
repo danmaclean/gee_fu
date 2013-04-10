@@ -5,6 +5,8 @@ class Experiment < ActiveRecord::Base
   validate :gff_file_or_bam_file_path_is_provided
   
   attr_accessor :gff_file, :yaml_file, :expected_file, :find_parents, :merge
+
+  attr_accessible :name, :description, :gff_file, :genome_id, :find_parents, :expected_file
   
   def gff_file_or_bam_file_path_is_provided
     if self.expected_file == "gff"
@@ -13,14 +15,12 @@ class Experiment < ActiveRecord::Base
       errors.add_to_base("A path to a BAM file must be provided") if self.bam_file_path == ''
     end
   end
-  
-  
+    
   def html_meta
-    self.meta ? self.meta.to_yaml.gsub!(/\n/,"<br/>").gsub!(/\s/,"&nbsp;") : ''
+    self.meta ? self.meta.to_yaml.gsub!(/\n/,"<br/>").gsub!(/\s/,"&nbsp;").html_safe : ''
   end
   
   def meta_as_data_structure
     self.meta ? JSON::parse(self.meta) : nil
   end
-  
 end
