@@ -1,14 +1,16 @@
-<div class="navbar">
-  <div class="navbar-inner">
-    <ul id="nav_menu" class="nav">
-      <li><a href="/organisms">Samples</a></li>
-      <li><a href="/genomes">Genome Builds</a></li>
-      <li><a href="/experiments">Annotation Experiments</a></li>
-      <li><a href="/features">Features</a></li>
-      <li><a href="/tools">Tools</a></li>
-      <li><a href="/browse" target="_blank">Gee Fu Browse </a></li>
-      <li><a href="/registrations/edit"><i class="icon-wrench icon-white"></i>My Account</a></li>
-      <li><a href="/users/sign_out"><i class="icon-user icon-white"></i>Sign Out</a></li>
-    </ul>
+<% if user_signed_in? %>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <ul id="nav_menu" class="nav">
+        <li><a href="/organisms">Samples</a></li>
+        <li><a href="/genomes">Genome Builds</a></li>
+        <li><a href="/experiments">Annotation Experiments</a></li>
+        <li><a href="/features">Features</a></li>
+        <li><a href="/tools">Tools</a></li>
+        <li><a href="/browse" target="_blank">Gee Fu Browse </a></li>
+        <li><a href=<%=edit_user_registration_path%>><i class="icon-wrench icon-white"></i>My Account</a></li>
+        <li><a href=<%=destroy_user_session_path%>><i class="icon-user icon-white"></i>Sign Out</a></li>
+      </ul>
+    </div>
   </div>
-</div>
+<% end %>
