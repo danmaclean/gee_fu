@@ -2,7 +2,9 @@
   <div class="navbar">
     <div class="navbar-inner">
       <ul id="nav_menu" class="nav">
-        <li><a href="/organisms">Samples</a></li>
+        <% if current_user.admin? %>
+          <li><a href="/organisms">Samples</a></li>
+        <% end %>
         <li><a href="/genomes">Genome Builds</a></li>
         <li><a href="/experiments">Annotation Experiments</a></li>
         <li><a href="/features">Features</a></li>
