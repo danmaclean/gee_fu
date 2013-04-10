@@ -3,13 +3,16 @@ source 'https://rubygems.org'
 gem 'rails', '~>3.2'
 
 gem 'pg'
-gem 'thin'
-  
+gem 'unicorn-rails'
+gem 'foreman'
+
 gem 'bio'
 gem 'bio-samtools'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-  
+gem 'devise'
+gem 'twitter-bootstrap-rails'  
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -23,7 +26,12 @@ group :assets do
 end
 
 group :test do
-  gem "cucumber-rails"
+  gem "cucumber-rails", require: false
   gem "database_cleaner"
   gem "rspec-rails"
+  gem 'email_spec'
+  gem 'spork-rails'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'rb-fsevent'
 end

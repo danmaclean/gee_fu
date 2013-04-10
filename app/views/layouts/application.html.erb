@@ -8,19 +8,9 @@
 </head>
 <body>
 
-<div id="page">
-  <div>
-    <h1 id="page_title">OpenAshDieBack - Gee Fu</h1>
-  </div>
-  <ul id="nav_menu">
-    <li><a href="/organisms">Samples</a></li>
-    <li><a href="/genomes">Genome Builds</a></li>
-    <li><a href="/experiments">Annotation Experiments</a></li>
-    <li><a href="/features">Features</a></li>
-    <li><a href="/tools">Tools</a></li>
-    <li><a href="/" target="_blank">Gee Fu Browse </a></li>
-  </ul>
-  <p style="color: green"><%= notice %></p>
+<div id="page" class="container">
+  <%= bootstrap_flash %>
+  <%= render partial: "layouts/navbar"%>
   <%= yield %>
 </div>
 </body>

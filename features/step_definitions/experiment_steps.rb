@@ -3,7 +3,6 @@ Given(/^there is no experiment data$/) do
 end
 
 When(/^I am ready to enter experiment data$/) do
-  visit "/begin"
   click_link("Annotation Experiments")
   click_link("New experiment")
 end
@@ -20,4 +19,8 @@ end
 
 Then(/^there should be an experiment called "(.*?)"$/) do |name|
   Experiment.where(:name => name).count.should eq 1
+end
+
+When(/^I am ready to enter experiment data directly$/) do
+  visit "/experiments"
 end
