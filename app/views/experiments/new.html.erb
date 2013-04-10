@@ -39,7 +39,7 @@
 		<%= f.label :description, "description (required)" %><br />  
 		<%= f.text_field :description %> <br />
 	  	<%= f.label :bam_file_path, "BAM file of features  (required)"%><br />
-		<%= f.file_field :bam_file_path %><br />
+		<%= f.text_field :bam_file_path %><br />
 		<%= f.label "YAML file of metadata about this genome (optional - inherits from genome if omitted) "%><br />
 		<%= f.file_field :yaml_file %><br />
 		Select one of the genome build versions in this DB to attach these features to:<br />
