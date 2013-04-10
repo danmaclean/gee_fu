@@ -5,7 +5,6 @@ GeeFu::Application.routes.draw do
   
   get "/browse",     :to => "pages#browse" 
   get "/signed_up",  :to => "pages#signed_up", :as => :signed_up
-  get "/signed_out", :to => "pages#signed_out", :as => :signed_up
   match 'begin' => 'organisms#index'
 
   authenticate :user do
