@@ -14,6 +14,9 @@ module NavigationHelpers
     when /the user signup page/
       '/signed_up'
 
+    when /the sign in page/
+      '/users/sign_in'
+
     when /the account page/
       '/users/edit'
 
