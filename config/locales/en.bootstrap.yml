@@ -20,3 +20,14 @@ en:
       new: New genome
     new:
       title: New genome
+  organisms:
+    index:
+      new: New organism
+      title: Samples
+    new:
+      title: New organism
+  activerecord:
+    attributes:
+      organism:
+        pv: "Pathovar"
+        taxid: "NCBI taxonomy ID"
