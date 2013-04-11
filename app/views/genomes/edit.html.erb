@@ -1,20 +1,5 @@
-<h1>Editing genome</h1>
-
-<% form_for(@genome) do |f| %>
-  <%= f.error_messages %>
-  <%= f.error_messages %>
-	<p>  <%= f.label "Build version" %><br /> 
-		 <%= f.text_field :build_version %> <br />
-		<%= f.label "Fasta file of sequences "%><br />
-		<%= f.file_field :fasta_file  %><br />
-		<%= f.label "YAML file of metadata about this genome"%><br />
-		<%= f.file_field :yaml %><br />
-	</p>
-  <p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @genome %> |
-<%= link_to 'Back', genomes_path %>
+<%- model_class = Genome -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human %></h1>
+</div>
+<%= render :partial => 'form' %>
