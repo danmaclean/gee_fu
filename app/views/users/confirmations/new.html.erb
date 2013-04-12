@@ -1,8 +1,11 @@
 <div class="border-form-div">
   <h2>Resend confirmation?</h2>
-  <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-    <%= devise_error_messages! %>
-    <%= f.email_field :email, :autofocus => true, placeholder: "Email address" %>
+  <%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+    <%= f.error_notification %>
+    <%= f.full_error :confirmation_token %>
+    <div class="form-inputs">
+      <%= f.input :email, :autofocus => true, placeholder: "Email address", label: false %>
+    </div>
     <p>
       <button type="submit" name="commit" class='btn btn-primary'>
         <i class="icon-envelope icon-white"></i>

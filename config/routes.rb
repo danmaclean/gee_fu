@@ -5,12 +5,18 @@ GeeFu::Application.routes.draw do
   
   get "/browse",     :to => "pages#browse" 
   get "/signed_up",  :to => "pages#signed_up", :as => :signed_up
-  match 'begin' => 'organisms#index'
 
   authenticate :user do
     resources :organisms
     resources :genomes
     resources :experiments
+    match 'begin' => 'pages#index'
+
+  end
+
+  scope "/features/annoj" do
+    get  :id, to: "features#annoj_get"
+    post :id, to: "features#annoj_post"
   end
 
   resources :features

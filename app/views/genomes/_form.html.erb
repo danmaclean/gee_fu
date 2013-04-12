@@ -1,26 +1,13 @@
-<%= form_for @genome, :html => { :class => 'form-horizontal', :multipart => true } do |f| %>
-  <div class="control-group">
-    <%= f.label :build_version, "Build version (required)", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :build_version, :class => 'text_field' %>
+<div class="border-form-div">
+  <%= simple_form_for @genome do |f| %>
+     <%= f.error_notification %>
+    <%= f.input :build_version, as: :string, required: true %>
+    <%= f.input :fasta_file, as: :file, required: true%>
+    <%= f.input :yaml_file, as: :file, hint: "(required for AnnoJ browsing only)"%>
+    <div class="form-actions">
+      <%= f.button :submit, :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  genomes_path, :class => 'btn' %>
     </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :fasta_file, "Fasta file of sequences (required)", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.file_field :fasta_file, :class => 'file_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :yaml_file, "YAML file of metadata about this genome (required for AnnoJ browsing only)", :class => 'control-label' %>
-    <div class="controls">
-      <%= f.file_field :yaml_file, :class => 'file_field' %>
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                genomes_path, :class => 'btn' %>
-  </div>
-<% end %>
+  <% end %>
+</div>
