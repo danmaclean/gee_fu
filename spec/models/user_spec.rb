@@ -64,4 +64,28 @@ describe User do
       User.find(user.id).should be_admin
     end
   end
+
+  describe "persistence", versioning: true do
+    subject { User.new(valid_attributes) }
+
+    before(:each) do
+      subject.save!
+    end
+        
+    it_behaves_like "a model with versioning" do
+      let(:attributes_to_update) { 
+        {
+          first_name: "Frederick",
+          last_name:  "Blogger"
+        }  
+      }
+
+      let(:changeset) { 
+        {
+          "first_name" => [ "Fred", "Frederick" ],
+          "last_name" => [ "Bloggs", "Blogger" ]
+        }
+      }
+    end
+  end
 end
