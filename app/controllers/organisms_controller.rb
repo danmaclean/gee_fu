@@ -81,7 +81,7 @@ class OrganismsController < ApplicationController
   end
 
   def require_admin
-    return if current_user.admin?
+    return if current_user && current_user.admin?
     sign_out current_user 
     redirect_to root_path, flash: { notice: "You have been signed out for security reasons." }
   end
