@@ -447,43 +447,26 @@ class FeaturesController < ApplicationController
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
-  def annoj
-    #annoj does this funny, makes posts for just getting information .. meh 
-    #we dont want this sooo need to separate out the annoj get from the proper
-    #rails resource request, this method handles only annoj requests...
-    if request.get?
-      ##sort out the params from annoj's get
-      annoj_params = {}
-      request.url.split(/&/).each do |pair|
-        k,v = pair.split(/=/)
-        annoj_params[k] = v
-      end#CGI.parse(URI.parse(request.url).query)
-      annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
-      case annoj_params['action']
-        when "syndicate"
-          @response = syndicate(params[:id])
-        when "describe"
-          @response = describe(annoj_params["id"])
-        end
-        render :json => @response,  :layout => false
-    elsif request.post?
-      #annoj_params = CGI.parse(request.raw_post)
-      annoj_params = {}
-      request.raw_post.split(/&/).each do |pair|
-        k,v = pair.split(/=/)
-        annoj_params[k] = v
-      end
-      annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
-        #now do the specific stuff based on the annoj action... 
-        case annoj_params['action']
-          when "range" 
-            @response = range(annoj_params['assembly'], annoj_params['left'], annoj_params['right'], params[:id], annoj_params['bases'], annoj_params['pixels'])
-          when "lookup"
-            @response = lookup(annoj_params["query"], params[:id])
-        end
-        render :json => @response, :layout => false
-      end
+  def annoj_get
+    case params[:annoj_action]
+      when "syndicate"
+        @response = syndicate(params[:id])
+      when "describe"
+        @response = describe(params["id"])
+    end
+    render :json => @response,  :layout => false
   end
+
+  def annoj_post
+    case params[:annoj_action]
+      when "range" 
+        @response = range(params['assembly'], params['left'], params['right'], params[:id], params['bases'], params['pixels'])
+      when "lookup"
+        @response = lookup(params["query"], params[:id])
+    end
+    render :json => @response, :layout => false
+  end
+
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets reference track that is saved as experiment at id
   # => use /features/chromosome/id
   def chromosome
