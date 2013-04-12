@@ -447,6 +447,39 @@ class FeaturesController < ApplicationController
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
+  def annoj_get
+    annoj_params = {}
+    request.url.split(/&/).each do |pair|
+      k,v = pair.split(/=/)
+      annoj_params[k] = v
+    end
+    annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
+    case annoj_params['action']
+      when "syndicate"
+        @response = syndicate(params[:id])
+      when "describe"
+        @response = describe(annoj_params["id"])
+    end
+    render :json => @response,  :layout => false
+  end
+
+  def annoj_post
+    annoj_params = {}
+    request.raw_post.split(/&/).each do |pair|
+      k,v = pair.split(/=/)
+      annoj_params[k] = v
+    end
+
+    annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
+    case annoj_params['action']
+      when "range" 
+        @response = range(annoj_params['assembly'], annoj_params['left'], annoj_params['right'], params[:id], annoj_params['bases'], annoj_params['pixels'])
+      when "lookup"
+        @response = lookup(annoj_params["query"], params[:id])
+    end
+    render :json => @response, :layout => false
+  end
+
   def annoj
     #annoj does this funny, makes posts for just getting information .. meh 
     #we dont want this sooo need to separate out the annoj get from the proper
