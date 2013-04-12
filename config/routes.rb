@@ -5,18 +5,21 @@ GeeFu::Application.routes.draw do
   
   get "/browse",     :to => "pages#browse" 
   get "/signed_up",  :to => "pages#signed_up", :as => :signed_up
+  get 'begin' => 'pages#index'
 
   authenticate :user do
     resources :organisms
     resources :genomes
     resources :experiments
-    match 'begin' => 'pages#index'
-
   end
 
   scope "/features/annoj" do
-    get  :id, to: "features#annoj_get"
-    post :id, to: "features#annoj_post"
+    get  "/:id", to: "features#annoj_get"
+    post "/:id", to: "features#annoj_post"
+  end
+
+  scope "/genomes/annoj" do
+    get  "/:id", to: "genomes#annoj"
   end
 
   resources :features
@@ -26,6 +29,6 @@ GeeFu::Application.routes.draw do
   match 'features/depth' => 'features#depth'
   match 'tools/genomic_sequence' => 'tools#genomic_sequence'
   match 'tools/export' => 'tools#export'
-  match '/:controller(/:action(/:id))'
+  # match '/:controller(/:action(/:id))'
   match ':controller/:action.:format' => '#index'
 end
