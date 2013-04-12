@@ -68,14 +68,14 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
-    diff-lcs (1.2.2)
+    diff-lcs (1.2.3)
     email_spec (1.4.0)
       launchy (~> 2.1)
       mail (~> 2.2)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    ffi (1.6.0)
+    ffi (1.7.0)
     foreman (0.62.0)
       thor (>= 0.13.6)
     formatador (0.2.4)
@@ -87,7 +87,7 @@ GEM
       lumberjack (>= 1.0.2)
       pry (>= 0.9.10)
       thor (>= 0.14.6)
-    guard-rspec (2.5.2)
+    guard-rspec (2.5.3)
       guard (>= 1.1)
       rspec (~> 2.11)
     guard-spork (1.5.0)
@@ -118,6 +118,9 @@ GEM
     multi_json (1.7.2)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
+    paper_trail (2.7.1)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     pg (0.15.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -231,6 +234,7 @@ DEPENDENCIES
   guard-spork
   jquery-rails
   jquery-ui-rails
+  paper_trail (~> 2)
   pg
   rails (~> 3.2)
   rb-fsevent
