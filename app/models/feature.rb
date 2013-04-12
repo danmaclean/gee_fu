@@ -52,15 +52,13 @@ class Feature < ActiveRecord::Base
         if experiment.uses_bam_file?
           Feature.find_by_bam(reference_id,start,stop,experiment_id)
         else
-          Feature.find_by_sql(
-          "select * from features where 
-          reference_id = '#{reference_id}' and 
-          start <= '#{stop}' and 
-          start >= '#{start}' and
-          end >= '#{start}' and 
-          end <= '#{stop}' and 
-          experiment_id = '#{experiment_id}'  
-          order by start asc, end desc")
+          _start         = start
+          _experiment_id = experiment_id
+          _reference_id  = reference_id
+          Feature.where{|f|
+              (f.experiment_id == _experiment_id) & (f.reference_id == _reference_id) &
+              (f.start >> (_start..stop)) & (f.end >> (_start..stop))
+          }.order{|f| [f.start.asc, f.end.desc]}
         end
   end
 
