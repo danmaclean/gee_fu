@@ -1,28 +1,20 @@
 <div class="border-form-div">
 <h2>Account details</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.label :email %>
-  <%= f.email_field :email, :autofocus => true %>
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :email, :autofocus => true %>
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
-  <%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
-  <%= f.password_field :password, :autocomplete => "off" %>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
-  <%= f.password_field :current_password %>
+  <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
+  <%= f.input :password_confirmation, :required => false %>
+  <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
   <legend>Personal details</legend>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name%>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name%>
-  <%= f.label :affiliation, "Affiliation / Place of work" %>
-  <%= f.text_field :affiliation%>
-  <%= f.label :role %>
-  <%= f.text_field :role%>
+  <%= f.input :first_name, required: true%>
+  <%= f.input :last_name, required: true%>
+  <%= f.input :affiliation, label: "Affiliation / Place of work"%>
+  <%= f.input :role%>
   <p>
     <button type="submit" name="commit" class='btn btn-success'>
       <i class="icon-pencil icon-white"></i>

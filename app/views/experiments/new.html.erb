@@ -4,7 +4,7 @@
 
 <div id="gff_experiment_data">
 	<h2>If you have a GFF File</h2>
-	<%= form_for(@experiment, :html => {:multipart => true}) do |f| %>  
+	<%= simple_form_for(@experiment, :html => {:multipart => true}) do |f| %>  
 		<p>  <%= f.label :name, "name (required)" %><br /> 
 			 <%= f.text_field :name %> <br />
 	  
@@ -31,7 +31,7 @@
 </div>
 <div id="bam_experiment_data">
 	<h2>or if you have a BAM File</h2>
-	<%= form_for(@experiment, :html => {:multipart => true}) do |f| %>  
+	<%= simple_form_for(@experiment, :html => {:multipart => true}) do |f| %>  
 		<%#= f.error_messages %>  
 		<p>  <%= f.label :name, "name (required)" %><br /> 
 			 <%= f.text_field :name %> <br />

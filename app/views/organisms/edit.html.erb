@@ -1,27 +1,5 @@
-<h1>Editing organism</h1>
-
-<% form_for(@organism) do |f| %>
-  <%= f.error_messages %>
-	<p>  <%= f.label "Genus (required)" %><br /> 
-		 <%= f.text_field :genus %> 
-	</p>
-	<p>  <%= f.label "Species (required)" %><br /> 
-		 <%= f.text_field :species %> 
-	</p>
-	<p>  <%= f.label "strain (optional)" %><br /> 
-		 <%= f.text_field :strain %> 
-	</p>
-	<p>  <%= f.label "pathovar (optional)" %><br /> 
-		 <%= f.text_field :pv %> 
-	</p>
-	<p>  <%= f.label "NCBI taxonomy ID (optional)" %><br /> 
-		 <%= f.text_field :taxid %> 
-	</p>
-  <p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
-
-<%= link_to 'Show', @organism %> |
-<%= link_to 'Back', organisms_path %>
+<%- model_class = Organism -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human %></h1>
+</div>
+<%= render :partial => 'form' %>
