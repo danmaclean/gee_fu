@@ -9,9 +9,8 @@ class AnnojParamSanitiser
   end
 
   def sanitise_params(env)
-    return if env["rack.request.form_hash"].nil?
     req = Rack::Request.new(env)
-    req.POST[:annoj_action] = env["rack.request.form_hash"]["action"]
+    (req.post? ? req.POST : req.GET)[:annoj_action] = req.params["action"] if req.params.has_key?("action")
     @params = nil
   end
 end
