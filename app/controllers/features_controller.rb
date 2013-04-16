@@ -28,7 +28,7 @@ class FeaturesController < ApplicationController
     @feature.score = params[:feature][:score] 
     
     strand = nil
-    strand = params[:feature][:strand] == 'plus' ? '+' : '-' 
+    strand = params[:feature][:strand]
     
     @feature.strand = strand || old_feature.strand
     @feature.phase = params[:feature][:phase] 
