@@ -11,6 +11,7 @@ GeeFu::Application.routes.draw do
     resources :organisms
     resources :genomes
     resources :experiments
+    resources :features
   end
 
   scope "/features/annoj" do
@@ -22,13 +23,12 @@ GeeFu::Application.routes.draw do
     get  "/:id", to: "genomes#annoj"
   end
 
-  resources :features
   resources :references
   resources :tools
   match 'features/objects' => 'features#objects'
   match 'features/depth' => 'features#depth'
   match 'tools/genomic_sequence' => 'tools#genomic_sequence'
   match 'tools/export' => 'tools#export'
-  # match '/:controller(/:action(/:id))'
-  match ':controller/:action.:format' => '#index'
+  match '/:controller(/:action(/:id))'
+  # match ':controller/:action.:format' => '#index'
 end
