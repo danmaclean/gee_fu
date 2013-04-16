@@ -29,6 +29,9 @@ en:
   experiments:
     index:
       new: New experiment
+  features:
+    edit:
+      update: Update feature
   activerecord:
     attributes:
       organism:
