@@ -3,6 +3,7 @@
 
 class FeaturesController < ApplicationController
 
+  before_filter :search, only: [ :index ]
 
   def index
     @genomes = Genome.all
@@ -171,6 +172,14 @@ class FeaturesController < ApplicationController
     end
     
   end
+  
+  def find_annotation
+    flash[:error] = []
+    @features = Feature.find(:all)
+    @features.delete_if {|x| x.group !~ /#{params[:search_string]}/}
+
+
+  end
 
   def graphic_range
 
@@ -216,6 +225,158 @@ class FeaturesController < ApplicationController
       #if we have already used 
     end
         
+  end
+  
+  def feature_summary
+    @features = [Feature.find(params[:id])]
+    summary_img
+  end
+  
+  def summary
+        flash[:error] = []
+    unless params[:genome_id]
+      flash[:error] << 'A genome build must be selected'
+    end
+    unless params[:experiment]
+      flash[:error] << 'An experiment must be selected'
+    end
+    if params[:reference].length == 0
+      flash[:error] << 'A reference sequence name must be provided' 
+    end
+    params[:start] = 0 if params[:start].nil?
+    params[:end] = 0 if params[:end].nil?
+    if params[:start] =~ /\D/
+      flash[:error] << 'Start must be a positive numeric value'
+    end
+    if params[:end] =~ /\D/
+      flash[:error] << 'End must be a positive numeric value'
+    end
+    
+    if params[:end] < params[:start]
+      flash[:error] << 'End value must be greater than (or equal to) start value'
+    end
+     
+    if not flash[:error].empty?
+      redirect_to :back
+      return
+    end
+    
+    
+
+    
+  #method for returning preformatted feature objects in a range for plotting by the javascript feature renderer. Groups features with a parent that have type in list Features::aggregate_features.
+    ref = Reference.find(:first, :conditions => {:genome_id => params[:genome_id], :name => params[:reference]})
+    @features = []
+    @start = params[:start]
+    @end = params[:end]
+    #seen_features = []
+    @features = Feature.find_in_range_no_overlap(ref.id, params[:start], params[:end], params[:experiment]) #.each do |f|
+      #@features << f.descendants
+      #if we have already used 
+    #end
+    summary_img
+
+  end
+  
+  #get a png of an svg from a bio-svgenes render of the features, dumps it in public pngs for
+  #head of a summary page
+  def summary_img
+    require 'rubygems'
+    require 'bio-svgenes'
+    num_tracks_needed = 1
+
+    begin
+    p = Bio::Graphics::Page.new(:width => 800, :height => 150, :number_of_intervals => 10) 
+      
+      #separate features into mRNA or gene features
+     
+      genes = @features.select {|x| x.feature == 'gene' }
+      if not genes.empty?
+        gene_track = p.add_track(:glyph => :directed,
+                                 :fill_color => :green_white_radial,
+                               :label => false
+                              )
+     # mrna_track = p.add_track(:glyph => :transcript,
+     #                          :exon_fill_color => :red_white_h,
+     #                          :utr_fill_color => :blue_white_h 
+     #                          )
+        genes.each do |gene|
+          feat = Bio::Graphics::MiniFeature.new(:start => gene.start, 
+                                              :end => gene.end, 
+                                              :strand => gene.strand,
+                                              :id => gene.gff_id)
+          gene_track.add(feat)
+        end   
+      end
+      
+      proteins = @features.select {|x| x.feature == 'protein'}
+      
+      if not proteins.empty?
+        protein_track = p.add_track(
+                                    :glyph => :generic,
+                                    :fill_color => :yellow_white_radial,
+                                    :label => false
+                                   )
+        proteins.each do |protein|
+          feat = Bio::Graphics::MiniFeature.new(:start => protein.start,
+                                                :end => protein.end,
+                                                :id => protein.gff_id
+                                                )
+          protein_track.add(feat)
+        end
+      end
+      
+      
+      mrnas = @features.select {|x| x.feature == 'mRNA' }
+      @mrnas = mrnas
+      if not mrnas.empty?
+        mrna_track = p.add_track(:glyph => :transcript,
+                                 :exon_fill_color => :red_white_h,
+                                 :utr_fill_color => :blue_white_h,
+                                 :label => false,
+                                 :gap_marker => 'angled' 
+                               )
+        mrnas.each do |m|
+          exons = []
+          utrs = []
+          m.children.each do |d|
+            if d.feature == 'exon'
+              exons << d.start
+              exons << d.end
+            end
+            if d.feature == 'five_prime_UTR' or d.feature == 'three_prime_UTR'
+              utrs << d.start
+              utrs << d.end
+            end
+            exons.sort!
+            utrs.sort!
+          end
+          @exons = exons
+          @utrs = utrs
+          
+          if exons.empty?
+            exons = [m.start,m.end]
+          end
+          
+          if utrs.empty?
+            utrs = [m.start, m.end]
+          end
+          feat = Bio::Graphics::MiniFeature.new(
+                                              :start => m.start,
+                                              :end => m.end,
+                                              :strand => m.strand,
+                                              :exons => exons,
+                                              :utrs => utrs,
+                                             :id => m.gff_id
+                                             )
+          mrna_track.add(feat)                                     
+        end                                              
+      end
+     @svg = p.get_markup 
+     rescue
+      @svg = ""
+     end 
+   
   end
   
   #Standard REST request method 
@@ -287,34 +448,26 @@ class FeaturesController < ApplicationController
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
-  def annoj
-    #annoj does this funny, makes posts for just getting information .. meh 
-    #we dont want this sooo need to separate out the annoj get from the proper
-    #rails resource request, this method handles only annoj requests...
-    if request.get?
-      ##sort out the params from annoj's get
-      annoj_params = CGI.parse(URI.parse(request.url).query)
-      annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
-      case annoj_params['action']
-        when "syndicate"
-          @response = syndicate(params[:id])
-        when "describe"
-          @response = describe(annoj_params["id"])
-        end
-        render :json => @response,  :layout => false
-    elsif request.post?
-      annoj_params = CGI.parse(request.raw_post)
-      annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
-        #now do the specific stuff based on the annoj action... 
-        case annoj_params['action']
-          when "range" 
-            @response = range(annoj_params['assembly'], annoj_params['left'], annoj_params['right'], params[:id], annoj_params['bases'], annoj_params['pixels'])
-          when "lookup"
-            @response = lookup(annoj_params["query"], params[:id])
-        end
-        render :json => @response, :layout => false
-      end
+  def annoj_get
+    case params[:annoj_action]
+      when "syndicate"
+        @response = syndicate(params[:id])
+      when "describe"
+        @response = describe(params["id"])
+    end
+    render :json => @response,  :layout => false
   end
+
+  def annoj_post
+    case params[:annoj_action]
+      when "range" 
+        @response = range(params['assembly'], params['left'], params['right'], params[:id], params['bases'], params['pixels'])
+      when "lookup"
+        @response = lookup(params["query"], params[:id])
+    end
+    render :json => @response, :layout => false
+  end
+
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets reference track that is saved as experiment at id
   # => use /features/chromosome/id
   def chromosome
@@ -322,7 +475,11 @@ class FeaturesController < ApplicationController
     #a method for returning chromosome sequence as if it were a read to trick annoj into showing a reference sequence...
     if request.get?
       ##sort out the params from annoj's get
-      annoj_params = CGI.parse(URI.parse(request.url).query)
+      annoj_params = {}
+      request.url.split(/&/).each do |pair|
+        k,v = pair.split(/=/)
+        annoj_params[k] = v
+      end#CGI.parse(URI.parse(request.url).query)
       annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
       case annoj_params['action']
         when "syndicate"
@@ -332,13 +489,17 @@ class FeaturesController < ApplicationController
       end
         render :json => @response,  :layout => false
     elsif request.post?
-      annoj_params = CGI.parse(request.raw_post)
+      annoj_params = {}
+      request.raw_post.split(/&/).each do |pair|
+        k,v = pair.split(/=/)
+        annoj_params[k] = v
+      end
       annoj_params.each_pair {|k,v| annoj_params[k] = v.to_s}
         #now do the specific stuff based on the annoj action... 
       if annoj_params['action'] == 'range'
           #remember params[:id] is genome id and annoj_params['assembly'] is the chromosome
           sequence = Reference.find(:first, :conditions => {:genome_id => params[:id], :name => annoj_params['assembly']}).sequence.sequence
-          subseq = sequence[annoj_params['left'].to_i..annoj_params['right'].to_i]
+          subseq = sequence[annoj_params['left'].to_i - 3..annoj_params['right'].to_i - 3]
           f = LightFeature.new(
             :group => '.',
             :feature => 'chromosome',
@@ -561,6 +722,10 @@ class FeaturesController < ApplicationController
   #Empty response, AnnoJ only
   def new_response
     {:success => true }
+  end
+
+  def search
+    redirect_to feature_path(params[:feature][:id]) if params.has_key?(:feature) && params[:feature].has_key?(:id)
   end
  
 end

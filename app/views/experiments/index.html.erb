@@ -1,22 +1,42 @@
-<h1>Listing experiments</h1>
+<%- model_class = Experiment -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<% unless @experiments.empty? %>
 
-<table>
-  <tr>
-	<th>DB ID</th><th>Name</th><th>Description</th><th>Created</th><th>Features associated<th></th><th></th><th></th>
-<% @experiments.each do |experiment| %>
-  <tr>
-	<td><%= experiment.id %></td>
-	<td><%= experiment.name %></td>
-	<td><%= experiment.description %></td>
-	<td><%= experiment.created_at.strftime("%a %d %B") %></td>
-	<td><%= experiment.features.length %></td>
-    <td><%= link_to 'Show', experiment %></td>
-    <td><%= link_to 'Edit', edit_experiment_path(experiment) %></td>
-    <td><%= link_to 'Destroy', experiment, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-
-
-<%= link_to 'New experiment', new_experiment_path %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:name) %></th>
+        <th><%= model_class.human_attribute_name(:description) %></th>
+        <th><%= model_class.human_attribute_name(:created_at) %></th>
+        <th>Features associated</th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @experiments.each do |experiment| %>
+        <tr>
+          <td><%= link_to experiment.id, experiment_path(experiment) %></td>
+          <td><%= experiment.name %></td>
+          <td><%= experiment.description %></td>
+          <td><%=l experiment.created_at.to_date, format: :short %></td>
+          <td><%=experiment.features.count %></td>
+          <td>
+            <%#= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_experiment_path(experiment), :class => 'btn btn-mini' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        experiment_path(experiment),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_experiment_path,
+            :class => 'btn btn-primary' %>

@@ -23,7 +23,7 @@ namespace :add do
       puts "dont have a genus and species definition"
       exit
     end
-    s = Organism.new (
+    s = Organism.new(
                 :genus => ENV['genus'],
                 :species => ENV['species'],
                 :strain => ENV['strain'],
@@ -149,7 +149,7 @@ namespace :add do
     puts "\nAttempting to add gff #{ENV['gff']} as experiment #{ENV['exp']}" 
     puts "---------------------------------------------------------------"
     puts "looking for experiment #{ENV['exp']} in database"
-    escaped_exp = ENV['exp'].gsub ('%', '\%').gsub ('_', '\_')
+    escaped_exp = ENV['exp'].gsub('%', '\%').gsub('_', '\_')
     exp = nil
     if (!Experiment.find(:first, :conditions => ['name = ?', "#{escaped_exp}"]).nil?)
       puts "We have an experiment with that name already.. Do you want to add these features? (y/n)..."
@@ -223,7 +223,7 @@ namespace :add do
       
         ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome_id}"])
       
-        feature = Feature.new (
+        feature = Feature.new(
           :group => "#{attribute}",
           :feature => "#{record.feature}",
           :source => "#{record.source}",
@@ -306,7 +306,7 @@ namespace :add do
     puts "\nAttempting to add gff #{ENV['gff']} as experiment #{ENV['exp']}" 
     puts "---------------------------------------------------------------"
     puts "looking for experiment #{ENV['exp']} in database"
-    escaped_exp = ENV['exp'].gsub ('%', '\%').gsub ('_', '\_')
+    escaped_exp = ENV['exp'].gsub('%', '\%').gsub('_', '\_')
     exp = nil
     if (!Experiment.find(:first, :conditions => ['name = ?', "#{escaped_exp}"]).nil?)
       puts "We have an experiment with that name already.. Do you want to add these features? (y/n)..."
@@ -502,7 +502,7 @@ namespace :update do
     $stderr.puts "\nAttempting to update features in gff #{ENV['gff']} in experiment #{ENV['exp']}" 
     $stderr.puts "---------------------------------------------------------------"
     $stderr.puts "looking for experiment #{ENV['exp']} in database"
-    escaped_exp = ENV['exp'].gsub ('%', '\%').gsub ('_', '\_')
+    escaped_exp = ENV['exp'].gsub('%', '\%').gsub('_', '\_')
 
     exp = Experiment.find(:first, :conditions => ['name = ?', "#{escaped_exp}"])
 
@@ -716,8 +716,8 @@ namespace :create do
   desc "creates the AnnoJ config.js file based on the information in config.yml"
   task :config => :environment do
 
-    config = YAML.load_file("#{RAILS_ROOT}/config/config.yml")
-    config_js = File.new("#{RAILS_ROOT}/public/javascripts/config.js", 'w')
+    config = YAML.load_file("#{Rails.root}/config/config.yml")
+    config_js = File.new("#{Rails.root}/public/javascripts/config.js", 'w')
     config_js.puts('AnnoJ.config = ')
     config_js.puts config.to_json
     

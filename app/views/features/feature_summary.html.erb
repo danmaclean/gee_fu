@@ -1,0 +1,22 @@
+
+
+
+
+
+<%= @svg %>
+<table>
+	<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Parent IDs</tr>
+					
+
+<% @features.each do |f|%>
+
+						<% g = 'none' %>
+						<% if f.has_parent? %>
+							<% g = f.parents.collect {|x| '<a href=/features/' + x.parent_obj.id.to_s + '/edit>' + x.parent_obj.id.to_s + '</a>'}.join(',') %>
+						<% end %>
+					<tr><td><%= "<a href=\"/features/#{f.id}/edit\">#{f.id}</a>" %></td><td><%= f.seqid %></td><td><%= f.feature %></td><td><%= f.start %></td><td><%= f.end %></td><td><%= f.strand %></td><td><%= f.description%></td><td><%= g %></td></tr>
+<% end %>
+</ table >
+
+
+
