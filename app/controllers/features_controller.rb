@@ -3,6 +3,7 @@
 
 class FeaturesController < ApplicationController
 
+  before_filter :search, only: [ :index ]
 
   def index
     @genomes = Genome.all
@@ -721,6 +722,10 @@ class FeaturesController < ApplicationController
   #Empty response, AnnoJ only
   def new_response
     {:success => true }
+  end
+
+  def search
+    redirect_to feature_path(params[:feature][:id]) if params.has_key?(:feature) && params[:feature].has_key?(:id)
   end
  
 end

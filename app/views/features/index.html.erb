@@ -1,12 +1,17 @@
 
-<h2>Get feature by database ID</h2>
-<%= form_tag( {:controller => :features, :action => :show}, :method => 'post', :multipart => true, :id => "by_id")%>
-<%= label(:feature, :id, "Find features by DBID") %><br />
-<%= text_field_tag(:id, "Enter ID")  %>
-<%= submit_tag "get feature" %>
-</form>
-
-<h2>Get features by annotation</h2>
+<legend>Get feature by database ID</legend>
+<%#= form_tag( {:controller => :features, :action => :show}, :method => 'post', :multipart => true, :id => "by_id")%>
+<%#= label(:feature, :id, "Find features by DBID") %><br />
+<%#= text_field_tag(:id, "Enter ID")  %>
+<%#= submit_tag "get feature" %>
+<!-- </form> -->
+<div id="find_feature_by_id">
+	<%= simple_form_for(Feature.new, method: :get) do |f| %>
+		<%= f.input :id, as: :string, placeholder: "Database ID", label: false%>
+	  <%= f.button :submit, :class => 'btn-success', :value => "Get feature", name: nil %>
+	<% end %>
+</div>
+<legend>Get features by annotation</legend>
 <%= form_tag( {:controller => "features", :action => :find_annotation}, :method => "post", :multipart => true, :id => 'by_annot')%>
 <% if flash[:error] %>
 	<% if not flash[:error].empty? %>
@@ -29,7 +34,7 @@
 <br />
 <%= submit_tag "get features" %>
 </form>
-<h2>Get features by range </h2>
+<legend>Get features by range</legend>
 <%= form_tag( {:controller => "features", :action => "summary"}, :method => "post", :multipart => true, :id => "by_range" ) %>
 <% if flash[:error] %>
 	<% if not flash[:error].empty? %>

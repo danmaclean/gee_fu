@@ -6,6 +6,16 @@ module GeeFuHelpers
     click_button "Create"
   end
 
+  def add_experiment(name, description, gff_file, genome_build)
+    within "div#gff_experiment_data" do
+      fill_in("name (required)", :with => name)
+      fill_in("description (required)", :with => description)
+      attach_file("GFF3 file of features (required)", "#{Rails.root}/#{gff_file}")
+      choose(genome_build)
+      click_button "Create"
+    end
+  end
+
   def set_current_user_email(email)
     @current_email = email
   end
