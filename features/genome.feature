@@ -8,7 +8,7 @@ Feature: Entering genome data
     And there is a user called "Fred Bloggs" with email "fred@fred.com"
     And "fred@fred.com" is logged in
     When I am ready to add a genome build
-    And I add a genome build called "TAIR 9" with Fasta file "public/sequences/sample_reference_TAIR9_Chr1.fna" and YAML file of "config/meta.yml"
+    And I add a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml"
     Then there should be a genome build called "TAIR 9"
 
   Scenario: Add a genome build when not logged in
