@@ -8,13 +8,7 @@ When(/^I am ready to enter experiment data$/) do
 end
 
 When(/^I add an experiment called "(.*?)", described as "(.*?)" with GFF file "(.*?)" and "(.*?)" as the genome build$/) do |name, description, gff_file, genome_build|
-  within "div#gff_experiment_data" do
-    fill_in("name (required)", :with => name)
-    fill_in("description (required)", :with => description)
-    attach_file("GFF3 file of features (required)", "#{Rails.root}/#{gff_file}")
-    choose(genome_build)
-    click_button "Create"
-  end
+  add_experiment(name, description, gff_file, genome_build)
 end
 
 Then(/^there should be an experiment called "(.*?)"$/) do |name|
@@ -33,4 +27,9 @@ When(/^I add an experiment called "(.*?)", described as "(.*?)" with BAM file "(
     choose(genome_build)
     click_button "Create"
   end
+end
+
+Given(/^there is an experiment called "(.*?)", described as "(.*?)" with GFF file "(.*?)" and "(.*?)" as the genome build$/) do |name, description, gff_file, genome_build|
+  step %Q{I am ready to enter experiment data}
+  add_experiment(name, description, gff_file, genome_build)
 end
