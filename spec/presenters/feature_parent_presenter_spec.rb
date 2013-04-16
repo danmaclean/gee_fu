@@ -5,11 +5,6 @@ describe FeatureParentPresenter do
   let(:feature) { mock(Feature) }
   subject       { FeatureParentPresenter.new(feature) }
 
-  #     <% g = 'none' %>
-  # <% if @feature.has_parent? %>
-  #   <% g = @feature.parents.collect {|x| '<a href=/features/' + x.parent_obj.id.to_s + '/edit>' + x.parent_obj.id.to_s + '</a>'}.join(',') %>
-  # <% end %>
-
   describe "parent_list" do
     context "the feature doesn't have parents" do
       before(:each) do
