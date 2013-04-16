@@ -7,7 +7,7 @@ Feature: Add experiment data
     Given there is no experiment data
     And there is a user called "Fred Bloggs" with email "fred@fred.com"
     And "fred@fred.com" is logged in
-    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/sample_reference_TAIR9_Chr1.fna" and YAML file of "config/meta.yml"
+    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml"
     When I am ready to enter experiment data
     And I add an experiment called "TAIR experiment", described as "my first experiment" with GFF file "public/sample_gffs/sample_features.gff" and "TAIR 9" as the genome build
     Then there should be an experiment called "TAIR experiment"
@@ -23,7 +23,7 @@ Feature: Add experiment data
     Given there is no experiment data
     And there is a user called "Fred Bloggs" with email "fred@fred.com"
     And "fred@fred.com" is logged in
-    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/sample_reference_TAIR9_Chr1.fna" and YAML file of "config/meta.yml"
+    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml"
     When I am ready to enter experiment data
     And I add an experiment called "TAIR BAM experiment", described as "my first experiment" with BAM file "public/sample_bam/aln.sort.bam" and "TAIR 9" as the genome build
     Then there should be an experiment called "TAIR BAM experiment"
