@@ -14,12 +14,8 @@
 		<th>Attributes</th>
 		<th>Created</th>
 		<th>Parent IDs</tr>
-		<% g = 'none' %>
-		<% if @feature.has_parent? %>
-			<% g = @feature.parents.collect {|x| '<a href=/features/' + x.parent_obj.id.to_s + '/edit>' + x.parent_obj.id.to_s + '</a>'}.join(',') %>
-		<% end %>
 		<tr>
-			<td><%= "<a href=\"#{@feature.id}/edit\">#{@feature.id}</a>".html_safe %></td>
+			<td><%= link_to @feature.id, edit_feature_path(@feature) %></td>
 			<td><%= @feature.seqid %></td>
 			<td><%= @feature.feature %></td>
 			<td><%= @feature.start %></td>
@@ -27,7 +23,7 @@
 			<td><%= @feature.strand %></td>
 			<td><%= @feature.group.join(' ') %></td>
 			<td><%=l @feature.created_at.to_date, format: :gee_fu %></td>
-			<td><%= g.html_safe %></td>
+			<td><%= FeatureParentPresenter.new(@feature).parent_list %></td>
 		</tr>
 </table>
 
