@@ -30,26 +30,22 @@ function addGroup(){
   <%= f.input :score %>
   <%= f.input :strand, as: :radio_buttons, collection: ["+", "-" ], item_wrapper_class: "inline" %>
 	<%= f.input :phase %>
-	<hr/>
-	<%= f.label "Group Attributes:"%><br />
-	<% atts = JSON.parse(@feature.group )%>
-	<% atts.each do |pair| %>
-	<%=	"<div class='attribute' id='#{pair.join('_') + '_div' }'>".html_safe %>
-		<div class="edit_form_elements">
-			<%= label_tag("feature_group_#{pair.join('_')}", pair[0] ) %>
+	<legend>Group Attributes:</legend>
+	<% JSON.parse(@feature.group).each do |pair| %>
+		<div class='control-group' id="<%=pair.join('_')%>">
+			<%= label_tag("feature_group_#{pair.join('_')}", pair[0], class: "control-label" ) %>
+			<div class="controls">
+			<%= text_field_tag("feature[group][#{pair.to_json}]", pair[1])  %>
+			<%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>".html_safe %>
+			</div>
 		</div>
-			<%= text_field_tag("feature[group][#{pair.to_json}]", pair[1])  %><%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>".html_safe %>
-	</div>
 	<% end %>
-	<div id="group">
-	</div>
-		<a href="#" onClick="addGroup()"; return false;>Add New Attribute</a>
+	<div id="group"></div>
+	<a href="#" onClick="addGroup()"; return false;>Add New Attribute</a>
 	<%=	hidden_field_tag 'old_feature_id', @feature.id %>
-	
-	<p>
-      <%= f.button :submit, :class => 'btn-primary' %>
-    	<%#= f.submit 'Update' %>
-  	</p>
+<div class='form-actions'>
+	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), features_path, :class => 'btn' %>
+	<%= f.button :submit, :class => 'btn-primary' %>
+</div>
 <% end %>
 
-<%= link_to 'Back', features_path %>
