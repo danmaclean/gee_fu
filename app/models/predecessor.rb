@@ -1,5 +1,7 @@
 class Predecessor < ActiveRecord::Base
   has_and_belongs_to_many :features
+  attr_accessible :seqid, :source, :feature, :start, :end, :score, :strand, :phase,
+                  :gff_id, :reference_id, :experiment_id, :created_at, :group, :old_id
   
   def description
     require 'json'
@@ -7,11 +9,9 @@ class Predecessor < ActiveRecord::Base
     b = []
     attributes.each {|a| b << a.join(" = ") }
     b.join("\n")
-    
   end
   
   def to_gff(kw={})
-    
     ref = Reference.find(self.reference_id)
     attributes = []
 
@@ -31,7 +31,5 @@ class Predecessor < ActiveRecord::Base
     
     "#{name}\t#{self.source}\t#{self.feature}\t#{self.start}\t#{self.end}\t#{self.score}\t#{self.strand}\t#{self.phase}\t#{attributes.join(';')}"
   end
-  
-  
 end
 
