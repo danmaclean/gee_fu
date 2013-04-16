@@ -29,18 +29,6 @@ function addGroup(){
   <%= f.input :end, as: :string, label: "End Position" %>
   <%= f.input :score %>
   <%= f.input :strand, as: :radio_buttons, collection: ["+", "-" ], item_wrapper_class: "inline" %>
-	<%#= f.label(:strand) %>
-	<%# if @feature.strand == '+'%>
-	<%#= label_tag(:strand_plus, "+") %>
-	<!-- <input checked="checked" id="strand_plus" name="feature[strand]" type="radio" value="plus" /> -->
-	<%#= label_tag(:strand_minus, "-") %>	
-	<!-- <input id="strand_minus" name="feature[strand]" type="radio" value="minus" /> -->
-	<%# else %>
-	<%#= label_tag(:strand_plus, "+") %>
-	<!-- <input id="strand_plus" name="feature[strand]" type="radio" value="plus" /> -->
-	<%#= label_tag(:strand_minus, "-") %>	
-	<!-- <input checked="checked" id="strand_minus" name="feature[strand]" type="radio" value="minus" /> -->
-	<%# end %>
 	<%= f.input :phase %>
 	<hr/>
 	<%= f.label "Group Attributes:"%><br />
