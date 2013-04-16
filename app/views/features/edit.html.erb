@@ -17,42 +17,40 @@ function addGroup(){
 	
 	$('#group').append('<div class="attribute" id="' + group_id + '"> <input type="text" value="Enter key" id="' + key_id +'" name="feature[new_group]['+ key_id + '][key]"/> <input type="text" value="Enter value" id="'+ value_id + '" name="feature[new_group]['+ key_id + '][value]"/><a href=# onclick="removeGroup(' + group_id + ');"  >remove</a></div>');
 }
-
-
 </script>
 
-<%= "<h1>Editing #{@feature.feature} ID #{@feature.id} </h1>" %>
-
-<% form_for(@feature) do |f| %>
-  <%= f.error_messages %>
-	<div class="edit_form_elements"><%= f.label "Reference "%></div><%= f.text_field :seqid  %><br />
-	<div class="edit_form_elements"><%= f.label "Source "%></div><%= f.text_field :source  %><br />
-	<div class="edit_form_elements"><%= f.label "Feature Type "%></div><%= f.text_field :feature  %><br />
-	<div class="edit_form_elements"><%= f.label "Start Position "%></div><%= f.text_field :start  %><br />
-	<div class="edit_form_elements"><%= f.label "End Position "%></div><%= f.text_field :end  %><br />
-	<div class="edit_form_elements"><%= f.label "Score "%></div><%= f.text_field :score  %><br />			
-	<div class="edit_form_elements"><%= f.label "Strand" %></div>
-	<% if @feature.strand == '+'%>
-	<%= label_tag(:strand_plus, "+") %>
-	<input checked="checked" id="strand_plus" name="feature[strand]" type="radio" value="plus" />
-	<%= label_tag(:strand_minus, "-") %>	
-	<input id="strand_minus" name="feature[strand]" type="radio" value="minus" />
-	<% else %>
-	<%= label_tag(:strand_plus, "+") %>
-	<input id="strand_plus" name="feature[strand]" type="radio" value="plus" />
-	<%= label_tag(:strand_minus, "-") %>	
-	<input checked="checked" id="strand_minus" name="feature[strand]" type="radio" value="minus" />
-	<% end %>
-	<br />
-	<div class="edit_form_elements"><%= f.label "Phase "%></div><%= f.text_field :phase  %><br />
-	<div class="edit_form_elements"></div><%= f.label "Group Attributes:"%><br />
+<legend>Editing <%=@feature.feature%> ID <%=@feature.id%></legend>
+<%= simple_form_for @feature, html: { class: "form-horizontal" } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :seqid, label: "Reference" %>
+  <%= f.input :source %>
+  <%= f.input :feature, label: "Feature Type" %>
+  <%= f.input :start, as: :string, label: "Start Position" %>
+  <%= f.input :end, as: :string, label: "End Position" %>
+  <%= f.input :score %>
+  <%= f.input :strand, as: :radio_buttons, collection: ["+", "-" ], item_wrapper_class: "inline" %>
+	<%#= f.label(:strand) %>
+	<%# if @feature.strand == '+'%>
+	<%#= label_tag(:strand_plus, "+") %>
+	<!-- <input checked="checked" id="strand_plus" name="feature[strand]" type="radio" value="plus" /> -->
+	<%#= label_tag(:strand_minus, "-") %>	
+	<!-- <input id="strand_minus" name="feature[strand]" type="radio" value="minus" /> -->
+	<%# else %>
+	<%#= label_tag(:strand_plus, "+") %>
+	<!-- <input id="strand_plus" name="feature[strand]" type="radio" value="plus" /> -->
+	<%#= label_tag(:strand_minus, "-") %>	
+	<!-- <input checked="checked" id="strand_minus" name="feature[strand]" type="radio" value="minus" /> -->
+	<%# end %>
+	<%= f.input :phase %>
+	<hr/>
+	<%= f.label "Group Attributes:"%><br />
 	<% atts = JSON.parse(@feature.group )%>
 	<% atts.each do |pair| %>
-	<%=	"<div class='attribute' id='#{pair.join('_') + '_div' }'>" %>
+	<%=	"<div class='attribute' id='#{pair.join('_') + '_div' }'>".html_safe %>
 		<div class="edit_form_elements">
 			<%= label_tag("feature_group_#{pair.join('_')}", pair[0] ) %>
 		</div>
-			<%= text_field_tag("feature[group][#{pair.to_json}]", pair[1])  %><%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>" %>
+			<%= text_field_tag("feature[group][#{pair.to_json}]", pair[1])  %><%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>".html_safe %>
 	</div>
 	<% end %>
 	<div id="group">
@@ -61,11 +59,9 @@ function addGroup(){
 	<%=	hidden_field_tag 'old_feature_id', @feature.id %>
 	
 	<p>
-    	<%= f.submit 'Update' %>
+      <%= f.button :submit, :class => 'btn-primary' %>
+    	<%#= f.submit 'Update' %>
   	</p>
 <% end %>
 
 <%= link_to 'Back', features_path %>
-
-
-
