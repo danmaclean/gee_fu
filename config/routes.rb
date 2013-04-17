@@ -12,6 +12,11 @@ GeeFu::Application.routes.draw do
     resources :genomes
     resources :experiments
     resources :features
+
+    scope "/features/search" do
+      post "/id",        to: "features#search_by_id", as: :feature_search_by_id
+      post "/attribute", to: "features#search_by_attribute", as: :feature_search_by_attribute
+    end
   end
 
   scope "/features/annoj" do

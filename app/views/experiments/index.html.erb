@@ -21,7 +21,7 @@
           <td><%= link_to experiment.id, experiment_path(experiment) %></td>
           <td><%= experiment.name %></td>
           <td><%= experiment.description %></td>
-          <td><%=l experiment.created_at.to_date, format: :short %></td>
+          <td><%=l experiment.created_at.to_date, format: :gee_fu %></td>
           <td><%=experiment.features.count %></td>
           <td>
             <%#= link_to t('.edit', :default => t("helpers.links.edit")),
