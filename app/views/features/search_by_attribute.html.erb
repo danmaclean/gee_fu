@@ -1,25 +1,4 @@
-<table class="table">
-  <tr>
-    <th>ID</th>
-    <th>Reference</th>
-    <th>Feature</th>
-    <th>Start</th>
-    <th>End</th>
-    <th>Strand</th>
-    <th>Attributes</th>
-    <th>Parent IDs</th>
-  </tr>
-  <% @features.each do |f|%>
-    <tr>
-      <td><%= link_to f.id, edit_feature_path(f) %></td>
-      <td><%= f.seqid %></td>
-      <td><%= f.feature %></td>
-      <td><%= f.start %></td>
-      <td><%= f.end %></td>
-      <td><%= f.strand %></td>
-      <td><%= FeaturePresenter.new(f).attributes %></td>
-      <td><%=l f.created_at.to_date, format: :gee_fu %></td>
-      <td><%= FeaturePresenter.new(f).parent_list %></td>
-    </tr>
-  <% end %>
+<table class='table'>
+  <%= render partial: "feature_header"%>
+  <%= render partial: "feature", collection: @features %>
 </table>
