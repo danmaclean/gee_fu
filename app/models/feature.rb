@@ -12,8 +12,10 @@ class Feature < ActiveRecord::Base
   has_and_belongs_to_many :predecessors
 
   attr_accessible :group, :feature, :source, :start, :end, :strand, :phase,
-                  :seqid, :score, :gff_id, :sequence, :quality, :reference_id
+                  :seqid, :score, :gff_id, :sequence, :quality, :reference_id, :experiment
 
+  has_paper_trail
+  
   class << self;
   #  #The read types classed as valid: SO:0001423 dye_terminator_read SO:0001424 pyrosequenced_read SO:0001425 ligation_based_read SO:0001426 polymerase_synthesis_read SO:0000150 read 
     attr_accessor :allowed_read_types, :aggregate_features 
