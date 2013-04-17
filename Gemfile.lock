@@ -35,6 +35,7 @@ GEM
     bio-samtools (0.6.0)
       bio (>= 1.4.2)
       ffi
+    bio-svgenes (0.3.2)
     builder (3.0.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -226,6 +227,7 @@ PLATFORMS
 DEPENDENCIES
   bio
   bio-samtools
+  bio-svgenes
   coffee-rails (~> 3.2.1)
   cucumber-rails
   database_cleaner
