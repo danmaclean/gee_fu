@@ -4,27 +4,8 @@
 <legend><%=" #{@feature.feature} feature: id #{@feature.id}"   %></legend>
 
 <table class='table'>
-	<tr>
-		<th>ID</th>
-		<th>Reference</th>
-		<th>Feature</th>
-		<th>Start</th>
-		<th>End</th>
-		<th>Strand</th>
-		<th>Attributes</th>
-		<th>Created</th>
-		<th>Parent IDs</tr>
-		<tr>
-			<td><%= link_to @feature.id, edit_feature_path(@feature) %></td>
-			<td><%= @feature.seqid %></td>
-			<td><%= @feature.feature %></td>
-			<td><%= @feature.start %></td>
-			<td><%= @feature.end %></td>
-			<td><%= @feature.strand %></td>
-			<td><%= @feature.group.join(' ') %></td>
-			<td><%=l @feature.created_at.to_date, format: :gee_fu %></td>
-			<td><%= FeaturePresenter.new(@feature).parent_list %></td>
-		</tr>
+	<%= render partial: "feature_header"%>
+  <%= render partial: "feature", object: @feature %>
 </table>
 
  <hr/>
