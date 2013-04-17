@@ -129,20 +129,15 @@ class FeaturesController < ApplicationController
         format.html { redirect_to :action => :edit, :id => params[:old_feature_id]}
       end
     end
-    
   end
 
   def show 
-      begin 
-        @feature = Feature.find(params[:id])
-        #if Feature.exists?(params[:id])
-        #  @feature = Feature.find(params[:id])
-        @feature.group = JSON::parse(@feature.group)
-        respond @feature
-      rescue
-      #else
-        respond :false
-      end
+    begin 
+      @feature = Feature.find(params[:id])
+      respond @feature
+    rescue
+      respond :false
+    end
   end
 
   def destroy
@@ -278,8 +273,6 @@ class FeaturesController < ApplicationController
   #get a png of an svg from a bio-svgenes render of the features, dumps it in public pngs for
   #head of a summary page
   def summary_img
-    require 'rubygems'
-    require 'bio-svgenes'
     num_tracks_needed = 1
 
     begin
