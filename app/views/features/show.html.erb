@@ -23,7 +23,7 @@
 			<td><%= @feature.strand %></td>
 			<td><%= @feature.group.join(' ') %></td>
 			<td><%=l @feature.created_at.to_date, format: :gee_fu %></td>
-			<td><%= FeatureParentPresenter.new(@feature).parent_list %></td>
+			<td><%= FeaturePresenter.new(@feature).parent_list %></td>
 		</tr>
 </table>
 
