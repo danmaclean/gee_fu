@@ -1,4 +1,4 @@
-class FeatureParentPresenter
+class FeaturePresenter
   include ActionView::Helpers::TagHelper
   include Rails.application.routes.url_helpers
 
@@ -12,6 +12,10 @@ class FeatureParentPresenter
       grand_parent = parent.parent_obj
       _link_to grand_parent.id, edit_feature_path(grand_parent.id)
     }.join(",").html_safe
+  end
+
+  def attributes
+    JSON.parse(@feature.group).join(" ")
   end
 
   private
