@@ -2,9 +2,6 @@
 
 
 class FeaturesController < ApplicationController
-
-  before_filter :search, only: [ :index ]
-
   def index
     @genomes = Genome.all
     @experiments = Experiment.all
@@ -724,8 +721,22 @@ class FeaturesController < ApplicationController
     {:success => true }
   end
 
-  def search
-    redirect_to feature_path(params[:feature][:id]) if params.has_key?(:feature) && params[:feature].has_key?(:id)
+  def search_by_id
+    feature_id = params[:feature][:id]
+    if Feature.exists?(feature_id)
+      redirect_to feature_path(feature_id)
+    else
+      redirect_to features_path, flash: { alert: "No feature found with that ID"}
+    end
   end
- 
+
+  def search_by_attribute
+    attribute = params[:feature][:group]
+    @features = Feature.where{ group.matches("%#{attribute}%") }
+    if @features.empty?
+      redirect_to features_path, flash: { alert: "No features found searching for: '#{attribute}'"}
+    else
+      render
+    end
+  end
 end
