@@ -1,11 +1,9 @@
-<h1>GeeFu Tools</h1>
-<hr />
-<h2>Get Sequence</h2>
-<%= form_tag( {:controller => "tools", :action => "genomic_sequence"}, :method => "post", :multipart => true ) %>
+<legend>Export Sequence Fragment</legend>
+<%= form_tag( {:controller => "tools", :action => "genomic_sequence"}, :method => "post" ) %>
 <%= label(:reference, :id, "Extract a genome sequence region") %><br />
 <%= label(:genome, :id, "Select genome build") %><br />
 <% @genomes.each do |g| %>
-	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />" %> 
+	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />".html_safe %> 
  <%= label_tag(:id, "#{g.build_version}") %>
 <% end %><br/>
 <%= label(:reference, :id, "Type in the reference sequence from which to extract") %><br />
@@ -17,30 +15,4 @@
 <%= radio_button_tag(:strand, '-') %>  <%= label_tag(:strand_minus, '-') %>
 <br />
 <%= submit_tag "extract this sequence" %>
-</form>
-<h2>Export</h2>
-<%= form_tag( {:controller => "tools", :action => "export"}, :method => "post", :multipart => true ) %>
-<%= label(:genome, :id, "Select genome build from which to export features") %><br />
-<% @genomes.each do |g| %>
-	<%= radio_button_tag("genome_id", "#{g.id}") %>  <%= label_tag(:genome_id, "#{g.build_version}") %>
-<% end %><br/><br/>
-<%= label(:experiment, :id, "Select experiments to include in feature export (avoid including NGS read or BAM files)") %><br />
-<% @experiments.each do |e| %>
-	<% next if e.uses_bam_file? %>
-	<%= check_box_tag("experiment_#{e.id}", "#{e.id}") %> <%= label_tag( "#{e.id}", "#{e.name}")%>
-<% end %><br /><br/>
-<%= label(:export_format, :type, "Select export format") %><br />
-<% ["embl", "gff", "genbank"].each do |f| %>
-	<%= radio_button_tag("export_format", "#{f}") %>  <%= label_tag(:format, "#{f}") %>
-<% end %><br/><br />
-
-<%= label(:destination, :type, "Select export destination") %><br />
-<% ["browser", "server_directory"].each do |d| %>
-	<%= radio_button_tag("destination", "#{d}") %>  <%= label_tag(:destination, "#{d}") %>
-<% end %><br/>
-<%= check_box_tag("add_db_id_to_attrs", "yes")%>
-<%= label(:include_db, :id, "include db_id (required for external editing and importing back to this db)") %><br /><br />
-<%= label(:yaml_file, :yaml, "YAML file of metadata about this export (required for embl and genbank formats only)")%><br />
-<%= file_field :yaml_file, :yaml_file %><br /><br />
-<%= submit_tag "export" %>
 </form>

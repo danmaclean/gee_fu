@@ -15,25 +15,10 @@ tracks:
       minHeight: 20
       maxHeight: 500
       height: 70
-    - id: 3
-      name: Reads from a bam file stored in public/bam
-      type: ReadsTrack
-      path: Reads
-      data: /features/annoj/3
-      maxHeight: 500
-      height: 70
-    - id: 4
-      name: Reference sequence track
-      type: ReadsTrack
-      data: /features/chromosome/1
-      path: Reference
-      maxHeight: 100
-      height: 70     
 #A list of tracks that will be active by default (use the ID of the track)
 active:
     - 1
     - 2
-    - 3
 #genome - the service that knows about the genome
 genome: genomes/annoj/1
 # bookmarks - the service that keeps the bookmarks

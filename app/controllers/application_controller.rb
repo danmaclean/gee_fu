@@ -1,18 +1,18 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  
+  protect_from_forgery
 
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  helper :all # include all helpers, all the time
+  
   def respond(response)
     respond_to do |format|
       format.html
       format.json { render :json => response, :layout => false }
       format.xml  { render :xml => response, :layout => false }
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    #  if resource is_admin? then redirect to somewhere else perhaps?
+    root_path
   end
 end

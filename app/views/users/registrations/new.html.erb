@@ -1,0 +1,20 @@
+<div class="border-form-div">
+  <h2>Sign up</h2>
+  <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :email, :autofocus => true, :placeholder => 'Email address', label: false, :required => true %>
+    <%= f.input :password, :placeholder => 'Password', label: false, :required => true %>
+    <%= f.input :password_confirmation, :placeholder => 'Password confirmation', label: false, :required => true %>
+    <%= f.input :first_name, :placeholder => 'First name', label: false, :required => true %>
+    <%= f.input :last_name, :placeholder => 'Last name', label: false, :required => true %>
+    <%= f.input :affiliation, :placeholder => 'Affiliation / Place of work', label: false %>
+    <%= f.input :role, :placeholder => 'Role', label: false %>
+    <p>
+      <button type="submit" name="commit" class='btn btn-success'>
+        <i class="icon-pencil icon-white"></i>
+        Sign up
+      </button>
+    </p>
+  <% end %>
+  <%= render "devise/shared/links" %>
+</div>

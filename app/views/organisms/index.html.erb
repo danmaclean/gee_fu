@@ -1,26 +1,45 @@
-<h1>Listing organisms</h1>
-
-<table>
-  <tr>
-	<th>DB ID</th><th>Genus</th><th>Species</th><th>strain</th><th>pathovar</th><th>Created </th><th></th><th></th><th></th>
-  </tr>
-
-<% @organisms.each do |organism| %>
-  <tr>
-		<td><%= organism.id %></id>
-		<td><%= organism.genus %></td>
-		<td><%= organism.species %></td>
-		<td><%= organism.strain %></td>
-		<td><%= organism.pv %></td>
-		<td><%= organism.created_at.strftime("%a %d %B") %></td>
-    <td><%= link_to 'Show', organism %></td>
-    <td><%= link_to 'Edit', edit_organism_path(organism) %></td>
-    <td><%= link_to 'Destroy', organism, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New organism', new_organism_path %>
-
+<%- model_class = Organism -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<% unless @organisms.empty? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:genus) %></th>
+        <th><%= model_class.human_attribute_name(:species) %></th>
+        <th><%= model_class.human_attribute_name(:strain) %></th>
+        <th><%= model_class.human_attribute_name(:pv) %></th>
+        <th><%= model_class.human_attribute_name(:taxid) %></th>
+        <th><%= model_class.human_attribute_name(:created_at) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @organisms.each do |organism| %>
+        <tr>
+          <td><%= organism.id %></td>
+          <td><%= organism.genus %></td>
+          <td><%= organism.species %></td>
+          <td><%= organism.strain %></td>
+          <td><%= organism.pv %></td>
+          <td><%= organism.taxid %></td>
+          <td><%=l organism.created_at.to_date, format: :long %></td>
+          <td>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_organism_path(organism), :class => 'btn btn-mini' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        organism_path(organism),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_organism_path,
+            :class => 'btn btn-primary' %>

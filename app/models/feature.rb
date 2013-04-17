@@ -11,6 +11,11 @@ class Feature < ActiveRecord::Base
   #before_destroy :destroy_parents
   has_and_belongs_to_many :predecessors
 
+  attr_accessible :group, :feature, :source, :start, :end, :strand, :phase,
+                  :seqid, :score, :gff_id, :sequence, :quality, :reference_id, :experiment
+
+  has_paper_trail
+  
   class << self;
   #  #The read types classed as valid: SO:0001423 dye_terminator_read SO:0001424 pyrosequenced_read SO:0001425 ligation_based_read SO:0001426 polymerase_synthesis_read SO:0000150 read 
     attr_accessor :allowed_read_types, :aggregate_features 
@@ -49,15 +54,13 @@ class Feature < ActiveRecord::Base
         if experiment.uses_bam_file?
           Feature.find_by_bam(reference_id,start,stop,experiment_id)
         else
-          Feature.find_by_sql(
-          "select * from features where 
-          reference_id = '#{reference_id}' and 
-          start <= '#{stop}' and 
-          start >= '#{start}' and
-          end >= '#{start}' and 
-          end <= '#{stop}' and 
-          experiment_id = '#{experiment_id}'  
-          order by start asc, end desc")
+          _start         = start
+          _experiment_id = experiment_id
+          _reference_id  = reference_id
+          Feature.where{|f|
+              (f.experiment_id == _experiment_id) & (f.reference_id == _reference_id) &
+              (f.start >> (_start..stop)) & (f.end >> (_start..stop))
+          }.order{|f| [f.start.asc, f.end.desc]}
         end
   end
 
@@ -75,7 +78,7 @@ class Feature < ActiveRecord::Base
          a.query_strand ? strand = '+'  : strand = '-'       
          features << LightFeature.new(
            :seqid => ref.name,
-           :start => a.pos - 1,
+           :start => a.pos,
            :end => a.calend,
            :strand => strand,
            :sequence => a.seq,
@@ -181,17 +184,17 @@ class Feature < ActiveRecord::Base
   #Returns an array formatted version of the current object for AnnoJ, not normally used outside this context
   def to_box
     if self.id.nil?
-      [self.object_id.to_s, self.start, (self.end - self.start) - 1, '1', '1', ""]
+      [self.object_id.to_s, self.start + 1, (self.end - self.start) - 1, '1', '1', ""]
     else
-      [self.id, self.start, (self.end - self.start) - 1, '1', '1', ""]
+      [self.id, self.start + 1, (self.end - self.start) - 1, '1', '1', ""]
     end
   end
   #Returns an array formatted version of the current object for AnnoJ, not normally used outside this context
   def to_read
     if self.id.nil? 
-      [self.object_id.to_s, self.start, (self.end - self.start) - 1, '1', '1', self.sequence]
+      [self.object_id.to_s, self.start + 1, (self.end - self.start) - 1, '1', '1', self.sequence]
     else
-      [self.id, self.start, (self.end - self.start) - 1, '1', '1', self.sequence]
+      [self.id, self.start + 1, (self.end - self.start) - 1, '1', '1', self.sequence]
     end
   end
   #Returns an array formatted version of the current object for AnnoJ, not normally used outside this contex

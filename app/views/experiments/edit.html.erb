@@ -2,38 +2,33 @@
 
 <h1>Editing experiment</h1>
 
-<% if not @experiment.uses_bam_file %>
-<h2>Updating an experiment with features from a GFF File</h2>
-<% form_for(@experiment, :html => {:multipart => true}) do |f| %>  
-	<%= f.error_messages %>  
-	<p>  <%= f.label "name" %><br /> 
-		 <%= f.text_field :name %> <br />
-  
-	<%= f.label "description" %><br />  
-	<%= f.text_field :description %> <br />
-	If you provide another GFF3 file you can merge new features into this experiment or replace them all
-  	<%= f.label "GFF3 file of new features"%><br />
-	<%= f.file_field :gff_file %><br />
-	<%= f.label :merge, "Merge" %>	
+<% unless @experiment.uses_bam_file %>
+<h3>Updating an experiment with features from a GFF File</h3>
+<%= simple_form_for(@experiment, :html => {:multipart => true}) do |f| %>  
+	<%= f.error_notification %>  
+	<%= f.input :name %>
+	<%= f.input :description %>
+	<%= f.input :gff_file, as: :file, label: "GFF3 file of new features", hint: "If you provide another GFF3 file you can merge new features into this experiment or replace them all" %>
 	<%= f.radio_button :merge, :merge, :checked => true %>
-	<%= f.label :merge, "Replace" %>	
+	<%= f.label :merge, "Merge" %>	
 	<%= f.radio_button :merge, :replace %><br />
-	
-	<%= f.label "YAML file of metadata about this genome (optional - inherits from genome if omitted, overwrites existing metadata if provided) "%><br />
-	<%= f.file_field :yaml_file %><br />
+	<%= f.label :merge, "Replace" %>	
+	<%= f.input :yaml_file, as: :file, label: "YAML file of metadata about this genome", hint: "(optional - inherits from genome if omitted, overwrites existing metadata if provided)" %>
+	<br />
 	Select one of the genome build versions in this DB to attach these features to:<br />
-		<% genomes.each do |g|%><br />
+		<% genomes.each do |g|%>
+			<%= f.radio_button :genome_id, g.id %>
 			<%= label :genome_id, g.build_version %>
-			<%= f.radio_button :genome_id,  g.id %>
-		<% end %><br />  
+		<% end %><br/>
 	Find parents for the features in this file? (Upload is quicker if all the features are parentless)<br />
-	<%= f.label :find_parents, "Yes"%>
 	<%= f.radio_button :find_parents, "find_parents", :checked => true %>
+	<%= f.label :find_parents, "Yes"%>
+	<%= f.radio_button :find_parents,  "dont_find" %>
 	<%= f.label :find_parents, "No"%>
-	<%= f.radio_button :find_parents,  "dont_find" %><br />	
+	<br />
+	<br />
+ 	<%= f.button :submit, :class => 'btn-primary' %>
 	<%= f.hidden_field :expected_file, :value => "gff" %>
-</p>
- <p>  <%= f.submit "Update" %>  </p> 
 <% end %>
 <% else %>
 <h2>Editing experiment with features in a BAM File</h2>

@@ -1,67 +1,25 @@
 
 
-<script>
-function draw_all(){
-	<%= "features = #{@features.to_json}" %>
-	for (var i in features){  // every array of features (every family)
-		GFR.draw(features[i]);	
-	}
-}
-window.onload=draw_all;
-</script>
-
-
-<script>
-$(function() {
-	var stop = false;
-	$( "#accordion h3" ).click(function( event ) {
-		if ( stop ) {
-			event.stopImmediatePropagation();
-			event.preventDefault();
-			stop = false;
-		}
-	});
-	$( "#accordion" )
-		.accordion({
-			header: "> div > h3",
-			autoHeight: false,
-			navigation: true
-		})
-		.sortable({
-			axis: "y",
-			handle: "h3",
-			stop: function() {
-				stop = true;
-			}
-		});
-});
-</script>
 
 
 
 
-<div id="accordion">
-	<h2>Listing features in range: <%= @start%> - <%= @end %></h2>
-	<p>(click panel for feature and descendant information)</p> 
+
+<h2>Listing features in range: <%= @start%> - <%= @end %></h2>
+<table>
+	<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Parent IDs</tr>
+					
+
 <% @features.each do |family|%>
-	<div class="accordion_element">
-		<%= "<h3><a href=#>#{family.first.id}: #{family.first.feature} '#{family.first.strand}' #{family.first.start}-#{family.first.end}</a></h3>" %>
-		<div>
-		<%= "<canvas id ='#{family.first.id}' width=1000 height=150>" %>
-		</canvas>
-
-				<table>
-					<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Parent IDs</tr>
-					<% family.each do |f| %>
+<% family.each do |f| %>
 						<% g = 'none' %>
 						<% if f.has_parent? %>
 							<% g = f.parents.collect {|x| '<a href=/features/' + x.parent_obj.id.to_s + '/edit>' + x.parent_obj.id.to_s + '</a>'}.join(',') %>
 						<% end %>
 					<tr><td><%= "<a href=\"#{f.id}/edit\">#{f.id}</a>" %></td><td><%= f.seqid %></td><td><%= f.feature %></td><td><%= f.start %></td><td><%= f.end %></td><td><%= f.strand %></td><td><%= f.description%></td><td><%= g %></td></tr>
 					<% end %>
-				</table>
-		</div>
-	</div>
 <% end %>
-</div>
+</ table >
+
+
 
