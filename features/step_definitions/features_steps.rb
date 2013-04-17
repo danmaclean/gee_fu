@@ -8,14 +8,13 @@ end
 
 Given(/^I am reviewing a feature$/) do
   click_link "Features"
-  fill_in "Database ID", with: Feature.first.id
-  click_button "Get feature"
+  step %Q{I search by feature ID}
 end
 
 When(/^I search by feature ID$/) do
   within "div#find_feature_by_id" do
     fill_in "Database ID", :with => Feature.first.id
-    click_button "Get feature"
+    click_button "Search"
   end
 end
 
@@ -34,4 +33,15 @@ end
 Then(/^there should be a new feature with changed coordinates$/) do
   Feature.last.start.should eq 1000
   Feature.last.end.should eq 2000
+end
+
+When(/^I search by attribute "(.*?)"$/) do |attribute|
+  within "div#find_feature_by_attribute" do
+    fill_in "Enter string to find", with: attribute
+    click_button "Search"
+  end
+end
+  
+Then(/^I should see features with the attribute "(.*?)"$/) do |attribute|
+  page.should have_content attribute
 end
