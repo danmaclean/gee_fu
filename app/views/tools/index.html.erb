@@ -1,11 +1,9 @@
-<h1>OpenAshDieBack GeeFu Tools</h1>
-<hr />
-<h2>Export Sequence Fragment</h2>
-<%= form_tag( {:controller => "tools", :action => "genomic_sequence"}, :method => "post", :multipart => true ) %>
+<legend>Export Sequence Fragment</legend>
+<%= form_tag( {:controller => "tools", :action => "genomic_sequence"}, :method => "post" ) %>
 <%= label(:reference, :id, "Extract a genome sequence region") %><br />
 <%= label(:genome, :id, "Select genome build") %><br />
 <% @genomes.each do |g| %>
-	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />" %> 
+	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />".html_safe %> 
  <%= label_tag(:id, "#{g.build_version}") %>
 <% end %><br/>
 <%= label(:reference, :id, "Type in the reference sequence from which to extract") %><br />

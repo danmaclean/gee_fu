@@ -23,7 +23,7 @@
           <td><%= link_to genome.id, genome_path(genome) %></td>
           <td><%= genome.build_version %></td>
           <td><%= genome.html_meta %></td>
-          <td><%=l genome.created_at.to_date, format: :short %></td>
+          <td><%=l genome.created_at.to_date, format: :gee_fu %></td>
           <td>
             <%#= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_genome_path(genome), :class => 'btn btn-mini' %>
