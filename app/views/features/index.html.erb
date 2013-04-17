@@ -21,18 +21,6 @@
 
 <legend>Get features by range</legend>
 <%= form_tag( {:controller => "features", :action => "summary"}, :method => "post", :multipart => true, :id => "by_range" ) %>
-<% if flash[:error] %>
-	<% if not flash[:error].empty? %>
-      <div class="errorExplanation" id="errorExplanation">
-		<h2> <%= flash[:error].length %> errors prohibited the search from being executed</h2>
-		<ul>
-			<% flash[:error].each do |e| %>
-			<li><%= e %></li>
-			<% end %>
-		</ul>
-      </div>
-	<%end%>
-<% end %>
 <%= label(:reference, :id, "Find features by sequence region") %><br />
 <%= label(:genome, :id, "Select genome build") %><br />
 <% @genomes.each do |g| %>
