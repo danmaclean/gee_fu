@@ -3,7 +3,6 @@ Feature: Review genome features
   As a Scientist
   I want to see specific feature data
 
-  @wip
   Scenario: Review feature data by ID as logged in user
     Given there is a user called "Fred Bloggs" with email "fred@fred.com"
     And "fred@fred.com" is logged in
@@ -29,7 +28,6 @@ Feature: Review genome features
     Then I should see "New feature was successfully created."
     And there should be a new feature with changed coordinates
 
-  @wip
   Scenario: Reviewing features by attributes
     Given there is a user called "Fred Bloggs" with email "fred@fred.com"
     And "fred@fred.com" is logged in
