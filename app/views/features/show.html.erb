@@ -2,44 +2,11 @@
 <legend>No feature with that ID</legend>
 <%else%> 
 <legend><%=" #{@feature.feature} feature: id #{@feature.id}"   %></legend>
-	
-<dl class="dl-horizontal">
-  <dt><strong>ID</strong></dt>
-  <dd><%= @feature.id %></dd>
-  <dt><strong>Reference:</strong></dt>
-  <dd><%= @feature.seqid %></dd>
-  <dt><strong>Feature:</strong></dt>
-  <dd><%= @feature.feature %></dd>
-  <dt><strong>Start:</strong></dt>
-  <dd><%= @feature.start %></dd>
-  <dt><strong>End:</strong></dt>
-  <dd><%= @feature.end %></dd>
-  <dt><strong>Strand:</strong></dt>
-  <dd><%= @feature.strand %></dd>
-  <dt><strong>Attributes:</strong></dt>
-  <dd><%= @feature.group.join(' ') %></dd>
-  <dt><strong>Created:</strong></dt>
-  <dd><%=l @feature.created_at.to_date, format: :short %></dd>
-</dl>
 
-
-	<!-- <table> -->
-		<!-- <tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Created</th><th>Parent IDs</tr> -->
-			<%# g = 'none' %>
-			<%# if @feature.has_parent? %>
-				<%# g = @feature.parents.collect {|x| '<a href=/features/' + x.parent_obj.id.to_s + '/edit>' + x.parent_obj.id.to_s + '</a>'}.join(',') %>
-			<%# end %>
-<!-- 		<tr>
-			<td><%#= "<a href=\"#{@feature.id}/edit\">#{@feature.id}</a>".html_safe %></td>
-			<td><%#= @feature.seqid %></td><td><%= @feature.feature %></td>
-			<td><%#= @feature.start %></td><td><%= @feature.end %></td>
-			<td><%#= @feature.strand %></td>
-			<td><%#= @feature.group.join(' ') %></td>
-			<td><%#= @feature.created_at.strftime("%R %A %d %B %Y") %></td>
-			<td><%#= g %></td>
-		</tr>
-	</table>
- -->
+<table class='table'>
+	<%= render partial: "feature_header"%>
+  <%= render partial: "feature", object: @feature %>
+</table>
 
  <hr/>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -49,12 +16,21 @@
               :class => 'btn btn-danger' %>
 <p>This will delete the feature from the DB, remove any predecessors and unlink it as a parent of DB features</p>
 <% if not @feature.predecessors.empty?%>
-<h2>Predecessors </h2>
+<legend>Predecessors </legend>
 
-<table>
+<table class="table">
 	<tr><th>ID</th><th>Reference</th><th>Feature</th><th>Start</th><th>End</th><th>Strand</th><th>Attributes</th><th>Created</td></tr>
 	<% @feature.predecessors.each do |p| 	%>
-	<tr><td><%= p.id %></td><td><%= p.seqid %></td><td><%= p.feature %></td><td><%= p.start %></td><td><%= p.end %></td><td><%= p.strand %></td><td><%= p.description %></td><td><%= p.created_at.strftime("%R %A %d %B %Y") %></td>
+	<tr>
+		<td><%= p.id %></td>
+		<td><%= p.seqid %></td>
+		<td><%= p.feature %></td>
+		<td><%= p.start %></td>
+		<td><%= p.end %></td>
+		<td><%= p.strand %></td>
+		<td><%= p.description %></td>
+		<td><%= l p.created_at, format: :gee_fu %></td>
+	</tr>
 	<% end %>
 	</table>
 <% end %>

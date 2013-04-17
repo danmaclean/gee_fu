@@ -1,5 +1,3 @@
-<%= @svg.html_safe %>
-<legend>Listing features in range: <%= @start%> - <%= @end %></legend>
 <table class='table'>
   <%= render partial: "feature_header"%>
   <%= render partial: "feature", collection: @features %>

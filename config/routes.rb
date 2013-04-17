@@ -12,6 +12,12 @@ GeeFu::Application.routes.draw do
     resources :genomes
     resources :experiments
     resources :features
+    resources :tools
+
+    scope "/features/search" do
+      post "/id",        to: "features#search_by_id", as: :feature_search_by_id
+      post "/attribute", to: "features#search_by_attribute", as: :feature_search_by_attribute
+    end
   end
 
   scope "/features/annoj" do
@@ -23,8 +29,8 @@ GeeFu::Application.routes.draw do
     get  "/:id", to: "genomes#annoj"
   end
 
+  # TODO review these for security
   resources :references
-  resources :tools
   match 'features/objects' => 'features#objects'
   match 'features/depth' => 'features#depth'
   match 'tools/genomic_sequence' => 'tools#genomic_sequence'

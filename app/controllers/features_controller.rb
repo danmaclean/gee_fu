@@ -2,9 +2,6 @@
 
 
 class FeaturesController < ApplicationController
-
-  before_filter :search, only: [ :index ]
-
   def index
     @genomes = Genome.all
     @experiments = Experiment.all
@@ -28,7 +25,7 @@ class FeaturesController < ApplicationController
     @feature.score = params[:feature][:score] 
     
     strand = nil
-    strand = params[:feature][:strand] == 'plus' ? '+' : '-' 
+    strand = params[:feature][:strand]
     
     @feature.strand = strand || old_feature.strand
     @feature.phase = params[:feature][:phase] 
@@ -132,20 +129,15 @@ class FeaturesController < ApplicationController
         format.html { redirect_to :action => :edit, :id => params[:old_feature_id]}
       end
     end
-    
   end
 
   def show 
-      begin 
-        @feature = Feature.find(params[:id])
-        #if Feature.exists?(params[:id])
-        #  @feature = Feature.find(params[:id])
-        @feature.group = JSON::parse(@feature.group)
-        respond @feature
-      rescue
-      #else
-        respond :false
-      end
+    begin 
+      @feature = Feature.find(params[:id])
+      respond @feature
+    rescue
+      respond :false
+    end
   end
 
   def destroy
@@ -281,8 +273,6 @@ class FeaturesController < ApplicationController
   #get a png of an svg from a bio-svgenes render of the features, dumps it in public pngs for
   #head of a summary page
   def summary_img
-    require 'rubygems'
-    require 'bio-svgenes'
     num_tracks_needed = 1
 
     begin
@@ -724,8 +714,22 @@ class FeaturesController < ApplicationController
     {:success => true }
   end
 
-  def search
-    redirect_to feature_path(params[:feature][:id]) if params.has_key?(:feature) && params[:feature].has_key?(:id)
+  def search_by_id
+    feature_id = params[:feature][:id]
+    if Feature.exists?(feature_id)
+      redirect_to feature_path(feature_id)
+    else
+      redirect_to features_path, flash: { alert: "No feature found with that ID"}
+    end
   end
- 
+
+  def search_by_attribute
+    attribute = params[:feature][:group]
+    @features = Feature.where{ group.matches("%#{attribute}%") }
+    if @features.empty?
+      redirect_to features_path, flash: { alert: "No features found searching for: '#{attribute}'"}
+    else
+      render
+    end
+  end
 end
