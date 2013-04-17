@@ -1,11 +1,11 @@
 require 'spec_helper'
-require_relative '../../app/presenters/feature_parent_presenter'
+require_relative '../../app/presenters/feature_presenter'
 
-describe FeatureParentPresenter do
+describe FeaturePresenter do
   let(:feature) { mock(Feature) }
-  subject       { FeatureParentPresenter.new(feature) }
+  subject       { FeaturePresenter.new(feature) }
 
-  describe "parent_list" do
+  describe "#parent_list" do
     context "the feature doesn't have parents" do
       before(:each) do
         feature.stub(:has_parent? => false)
@@ -36,6 +36,18 @@ describe FeatureParentPresenter do
           '<a href="/features/A820FB48-566D-4650-B077-A855007EB184/edit">A820FB48-566D-4650-B077-A855007EB184</a>,<a href="/features/blah-blah-blah/edit">blah-blah-blah</a>,<a href="/features/42/edit">42</a>'
         )
       end
+    end
+  end
+
+  describe "#attributes" do
+    before(:each) do
+      feature.stub(group: [
+        [ "Parent", "AT1G01010.1" ]
+      ].to_json)
+    end
+
+    it "is the attributes joined together with a space" do
+      subject.attributes.should eq "Parent AT1G01010.1"
     end
   end
 end
