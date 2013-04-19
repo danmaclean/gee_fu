@@ -1,6 +1,8 @@
 #Implements the REST requests for the Genomes table/model
 #access via url
 class GenomesController < ApplicationController
+
+  before_filter :require_organism
   
   #returns the genome information on an AnnoJ genome request
   # only for use by AnnoJ
@@ -45,6 +47,7 @@ class GenomesController < ApplicationController
   end
   
   def new
+    @organisms = Organism.all
     @genome = Genome.new
     respond @genome
   end
@@ -109,6 +112,10 @@ class GenomesController < ApplicationController
       format.json { render :json => response, :layout => false }
       format.xml  { render :xml => response, :layout => false }
     end
+  end
+
+  def require_organism
+    redirect_to root_path unless has_organisms?
   end
 
 end

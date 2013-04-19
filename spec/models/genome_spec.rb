@@ -1,8 +1,31 @@
 require 'spec_helper'
 
 describe Genome do
+  let(:organism) { 
+    Organism.create!(
+      :local_name => "My favourite organism",
+      :genus => "Arabidopsis",
+      :species => "thaliana",
+      :strain => "Col 0",
+      :pv => "A",
+      :taxid  => "3702"
+    ) 
+  }
+
+  let(:other_organism) { 
+    Organism.create!(
+      :local_name => "My mother's organism",
+      :genus => "Ardisia",
+      :species => "Myrsinaceae",
+      :strain => "Col 10",
+      :pv => "B",
+      :taxid  => "1234"
+    ) 
+  }
+
   def valid_attributes(overrides={})
     {
+      organism_id: organism.id,
       build_version: "TAIR 9",
       meta: {
         "institution" => 
@@ -36,11 +59,39 @@ describe Genome do
     }.merge(overrides)
   end
 
+  describe "validations" do
+    subject { Genome.new(valid_attributes) }
+
+    it "sanity checks it is valid" do
+      subject.should be_valid
+    end
+
+    it "isn't valid unless we have a build version" do
+      subject.build_version = ""
+      subject.should_not be_valid
+    end
+
+    it "isn't valid unless the build version is unique within genomes for this organism" do
+      Genome.create!(valid_attributes)
+      subject.save.should be_false
+      subject.errors[:build_version].should include "Build version must be unique to a genome"
+    end
+
+    it "is valid if the build version is unique for a separate organism" do
+      Genome.create!(valid_attributes(organism_id: other_organism.id))
+      subject.save.should be_true
+    end
+  end
+
   describe "persistence", versioning: true do
     subject { Genome.new(valid_attributes) }
 
     before(:each) do
       subject.save!
+    end
+
+    it "belongs to an Organism" do
+      Genome.find(subject.id).organism.should eq organism
     end
         
     it_behaves_like "a model with versioning" do

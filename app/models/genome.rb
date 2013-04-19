@@ -1,11 +1,12 @@
 class Genome < ActiveRecord::Base
+  belongs_to :organism
   has_many :references, :dependent => :destroy
 
-  validates_presence_of :build_version
+  validates :build_version, presence: true, uniqueness: { scope: :organism_id, message: "Build version must be unique to a genome" }
   validates_presence_of :fasta_file
   
   attr_accessor   :fasta_file, :yaml_file
-  attr_accessible :build_version, :fasta_file, :yaml_file, :meta
+  attr_accessible :build_version, :fasta_file, :yaml_file, :meta, :organism_id
 
   has_paper_trail
   

@@ -12,7 +12,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    #  if resource is_admin? then redirect to somewhere else perhaps?
     root_path
   end
+
+  def has_organisms?
+    Organism.count > 0
+  end
+  helper_method :has_organisms?
 end

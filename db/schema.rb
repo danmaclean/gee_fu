@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412155859) do
+ActiveRecord::Schema.define(:version => 20130419103854) do
 
   create_table "experiments", :force => true do |t|
     t.string   "name",                                             :null => false
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130412155859) do
     t.datetime "created_at"
     t.text     "build_version"
     t.text     "meta"
+    t.integer  "organism_id",   :null => false
   end
 
   create_table "organisms", :force => true do |t|
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20130412155859) do
     t.string   "pv"
     t.integer  "taxid"
     t.datetime "created_at"
+    t.string   "local_name", :null => false
   end
 
   create_table "parents", :force => true do |t|
@@ -149,5 +151,7 @@ ActiveRecord::Schema.define(:version => 20130412155859) do
   end
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
+
+  add_foreign_key "genomes", "organisms", :name => "genomes_organism_id_fk"
 
 end
