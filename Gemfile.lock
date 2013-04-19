@@ -266,6 +266,7 @@ DEPENDENCIES
   email_spec
   foreigner
   fakefs
+  foreigner
   foreman
   guard-rspec
   guard-spork
