@@ -1,8 +1,20 @@
 require 'spec_helper'
 
 describe Experiment do
+  let(:organism) { 
+    Organism.create!(
+      :local_name => "My favourite organism",
+      :genus => "Arabidopsis",
+      :species => "thaliana",
+      :strain => "Col 0",
+      :pv => "A",
+      :taxid  => "3702"
+    ) 
+  }
+
   let(:genome) { 
     Genome.create!(
+      organism_id: organism.id,
       build_version: "TAIR 9",
       meta: {}.to_json,
       fasta_file: "dummy/not/actually/used/in/the/spec"

@@ -15,7 +15,7 @@ gem 'devise'
 gem 'twitter-bootstrap-rails'  
 gem 'simple_form'
 gem 'squeel'
-
+gem 'foreigner'
 gem 'paper_trail', '~> 2'
 
 gem 'sidekiq'
