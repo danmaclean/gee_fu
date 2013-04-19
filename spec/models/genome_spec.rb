@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Genome do
   let(:organism) { 
     Organism.create!(
+      :local_name => "My favourite organism",
       :genus => "Arabidopsis",
       :species => "thaliana",
       :strain => "Col 0",
@@ -13,6 +14,7 @@ describe Genome do
 
   let(:other_organism) { 
     Organism.create!(
+      :local_name => "My mother's organism",
       :genus => "Ardisia",
       :species => "Myrsinaceae",
       :strain => "Col 10",

@@ -1,6 +1,6 @@
 <%= simple_form_for @genome, html: { class: "form-horizontal" } do |f| %>
   <%= f.error_notification %>
-  <%= f.input :organism_id, collection: @organisms, prompt: "Choose an organism..." %>
+  <%= f.input :organism_id, collection: Organism.all, prompt: "Choose an organism...", required: true %>
   <%= f.input :build_version, as: :string, required: true %>
   <%= f.input :fasta_file, as: :file, required: true%>
   <%= f.input :yaml_file, as: :file, hint: "(required for AnnoJ browsing only)"%>
