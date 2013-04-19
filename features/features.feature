@@ -5,8 +5,9 @@ Feature: Review genome features
 
   Scenario: Review feature data by ID as logged in user
     Given there is a user called "Fred Bloggs" with email "fred@fred.com"
+    And there is an organism with local name of "My favourite organism"
     And "fred@fred.com" is logged in
-    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml"
+    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml" for the organism "My favourite organism"
     And there is an experiment called "TAIR experiment", described as "my first experiment" with GFF file "public/sample_gffs/sample_features.gff" and "TAIR 9" as the genome build
     And I am reviewing features
     When I search by feature ID 
@@ -20,8 +21,9 @@ Feature: Review genome features
 
   Scenario: Edit a genome feature
     Given there is a user called "Fred Bloggs" with email "fred@fred.com"
+    And there is an organism with local name of "My favourite organism"
     And "fred@fred.com" is logged in
-    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml"
+    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml" for the organism "My favourite organism"
     And there is an experiment called "TAIR experiment", described as "my first experiment" with GFF file "public/sample_gffs/sample_features.gff" and "TAIR 9" as the genome build
     And I am reviewing a feature
     When I edit a feature and change the coordinates of the exon
@@ -30,8 +32,9 @@ Feature: Review genome features
 
   Scenario: Reviewing features by attributes
     Given there is a user called "Fred Bloggs" with email "fred@fred.com"
+    And there is an organism with local name of "My favourite organism"
     And "fred@fred.com" is logged in
-    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml"
+    And there is a genome build called "TAIR 9" with Fasta file "public/sequences/short.fna" and YAML file of "config/meta.yml" for the organism "My favourite organism"
     And there is an experiment called "TAIR experiment", described as "my first experiment" with GFF file "public/sample_gffs/sample_features.gff" and "TAIR 9" as the genome build
     And I am reviewing features
     When I search by attribute "AT1G01010.1"
