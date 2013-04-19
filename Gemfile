@@ -18,6 +18,7 @@ gem 'squeel'
 gem 'foreigner'
 gem 'paper_trail', '~> 2'
 
+gem 'sidekiq'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -40,4 +41,5 @@ group :test do
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'rb-fsevent'
+  gem 'fakefs', :require => "fakefs/safe"
 end
