@@ -1,13 +1,12 @@
-<div class="border-form-div">
-  <%= simple_form_for @genome do |f| %>
-     <%= f.error_notification %>
-    <%= f.input :build_version, as: :string, required: true %>
-    <%= f.input :fasta_file, as: :file, required: true%>
-    <%= f.input :yaml_file, as: :file, hint: "(required for AnnoJ browsing only)"%>
-    <div class="form-actions">
-      <%= f.button :submit, :class => 'btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  genomes_path, :class => 'btn' %>
-    </div>
-  <% end %>
-</div>
+<%= simple_form_for @genome, html: { class: "form-horizontal" } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :organism_id, collection: @organisms, prompt: "Choose an organism..." %>
+  <%= f.input :build_version, as: :string, required: true %>
+  <%= f.input :fasta_file, as: :file, required: true%>
+  <%= f.input :yaml_file, as: :file, hint: "(required for AnnoJ browsing only)"%>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                genomes_path, :class => 'btn' %>
+  </div>
+<% end %>
