@@ -8,9 +8,7 @@ class ToolsController < ApplicationController
   #Returns a web form view that allows definition of a section of genomic reference sequence
   # use /tools/genome_sequence
   def genomic_sequence
-    require 'bio'
-
-    ref = Reference.find(:first, :conditions => {:name => params[:reference] , :genome_id => params[:id] } ) 
+    ref = Reference.find(:first, :conditions => {:name => params[:reference] , :genome_id => params[:genome_id] } )
     
     @result = Hash.new
     
