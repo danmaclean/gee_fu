@@ -4,7 +4,7 @@
 <%= label(:genome, :id, "Select genome build") %><br />
 <% @genomes.each do |g| %>
 	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />".html_safe %> 
- <%= label_tag(:id, "#{g.build_version}") %>
+ <%= label_tag("genome_id_#{g.id}", "#{g.build_version}") %>
 <% end %><br/>
 <%= label(:reference, :id, "Type in the reference sequence from which to extract") %><br />
 <%= text_area_tag(:reference, "Enter name of reference sequence here", :size => "40 x 1", :id => 'chromosome_list') %><br />
