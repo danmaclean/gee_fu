@@ -3,7 +3,8 @@ class Organism < ActiveRecord::Base
   validates :species,     presence: true
   validates :strain,      presence: true
   validates :taxid,       presence: true
-  validates :local_name,  presence: true, uniqueness: { message: "The local name of the organism must be unique." }
+  validates :local_name,  presence: true
+  validates_uniqueness_of :local_name, message: "The local name of the organism must be unique."
 
   attr_accessible :genus, :species, :strain, :pv, :taxid, :local_name
 
