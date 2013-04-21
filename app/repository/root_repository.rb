@@ -1,4 +1,3 @@
-require 'organism_attributes'
 require 'organism_repository'
 
 class RootRepository
@@ -30,7 +29,7 @@ class RootRepository
   end
 
   def existing_organism_folders
-    Organism.all.map { |organism| OrganismAttributes.new(organism).combine }
+    Organism.all.map(&:local_name)
   end
 
   def remove_unused_organism_folders
@@ -40,9 +39,8 @@ class RootRepository
   end
 
   def repo_root_directories
-    @repo_root_directories ||= 
-      Dir.chdir(repo) do
-        Dir.glob("*").select { |entry| File.directory?(entry) }
-      end
+    Dir.chdir(repo) do
+      Dir.glob("*").select { |entry| File.directory?(entry) }
+    end
   end
 end 
