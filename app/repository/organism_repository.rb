@@ -1,4 +1,4 @@
-require 'organism_attributes'
+require 'genome'
 require 'genome_repository'
 
 class OrganismRepository
@@ -9,18 +9,50 @@ class OrganismRepository
   end
 
   def create
+    make_organism_directory
+    remove_unused_genome_folders
+    write_to_yaml(organism, "#{organism_directory}/organism.yml")
+
+    organism.genomes.each do |genome|
+      GenomeRepository.new(genome, organism_directory).create
+    end
+  end
+
+  private
+
+  def make_organism_directory
     FileUtils.mkdir_p(organism_directory)
-    # TODO - put the 'info' in here?
-    # TODO - iterate over the genomes for the organism and create the folders
-    # have it remove unused folders, per the RootRepository
-    GenomeRepository.new(organism, organism_directory).create
+  end
+
+  def write_to_yaml(organism, path)
+    File.open(path, 'w') { |file| file.write OrganismYaml.new(organism).dump } 
   end
 
   def folder_name
-    OrganismAttributes.new(organism).combine
+    organism.local_name
   end
 
   def organism_directory
-    "#{repo_path}/#{folder_name}"
+    repo(folder_name)
+  end
+
+  def repo(other_path="")
+    "#{repo_path}/#{other_path}"
+  end
+
+  def remove_unused_genome_folders
+    genome_directories.each do |dir|
+      FileUtils.rm_r("#{organism_directory}/#{dir}") unless existing_folders.include?(dir)
+    end
+  end
+
+  def existing_folders
+    organism.genomes.map(&:build_version)
+  end
+
+  def genome_directories
+    Dir.chdir(organism_directory) do
+      Dir.glob("*").select { |entry| File.directory?(entry) }
+    end
   end
 end

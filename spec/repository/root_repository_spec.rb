@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'fakefs/spec_helpers'
 require 'organism'
+require 'organism_repository'
 
 describe RootRepository do
   include FakeFS::SpecHelpers
@@ -44,26 +45,33 @@ describe RootRepository do
 
   describe "creating top level folders for organisms" do
     context "when there are many organisms in the database" do
-      before(:each) do
+      let!(:organism_1) {  
         Organism.create!(
+          :local_name => "My favourite organism",
           :genus => "Arabidopsis",
           :species => "thaliana",
           :strain => "Col 0",
           :pv => "A",
           :taxid  => "3702"
         )
+      }
 
+      let!(:organism_2) {  
         Organism.create!(
+          :local_name => "Sea-based organism",
           :genus => "Oceanobacillus",
-          :species => "iheyensis"
+          :species => "iheyensis",
+          :strain => "Col 10",
+          :pv => "BABB",
+          :taxid  => "1234"
         )
-      end
+      }
 
       it "should create a folder for each organism" do
         subject.create
         directory_listing.should =~ [ 
-          '3702_Arabidopsis_thaliana_Col 0',
-          'no-ncbi-taxid_Oceanobacillus_iheyensis_no-strain' 
+          'My favourite organism',
+          'Sea-based organism' 
         ]    
       end
     end
@@ -71,6 +79,7 @@ describe RootRepository do
     context "when there is 1 organism in the database" do
       before(:each) do
         Organism.create!(
+          :local_name => "My favourite organism",
           :genus => "Arabidopsis",
           :species => "thaliana",
           :strain => "Col 0",
@@ -81,7 +90,7 @@ describe RootRepository do
 
       it "should create a folder for each organism" do
         subject.create
-        directory_listing.should =~ [ '3702_Arabidopsis_thaliana_Col 0' ]    
+        directory_listing.should =~ [ 'My favourite organism' ]    
       end
     end
 
@@ -101,14 +110,18 @@ describe RootRepository do
     context "when there is already an organism folder" do
       let!(:organism) {  
         Organism.create!(
+          :local_name => "My favourite organism",
           :genus => "Arabidopsis",
-          :species => "thaliana"
+          :species => "thaliana",
+          :strain => "Col 0",
+          :pv => "A",
+          :taxid  => "3702"
         )
       }
 
       before(:each) do
-        FileUtils.mkdir_p(repo_path_with('3702_Arabidopsis_thaliana_Col 0'))
-        directory_listing.should =~ [ '3702_Arabidopsis_thaliana_Col 0' ]
+        FileUtils.mkdir_p(repo_path_with('My favourite organism'))
+        directory_listing.should =~ [ 'My favourite organism' ]
       end
 
       it "removes the folder if the Organism is removed" do
@@ -128,6 +141,21 @@ describe RootRepository do
         subject.create
         directory_listing.should be_empty
       end
+    end
+  end
+
+  describe "using an OrganismRepository" do
+    let(:organism) { mock(Organism) }
+    let(:organism_repository) { mock(OrganismRepository) }
+
+    before(:each) do
+      Organism.stub(all: [ organism ])
+    end
+
+    it "uses an OrganismRepository with the repo path and the organisms" do
+      OrganismRepository.should_receive(:new).with(organism, repo_path_with).and_return(organism_repository)
+      organism_repository.should_receive(:create)
+      subject.create
     end
   end
 end
