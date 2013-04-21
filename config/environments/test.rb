@@ -40,4 +40,6 @@ GeeFu::Application.configure do
   config.after_initialize do
     PaperTrail.enabled = false
   end
+
+  app_config[:repository_directory] = "spec/repository"
 end
