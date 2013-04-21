@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'sidekiq/testing'
 
 describe DataRepositoryWorker do
   let(:repo_path)       { GeeFu::Application.app_config[:repository_directory] }
