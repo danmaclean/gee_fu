@@ -1,4 +1,5 @@
 class Organism < ActiveRecord::Base
+  has_many  :genomes
   validates :genus,       presence: true
   validates :species,     presence: true
   validates :strain,      presence: true
