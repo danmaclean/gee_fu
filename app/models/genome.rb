@@ -1,6 +1,7 @@
 class Genome < ActiveRecord::Base
   belongs_to :organism
   has_many :references, :dependent => :destroy
+  has_many :experiments
 
   validates :build_version, presence: true, uniqueness: { scope: :organism_id, message: "Build version must be unique to a genome" }
   validates_presence_of :fasta_file
