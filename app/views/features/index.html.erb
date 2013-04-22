@@ -1,29 +1,30 @@
 
-<h2>Get feature by database ID</h2>
-<%= form_tag( {:controller => :features, :action => :show}, :method => 'post', :multipart => true, :id => "by_id")%>
-<%= label(:feature, :id, "Find features by DBID") %><br />
-<%= text_field_tag(:id, "Enter ID")  %>
-<%= submit_tag "get feature" %>
-</form>
+<legend>Get feature by database ID</legend>
+<div id="find_feature_by_id">
+	<%= form_for(Feature.new, url: feature_search_by_id_path, html: { class: "form-search" } ) do |f| %>
+		<div class="input-append">
+			<%= f.text_field :id, placeholder: "Database ID", label: false, class: "search-query" %>
+		  <%= f.button "Search", :class => 'btn' %>
+		</div>
+	<% end %>
+</div>
 
-<h2>Get features by range </h2>
-<%= form_tag( {:controller => "features", :action => "graphic_range"}, :method => "post", :multipart => true, :id => "by_range" ) %>
-<% if flash[:error] %>
-	<% if not flash[:error].empty? %>
-      <div class="errorExplanation" id="errorExplanation">
-		<h2> <%= flash[:error].length %> errors prohibited the search from being executed</h2>
-		<ul>
-			<% flash[:error].each do |e| %>
-			<li><%= e %></li>
-			<% end %>
-		</ul>
-      </div>
-	<%end%>
-<% end %>
+<legend>Get features by annotation</legend>
+<div id="find_feature_by_attribute">
+	<%= form_for(Feature.new, url: feature_search_by_attribute_path, html: { class: "form-search" } ) do |f| %>
+		<div class="input-append">
+			<%= f.text_field :group, label: false, placeholder: "Enter string to find", class: "search-query" %>
+	  	<%= f.button "Search", :class => 'btn' %>
+		</div>
+	<% end %>
+</div>
+
+<legend>Get features by range</legend>
+<%= form_tag( {:controller => "features", :action => "summary"}, :method => "post", :multipart => true, :id => "by_range" ) %>
 <%= label(:reference, :id, "Find features by sequence region") %><br />
 <%= label(:genome, :id, "Select genome build") %><br />
 <% @genomes.each do |g| %>
-	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />" %> 
+	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />".html_safe %> 
     <%= label_tag(:genome_id, "#{g.build_version}") %>
 <% end %><br/>
 <%= label(:experiment, :id, "Select experiment") %><br />

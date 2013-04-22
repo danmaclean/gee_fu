@@ -1,29 +1,13 @@
-<h1>New organism</h1>
-<% number_of_organisms = Organism.all.length%>
-<% if  number_of_organisms >= 1%>
-<h2>The database already carries <%= "#{number_of_organisms}" %> definition(s) </h2>
-<p>Think carefully before adding another</p>
+<%- model_class = Organism -%>
+<%- number_of_organisms = Organism.count -%>
+<% unless number_of_organisms.zero? %>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Warning!</strong> The database already carries <%= "#{number_of_organisms}" %> definition(s).
+    Think carefully before adding another.
+  </div>
 <% end %>
-<% form_for(@organism) do |f| %>
-  <%= f.error_messages %>
-	<p>  <%= f.label "Genus (required)" %><br /> 
-		 <%= f.text_field :genus %> 
-	</p>
-	<p>  <%= f.label "Species (required)" %><br /> 
-		 <%= f.text_field :species %> 
-	</p>
-	<p>  <%= f.label "strain (optional)" %><br /> 
-		 <%= f.text_field :strain %> 
-	</p>
-	<p>  <%= f.label "pathovar (optional)" %><br /> 
-		 <%= f.text_field :pv %> 
-	</p>
-	<p>  <%= f.label "NCBI taxonomy ID (optional)" %><br /> 
-		 <%= f.text_field :taxid %> 
-	</p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
-
-<%= link_to 'Back', organisms_path %>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human %></h1>
+</div>
+<%= render :partial => 'form' %>

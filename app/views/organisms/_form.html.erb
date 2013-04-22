@@ -1,0 +1,14 @@
+<%= simple_form_for @organism, html: { class: "form-horizontal" } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :local_name, required: true %>
+  <%= f.input :genus, required: true %>
+  <%= f.input :species, required: true %>
+  <%= f.input :strain %>
+  <%= f.input :pv %>
+  <%= f.input :taxid, as: :string %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                organisms_path, :class => 'btn' %>
+  </div>
+<% end %>

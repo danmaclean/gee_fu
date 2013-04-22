@@ -1,13 +1,8 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-  protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  
+  protect_from_forgery
 
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  helper :all # include all helpers, all the time
+  
   def respond(response)
     respond_to do |format|
       format.html
@@ -15,4 +10,13 @@ class ApplicationController < ActionController::Base
       format.xml  { render :xml => response, :layout => false }
     end
   end
+
+  def after_sign_in_path_for(resource)
+    root_path
+  end
+
+  def has_organisms?
+    Organism.count > 0
+  end
+  helper_method :has_organisms?
 end
