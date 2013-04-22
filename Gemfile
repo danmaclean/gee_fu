@@ -36,4 +36,5 @@ group :test do
   gem 'guard-spork'
   gem 'rb-fsevent'
   gem 'fakefs', :require => "fakefs/safe"
+  gem 'timecop'
 end
