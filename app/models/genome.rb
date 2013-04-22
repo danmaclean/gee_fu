@@ -1,4 +1,5 @@
 require 'bio'
+require 'reference'
 
 class Genome < ActiveRecord::Base
   include Concerns::Versioning

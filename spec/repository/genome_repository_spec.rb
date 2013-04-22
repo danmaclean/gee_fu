@@ -16,7 +16,11 @@ describe GenomeRepository do
   end
 
   def with_repo_path(elements)
-    elements.map { |e| "#{repo_path}/#{e}"  }
+    elements.map { |e| element_with_path(e)  }
+  end
+
+  def element_with_path(element)
+    "#{repo_path}/#{element}"
   end
 
   def directories_within(elements)
@@ -85,7 +89,7 @@ describe GenomeRepository do
 
     it "writes a genome.yml file to the genome folder" do
       subject.create
-      directory_listing('TAIR 9/*').should =~ with_repo_path([ 'TAIR 9/genome.yml' ])
+      directory_listing('TAIR 9/*').should include(element_with_path('TAIR 9/genome.yml'))
     end
 
     it "writes a genome.yml file that represents the genome's attributes" do
@@ -98,6 +102,11 @@ describe GenomeRepository do
       )
     end
   
+    it "writes a sequence.fna file to the genome folder" do
+      subject.create
+      directory_listing('TAIR 9/*').should include(element_with_path('TAIR 9/sequence.fna'))
+    end
+
     context "when there are no Experiments for the Genome" do
       it "doesn't create any folders" do
         subject.create
@@ -222,7 +231,7 @@ describe GenomeRepository do
   describe "with mocks" do
     let(:experiment) { mock(Experiment, name: :specified_later) }
     let(:organism)   { mock(Organism, local_name: "mock_organism") }
-    let(:genome)     { mock(Genome, experiments: [ experiment ], build_version: "mock") }
+    let(:genome)     { mock(Genome, experiments: [ experiment ], build_version: "mock", to_fasta: :specified_later) }
 
     let(:genome_yaml) { mock(GenomeYaml, dump: :specified_later)  }
 
