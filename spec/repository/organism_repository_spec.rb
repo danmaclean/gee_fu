@@ -62,7 +62,7 @@ describe OrganismRepository do
     it "the yaml file contains the correct attributes" do
       subject.create
       data = YAML.load_file "#{full_repo_path}/My favourite organism/organism.yml"
-      data["organism"].should eq(
+      data["organism"].should include(
         {
           "Local name" => "My favourite organism",
           "Genus"   => "Arabidopsis",

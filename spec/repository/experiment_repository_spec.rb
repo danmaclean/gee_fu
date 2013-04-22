@@ -73,7 +73,7 @@ describe ExperimentRepository do
     it "writes an experiment.yml file that represents the experiment's attributes" do
       subject.create
       data = YAML.load_file "#{full_repo_path}/TAIR 9 GFF/experiment.yml"
-      data["experiment"].should eq(
+      data["experiment"].should include(
         {
           "Name"        => "TAIR 9 GFF",
           "Description" => "my first experiment"
