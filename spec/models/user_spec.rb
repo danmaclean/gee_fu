@@ -11,6 +11,12 @@ describe User do
     }.merge(overrides)
   end    
 
+  describe "#full_name" do
+    it "is the user's full name" do
+      User.new(valid_attributes).full_name.should eq "Fred Bloggs"
+    end
+  end
+
   describe "validations" do
     it "sanity checks it is valid" do
       User.new(valid_attributes).should be_valid
