@@ -1,4 +1,6 @@
 class Genome < ActiveRecord::Base
+  include Concerns::Versioning
+
   belongs_to :organism
   has_many :references, :dependent => :destroy
   has_many :experiments

@@ -1,4 +1,6 @@
 class Experiment < ActiveRecord::Base
+  include Concerns::Versioning
+  
   has_many :features, :dependent => :destroy
   belongs_to :genome
 

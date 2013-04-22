@@ -20,6 +20,8 @@ describe Organism do
     end
   end
 
+  it_behaves_like "a model with user audits"
+
   describe "validations" do
     subject { Organism.new(valid_attributes) }
 
