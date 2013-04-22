@@ -31,6 +31,8 @@ describe Experiment do
     }.merge(overrides)   
   end
 
+  it_behaves_like "a model with user audits"
+
   describe "persistence", versioning: true do
     subject { Experiment.new(valid_attributes) }
 
