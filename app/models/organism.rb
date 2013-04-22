@@ -1,4 +1,6 @@
 class Organism < ActiveRecord::Base
+  include Concerns::Versioning
+  
   has_many  :genomes
   validates :genus,       presence: true
   validates :species,     presence: true

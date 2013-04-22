@@ -59,6 +59,8 @@ describe Genome do
     }.merge(overrides)
   end
 
+  it_behaves_like "a model with user audits"
+
   describe "validations" do
     subject { Genome.new(valid_attributes) }
 
