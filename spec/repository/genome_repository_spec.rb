@@ -91,7 +91,7 @@ describe GenomeRepository do
     it "writes a genome.yml file that represents the genome's attributes" do
       subject.create
       data = YAML.load_file "#{full_repo_path}/TAIR 9/genome.yml"
-      data["genome"].should eq(
+      data["genome"].should include(
         {
           "Build version" => "TAIR 9"
         }
