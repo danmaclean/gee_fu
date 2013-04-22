@@ -1,4 +1,5 @@
 require 'experiment_repository'
+require 'genome_yaml'
 
 class GenomeRepository
   attr_reader :genome, :repo_path
