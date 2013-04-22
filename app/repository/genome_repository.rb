@@ -12,6 +12,7 @@ class GenomeRepository
     create_genome_directory
     remove_unused_experiment_folders
     write_to_yaml(genome, "#{genome_directory}/genome.yml")
+    write_to_fasta(genome, "#{genome_directory}/sequence.fna")
     genome.experiments.each do |experiment|
       ExperimentRepository.new(experiment, genome_directory).create
     end
@@ -25,6 +26,10 @@ class GenomeRepository
 
   def write_to_yaml(genome, path)
     File.open(path, 'w') { |file| file.write GenomeYaml.new(genome).dump } 
+  end
+
+  def write_to_fasta(genome, path)
+    File.open(path, 'w') { |file| file.write genome.to_fasta } 
   end
 
   def folder_name
