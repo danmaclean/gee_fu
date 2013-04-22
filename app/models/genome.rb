@@ -1,3 +1,6 @@
+require 'bio'
+require 'reference'
+
 class Genome < ActiveRecord::Base
   include Concerns::Versioning
 
@@ -12,6 +15,12 @@ class Genome < ActiveRecord::Base
   attr_accessible :build_version, :fasta_file, :yaml_file, :meta, :organism_id
 
   has_paper_trail
+
+  def to_fasta
+    references.map { |reference|
+      Bio::Sequence::NA.new(reference.sequence.sequence).to_fasta(reference.name, 60)
+    }.join("\n")
+  end
   
   def html_meta
     self.meta ? self.meta.to_yaml.gsub!(/\n/,"<br/>").gsub!(/\s/,"&nbsp;").html_safe : ''
@@ -19,5 +28,11 @@ class Genome < ActiveRecord::Base
   
   def meta_as_data_structure
     self.meta ? JSON::parse(self.meta) : nil
+  end
+
+  private
+
+  def combined_sequences
+    references.map { |ref| ref.sequence.sequence }.join
   end
 end

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'bio'
 
 describe Genome do
   let(:organism) { 
@@ -60,6 +61,50 @@ describe Genome do
   end
 
   it_behaves_like "a model with user audits"
+
+  describe "#to_fasta" do
+    let(:fasta_file_path) { "#{Rails.root}/spec/example_files/fasta/short.fna" }
+
+    subject { Genome.new(valid_attributes) }
+
+    before(:each) do
+      Bio::FastaFormat.open(fasta_file_path).each do |entry|
+        seq                = entry.to_seq
+        reference          = Reference.new(:name => entry.entry_id, :length => entry.length)
+        sequence           = Sequence.new(:sequence => "#{seq.seq}")
+        reference.sequence = sequence        
+        subject.references << reference
+      end
+      subject.save!
+    end
+
+    it "streams its sequences in fasta format" do
+      subject.to_fasta.should eq <<-FASTA
+>Chr1
+ccctaaaccctaaaccctaaaccctaaacctctgaatccttaatccctaaatccctaaat
+ctttaaatcctacatccatgaatccctaaatacctaattccctaaacccgaaaccggttt
+ctctggttgaaaatcattgtgtatataatgataattttatcgtttttatgtaattgctta
+ttgttgtgtgtagattttttaaaaatatcatttgaggtcaatacaaatcctatttcttgt
+ggttttctttccttcacttagctatggatggtttatcttcatttgttatattggatacaa
+gctttgctacgatctacatttgggaatgtgagtctcttattgtaaccttagggttggttt
+atctcaagaatcttattaattgtttggactgtttatgtttggacatttattgtcattctt
+actcctttgtggaaatgtttgttctatcaatttatcttttgtgggaaaattatttagttg
+tagggatgaagtctttcttcgttgttgttacgcttgtcatctcatctctcaatgatatgg
+gatggtcctttagcatttattctgaagttcttctgcttgatgattttatccttagccaaa
+aggattggtggtttgaagacacatcatatcaaaaaagctatcgcctcgacgatgctctat
+ttctatccttgtagcacacattttggcactcaaaaaagtatttttagatgtttgttttgc
+ttctttgaagtagtttctctttgcaaaattcctctttttttagagtgatttggatgattc
+aagacttctcggtactgcaaagttcttccgcctgattaattatccattttacctttgtcg
+tagatattaggtaatctgtaagtcaactcatatacaactcataatttaaaataaaattat
+gatcgacacacgtttacacataaaatctgtaaatcaactcatatacccgttattcccaca
+atcatatgctttctaaaagcaaaagtatatgtcaacaattggttataaattattagaagt
+tttccacttatgacttaagaacttgtgaagcagaaagtggcaacaccccccacctccccc
+ccccccccccaccccccaaattgagaagtcaattttatataatttaatcaaataaataag
+tttatggttaagagttttttactctctttatttttctttttctttttgagacatactgaa
+aaaagttgtaattattaatgatagttctgtgattcctccatgaatcacatctgcttgatt
+FASTA
+    end
+  end
 
   describe "validations" do
     subject { Genome.new(valid_attributes) }
