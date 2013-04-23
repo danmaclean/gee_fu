@@ -1,0 +1,15 @@
+* `mkdir gee_fu_data`
+* `cd gee_fu_data`
+* `echo .DS_Store >> .gitignore`
+* `git add .`
+* `git commit -am 'Setup GeeFU data repository'`
+* Add new Repo in GitHub
+  * https://github.com/new
+  * Follow the steps there to create Gee_Fu Data
+  * Copy the repo link, e.g. git@github.com:[your_github_user]/gee_fu_data.git
+* `git remote add origin git@github.com:[your_github_user]/gee_fu_data.git`
+* `git pull origin master`
+* `rake repo:export`
+* `git add .`
+* `git commit -am 'Add GeeFU data'`
+* `git push origin master`
