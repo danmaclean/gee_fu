@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Feature do
+  include FastaGffSetup
   let(:organism) { 
     Organism.create!(
       :local_name => "My favourite organism",
@@ -50,6 +51,20 @@ describe Feature do
       experiment: experiment#, 
       # reference_id: reference.id
     }.merge(overrides)
+  end
+
+  describe "#to_gff (a simple spec to play with the data format)" do
+    before(:each) do
+      import_fasta
+      import_gff
+    end
+
+    it "outputs the feature data as GFF" do
+      gff_output = Feature.last.to_gff
+      "#{gff_output}\n".should eq <<-GFF
+Chr1\tTAIR9\tthree_prime_UTR\t11649\t11863\t.\t-\t.\tParent=AT1G01030.1
+GFF
+    end
   end
 
   describe "persistence", versioning: true do
