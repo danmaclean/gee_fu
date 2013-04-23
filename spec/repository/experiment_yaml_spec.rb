@@ -60,7 +60,7 @@ describe ExperimentYaml do
         "experiment" => {
           "Name"            => "TAIR 9 GFF",
           "Description"     => "my first experiment",
-          "Last updated by" => "Fred Bloggs",
+          "Last updated by" => "Fred Bloggs (fred@fred.com)",
           "Last updated on" => "19 April 2013"
         }
       )

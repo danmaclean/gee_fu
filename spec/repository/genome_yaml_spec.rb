@@ -50,7 +50,7 @@ describe GenomeYaml do
       yaml.should eq(
         "genome" => {
           "Build version"   => "TAIR 9",
-          "Last updated by" => "Fred Bloggs",
+          "Last updated by" => "Fred Bloggs (fred@fred.com)",
           "Last updated on" => "19 April 2013"
         }
       )
