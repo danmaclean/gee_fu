@@ -56,5 +56,4 @@ describe Experiment do
       }
     end
   end
-
 end
