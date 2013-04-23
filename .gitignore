@@ -16,3 +16,4 @@
 .DS_Store
 bin/
 .env
+gee_fu_data/
