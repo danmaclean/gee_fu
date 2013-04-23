@@ -10,6 +10,8 @@ class ExperimentRepository
   def create
     create_experiment_directory
     write_to_yaml(experiment, "#{experiment_directory}/experiment.yml")
+    write_features_gff(experiment, "#{experiment_directory}/features.gff")
+    write_predecessor_gff(experiment, "#{experiment_directory}/predecessor.gff")
   end
 
   private
@@ -20,6 +22,14 @@ class ExperimentRepository
 
   def write_to_yaml(experiment, path)
     File.open(path, 'w') { |file| file.write ExperimentYaml.new(experiment).dump } 
+  end
+
+  def write_features_gff(experiment, path)
+    File.open(path, 'w') { |file| file.write FeaturesGffExporter.new(experiment).export } 
+  end
+
+  def write_predecessor_gff(experiment, path)
+    File.open(path, 'w') { |file| file.write PredecessorsGffExporter.new(experiment).export } 
   end
 
   def folder_name
