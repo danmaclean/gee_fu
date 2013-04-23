@@ -11,9 +11,9 @@ describe User do
     }.merge(overrides)
   end    
 
-  describe "#full_name" do
+  describe "#full_name_with_email" do
     it "is the user's full name" do
-      User.new(valid_attributes).full_name.should eq "Fred Bloggs"
+      User.new(valid_attributes).full_name_with_email.should eq "Fred Bloggs (fred@fred.com)"
     end
   end
 

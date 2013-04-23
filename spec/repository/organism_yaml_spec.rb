@@ -45,7 +45,7 @@ describe OrganismYaml do
           "Strain"            => "Col 0",
           "Pathovar"          => "A",
           "NCBI Taxonomy ID"  => "3702",
-          "Last updated by"   => "Fred Bloggs",
+          "Last updated by"   => "Fred Bloggs (fred@fred.com)",
           "Last updated on"   => "19 April 2013"
         }
       )

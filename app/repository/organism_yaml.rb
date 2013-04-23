@@ -15,7 +15,7 @@ class OrganismYaml
         "Strain"            => organism.strain,
         "Pathovar"          => organism.pv,
         "NCBI Taxonomy ID"  => organism.taxid.to_s,
-        "Last updated by"   => version_info.user_name,
+        "Last updated by"   => version_info.user_name_with_email,
         "Last updated on"   => version_info.last_updated_on
       }
     }.to_yaml
