@@ -34,7 +34,7 @@ class FeaturesController < ApplicationController
     ##get the genome from the reference, only look in the same reference... 
     genome_id = Reference.find(old_feature.reference_id).genome_id
 
-    @feature.reference_id = Reference.find(:first, :conditions => {:genome_id => genome_id, :name => @feature.seqid} ) || old_feature.ref_id
+    @feature.reference_id = Reference.find(:first, :conditions => {:genome_id => genome_id, :name => @feature.seqid} ).id || old_feature.ref_id
     
     @feature.group = []
     if params[:feature][:group]
