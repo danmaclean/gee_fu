@@ -21,7 +21,7 @@ module GeeFu
       @app_config ||= {}
     end
 
-    app_config[:repository_directory] = "repository"
+    app_config[:repository_directory] = "gee_fu_data"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
