@@ -4,9 +4,9 @@ class VersionInfo
     @model = model
   end
 
-  def user_name
+  def user_name_with_email
     return "Unknown" unless User.exists?(model.last_updated_by)
-    User.find(model.last_updated_by).full_name
+    User.find(model.last_updated_by).full_name_with_email
   end
 
   def last_updated_on

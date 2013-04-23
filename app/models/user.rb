@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   has_paper_trail
 
-  def full_name
-    "#{first_name} #{last_name}" 
+  def full_name_with_email
+    "#{first_name} #{last_name} (#{email})" 
   end
 end
