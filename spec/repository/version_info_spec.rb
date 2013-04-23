@@ -35,9 +35,9 @@ describe VersionInfo do
   subject { VersionInfo.new(organism) }
 
   describe "with versioning", versioning: true do
-    describe "#user_name" do
-      it "is the name of the user who made the change" do
-        subject.user_name.should eq "Fred Bloggs"
+    describe "#user_name_with_email" do
+      it "is the name (and email) of the user who made the change" do
+        subject.user_name_with_email.should eq "Fred Bloggs (fred@fred.com)"
       end
     end
 
@@ -49,9 +49,9 @@ describe VersionInfo do
   end
 
   describe "without versioning", versioning: false do
-    describe "#user_name" do
+    describe "#user_name_with_email" do
       it "is 'Unknown'" do
-        subject.user_name.should eq "Unknown"
+        subject.user_name_with_email.should eq "Unknown"
       end      
     end    
 

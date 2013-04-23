@@ -10,7 +10,7 @@ class GenomeYaml
     {
       "genome" => {
         "Build version"   => genome.build_version,
-        "Last updated by" => version_info.user_name,
+        "Last updated by" => version_info.user_name_with_email,
         "Last updated on" => version_info.last_updated_on
       }
     }.to_yaml
