@@ -19,7 +19,7 @@ gem 'foreigner'
 gem 'paper_trail', '~> 2'
 
 gem 'sidekiq'
-gem 'whenever', require: false
+gem 'clockwork'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -28,7 +28,7 @@ group :assets do
 end
 
 group :test do
-  gem "cucumber-rails", require: false
+  gem "cucumber-rails", :require => false
   gem "database_cleaner"
   gem "rspec-rails"
   gem 'email_spec'
