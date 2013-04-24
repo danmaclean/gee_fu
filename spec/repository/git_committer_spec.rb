@@ -8,18 +8,15 @@ describe GitCommitter do
 
   describe "#commit" do
     it "changes to the data repo folder" do
-      Dir.should_receive(:chdir).with(full_repo_path)
       subject.commit
     end
 
     it "calls `git add .`" do
-      subject.should_receive(:`).with("git add '.'")
+      Dir.should_receive(:chdir).with(full_repo_path).ordered
+      subject.should_receive(:`).with("git add .").ordered
+      subject.should_receive(:`).with("git commit -am 'Update GeeFU data'").ordered
+      subject.should_receive(:`).with("git push origin master").ordered
       subject.commit
-    end
-
-    it "exists, testing is done manually" do
-      Grit::Repo.should_receive(:new).with(full_repo_path)
-      -> { subject.commit }.should_not raise_error
     end
   end
 end
