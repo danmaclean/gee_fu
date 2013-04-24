@@ -8,11 +8,11 @@ describe GitCommitter do
 
   describe "#commit" do
     it "changes to the data repo folder" do
+      Dir.should_receive(:chdir).with(full_repo_path)
       subject.commit
     end
 
     it "calls `git add .`" do
-      Dir.should_receive(:chdir).with(full_repo_path).ordered
       subject.should_receive(:`).with("git add .").ordered
       subject.should_receive(:`).with("git commit -am 'Update GeeFU data'").ordered
       subject.should_receive(:`).with("git push origin master").ordered
