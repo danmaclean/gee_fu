@@ -27,4 +27,8 @@ class Experiment < ActiveRecord::Base
   def meta_as_data_structure
     self.meta ? JSON::parse(self.meta) : nil
   end
+
+  def with_organism_and_genome
+    "#{genome.organism.local_name} / #{genome.build_version} / #{name}"
+  end
 end
