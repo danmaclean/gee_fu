@@ -28,8 +28,6 @@ class ExperimentsController < ApplicationController
   
   def new
     @experiment = Experiment.new
-    #@genomes = Genome.all
-    #respond @experiment
     respond_to do |format|
       format.html 
     end
