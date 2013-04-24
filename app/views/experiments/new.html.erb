@@ -3,53 +3,34 @@
 <h1>New experiment from GFF or BAM file</h1> 
 
 <div id="gff_experiment_data">
-	<h2>If you have a GFF File</h2>
-	<%= simple_form_for(@experiment, :html => {:multipart => true}) do |f| %>  
-		<p>  <%= f.label :name, "name (required)" %><br /> 
-			 <%= f.text_field :name %> <br />
-	  
-		<%= f.label :description, "description (required)" %><br />  
-		<%= f.text_field :description %> <br />
-	  	<%= f.label :gff_file, "GFF3 file of features  (required)"%><br />
-		<%= f.file_field :gff_file  %><br />
-		<%= f.label :yaml_file, "YAML file of metadata about this genome (optional - inherits from genome if omitted) "%><br />
-		<%= f.file_field :yaml_file %><br />
-		Select one of the genome build versions in this DB to attach these features to:<br />
-			<% genomes.each do |g|%><br />
-				<%= label :experiment, :genome_id, g.build_version, :value => g.id %>
-				<%= f.radio_button :genome_id, g.id %>
-			<% end %><br />  
-		Find parents for the features in this file? (Upload is quicker if all the features are parentless)<br />
-		<%= label :find_parents, "Yes"%>
-		<%= f.radio_button :find_parents, "find_parents", :checked => true %>
-		<%= label :find_parents, "No"%>
-		<%= f.radio_button :find_parents,  "dont_find" %><br />	
+	<legend>If you have a GFF File...</legend>
+	<%= simple_form_for(@experiment, :html => {:multipart => true, class: "form-horizontal" }) do |f| %>
+		<%= f.error_notification %>
+		<%=f.input :name, required: true%>
+		<%=f.input :description, required: true%>
+		<%=f.input :gff_file, as: :file, required: true, label: "GFF3 file of features"%>
+	  <%= f.input :genome_id, collection: Genome.all, prompt: "Select a genome build...", required: true %>
+		<%=f.input :yaml_file, as: :file, required: false, label: "YAML file of metadata about this genome", hint: "(inherits from genome if omitted)"%>
+	  <%= f.input :find_parents, collection: ["Yes", "No"], prompt: "Find parents", selected: "Yes", prompt: nil, label: "Find parents for the features in this file?", hint: "(Upload is quicker if all the features are parentless)" %>
 		<%= f.hidden_field :expected_file, :value => "gff" %>
-	</p>
-	 <p>  <%= f.submit "Create" %>  </p> 
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+   </div>
 	<% end %>
 </div>
 <div id="bam_experiment_data">
-	<h2>or if you have a BAM File</h2>
-	<%= simple_form_for(@experiment, :html => {:multipart => true}) do |f| %>  
-		<%#= f.error_messages %>  
-		<p>  <%= f.label :name, "name (required)" %><br /> 
-			 <%= f.text_field :name %> <br />
-	  
-		<%= f.label :description, "description (required)" %><br />  
-		<%= f.text_field :description %> <br />
-	  	<%= f.label :bam_file_path, "BAM file of features  (required)"%><br />
-		<%= f.text_field :bam_file_path %><br />
-		<%= f.label "YAML file of metadata about this genome (optional - inherits from genome if omitted) "%><br />
-		<%= f.file_field :yaml_file %><br />
-		Select one of the genome build versions in this DB to attach these features to:<br />
-			<% genomes.each do |g|%><br />
-				<%= label :experiment, :genome_id, g.build_version, :value => g.id %>
-				<%= f.radio_button :genome_id,  g.id %>
-			<% end %>  
+	<legend>...or if you have a BAM File</legend>
+	<%= simple_form_for(@experiment, :html => {:multipart => true, class: "form-horizontal"}) do |f| %>  
+	  <%= f.error_notification %>
+		<%=f.input :name, required: true%>
+		<%=f.input :description, required: true%>
+		<%=f.input :bam_file_path, required: true, label: "BAM file of features"%>
+	  <%= f.input :genome_id, collection: Genome.all, prompt: "Select a genome build...", required: true %>
+		<%=f.input :yaml_file, as: :file, required: false, label: "YAML file of metadata about this genome", hint: "(inherits from genome if omitted)"%>
 		<%= f.hidden_field :expected_file, :value => "bam" %>
-	</p>
-	 <p>  <%= f.submit "Create" %>  </p>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+   </div>
 	<% end %> 
 </div>
-<%= link_to 'Back', experiments_path %> 
+<%= link_to t('.cancel', :default => t("helpers.links.cancel")), experiments_path, :class => 'btn' %>
