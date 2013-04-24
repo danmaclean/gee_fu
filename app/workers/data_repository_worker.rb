@@ -3,6 +3,7 @@ require 'git_committer'
 
 class DataRepositoryWorker
   include Sidekiq::Worker
+  sidekiq_options :retry => false
 
   def perform
     RootRepository.new(repo_path).create
