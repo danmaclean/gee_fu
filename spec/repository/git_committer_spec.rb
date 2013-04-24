@@ -7,6 +7,16 @@ describe GitCommitter do
   subject { GitCommitter.new(full_repo_path) }
 
   describe "#commit" do
+    it "changes to the data repo folder" do
+      Dir.should_receive(:chdir).with(full_repo_path)
+      subject.commit
+    end
+
+    it "calls `git add .`" do
+      subject.should_receive(:`).with("git add '.'")
+      subject.commit
+    end
+
     it "exists, testing is done manually" do
       Grit::Repo.should_receive(:new).with(full_repo_path)
       -> { subject.commit }.should_not raise_error
