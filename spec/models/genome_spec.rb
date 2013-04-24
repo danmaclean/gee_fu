@@ -62,6 +62,14 @@ describe Genome do
 
   it_behaves_like "a model with user audits"
 
+  describe "#to_s" do
+    subject { Genome.new(valid_attributes) }
+
+    it "is the organism's local name / build version" do
+      subject.to_s.should eq "My favourite organism / TAIR 9"
+    end
+  end
+
   describe "#to_fasta" do
     let(:fasta_file_path) { "#{Rails.root}/spec/example_files/fasta/short.fna" }
 
