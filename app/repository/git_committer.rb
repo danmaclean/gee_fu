@@ -6,6 +6,7 @@ class GitCommitter
 
   def commit
     Dir.chdir(repo_path) do
+      return unless File.directory?('.git')
       `git add .`
       `git commit -am 'Update GeeFU data'`
       `git push origin master`
