@@ -1,7 +1,7 @@
 class GitCommitter
   attr_reader :repo_path
   def initialize(repo_path)
-    @repo_path
+    @repo_path = repo_path
   end
 
   def commit
