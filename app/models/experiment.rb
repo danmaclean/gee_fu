@@ -8,7 +8,7 @@ class Experiment < ActiveRecord::Base
   validate              :gff_file_or_bam_file_path_is_provided
   
   attr_accessor   :gff_file, :yaml_file, :expected_file, :find_parents, :merge
-  attr_accessible :name, :description, :gff_file, :bam_file_path, :genome_id, :find_parents, :expected_file, :meta
+  attr_accessible :name, :description, :gff_file, :bam_file_path, :genome_id, :find_parents, :expected_file, :meta, :yaml_file
 
   has_paper_trail
   
