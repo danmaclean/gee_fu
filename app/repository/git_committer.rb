@@ -6,9 +6,8 @@ class GitCommitter
 
   def commit
     `cd #{repo_path}`
-    `git add .` if $?.success?
-    `git commit -am 'Add GeeFU data'` if $?.success?
-    `git push origin master` if $?.success?
-    raise unless $?.success?
+    `git add .`
+    `git commit -am 'Add GeeFU data'`
+    `git push origin master`
   end
 end
