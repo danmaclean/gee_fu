@@ -20,7 +20,6 @@ gem 'paper_trail', '~> 2'
 
 gem 'sidekiq'
 gem 'whenever', require: false
-gem 'grit'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
