@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'fakefs/spec_helpers'
 require 'organism'
 require 'organism_repository'
+require 'organism_yaml'
 
 describe RootRepository do
   include FakeFS::SpecHelpers
@@ -34,11 +35,17 @@ describe RootRepository do
     context "when the repo folder exists" do
       before(:each) do
         FileUtils.mkdir_p(full_repo_path)
+        FileUtils.touch(repo_path_with(".gitignore"))
       end
 
       it "sanity checks that the configured repository folder is there" do
         subject.create
         File.directory?(full_repo_path).should be_true
+      end
+
+      it "sanity checks that the configured .gitignore is there" do
+        subject.create
+        File.exists?(repo_path_with(".gitignore")).should be_true
       end
     end
   end
@@ -140,6 +147,19 @@ describe RootRepository do
       it "removes any top level folders that aren't related to Organisms" do
         subject.create
         directory_listing.should be_empty
+      end
+    end
+
+    context "when there is a .gitignore in the top level repo folder" do
+      before(:each) do
+        FileUtils.mkdir_p(repo_path)
+        FileUtils.touch(repo_path_with(".gitignore"))
+        directory_listing.should =~ [ '.gitignore' ]
+      end
+
+      it "leaves the .gitignore alone" do
+        subject.create
+        directory_listing.should =~ [ '.gitignore' ]
       end
     end
   end
