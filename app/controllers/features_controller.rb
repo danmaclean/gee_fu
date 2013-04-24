@@ -225,49 +225,32 @@ class FeaturesController < ApplicationController
   end
   
   def summary
-        flash[:error] = []
-    unless params[:genome_id]
-      flash[:error] << 'A genome build must be selected'
-    end
-    unless params[:experiment]
-      flash[:error] << 'An experiment must be selected'
-    end
-    if params[:reference].length == 0
-      flash[:error] << 'A reference sequence name must be provided' 
-    end
-    params[:start] = 0 if params[:start].nil?
-    params[:end] = 0 if params[:end].nil?
-    if params[:start] =~ /\D/
-      flash[:error] << 'Start must be a positive numeric value'
-    end
-    if params[:end] =~ /\D/
-      flash[:error] << 'End must be a positive numeric value'
-    end
-    
-    if params[:end] < params[:start]
-      flash[:error] << 'End value must be greater than (or equal to) start value'
-    end
+    reference     = params[:reference]
+    start         = params[:start].presence || 0
+    _end          = params[:end].presence || 0
+    experiment_id = params[:experiment]
+
+    flash[:error] = []
+
+    flash[:error] << 'An experiment must be selected'unless experiment_id.present?
+    flash[:error] << 'A reference sequence name must be provided' if reference.length == 0
+    flash[:error] << 'Start must be a positive numeric value' if start =~ /\D/
+    flash[:error] << 'End must be a positive numeric value' if _end =~ /\D/
+    flash[:error] << 'End value must be greater than (or equal to) start value'if _end < start
      
-    if not flash[:error].empty?
-      redirect_to :back
-      return
-    end
-    
-    
+    redirect_to(:back) and return unless flash[:error].empty?
 
-    
-  #method for returning preformatted feature objects in a range for plotting by the javascript feature renderer. Groups features with a parent that have type in list Features::aggregate_features.
-    ref = Reference.find(:first, :conditions => {:genome_id => params[:genome_id], :name => params[:reference]})
-    @features = []
-    @start = params[:start]
-    @end = params[:end]
-    #seen_features = []
-    @features = Feature.find_in_range_no_overlap(ref.id, params[:start], params[:end], params[:experiment]) #.each do |f|
-      #@features << f.descendants
-      #if we have already used 
-    #end
+    experiment  = Experiment.find(experiment_id)
+    genome_id   = experiment.genome.id
+
+    # method for returning preformatted feature objects in a range for plotting by the javascript feature renderer. 
+    # Groups features with a parent that have type in list Features::aggregate_features.
+    ref       = Reference.find(:first, :conditions => {:genome_id => genome_id, :name => reference})
+    @start    = start
+    @end      = _end
+    @features = Feature.find_in_range_no_overlap(ref.id, start, _end, experiment.id)
+
     summary_img
-
   end
   
   #get a png of an svg from a bio-svgenes render of the features, dumps it in public pngs for
