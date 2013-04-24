@@ -7,12 +7,13 @@ module GeeFuHelpers
     click_button "Create"
   end
 
-  def add_experiment(name, description, gff_file, genome_build)
+  def add_experiment(name, description, gff_file, genome_build, config_file=nil)
     within "div#gff_experiment_data" do
-      fill_in("name (required)", :with => name)
-      fill_in("description (required)", :with => description)
+      fill_in("Name (required)", :with => name)
+      fill_in("Description (required)", :with => description)
       attach_file("GFF3 file of features (required)", "#{Rails.root}/#{gff_file}")
-      choose(genome_build)
+      attach_file "YAML file of metadata about this genome", "#{Rails.root}/#{config_file}" if config_file.present?
+      select genome_build, from: "Genome (required)"
       click_button "Create"
     end
   end
