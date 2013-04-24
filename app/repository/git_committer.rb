@@ -5,9 +5,10 @@ class GitCommitter
   end
 
   def commit
-    `cd #{repo_path}`
-    `git add .`
-    `git commit -am 'Add GeeFU data'`
-    `git push origin master`
+    Dir.chdir(repo_path) do
+      `git add .`
+      `git commit -am 'Update GeeFU data'`
+      `git push origin master`
+    end
   end
 end
