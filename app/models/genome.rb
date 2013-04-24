@@ -16,6 +16,10 @@ class Genome < ActiveRecord::Base
 
   has_paper_trail
 
+  def to_s
+    "#{organism.local_name} / #{build_version}"
+  end
+
   def to_fasta
     references.map { |reference|
       Bio::Sequence::NA.new(reference.sequence.sequence).to_fasta(reference.name, 60)
@@ -28,11 +32,5 @@ class Genome < ActiveRecord::Base
   
   def meta_as_data_structure
     self.meta ? JSON::parse(self.meta) : nil
-  end
-
-  private
-
-  def combined_sequences
-    references.map { |ref| ref.sequence.sequence }.join
   end
 end
