@@ -33,6 +33,14 @@ describe Experiment do
 
   it_behaves_like "a model with user audits"
 
+  describe "#with_organism_and_genome" do
+    subject { Experiment.new(valid_attributes) }
+
+    it "concatenates the organism name, the genome build version and the experiment name" do
+      subject.with_organism_and_genome.should eq "My favourite organism / TAIR 9 / TAIR 9 GFF"
+    end
+  end
+
   describe "persistence", versioning: true do
     subject { Experiment.new(valid_attributes) }
 
