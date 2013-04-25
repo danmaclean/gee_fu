@@ -2,6 +2,21 @@ require 'spec_helper'
 
 describe Feature do
   include FastaGffSetup
+
+  let(:user) {  
+    user = User.new(
+      email:                  "fred@fred.com",
+      password:               "password",
+      password_confirmation:  "password",
+      first_name:             "Fred",
+      last_name:              "Bloggs",
+      admin:                   true
+    )
+    user.confirm!
+    user.save
+    user
+  }
+
   let(:organism) { 
     Organism.create!(
       :local_name => "My favourite organism",
@@ -53,14 +68,37 @@ describe Feature do
     }.merge(overrides)
   end
 
-  describe "#to_gff (a simple spec to play with the data format)" do
+  it_behaves_like "a model with user audits"
+
+  describe "#to_gff (with user making the change)", versioning: true do
     before(:each) do
-      import_fasta
-      import_gff
+      PaperTrail.whodunnit = user.id
+      Timecop.freeze(Time.zone.local(2013, 4, 19, 12, 0, 0)) do
+        import_fasta
+        import_gff
+      end
     end
 
-    it "outputs the feature data as GFF" do
+    it "outputs the feature data as GFF", versioning: true do
       gff_output = Feature.last.to_gff
+
+      "#{gff_output}\n".should eq <<-GFF
+Chr1\tTAIR9\tthree_prime_UTR\t11649\t11863\t.\t-\t.\tParent=AT1G01030.1\tupdated_by=Fred Bloggs (fred@fred.com);updated_on=19 April 2013
+GFF
+    end
+  end
+
+  describe "#to_gff (with user making the change)", versioning: false do
+    before(:each) do
+      Timecop.freeze(Time.zone.local(2013, 4, 19, 12, 0, 0)) do
+        import_fasta
+        import_gff
+      end
+    end
+
+    it "outputs the feature data as GFF without user information" do
+      gff_output = Feature.last.to_gff
+
       "#{gff_output}\n".should eq <<-GFF
 Chr1\tTAIR9\tthree_prime_UTR\t11649\t11863\t.\t-\t.\tParent=AT1G01030.1
 GFF
