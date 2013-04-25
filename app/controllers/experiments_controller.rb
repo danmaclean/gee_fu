@@ -36,7 +36,7 @@ class ExperimentsController < ApplicationController
   def create
     require 'bio'
     @experiment = Experiment.new(params[:experiment])
-    genome = Genome.find(@experiment.genome_id)
+    genome      = Genome.find(params[:experiment][:genome_id])
     
     #format the meta data string from a provided yaml file or get it from the parent genome
     if @experiment.yaml_file
@@ -70,8 +70,8 @@ class ExperimentsController < ApplicationController
         end
 
        attribute = JSON.generate(record.attributes)
-
-        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{@experiment.genome_id}"])
+        Rails.logger.info record.seqname
+        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
 
         feature = Feature.new(
           :group => "#{attribute}",
