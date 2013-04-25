@@ -5,6 +5,8 @@
 #Implements methods for finding features in ranges and returning information.
 #Also defines some methods for AnnoJ formatting
 class Feature < ActiveRecord::Base
+  include Concerns::Versioning
+
   belongs_to :assembly
   belongs_to :experiment
   has_and_belongs_to_many :parents
@@ -237,6 +239,17 @@ class Feature < ActiveRecord::Base
     self.strand = '.' if self.strand == ''
     self.phase = '.' if self.phase == ''
     
-    "#{name}\t#{self.source}\t#{self.feature}\t#{self.start}\t#{self.end}\t#{self.score}\t#{self.strand}\t#{self.phase}\t#{attributes.join(';')}"
+    "#{name}\t#{self.source}\t#{self.feature}\t#{self.start}\t#{self.end}\t#{self.score}\t#{self.strand}\t#{self.phase}\t#{attributes.join(';')}#{version_info_as_gff}"
+  end
+
+  private
+
+  def version_info_as_gff
+    return if version_info.unknown?
+    "\tupdated_by=#{version_info.user_name_with_email};updated_on=#{version_info.last_updated_on}"
+  end
+
+  def version_info
+    @version_info ||= VersionInfo.new(self)
   end
 end
