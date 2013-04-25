@@ -246,7 +246,7 @@ class Feature < ActiveRecord::Base
 
   def version_info_as_gff
     return if version_info.unknown?
-    "\tupdated_by=#{version_info.user_name_with_email};updated_on=#{version_info.last_updated_on}"
+    ";updated_by=#{version_info.user_name_with_email};updated_on=#{version_info.last_updated_on}"
   end
 
   def version_info
