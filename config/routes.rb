@@ -19,6 +19,18 @@ GeeFu::Application.routes.draw do
       post "/attribute", to: "features#search_by_attribute",  as: :feature_search_by_attribute
       post "/summary",   to: "features#summary",              as: :feature_search_by_range
     end
+
+    scope "/tools" do
+      post "/sequence",  to: "tools#genomic_sequence",        as: :tools_genomic_sequence
+    end
+
+    scope "/genomes" do
+      get "/reference_list", to: "genomes#reference_list"
+    end
+
+    scope "/experiments" do
+      get "/reference_list", to: "experiments#reference_list"
+    end
   end
 
   scope "/features/annoj" do
