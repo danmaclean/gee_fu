@@ -15,8 +15,9 @@ GeeFu::Application.routes.draw do
     resources :tools
 
     scope "/features/search" do
-      post "/id",        to: "features#search_by_id", as: :feature_search_by_id
-      post "/attribute", to: "features#search_by_attribute", as: :feature_search_by_attribute
+      post "/id",        to: "features#search_by_id",         as: :feature_search_by_id
+      post "/attribute", to: "features#search_by_attribute",  as: :feature_search_by_attribute
+      post "/summary",   to: "features#summary",              as: :feature_search_by_range
     end
   end
 

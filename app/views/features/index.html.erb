@@ -20,23 +20,14 @@
 </div>
 
 <legend>Get features by range</legend>
-<%= form_tag( {:controller => "features", :action => "summary"}, :method => "post", :multipart => true, :id => "by_range" ) %>
-<%= label(:reference, :id, "Find features by sequence region") %><br />
-<%= label(:genome, :id, "Select genome build") %><br />
-<% @genomes.each do |g| %>
-	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />".html_safe %> 
-    <%= label_tag(:genome_id, "#{g.build_version}") %>
-<% end %><br/>
-<%= label(:experiment, :id, "Select experiment") %><br />
-<% @experiments.each do |e| %>
-	<%= radio_button_tag("experiment", "#{e.id}") %> <%= label_tag( "#{e.id}", "#{e.name}")%>
-<% end %><br /><br/>
-<%= label(:reference_label, :reference_label, "Enter the name of the reference sequence") %><br />
-<%= text_area_tag(:reference, "", :size => "40 x 1", :id => 'chromosome_list') %> <br />
+	<%= form_for(Feature.new, url: feature_search_by_range_path, html: { id: "by_range" } ) do |f| %>
+		<%= select_tag "experiment", options_from_collection_for_select(Experiment.all, "id", "with_organism_and_genome"), prompt: "Select experiment...", class: "features-experiment" %>
+	<%= label_tag :reference,  "Enter the name of the reference sequence:" %>
+	<%= text_field_tag :reference %>
 
-<%= label(:reference, :coord, "Enter the start and end of the search region") %><br />
-<%= text_area_tag(:start, "0", :size => "10 x 1")%> <%= text_area_tag(:end, "0", :size => "10 x 1")%><br />
-
-<br />
-<%= submit_tag "get features" %>
-</form>
+	<%= label(:start, :coord, "Enter the start and end of the search region:") %>
+	<%= text_field_tag :start %> 
+	<%= text_field_tag :end %> 
+	<br/>
+  <%= f.submit "Get features", :class => 'btn btn-action' %>
+<% end %>
