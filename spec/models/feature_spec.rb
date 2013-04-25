@@ -83,7 +83,7 @@ describe Feature do
       gff_output = Feature.last.to_gff
 
       "#{gff_output}\n".should eq <<-GFF
-Chr1\tTAIR9\tthree_prime_UTR\t11649\t11863\t.\t-\t.\tParent=AT1G01030.1\tupdated_by=Fred Bloggs (fred@fred.com);updated_on=19 April 2013
+Chr1\tTAIR9\tthree_prime_UTR\t11649\t11863\t.\t-\t.\tParent=AT1G01030.1;updated_by=Fred Bloggs (fred@fred.com);updated_on=19 April 2013
 GFF
     end
   end
