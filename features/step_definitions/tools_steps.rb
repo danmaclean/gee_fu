@@ -3,16 +3,12 @@ When(/^I am ready to extract sequence data$/) do
 end
 
 When(/^I extract the "(.*?)" sequence starting at "(.*?)" and ending at "(.*?)" with "(.*?)" strand for the "(.*?)" genome build$/) do |sequence, starting, ending, strand, genome_build|
-  choose genome_build
+  select genome_build, from: :genome_id
   fill_in "reference", with: sequence
   fill_in "start", with: starting
   fill_in "end", with: ending
-  if strand == "+"
-    choose "strand__"
-  else
-    choose "strand_-"
-  end
-  click_button "extract this sequence"
+  select strand, from: :strand
+  click_button "Extract sequence"
 end
 
 Then(/^I should see the extracted sequence$/) do

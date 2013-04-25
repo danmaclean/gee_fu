@@ -1,18 +1,13 @@
 <legend>Export Sequence Fragment</legend>
-<%= form_tag( {:controller => "tools", :action => "genomic_sequence"}, :method => "post" ) %>
-<%= label(:reference, :id, "Extract a genome sequence region") %><br />
-<%= label(:genome, :id, "Select genome build") %><br />
-<% @genomes.each do |g| %>
-	<%= "<input id=\"genome_id_#{g.id}\" name=\"genome_id\" type=\"radio\" value=\"#{g.id}\" class=\"genome_button\" onMouseUp=get_chromosomes(\"#{g.id}\") />".html_safe %> 
- <%= label_tag("genome_id_#{g.id}", "#{g.build_version}") %>
-<% end %><br/>
-<%= label(:reference, :id, "Type in the reference sequence from which to extract") %><br />
-<%= text_area_tag(:reference, "Enter name of reference sequence here", :size => "40 x 1", :id => 'chromosome_list') %><br />
-<%= label(:reference, :coord, "Type in the start and end") %><br />
-<%= text_area_tag(:start, "start", :size => "10 x 1")%> <%= text_area_tag(:end, "end", :size => "10 x 1")%><br />
-<%= label(:reference, :strand, "Select the strand") %><br />
-<%= radio_button_tag(:strand, '+') %>  <%= label_tag(:strand_plus, '+') %>
-<%= radio_button_tag(:strand, '-') %>  <%= label_tag(:strand_minus, '-') %>
-<br />
-<%= submit_tag "extract this sequence" %>
-</form>
+<%= simple_form_for Genome.new, url: tools_genomic_sequence_path, html: { id: "genomic_sequence" } do |f| %>
+  <%= f.input :id, collection: Genome.all, prompt: "Select a genome build...", label: false %>
+  <%= label_tag :reference,  "Enter the name of the reference sequence:" %>
+  <%= text_field_tag :reference %>
+  <%= label(:start, :coord, "Enter the start and end to extract:") %>
+  <%= text_field_tag :start, nil, placeholder: "One or higher" %> 
+  <%= text_field_tag :end, nil, placeholder: "Higher than start value" %> 
+  <br/>  
+  <%= select_tag "strand", options_for_select([["Plus (+)", "+"], ["Minus (-)", "-"]]), prompt: "Select strand..." %>
+  <br/>
+  <%= f.submit "Extract sequence", :class => 'btn btn-action' %>
+<% end %>
