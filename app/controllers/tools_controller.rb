@@ -1,30 +1,29 @@
 #Implements a controller for custom web tools that act on the database
-class ToolsController < ApplicationController
-  
+class ToolsController < ApplicationController  
   def index
     @genomes = Genome.find(:all)
     @experiments = Experiment.find(:all)
   end
+
   #Returns a web form view that allows definition of a section of genomic reference sequence
   # use /tools/genome_sequence
   def genomic_sequence
-    ref = Reference.find(:first, :conditions => {:name => params[:reference] , :genome_id => params[:genome_id] } )
+    genome_id    = params[:genome][:id]
+    reference_id = params[:reference]
+    strand       = params[:strand].presence || '+'
+
+    ref = Reference.find(:first, :conditions => {:name => reference_id, :genome_id => genome_id } )
     
-    @result = Hash.new
-    
-    if not ref.nil?
-      seq = Bio::Sequence::NA.new("#{ref.sequence.sequence.to_s}")
-      start = params[:start].to_i ||= 1
-      stop = params[:end].to_i ||= seq.length
-      @subseq = seq.subseq(start, stop)
-      strand = params[:strand] ||= 'plus'
-      if strand == 'minus'
-        @subseq = @subseq.reverse_complement
-      end
+    if ref.present?
+      seq     = Bio::Sequence::NA.new("#{ref.sequence.sequence.to_s}")
+      start   = params[:start].presence || 1
+      stop    = params[:end].presence   || seq.length
+      @subseq = seq.subseq(start.to_i, stop.to_i)
+      @subseq = @subseq.reverse_complement if strand == '-'
     end
-    id = ref.name + ' ' + start.to_s + '..' + stop.to_s + ' ' + strand
-    render :text => @subseq.to_fasta(id, 60), :content_type => 'text/plain'
-    
+
+    id = "#{ref.name} #{start}..#{stop} #{strand}"
+    render :text => @subseq.to_fasta(id, 60), :content_type => 'text/plain'    
   end
   
   def export

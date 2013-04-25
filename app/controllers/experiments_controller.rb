@@ -262,5 +262,9 @@ class ExperimentsController < ApplicationController
       format.html { redirect_to(experiments_url) }
     end
   end
-  
+
+  def reference_list
+    genome = Experiment.find(params[:id]).genome
+    respond genome.references.collect {|x| x.name }
+  end
 end 
