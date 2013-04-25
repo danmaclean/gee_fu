@@ -46,6 +46,12 @@ describe VersionInfo do
         subject.last_updated_on.should eq "19 April 2013"
       end
     end
+
+    describe "#unknown?" do
+      it "is false" do
+        subject.should_not be_unknown
+      end
+    end
   end
 
   describe "without versioning", versioning: false do
@@ -58,6 +64,12 @@ describe VersionInfo do
     describe "#last_updated_on" do
       it "is 'Unknown'" do
         subject.last_updated_on.should eq "Unknown"
+      end
+    end
+
+    describe "#unknown?" do
+      it "is true" do
+        subject.should be_unknown
       end
     end
   end
