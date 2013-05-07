@@ -1,3 +1,14 @@
+<legend>Set Up AnnoJ</legend>
+<% if current_user.admin? %>
+  <%= simple_form_for Genome.new, url: tools_set_up_annoj_path, html: { id: "set_up_annoj" } do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :id, collection: Genome.all, prompt: "Select a genome build...", required: true, label: false %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+  </div>
+  <% end %>
+<% end %>
+
 <legend>Export Sequence Fragment</legend>
 <%= simple_form_for Genome.new, url: tools_genomic_sequence_path, html: { id: "genomic_sequence" } do |f| %>
   <%= f.input :id, collection: Genome.all, prompt: "Select a genome build...", label: false %>

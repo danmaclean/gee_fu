@@ -1,24 +1,45 @@
-What is Gee Fu?
-Gee Fu is a Ruby on Rails based RESTful web-service application that stores and serves sequence assembly and genome feature data on request. Gee Fu It is ideally suited to serving large amounts of data such as those from high-throughput sequencing experiments via samtools-ruby and BAM files. GeeFu can be used in conjunction with web-service viewports such as AnnoJ to create very fast, data-rich, attractive, RDBMS agnostic genome browsers that can be easily extended into fuller custom web-applications using the powerful Rails framework.
+## What is Gee Fu?
+Gee Fu is a Ruby on Rails based RESTful web-service application that stores and serves sequence assembly and genome feature data on request. Gee Fu is ideally suited to serving large amounts of data such as those from high-throughput sequencing experiments via samtools-ruby and BAM files. GeeFu can be used in conjunction with web-service viewports such as AnnoJ to create very fast, data-rich, attractive, RDBMS agnostic genome browsers that can be easily extended into fuller custom web-applications using the powerful Rails framework.
 
 
-How Gee Fu fits into the web service world
+## How Gee Fu fits into the web service world
 Gee Fu is an application centred around a database schema that holds GFF3 formatted data. It has been designed with the needs of researchers wanting to keep and annotate sequence and feature data. In the jargon of web applications it is the Model and Controller of the Model View Controller framework.  On request from a web service, script or the built-in web forms it will search the database on the basis of the parameters of the request and return a result. As an instance of a Rails application Gee Fu can be used with any type of RDBMS currently supported by Rails without modification. At this stage in development Gee Fu is capable of receiving and handling requests from AnnoJ , a web service based viewing engine for genomic data. It can return JSON data which AnnoJ is able to render. We anticipate being able to serve up data in formats suitable for different applications as development progresses and we become aware of other rendering engines and web services that request data. 
 
 
-Setting up Gee Fu
+## Setting up Gee Fu
 
 Gee Fu requires a working internet connection and the following software and packages to be available before installation
 
-Ruby  1.8.x (not Ruby 1.9.x)
-Rails  2.3.x (not Rails 3.x.x)
+** Pre-requisites for installation **
 
-These rubygems
-BioRuby 1.3.1 or later
-JSON 
-bio-samtools
-
-You will also require a RDBMS such as mySQL, ORACLE, PostGreSQL 
+* Install [rvm](https://rvm.io/) using:
+  `\curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled --ruby=1.9.3-p286`
+* Install redis (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
+  `brew install redis`
+* Install git (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
+  `brew install git`
+* Install postgres (on OSX use [PostgresApp](http://postgresapp.com/))
+* Clone the GeeFU repo
+  `git clone git://github.com/danmaclean/gee_fu.git .`
+* `cd gee_fu`
+* Accept the .rvmrc as trusted
+* Install bundler
+  `gem install bundler`
+* Setup the repo
+  `bundle install`
+* Signup for a [Mandrill](http://mandrill.com/) account and grab an API key
+* Create a .env file in the root folder with:
+```
+  EMAIL_SENDER=My Name <me@example.com>
+  MANDRILL_USERNAME=me@example.com
+  MANDRILL_APIKEY=[insert API key]
+```
+* Create a Postgres user called gee_fu with no password
+* Run `rake db:setup`
+* Follow the instructions at README_FOR_DATA.mdown
+* Start the server with `foreman start`
+* Visit http://localhost:3000
+* Once you've signed up as the first user use `rake admin:set email=me@example.com` to set your account as an admin to add Organisms
 
 
 Schema
@@ -31,14 +52,5 @@ Where to find more info
 If you get really frustrated with the software, feel free to complain to me dan.maclean@tsl.ac.uk. A lot of your initial problems will be answered in the Rails community pages, please look there if your problem looks like it might be related to Rails more directly than this particular instance of a Rails app.
 
 
-
-Setup
-rake db:create
-rake db:schema:load
-script/server
-..then upload data via web forms at http://localhost:3000/begin
-
-More Information
-Please read the PDF document, doc/manual.pdf
 
 

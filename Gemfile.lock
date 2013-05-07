@@ -262,7 +262,6 @@ DEPENDENCIES
   database_cleaner
   devise
   email_spec
-  foreigner
   fakefs
   foreigner
   foreman
