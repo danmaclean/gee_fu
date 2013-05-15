@@ -1,5 +1,6 @@
 * `mkdir gee_fu_data`
 * `cd gee_fu_data`
+* `git init`
 * `echo .DS_Store >> .gitignore`
 * `git add .`
 * `git commit -am 'Setup GeeFU data repository'`

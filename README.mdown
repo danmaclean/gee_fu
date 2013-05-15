@@ -16,6 +16,7 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
   `\curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled --ruby=1.9.3-p286`
 * Install redis (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
   `brew install redis`
+* Follow instructions given by `brew info redis` to have launchd start redis at login
 * Install git (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
   `brew install git`
 * Install postgres (on OSX use [PostgresApp](http://postgresapp.com/))
@@ -29,16 +30,19 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
   `bundle install`
 * Signup for a [Mandrill](http://mandrill.com/) account and grab an API key
 * Create a .env file in the root folder with:
+
 ```
-  EMAIL_SENDER=My Name <me@example.com>
-  MANDRILL_USERNAME=me@example.com
-  MANDRILL_APIKEY=[insert API key]
+EMAIL_SENDER=My Name <me@example.com>
+MANDRILL_USERNAME=me@example.com
+MANDRILL_APIKEY=[insert API key]
 ```
+
 * Create a Postgres user called gee_fu with no password
+* Change the attributes of Postgres user gee_fu to allow database creation `ALTER USER gee_fu CREATEDB;`
 * Run `rake db:setup`
 * Follow the instructions at README_FOR_DATA.mdown
-* Start the server with `foreman start`
-* Visit http://localhost:3000
+* Start the gee-fu server with `foreman start`
+* Visit http://localhost:5000
 * Once you've signed up as the first user use `rake admin:set email=me@example.com` to set your account as an admin to add Organisms
 
 
