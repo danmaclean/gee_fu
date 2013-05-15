@@ -29,9 +29,11 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
   `bundle install`
 * Signup for a [Mandrill](http://mandrill.com/) account and grab an API key
 * Create a .env file in the root folder with:
-`EMAIL_SENDER=My Name <me@example.com>`
-  `MANDRILL_USERNAME=me@example.com`
-  `MANDRILL_APIKEY=[insert API key]`
+```
+ 	 EMAIL_SENDER=My Name <me@example.com>
+	 MANDRILL_USERNAME=me@example.com
+	 MANDRILL_APIKEY=[insert API key]
+```
 * Create a Postgres user called gee_fu with no password
 * Run `rake db:setup`
 * Follow the instructions at README_FOR_DATA.mdown
