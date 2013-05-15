@@ -16,6 +16,7 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
   `\curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled --ruby=1.9.3-p286`
 * Install redis (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
   `brew install redis`
+* Follow instructions given by `brew info redis' to have launchd start redis at login
 * Install git (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
   `brew install git`
 * Install postgres (on OSX use [PostgresApp](http://postgresapp.com/))
