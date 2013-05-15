@@ -41,7 +41,6 @@ MANDRILL_APIKEY=[insert API key]
 * Change the attributes of Postgres user gee_fu to allow database creation `ALTER USER gee_fu CREATEDB;`
 * Run `rake db:setup`
 * Follow the instructions at README_FOR_DATA.mdown
-* Open a new terminal and start redis with `redis-server`
 * Start the gee-fu server with `foreman start`
 * Visit http://localhost:5000
 * Once you've signed up as the first user use `rake admin:set email=me@example.com` to set your account as an admin to add Organisms
