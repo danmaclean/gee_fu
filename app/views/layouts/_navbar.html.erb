@@ -1,7 +1,10 @@
 <% if user_signed_in? %>
-  <div class="navbar">
+
+  <div class="navbar navbar-inverse">
     <div class="navbar-inner">
       <ul id="nav_menu" class="nav">
+
+        <li> <a href="/">Home</a></li>
         <% if current_user.admin? %>
           <li><a href="<%=organisms_path%>">Samples</a></li>
         <% end %>
@@ -9,11 +12,30 @@
           <li><a href="<%=genomes_path%>">Genome Builds</a></li>
           <li><a href="<%=experiments_path%>">Annotation Experiments</a></li>
           <li><a href="<%=features_path%>">Features</a></li>
-          <li><a href="/tools">Tools</a></li>
-          <li><a href="/browse" target="_blank">Gee Fu Browse </a></li>
+          <li><a href="/tools">Tools</a>
+
+                <ul>
+                    	<li>
+                            	<a href="/sequenceserver">SequenceServer</a>
+                        </li>
+                        <li>
+                            	<li><a href="/browse" target="_blank">Gee Fu Browse </a></li>
+                        </li>
+                </ul>
+        </li>
+
+
         <% end %>
-        <li><a href=<%=edit_user_registration_path%>><i class="icon-wrench icon-white"></i>My Account</a></li>
-        <li><a href=<%=destroy_user_session_path%>><i class="icon-user icon-white"></i>Sign Out</a></li>
+        <li><a href="#"><i class="icon-user icon-white"></i> Signed In</a>
+                <ul>
+                    	<li>
+                            	<a href=<%=edit_user_registration_path%>><i class="icon-wrench icon-white"></i> My Account</a>
+                        </li>
+                        <li>
+                            	<a href=<%=destroy_user_session_path%>>Sign Out</a>
+                        </li>
+                </ul>
+        </li>
       </ul>
     </div>
   </div>
