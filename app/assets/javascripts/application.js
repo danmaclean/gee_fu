@@ -5,3 +5,4 @@
 //= require jquery.bgiframe.min
 //= require bootstrap.filestyle
 //= require_tree .
+//= require flat-ui
