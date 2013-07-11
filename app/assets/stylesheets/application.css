@@ -2,7 +2,6 @@
  *= require_self
  *= require jquery.ui.autocomplete
  *= require_tree .
- *= require twitter-bootstrap-static/sprites
  *= require flat-ui
  *= require 'main'
  */
