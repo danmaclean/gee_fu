@@ -42,6 +42,10 @@ GeeFu::Application.routes.draw do
     get  "/:id", to: "genomes#annoj"
   end
 
+SequenceServer::App.config_file = "config/sequenceserver.conf"
+SequenceServer::App.init
+mount SequenceServer::App, :at => "sequenceserver"
+
   # TODO review these for security
   resources :references
   match 'features/objects' => 'features#objects'
