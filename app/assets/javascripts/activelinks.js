@@ -3,7 +3,7 @@ $(document).ready(function () {
 	 $(function(){
 		 
 		 var url = window.location.pathname;  
-		 var activePage = url.substring(url.lastIndexOf('/')+1);
+		 var activePage = url.substring(url.lastIndexOf('/'));
 		 
 	     var pageLink = document.URL;
 	     console.log(activePage);
