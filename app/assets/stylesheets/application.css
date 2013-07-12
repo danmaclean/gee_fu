@@ -3,5 +3,5 @@
  *= require jquery.ui.autocomplete
  *= require_tree .
  *= require flat-ui
+ *= require zmain
  */
-@import url("zmain.css");
