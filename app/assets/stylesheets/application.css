@@ -1,8 +1,7 @@
 /*
  *= require_self
  *= require jquery.ui.autocomplete
- *= require_tree .
  *= require flat-ui
- *= require_tree ./custom
+ *= require zmain
  */
  
