@@ -13,7 +13,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'devise'
 gem 'twitter-bootstrap-rails'  
-gem 'flatui-rails'
+gem "flatui-rails", "~> 0.0.4"
 gem 'simple_form'
 gem 'squeel'
 gem 'foreigner'
