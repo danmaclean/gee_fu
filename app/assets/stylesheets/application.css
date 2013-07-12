@@ -3,4 +3,6 @@
  *= require jquery.ui.autocomplete
  *= require_tree .
  *= require_tree ./custom
+ *= require flat-ui
  */
+ 
