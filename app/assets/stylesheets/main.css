@@ -8,6 +8,10 @@ body {
 text-align:center;
 }
 
+.makeitwhite {
+	background-color: white;
+}
+
 .jumbotron h1 {
 font-family: 'Lily Script One', cursive;
 padding: 12px;
