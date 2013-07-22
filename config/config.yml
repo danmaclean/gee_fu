@@ -20,7 +20,7 @@ active:
     - 1
     - 2
 #genome - the service that knows about the genome
-genome: genomes/annoj/1
+genome: genomes/annoj/7
 # bookmarks - the service that keeps the bookmarks
 bookmarks: 
 #css - a list of services or locations for css (optional)

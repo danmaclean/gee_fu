@@ -45,6 +45,15 @@ MANDRILL_APIKEY=[insert API key]
 * Visit http://localhost:5000
 * Once you've signed up as the first user use `rake admin:set email=me@example.com` to set your account as an admin to add Organisms
 
+## Running as a service (linux)
+
+* 'sudo foreman export --app geefu --user UserToRunAs upstart /etc/init'
+* You may then start/stop via 'start geefu' / 'stop geefu'
+* Logs will be available via /var/log/geefu/
+
+## Development log
+
+The development log (log/development.log) spits out almost everything that happens in geefu. It is reccomended to add it to log rotation
 
 ## Setting up AnnoJ
 The AnnoJ view requires a JSON format configuration file, to tell it about the genome and the service etc.  Gee Fu allows you to maintain a YAML file and convert it to the `RAILS_ROOT/public/javascripts/config.js` AnnoJ uses. Edit the file `RAILS_ROOT/config/config.yml` to set up the AnnoJ view.
