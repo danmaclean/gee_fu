@@ -1,5 +1,6 @@
 development:
   adapter: postgresql
+  prepared_statements: false
   encoding: unicode
   database: gee_fu_development
   pool: 5
@@ -8,6 +9,7 @@ development:
 
 test:
   adapter: postgresql
+  prepared_statements: false
   encoding: unicode
   database: gee_fu_test
   pool: 5
@@ -16,6 +18,7 @@ test:
 
 cucumber:
   adapter: postgresql
+  prepared_statements: false
   encoding: unicode
   database: gee_fu_test
   pool: 5
