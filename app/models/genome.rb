@@ -21,13 +21,8 @@ class Genome < ActiveRecord::Base
   end
 
   def to_fasta
-    #references.map { |reference|
-    #  Bio::Sequence::NA.new(reference.sequence.sequence).to_fasta(reference.name, 60)
-    #}.join("\n")
-    
-    #to_fasta is deprecated
     references.map { |reference|
-      Bio::Sequence::NA.new(reference.sequence.sequence).output_fasta(reference.name, 60)
+      Bio::Sequence::NA.new(reference.sequence.sequence).to_fasta(reference.name, 60)
     }.join("\n")
   end
   
