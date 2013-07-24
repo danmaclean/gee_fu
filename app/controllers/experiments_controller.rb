@@ -6,7 +6,7 @@ class ExperimentsController < ApplicationController
   # use /experiments.format
   # where format = xml or json
   def index
-    Badge.give_badge
+    # Badge.give_badge
     @experiments = Experiment.all
       @experiments.each do |exp|
         exp.meta = JSON::parse exp.meta if exp.meta
