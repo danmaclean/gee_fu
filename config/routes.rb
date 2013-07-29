@@ -38,6 +38,10 @@ GeeFu::Application.routes.draw do
     post "/:id", to: "features#annoj_post"
   end
 
+  scope "/features/dalliance" do
+  	get "/:id", to: "features#dalliance"
+  end
+
   scope "/genomes/annoj" do
     get  "/:id", to: "genomes#annoj"
   end
