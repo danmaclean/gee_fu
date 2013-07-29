@@ -421,7 +421,7 @@ class FeaturesController < ApplicationController
   def dalliance_get
     # experiment = Feature.find(params[:id])
     # experiment = Feature.find(:reference_id => params[:id]) # UNKNOWN KEY :(
-    experiment = Feature.find(:all, :conditions => {:freference_id => params[:id]})
+    experiment = Feature.find(:all, :conditions => {:reference_id => params[:id]})
     render :xml => experiment,  :layout => false
   end
 
