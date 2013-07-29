@@ -419,7 +419,7 @@ class FeaturesController < ApplicationController
   end
   
   def dalliance_get
-    experiment = Feature.find(params[:id])
+    experiment = Reference.find(params[:id])
     render :xml => experiment,  :layout => false
   end
 
