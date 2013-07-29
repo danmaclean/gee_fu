@@ -418,6 +418,10 @@ class FeaturesController < ApplicationController
     respond objects
   end
   
+  def dalliance_get
+    experiment = Experiment.find(params[:id])
+    render :json => experiment,  :layout => false
+  end
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
