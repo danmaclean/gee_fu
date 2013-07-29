@@ -420,7 +420,7 @@ class FeaturesController < ApplicationController
   
   def dalliance_get
     # experiment = Feature.find(params[:id])
-    experiment = Feature.find(:all, :conditions => {:score => params[:id]})
+    experiment = Feature.find(:all, :conditions => {:experiment => params[:id]})
     render :xml => experiment,  :layout => false
   end
 
