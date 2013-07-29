@@ -420,9 +420,9 @@ class FeaturesController < ApplicationController
   
   def dalliance_get
     # experiment = Feature.find(params[:id])
-    experiment = Experiment.find(params[:id]).features
+    @experiment = Experiment.find(params[:id]).features
     # experiment = Feature.find(:all, :conditions => {:experiment => params[:id]})
-    render :xml => experiment,  :layout => false
+    render :xml => @experiment,  :layout => false
   end
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
