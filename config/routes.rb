@@ -39,7 +39,7 @@ GeeFu::Application.routes.draw do
   end
 
   scope "/features/dalliance" do
-  	get "/:id", to: "features#dalliance"
+  	get "/:id", to: "features#dalliance_get"
   end
 
   scope "/genomes/annoj" do
