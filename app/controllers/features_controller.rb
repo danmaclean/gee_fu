@@ -428,7 +428,8 @@ class FeaturesController < ApplicationController
       when "describe"
         @response = describe(params["id"])
     end
-    render :json => @response,  :layout => false
+    experiment = Experiment.find(id)
+    render :json => @experiment,  :layout => false
   end
 
   def annoj_post
