@@ -133,8 +133,8 @@ class FeaturesController < ApplicationController
 
   def show 
     begin
-      today = `date`
-      puts "#{today}"
+      today = `echo helloworld`
+      logger.debug "New post: #{today}"
       @feature = Feature.find(params[:id])
       respond @feature
     rescue
