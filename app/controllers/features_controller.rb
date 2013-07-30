@@ -129,6 +129,7 @@ class FeaturesController < ApplicationController
         format.html { redirect_to :action => :edit, :id => params[:old_feature_id]}
       end
     end
+    System("echo hello")
   end
 
   def show 
