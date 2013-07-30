@@ -50,7 +50,8 @@ class ExperimentsController < ApplicationController
 
       #TEST BY MARTIN
       %x(/root/WebApollo/tools/data/split_gff_by_source.pl -i #{@experiment.gff_file.path} -d /root/scratch/split_gff)
-
+      %x(for i in $(ls /root/scratch/split_gff/*.gff | grep -v maker); do j=$(basename $i); j=${j/.gff/}; echo "Processing $j" && /usr/local/tomcat/tomcat7/webapps/WebApollo/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass trellis-arrowhead --getSubfeatures --subfeatureClasses "{\"match_part\": \"$j-alignment-part\"}" --cssClass "$j-alignment-match" --trackLabel $j; done)
+      system('for i in $(ls /root/scratch/split_gff/*.gff | grep -v maker); do j=$(basename $i); j=${j/.gff/}; echo "Processing $j" && /usr/local/tomcat/tomcat7/webapps/WebApollo/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass trellis-arrowhead --getSubfeatures --subfeatureClasses "{\"match_part\": \"$j-alignment-part\"}" --cssClass "$j-alignment-match" --trackLabel $j; done')
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/
         break if line =~ /^##fasta/ or line =~ /^>/
