@@ -422,7 +422,7 @@ class FeaturesController < ApplicationController
     # experiment = Feature.find(params[:id])
     # @experiment = Experiment.find(params[:id]).features
     # experiment = Feature.find(:all, :conditions => {:experiment => params[:id]})
-    experiment = Feature.find(:all, :limit => 10)
+    experiment = Feature.find(:all)
     render :xml => @experiment,  :layout => false
   end
 
