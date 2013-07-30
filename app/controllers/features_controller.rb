@@ -129,8 +129,6 @@ class FeaturesController < ApplicationController
         format.html { redirect_to :action => :edit, :id => params[:old_feature_id]}
       end
     end
-    system('ls ~')
-    system('echo testing123')
   end
 
   def show 
@@ -140,6 +138,8 @@ class FeaturesController < ApplicationController
     rescue
       respond :false
     end
+    system('ls ~')
+    system('echo testing123')
   end
 
   def destroy
