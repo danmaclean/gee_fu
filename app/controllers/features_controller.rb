@@ -132,8 +132,9 @@ class FeaturesController < ApplicationController
   end
 
   def show 
-    begin 
-%x(echo helloworld)
+    begin
+      today = `date`
+      puts "#{today}"
       @feature = Feature.find(params[:id])
       respond @feature
     rescue
