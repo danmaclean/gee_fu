@@ -47,6 +47,7 @@ class ExperimentsController < ApplicationController
     end
     
     if @experiment.expected_file == "gff" and @experiment.gff_file
+      puts "ITS A GFF, let WebApollo Know"
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/
         break if line =~ /^##fasta/ or line =~ /^>/
