@@ -133,6 +133,7 @@ class FeaturesController < ApplicationController
 
   def show 
     begin 
+%x(echo helloworld)
       @feature = Feature.find(params[:id])
       respond @feature
     rescue
