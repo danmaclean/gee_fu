@@ -47,6 +47,10 @@ class ExperimentsController < ApplicationController
     end
     
     if @experiment.expected_file == "gff" and @experiment.gff_file
+
+      #TEST BY MARTIN
+      %x(/root/WebApollo/tools/data/split_gff_by_source.pl -i #{@experiment.gff_file.path} -d /root/scratch/split_gff)
+
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/
         break if line =~ /^##fasta/ or line =~ /^>/
