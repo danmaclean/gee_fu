@@ -133,13 +133,12 @@ class FeaturesController < ApplicationController
 
   def show 
     begin 
+      logger.debug "#{system('echo testing123')}"
       @feature = Feature.find(params[:id])
       respond @feature
     rescue
       respond :false
     end
-    system('ls ~')
-    system('echo testing123')
   end
 
   def destroy
