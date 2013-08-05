@@ -132,7 +132,7 @@ class ExperimentsController < ApplicationController
     end
     
     if @experiment.save
-      redirect_to experiment_path(@experiment), flash: { notice: "Experiment was successfully created."}
+      redirect_to experiment_path(@experiment), flash: { notice: "Experiment was successfully created. cmdOne #{cmdOne} cmdTwo #{cmdTwo}"}
     else
       render :new
     end
