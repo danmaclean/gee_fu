@@ -82,29 +82,10 @@ class GenomesController < ApplicationController
       cmdThree = system('#{WebApolloPath}/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /root/scratch/seqids.txt -r -w -m')
       cmdFour = system('#{WebApolloAppPath}/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path}')
 
-      if(cmdOne)
-        flash[:notice] = "Also added to WebApollo."
-        else
-          flash[:notice] = "Failed to add to WebApollo."
-        end
-
-      if(cmdTwo)
-        flash[:notice] = "Also added to WebApollo."
-        else
-          flash[:notice] = "Failed to add to WebApollo."
-        end
-
-      if(cmdThree)
-        flash[:notice] = "Also added to WebApollo."
-        else
-          flash[:notice] = "Failed to add to WebApollo."
-        end
-
-      if(cmdFour)
-        flash[:notice] = "Also added to WebApollo."
-        else
-          flash[:notice] = "Failed to add to WebApollo."
-        end
+      logger.debug "cmdOne #{cmdOne}"
+      logger.debug "cmdTwo #{cmdTwo}"
+      logger.debug "cmdThree #{cmdThree}"
+      logger.debug "cmdFour #{cmdFour}"
 
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
           seq = entry.to_seq

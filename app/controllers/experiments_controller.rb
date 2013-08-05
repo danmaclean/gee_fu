@@ -51,19 +51,6 @@ class ExperimentsController < ApplicationController
 #TEST BY MARTIN
       cmdOne = system('#{WebApolloPath}/tools/data/split_gff_by_source.pl -i #{@experiment.gff_file.path} -d /root/scratch/split_gff')
       cmdTwo = system('for i in $(ls /root/scratch/split_gff/*.gff | grep -v maker); do j=$(basename $i); j=${j/.gff/}; echo "Processing $j" && #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass trellis-arrowhead --getSubfeatures --subfeatureClasses "{\"match_part\": \"$j-alignment-part\"}" --cssClass "$j-alignment-match" --trackLabel $j; done')
-      
-      if(cmdOne)
-        flash[:notice] = "Also added to WebApollo."
-        else
-          flash[:notice] = "Failed to add to WebApollo."
-        end
-
-      if(cmdTwo)
-        flash[:notice] = "Also added to WebApollo."
-        else
-          flash[:notice] = "Failed to add to WebApollo."
-        end
-
 
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/
