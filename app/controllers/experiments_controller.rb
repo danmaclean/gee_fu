@@ -48,7 +48,14 @@ class ExperimentsController < ApplicationController
     
     if @experiment.expected_file == "gff" and @experiment.gff_file
 
-      cmdOne = system('for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do j=$(basename $i); j=${j/.gff/}; echo "Processing $j" && #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass trellis-arrowhead --getSubfeatures --subfeatureClasses "{\"match_part\": \"$j-alignment-part\"}" --cssClass "$j-alignment-match" --trackLabel $j; done')
+      cmdOne = system('for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do
+        j=$(basename $i)
+        j=${j/.gff/}
+        echo "Processing $j"
+        #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass webapollo-arrowhead \
+         --getSubfeatures --subfeatureClasses "{\"match_part\": \"darkblue-80pct\"}" \
+         --cssClass container-10px --trackLabel $j \
+         --webApollo --renderClassName gray-center-20pct')
       cmdOne = system('#{WebApolloAppPath}/jbrowse/bin/generate-names.pl')
 
       cmdComplete = "SUCCESSFUL"
