@@ -48,6 +48,8 @@ class ExperimentsController < ApplicationController
     
     if @experiment.expected_file == "gff" and @experiment.gff_file
 
+      logger.debug "DEBUG: Going to pass #{@experiment.gff_file.path} to WebApollo as a GFF"
+
       cmdOne = system('for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do
         j=$(basename $i)
         j=${j/.gff/}
@@ -56,6 +58,7 @@ class ExperimentsController < ApplicationController
          --getSubfeatures --subfeatureClasses "{\"match_part\": \"darkblue-80pct\"}" \
          --cssClass container-10px --trackLabel $j \
          --webApollo --renderClassName gray-center-20pct')
+      
       cmdOne = system('#{WebApolloAppPath}/jbrowse/bin/generate-names.pl')
 
       cmdComplete = "SUCCESSFUL"
