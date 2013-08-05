@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Lily+Script+One);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 
 html {
 	background-color: #95A5A6;
@@ -19,7 +19,7 @@ body {
 }
 
 .jumbotron h1 {
-	font-family: 'Lily Script One', cursive;
+	font-family: 'Droid Sans', sans-serif;
 	padding: 12px;
 	text-align: center;
 	font-size: 80px;
