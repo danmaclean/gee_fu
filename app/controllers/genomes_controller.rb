@@ -54,7 +54,6 @@ class GenomesController < ApplicationController
   
   #returns a list of references for the genome for the ajax autofill box
   def reference_list
-    flash[:notice] = "Tried to add to WebApollo"
     genome = Genome.find(params[:id])
     respond genome.references.collect {|x| x.name }
   end
