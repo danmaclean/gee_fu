@@ -77,10 +77,10 @@ class GenomesController < ApplicationController
     #add the reference objects and sequence objects for this file...
     if @genome.fasta_file
 
-      cmdOne = system('#{WebApolloPath}/tools/user/extract_seqids_from_fasta.pl -p Annotations- -i #{@genome.fasta_file.path} -o /root/scratch/seqids.txt'
-      cmdTwo = system('#{WebApolloPath}/tools/user/add_tracks.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -t /root/scratch/seqids.txt'
-      cmdThree = system('#{WebApolloPath}/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /root/scratch/seqids.txt -r -w -m'
-      cmdFour = system('#{WebApolloAppPath}/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path}'
+      cmdOne = system('#{WebApolloPath}/tools/user/extract_seqids_from_fasta.pl -p Annotations- -i #{@genome.fasta_file.path} -o /root/scratch/seqids.txt')
+      cmdTwo = system('#{WebApolloPath}/tools/user/add_tracks.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -t /root/scratch/seqids.txt')
+      cmdThree = system('#{WebApolloPath}/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /root/scratch/seqids.txt -r -w -m')
+      cmdFour = system('#{WebApolloAppPath}/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path}')
 
       if(cmdOne)
         flash[:notice] = "Also added to WebApollo."
