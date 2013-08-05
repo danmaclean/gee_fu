@@ -57,13 +57,13 @@ class ExperimentsController < ApplicationController
         else
           flash[:notice] = "Failed to add to WebApollo."
         end
-      end
+
       if(cmdTwo)
         flash[:notice] = "Also added to WebApollo."
         else
           flash[:notice] = "Failed to add to WebApollo."
         end
-      end
+
 
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/

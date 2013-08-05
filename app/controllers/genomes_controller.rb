@@ -87,28 +87,24 @@ class GenomesController < ApplicationController
         else
           flash[:notice] = "Failed to add to WebApollo."
         end
-      end
 
       if(cmdTwo)
         flash[:notice] = "Also added to WebApollo."
         else
           flash[:notice] = "Failed to add to WebApollo."
         end
-      end
 
       if(cmdThree)
         flash[:notice] = "Also added to WebApollo."
         else
           flash[:notice] = "Failed to add to WebApollo."
         end
-      end
 
       if(cmdFour)
         flash[:notice] = "Also added to WebApollo."
         else
           flash[:notice] = "Failed to add to WebApollo."
         end
-      end
 
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
           seq = entry.to_seq
