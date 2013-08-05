@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 
 html {
 	background-color: #95A5A6;
@@ -19,7 +18,6 @@ body {
 }
 
 .jumbotron h1 {
-	font-family: 'Droid Sans', sans-serif;
 	padding: 12px;
 	text-align: center;
 	font-size: 80px;
