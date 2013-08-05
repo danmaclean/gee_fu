@@ -87,9 +87,9 @@ class GenomesController < ApplicationController
       logger.debug "cmdThree #{cmdThree}"
       logger.debug "cmdFour #{cmdFour}"
 
-      cmdComplete = "successful"
+      cmdComplete = "SUCCESSFUL"
       if(!cmdOne || !cmdTwo || !cmdThree || !cmdFour)
-        cmdComplete = "failed";
+        cmdComplete = "FAILED, Please add manually"
       end
 
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
