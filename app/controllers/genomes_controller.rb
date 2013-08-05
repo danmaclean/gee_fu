@@ -54,6 +54,7 @@ class GenomesController < ApplicationController
   
   #returns a list of references for the genome for the ajax autofill box
   def reference_list
+    flash[:notice] = "Tried to add to WebApollo"
     genome = Genome.find(params[:id])
     respond genome.references.collect {|x| x.name }
   end
@@ -82,7 +83,7 @@ class GenomesController < ApplicationController
 %x(#{WebApolloPath}/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /root/scratch/seqids.txt -r -w -m)
 %x(#{WebApolloAppPath}/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path})
 
-flash[:notice] = "Tried to add to WebApollo"
+
 
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
           seq = entry.to_seq
