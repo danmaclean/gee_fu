@@ -48,20 +48,20 @@ class ExperimentsController < ApplicationController
     
     if @experiment.expected_file == "gff" and @experiment.gff_file
 
-      cmdOne = %x(for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do
+      cmdOne = system('for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do
         j=$(basename $i)
         j=${j/.gff/}
         echo "Processing $j"
         #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass webapollo-arrowhead \
          --getSubfeatures --subfeatureClasses "{\"match_part\": \"darkblue-80pct\"}" \
          --cssClass container-10px --trackLabel $j \
-         --webApollo --renderClassName gray-center-20pct)
-      cmdTwo = system('#{WebApolloAppPath}/jbrowse/bin/generate-names.pl')
+         --webApollo --renderClassName gray-center-20pct')
+      cmdOne = system('#{WebApolloAppPath}/jbrowse/bin/generate-names.pl')
 
-      # cmdComplete = "SUCCESSFUL"
-      # if(!cmdOne)
-      #   cmdComplete = "FAILED, Please add manually"
-      # end
+      cmdComplete = "SUCCESSFUL"
+      if(!cmdOne)
+        cmdComplete = "FAILED, Please add manually"
+      end
 
       logger.debug "cmdOne #{cmdOne}"
 
