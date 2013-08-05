@@ -82,6 +82,8 @@ class GenomesController < ApplicationController
 %x(#{WebApolloPath}/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /root/scratch/seqids.txt -r -w -m)
 %x(#{WebApolloAppPath}/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path})
 
+flash[:notice] = "Tried to add to WebApollo"
+
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
           seq = entry.to_seq
           reference = Reference.new(:name => entry.entry_id, :length => entry.length)
