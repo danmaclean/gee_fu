@@ -76,12 +76,6 @@ class GenomesController < ApplicationController
     
     #add the reference objects and sequence objects for this file...
     if @genome.fasta_file
-
-%x(/root/WebApollo/tools/user/extract_seqids_from_fasta.pl -p Annotations- -i #{@genome.fasta_file.path} -o /root/scratch/seqids.txt)
-%x(/root/WebApollo/tools/user/add_tracks.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -t /root/scratch/seqids.txt)
-%x(/root/WebApollo/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /root/scratch/seqids.txt -r -w -m)
-%x(/usr/local/tomcat/tomcat7/webapps/WebApollo/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path})
-
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
           seq = entry.to_seq
           reference = Reference.new(:name => entry.entry_id, :length => entry.length)
