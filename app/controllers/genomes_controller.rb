@@ -87,6 +87,11 @@ class GenomesController < ApplicationController
       logger.debug "cmdThree #{cmdThree}"
       logger.debug "cmdFour #{cmdFour}"
 
+      cmdComplete = true
+      if(!cmdOne || !cmdTwo || !cmdThree || !cmdFour)
+        cmdComplete = false;
+      end
+
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
           seq = entry.to_seq
           reference = Reference.new(:name => entry.entry_id, :length => entry.length)
@@ -98,7 +103,7 @@ class GenomesController < ApplicationController
     
     respond_to do |format|
       if @genome.save
-        flash[:notice] = "Genome was successfully created."
+        flash[:notice] = "Genome was successfully created. WebApollo import: #{cmdComplete}"
         format.html { redirect_to(@genome) }
      else
         format.html { render :action => "new" }
