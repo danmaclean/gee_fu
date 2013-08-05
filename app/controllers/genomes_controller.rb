@@ -98,7 +98,7 @@ class GenomesController < ApplicationController
     
     respond_to do |format|
       if @genome.save
-        flash[:notice] = "Genome was successfully created."
+        flash[:notice] = "Genome was successfully created. cmdOne #{cmdOne} cmdTwo #{cmdTwo} cmdThree #{cmdThree} cmdFour #{cmdFour}"
         format.html { redirect_to(@genome) }
      else
         format.html { render :action => "new" }
