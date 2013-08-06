@@ -3,6 +3,8 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def create
 		logger.debug "DEBUG - Hello"
+		logger.error "ERROR"
+		super
   	end
 
 	protected
