@@ -9,9 +9,13 @@ class RegistrationsController < Devise::RegistrationsController
 		waUserAddedTwo = system('#{WebApolloPath}/tools/user/add_user.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -u #{email} -p #{password}')
 		if(waUserAdded)
 			logger.error "{email} user added to database"
+		else
+			logger.error "ONE FAILED"
 		end
 		if(waUserAddedTwo)
 			logger.error "{email} user added to WebApollo"
+		else
+			logger.error "TWO FAILED"
 		end
 		super
   	end
