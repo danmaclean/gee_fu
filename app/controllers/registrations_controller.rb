@@ -2,8 +2,9 @@ class RegistrationsController < Devise::RegistrationsController
   
 
 	def create
-		user = params[:user]
-		logger.error "Hello #{user}"
+		email = params[:user][:email]
+		password = params[:user][:password]
+		logger.error "Hello #{email} #{password}"
 		user
 		super
   	end
