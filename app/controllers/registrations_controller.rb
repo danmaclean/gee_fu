@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def new
 		logger.debug "DEBUG - HELLO WORLD"
-      super
+      # super
     end
 
   def after_inactive_sign_up_path_for(resource)
