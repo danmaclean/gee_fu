@@ -13,7 +13,7 @@ class RegistrationsController < Devise::RegistrationsController
 		webApolloOutputTwo = `#{WebApolloPath}/tools/user/add_user.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -u #{email} -p #{password}`
 		logger.error "add user to apollo output: #{webApolloOutputTwo} ."
 
-		webApolloOutputThree = `sudo -u postgres #{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -r -w -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt`
+		webApolloOutputThree = %x(sudo -u postgres #{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -r -w -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt)
 		logger.error "set apollo user permissions output: #{webApolloOutputThree} ."
 
 		# if(waUserAdded)
