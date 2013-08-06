@@ -5,7 +5,6 @@ class RegistrationsController < Devise::RegistrationsController
 		email = params[:user][:email]
 		password = params[:user][:password]
 		logger.error "Hello #{email} #{password}"
-		user
 		super
   	end
 
