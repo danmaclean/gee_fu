@@ -7,7 +7,8 @@ class RegistrationsController < Devise::RegistrationsController
 		logger.error "Hello #{email} #{password}"
 		webApolloOutput = `createuser -U postgres #{email} --createdb --no-superuser --no-createrole`
 		logger.error "create user output: #{webApolloOutput}"
-		# waUserAddedTwo = `#{WebApolloPath}/tools/user/add_user.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -u #{email} -p #{password}`
+		webApolloOutputTwo = `#{WebApolloPath}/tools/user/add_user.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -u #{email} -p #{password}`
+		logger.error "add user to apollo output: #{webApolloOutputTwo}"
 		# if(waUserAdded)
 		# 	logger.error "{email} user added to database"
 		# else
