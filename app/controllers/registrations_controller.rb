@@ -2,6 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 	def create
 	logger.debug "DEBUG - HELLO WORLD"
+	super
 	end
 
   protected
