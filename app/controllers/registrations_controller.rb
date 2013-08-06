@@ -10,7 +10,4 @@ class RegistrationsController < Devise::RegistrationsController
     signed_up_path
   end
 
-  def create
-    logger.debug "DEBUG - CREATE WebApollo user here!"
-  end
 end
