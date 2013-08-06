@@ -2,8 +2,9 @@ class RegistrationsController < Devise::RegistrationsController
   
 
 	def create
-		logger.debug "DEBUG - Hello"
-		logger.error "ERROR"
+		user = params[:user]
+		logger.error "Hello #{user}"
+		user
 		super
   	end
 
