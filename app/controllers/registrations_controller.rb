@@ -17,6 +17,8 @@ class RegistrationsController < Devise::RegistrationsController
 		else
 			logger.error "TWO FAILED"
 		end
+		logger.error "FINISHED WEBAPOLLO STUFF"
+
 		super
   	end
 
