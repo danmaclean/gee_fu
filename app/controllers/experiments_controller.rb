@@ -50,7 +50,7 @@ class ExperimentsController < ApplicationController
 
       logger.debug "DEBUG: Going to pass #{@experiment.gff_file.path} to WebApollo as a GFF"
 
-      filenamebase = params[:name]
+      filenamebase = @experiment.name.downcase.tr(" ", "_")
       
       cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --arrowheadClass webapollo-arrowhead --getSubfeatures --trackLabel #{filenamebase} --webApollo --renderClassName gray-center-20pct --out #{WebApolloAppPath}/jbrowse/data/`
       
