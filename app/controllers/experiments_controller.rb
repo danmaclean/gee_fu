@@ -50,23 +50,17 @@ class ExperimentsController < ApplicationController
 
       logger.debug "DEBUG: Going to pass #{@experiment.gff_file.path} to WebApollo as a GFF"
 
-      cmdOne = system('for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do
-        j=$(basename $i)
-        j=${j/.gff/}
-        echo "Processing $j"
-        #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass webapollo-arrowhead \
-         --getSubfeatures --subfeatureClasses "{\"match_part\": \"darkblue-80pct\"}" \
-         --cssClass container-10px --trackLabel $j \
-         --webApollo --renderClassName gray-center-20pct')
+      cmdOne = `for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do j=$(basename $i) j=${j/.gff/} echo "Processing $j" #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass webapollo-arrowhead --getSubfeatures --subfeatureClasses "{\"match_part\": \"darkblue-80pct\"}" --cssClass container-10px --trackLabel $j --webApollo --renderClassName gray-center-20pct`
       
-      cmdTwo = system('#{WebApolloAppPath}/jbrowse/bin/generate-names.pl')
+      cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl`
 
-      cmdComplete = "SUCCESSFUL"
-      if(!cmdOne)
-        cmdComplete = "FAILED, Please add manually"
-      end
+#      cmdComplete = "SUCCESSFUL"
+#      if(!cmdOne)
+#        cmdComplete = "FAILED, Please add manually"
+#      end
 
-      logger.debug "cmdOne #{cmdOne}"
+      logger.error "cmdOne #{cmdOne}"
+        logger.error "cmdTwo #{cmdTwo}"
 
 
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
