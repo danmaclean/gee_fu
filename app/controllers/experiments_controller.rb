@@ -146,10 +146,10 @@ class ExperimentsController < ApplicationController
 #        cmdComplete = "FAILED, Please add manually"
 #      end
 #      logger.debug "cmdOne #{cmdOne}"
-#    end
+    end
     
     if @experiment.save
-      redirect_to experiment_path(@experiment), flash: { notice: "Experiment was successfully created."}
+      redirect_to experiment_path(@experiment), flash: { notice: "Experiment was successfully created. WebApollo import: #{cmdComplete}"}
     else
       render :new
     end
