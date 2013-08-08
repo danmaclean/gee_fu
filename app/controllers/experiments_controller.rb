@@ -145,7 +145,7 @@ class ExperimentsController < ApplicationController
 
 #      cmdComplete = "SUCCESSFUL"
 #      if(!cmdOne)
-        logger.error = "Add bam output: #{cmdOne}."
+        logger.error "Add bam output: #{cmdOne}."
 #      end
 #      logger.debug "cmdOne #{cmdOne}"
     end
