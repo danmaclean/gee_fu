@@ -149,7 +149,7 @@ class ExperimentsController < ApplicationController
     end
     
     if @experiment.save
-      redirect_to experiment_path(@experiment), flash: { notice: "Experiment was successfully created. WebApollo import: #{cmdComplete}"}
+      redirect_to experiment_path(@experiment), flash: { notice: "Experiment was successfully created."}
     else
       render :new
     end
