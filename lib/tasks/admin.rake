@@ -14,6 +14,11 @@ namespace :admin do
     email     = ENV['email']
     abort "\n*** Please provide an email, e.g. rake admin:#{task_name} email=me@example.com ***" unless email.present?
 
+    if(value)
+    `#{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -a -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt  > /dev/null`
+  else
+    `#{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -r -w -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt  > /dev/null`
+  end
     user = User.where(email: email).first
     abort "\n*** No user found with email: #{email} ***" unless user.present?
     user.update_attributes(admin: value)
