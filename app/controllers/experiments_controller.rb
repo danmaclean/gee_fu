@@ -139,11 +139,13 @@ class ExperimentsController < ApplicationController
       end
     elsif @experiment.expected_file == "bam"
       @experiment.uses_bam_file = true
-      logger.error "DEBUG: #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/ ...   #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName}"
+      
 
       cmdZero = `ln -s #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/`
       bamFileName = File.basename(@experiment.bam_file_path)
-      
+
+      logger.error "DEBUG: #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/ ...   #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName}"
+            
       cmdOne = `#{WebApolloAppPath}/jbrowse/bin/add_bam_track.pl --bam_url #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName} --label simulated_bam --key "simulated BAM" --out #{WebApolloAppPath}/jbrowse/data/trackList.json`
 
 #      cmdComplete = "SUCCESSFUL"
