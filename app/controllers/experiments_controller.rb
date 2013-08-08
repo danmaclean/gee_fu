@@ -59,7 +59,7 @@ class ExperimentsController < ApplicationController
          --cssClass container-10px --trackLabel $j \
          --webApollo --renderClassName gray-center-20pct')
       
-      cmdOne = system('#{WebApolloAppPath}/jbrowse/bin/generate-names.pl')
+      cmdTwo = system('#{WebApolloAppPath}/jbrowse/bin/generate-names.pl')
 
       cmdComplete = "SUCCESSFUL"
       if(!cmdOne)
