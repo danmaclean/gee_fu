@@ -139,7 +139,7 @@ class ExperimentsController < ApplicationController
       end
     elsif @experiment.expected_file == "bam"
       @experiment.uses_bam_file = true
-      logger.debug "DEBUG: Going to pass #{@experiment.bam_file_path} to WebApollo as a BAM"
+      logger.error "DEBUG: #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/ ...   #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName}"
 
       cmdZero = `ln -s #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/`
       bamFileName = File.basename(@experiment.bam_file_path)
