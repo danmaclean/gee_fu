@@ -141,11 +141,11 @@ class ExperimentsController < ApplicationController
       @experiment.uses_bam_file = true
       logger.debug "DEBUG: Going to pass #{@experiment.bam_file_path} to WebApollo as a BAM"
 
-      cmdOne = system('#{WebApolloAppPath}/jbrowse/bin/add_bam_track.pl --bam_url #{@experiment.bam_file_path} --label simulated_bam --key "simulated BAM"')
+      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/add_bam_track.pl --bam_url #{@experiment.bam_file_path} --label simulated_bam --key "simulated BAM"`
 
 #      cmdComplete = "SUCCESSFUL"
 #      if(!cmdOne)
-#        cmdComplete = "FAILED, Please add manually"
+        cmdComplete = "Add bam output: #{cmdOne}."
 #      end
 #      logger.debug "cmdOne #{cmdOne}"
     end
