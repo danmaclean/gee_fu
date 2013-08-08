@@ -50,9 +50,9 @@ class ExperimentsController < ApplicationController
 
       logger.debug "DEBUG: Going to pass #{@experiment.gff_file.path} to WebApollo as a GFF"
 
-      cmdOne = `for i in $(ls #{@experiment.gff_file.path} | grep -v maker); do j=$(basename $i) j=${j/.gff/} echo "Processing $j" #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff $i --arrowheadClass webapollo-arrowhead --getSubfeatures --subfeatureClasses "{\"match_part\": \"darkblue-80pct\"}" --cssClass container-10px --trackLabel $j --webApollo --renderClassName gray-center-20pct`
+      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --arrowheadClass webapollo-arrowhead --getSubfeatures --trackLabel #{@experiment.gff_file.basename} --webApollo --renderClassName gray-center-20pct --out #{WebApolloAppPath}/jbrowse/data/`
       
-      cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl`
+      cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
 #      cmdComplete = "SUCCESSFUL"
 #      if(!cmdOne)
