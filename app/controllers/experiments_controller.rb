@@ -144,7 +144,7 @@ class ExperimentsController < ApplicationController
       cmdZero = `ln -s #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/`
       bamFileName = File.basename(@experiment.bam_file_path)
 
-      logger.error "DEBUG: #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/ ...   #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName}"
+      logger.error "DEBUG: #{@experiment.bam_file_path} #{WebApolloAppPath}/jbrowse/data/bam/ ...   #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName}"
             
       cmdOne = `#{WebApolloAppPath}/jbrowse/bin/add_bam_track.pl --bam_url #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName} --label simulated_bam --key "simulated BAM" --out #{WebApolloAppPath}/jbrowse/data/trackList.json`
 
