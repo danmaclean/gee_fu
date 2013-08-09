@@ -16,12 +16,11 @@ namespace :admin do
 
     if(value)
       boolval = '-a'
-    # `#{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} -a -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt  > /dev/null`
-  else
-    boolval = '-r -w'  
-  end
+    else
+      boolval = '-r -w'  
+    end
 
-`#{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} #{boolval} -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt  > /dev/null`
+    `#{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} #{boolval} -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt  > /dev/null`
 
     user = User.where(email: email).first
     abort "\n*** No user found with email: #{email} ***" unless user.present?
