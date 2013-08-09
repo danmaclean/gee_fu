@@ -4,6 +4,6 @@ class AdminController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:user_id])
+    @project = User.find(params[:user_id])
   end
 end
