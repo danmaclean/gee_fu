@@ -17,14 +17,16 @@ body {
 }
 
 .boxedin {
-border: 1px solid #ddd;
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding: 20px;
 }
+
 .userAdmin {
 	font-size: 1.5em;
-	background-color: #95A5A6;
+	background-color: #BDC3C7;
 }
 
 .jumbotron h1 {
