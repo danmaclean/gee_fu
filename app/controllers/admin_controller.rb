@@ -13,10 +13,9 @@ class AdminController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.merge(params[:user])
-    if @user.valid?
-      @user.save
+    if @user.update_attributes(params[:user])
       # Handle a successful update.
+      @user.save
       render 'index'
     else
       render 'edit'
