@@ -1,4 +1,13 @@
-<!-- table header stuff here -->
-<% @users.each do |u| %>
-
+<% @users.each do |user| %>
+<div class=<% if user.admin %>"boxedin userAdmin"<% else %>"boxedin userNormal"<% end %>>
+	<p><%= user.first_name %></p>
+	<p><%= user.last_name %></p>
+	<p><%= user.email %></p>
+	
+	<% if !user.admin %>
+	<a href=<%=edit_user_registration_path%> class="btn btn-into" >Edit</a>
+	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+	<% end %>
+</div>
+<hr>
 <% end %>
