@@ -4,7 +4,6 @@
 	<p><%= user.last_name %></p>
 	<p><%= user.email %></p>
 	
-	<% if !user.admin %>
 	
 	<%= link_to 'Edit', :controller => 'admin', :action => 'edit', :id => user.id %>
 	
@@ -12,4 +11,3 @@
 	<% end %>
 </div>
 <hr>
-<% end %>
