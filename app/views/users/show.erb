@@ -6,7 +6,7 @@
 	
 	<% if !user.admin %>
 	<a href=<%=edit_user_registration_path%> class="btn btn-into" >Edit</a>
-    <p><%= button_to "Cancel account", registration_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger" %></p>
+	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
 	<% end %>
 </div>
 <hr>
