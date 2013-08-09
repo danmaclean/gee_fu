@@ -46,7 +46,7 @@ GeeFu::Application.routes.draw do
     get  "/:id", to: "genomes#annoj"
   end
 
-  match 'tools/admin' => 'users#show'
+  match '/tools/admin' => 'users#show'
 
 mount SequenceServer::App, :at => "sequenceserver"
 
