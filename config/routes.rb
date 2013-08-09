@@ -1,6 +1,8 @@
 GeeFu::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
 
+  resources :users
+    
   root :to => "pages#index"
   
   get "/browse",     :to => "pages#browse" 
@@ -45,8 +47,6 @@ GeeFu::Application.routes.draw do
   scope "/genomes/annoj" do
     get  "/:id", to: "genomes#annoj"
   end
-
-  match '/users/admin' => 'users#show'
 
 mount SequenceServer::App, :at => "sequenceserver"
 
