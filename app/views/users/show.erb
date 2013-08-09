@@ -1,7 +1,7 @@
 <% @users.each do |user| %>
-<div class=<% if @user.admin %><%= "userAdmin" %><% else %><%= "userNormal" %><% end %>>
-	<p><%= @user.first_name %></p>
-	<p><%= @user.last_name %></p>
-	<p><%= @user.email %></p>
+<div class=<% if user.admin %><%= "userAdmin" %><% else %><%= "userNormal" %><% end %>>
+	<p><%= user.first_name %></p>
+	<p><%= user.last_name %></p>
+	<p><%= user.email %></p>
 </div>
 <% end %>
