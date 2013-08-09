@@ -6,7 +6,7 @@
 	
 	<% if !user.admin %>
 	<%= button_to "Edit", { action: "edit" }, :class => "btn btn-into" %>
-	<%= link_to 'Download Results', :controller => 'admin', :action => 'edit', :user_id => user. %>
+	<%= link_to 'Download Results', :controller => 'admin', :action => 'edit', :user_id => user.id %>
 	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
 	<% end %>
 </div>
