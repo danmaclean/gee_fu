@@ -1,2 +1,4 @@
-<%= @user.first_name %><%= @user.last_name %>
-<%= @user.email %>
+<div class=<%= if(@user.admin) %>userAdmin<% else %>userNormal<% end %>
+	<%= @user.first_name %> <%= @user.last_name %>
+	<%= @user.email %>
+</div>
