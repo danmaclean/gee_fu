@@ -1,4 +1,5 @@
 <div class=<% if @user.admin %><%= "userAdmin" %><% else %><%= "userNormal" %><% end %>>
-	<%= @user.first_name %> <%= @user.last_name %>
-	<%= @user.email %>
+	<p><%= @user.first_name %></p>
+	<p><%= @user.last_name %></p>
+	<p><%= @user.email %></p>
 </div>
