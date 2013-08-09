@@ -47,6 +47,8 @@ GeeFu::Application.routes.draw do
     get  "/:id", to: "genomes#annoj"
   end
 
+  match '/admin/:id', :to => 'admin#show', :as => :user
+  
 mount SequenceServer::App, :at => "sequenceserver"
 
 match "/webapollo" => redirect("http://v0311.nbi.ac.uk:8080/WebApollo/"), :as => :webapollo
