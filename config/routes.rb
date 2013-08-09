@@ -1,8 +1,6 @@
 GeeFu::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
 
-  resources :users
-    
   root :to => "pages#index"
   
   get "/browse",     :to => "pages#browse" 
@@ -15,6 +13,7 @@ GeeFu::Application.routes.draw do
     resources :experiments
     resources :features
     resources :tools
+    resources :users
 
     scope "/features/search" do
       post "/id",        to: "features#search_by_id",         as: :feature_search_by_id
