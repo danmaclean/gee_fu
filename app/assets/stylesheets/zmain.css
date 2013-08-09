@@ -16,6 +16,11 @@ body {
 	background-color: white;
 }
 
+.userAdmin {
+	font-size: 1.5em;
+	background-color: red;
+}
+
 .jumbotron h1 {
 	padding: 12px;
 	text-align: center;
