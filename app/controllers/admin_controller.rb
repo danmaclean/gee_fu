@@ -16,8 +16,7 @@ class AdminController < ApplicationController
     if @user.update_attributes(params[:user])
       # Handle a successful update.
       @user.save
-      @user = User.find(params[:id])
-      #      redirect_to index
+      redirect_to index
       #    else
       #      render 'edit'
     end
