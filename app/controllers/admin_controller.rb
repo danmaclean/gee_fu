@@ -12,8 +12,8 @@ class AdminController < ApplicationController
   end
 
   def update
-    @user = User.find(:id)
-    @user.merge(params[:buyer])
+    @user = User.find(params[:id])
+    @user.merge(params[:user])
     if @user.valid?
       @user.save
       # Handle a successful update.
