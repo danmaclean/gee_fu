@@ -6,6 +6,7 @@
 	
 	<% if !user.admin %>
 	<a href=<%=edit_user_registration_path%> class="btn btn-into" >Edit</a>
+	<%= button_to "New", { action: "edit" }, :class => "btn btn-into" %>
 	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
 	<% end %>
 </div>
