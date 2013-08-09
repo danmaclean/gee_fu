@@ -25,7 +25,7 @@ class AdminController < ApplicationController
         
       logger.error "value #{value} email #{email}"
         
-      if(value == "0")
+      if(value == "1")
             boolval = '-a'
           else
             boolval = '-r -w'  
