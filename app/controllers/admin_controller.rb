@@ -31,7 +31,7 @@ class AdminController < ApplicationController
             boolval = '-r -w'  
           end
       
-#          `#{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} #{boolval} -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt  > /dev/null`
+          `#{WebApolloPath}/tools/user/set_track_permissions.pl -D #{WebApolloDatabase} -U #{WebApolloDatabaseUsername} -P #{WebApolloDatabasePassword} #{boolval} -u #{email} -t #{WebApolloPath}/data/scratch/seqids.txt  > /dev/null`
     end
   end
 end
