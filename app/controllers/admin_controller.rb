@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class AdminController < ApplicationController
   def show
     @users = User.all
   end
