@@ -5,8 +5,8 @@
 	<p><%= user.email %></p>
 	
 	<% if !user.admin %>
-	<a href=<%=edit_user_registration_path%> class="btn btn-into" >Edit</a>
-	<%= button_to "New", { action: "edit" }, :class => "btn btn-into" %>
+	<%= button_to "Edit", { action: "edit" }, :class => "btn btn-into" %>
+	<%= link_to 'Download Results', :controller => 'admin', :action => 'edit', :user_id => user. %>
 	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
 	<% end %>
 </div>
