@@ -5,8 +5,9 @@
 	<p><%= user.email %></p>
 	
 	<% if !user.admin %>
-	<%= button_to 'Edit', :action => "edit", :id => user.id, :class => "btn btn-info", :method => :get%>
-	<%=button_to( "New", :action => "edit", :id => user.id, :class => "btn btn-info", :method => :get)%>
+	
+	<%= button_to "New User", :action => "edit", :class => "button", :method => :get  %>
+	
 	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
 	<% end %>
 </div>
