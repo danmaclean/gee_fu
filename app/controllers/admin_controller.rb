@@ -12,10 +12,9 @@ class AdminController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:user][:id])
     if @user.update_attributes(params[:user])
       # Handle a successful update.
-      logger.error "id = #{params[:id]}"
       render 'index'
     else
       render 'edit'
