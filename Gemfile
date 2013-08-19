@@ -19,6 +19,8 @@ gem 'squeel'
 gem 'foreigner'
 gem 'paper_trail', '~> 2'
 
+gem 'newrelic_rpm'
+
 gem 'sidekiq'
 gem 'clockwork'
 
