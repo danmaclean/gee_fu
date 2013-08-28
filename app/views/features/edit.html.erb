@@ -20,7 +20,7 @@ function addGroup(){
 </script>
 
 <legend>Editing <%=@feature.feature%> ID <%=@feature.id%></legend>
-<a href=http://v0311.nbi.ac.uk:8081/index.php/feature_<%=@feature.id%> >Wiki</a>
+<a href=http://v0311.nbi.ac.uk:8081/index.php/feature_<%=@feature.id% class="btn"> >Wiki</a>
 <%= simple_form_for @feature, html: { class: "form-horizontal" } do |f| %>
   <%= f.error_notification %>
   <%= f.input :seqid, label: "Reference" %>
