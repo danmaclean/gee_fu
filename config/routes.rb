@@ -49,7 +49,7 @@ GeeFu::Application.routes.draw do
 
   match '/admin/:id', :to => 'admin#show', :as => :user
   
-  match "/:dalliance", :to => redirect{"http://v0311.nbi.ac.uk:8081/dalliance/geefu.html"), :as => :dalliance
+  match "/:dalliance", :to => redirect("http://v0311.nbi.ac.uk:8081/dalliance/geefu.html"), :as => :dalliance
   
 mount SequenceServer::App, :at => "sequenceserver"
 
