@@ -421,7 +421,7 @@ class FeaturesController < ApplicationController
 
   # Bio Dalliance
   def dalliance_get
-    @experiment = Feature.where(experiment_id: params[:id]).limit(50)
+    @experiment = Feature.where(experiment_id: params[:id]).limit(500)
 
     respond_to do |format|
       format.html # index.html.erb
