@@ -432,10 +432,10 @@ class FeaturesController < ApplicationController
       @experiment = Feature.where(experiment_id: params[:exid], feature: params[:datatype]).limit(featurelimit)
     end
 
-      respond_to do |format|
-        format.html # index.html.erb
-        format.xml # index.xml.builder
-      end
+      #respond_to do |format|
+        #format.html # index.html.erb
+        #format.xml # index.xml.builder
+      #end
     end
 
 
