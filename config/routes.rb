@@ -51,12 +51,7 @@ GeeFu::Application.routes.draw do
   
   match "/:dalliance", :to => redirect("http://v0311.nbi.ac.uk:8081/dalliance/geefu.html"), :as => :dalliance
 
-  map.dalliance "/dalliance.:format",
-              :controller => "features",
-              :action => "dalliance",
-              :conditions => { :method => :get }
-
-mount SequenceServer::App, :at => "sequenceserver"
+ mount SequenceServer::App, :at => "sequenceserver"
 
 match "/webapollo" => redirect("http://v0311.nbi.ac.uk:8080/WebApollo/"), :as => :webapollo
 
