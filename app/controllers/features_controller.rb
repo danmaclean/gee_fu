@@ -421,10 +421,15 @@ class FeaturesController < ApplicationController
 
   # Bio Dalliance
   def dalliance_get
-    #@experiment = Feature.find_all_by_experiment_id(params[:id])
+
     @experiment = Feature.where(experiment_id: params[:id]).limit(10)
-    #@experiment = Feature.find(:all, :conditions => [ "experiment_id = ?", params[:id]], :limit => 10)
-    render :xml => @experiment,  :layout => false
+
+      respond_to do |format|
+        #format.xml { @experiment }
+        format.xml { render :action => "show.xml.builder, :layout => false" }
+
+    end
+    #render :xml => @experiment,  :layout => false
   end
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
