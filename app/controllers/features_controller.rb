@@ -422,7 +422,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
 
-    featurelimit = 500
+    featurelimit = 100
 
     if !params[:datatype].nil? then
       @experiment = Feature.where(experiment_id: params[:id], feature: params[:datatype]).limit(featurelimit)
