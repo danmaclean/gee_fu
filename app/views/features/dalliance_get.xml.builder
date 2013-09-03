@@ -1,4 +1,4 @@
 xml.instruct!
 xml.feature do
-  xml.item("togive" => @experiments.id, "totake" => @experiments.start )
+  xml.item("togive" => @experiments.start, "totake" => @experiments.end )
 end
