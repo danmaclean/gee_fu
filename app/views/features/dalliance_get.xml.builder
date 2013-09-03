@@ -1,7 +1,7 @@
 xml.instruct!
 
   xml.feature do
-    @experiments.each do |feature|
+    @experiment.each do |feature|
       xml.email do
         xml.to feature.start
         xml.from feature.end
