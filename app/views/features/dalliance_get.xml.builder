@@ -5,7 +5,7 @@ xml.instruct!
       xml.SEGMENT do
         @experiment.each do |feature|
           xml.FEATURE "id" => feature.id, "label" => "arrow3" do
-            xml.TYPE feature
+            xml.TYPE feature.feature
             xml.METHOD feature.source
             xml.START feature.start
             xml.END feature.end
