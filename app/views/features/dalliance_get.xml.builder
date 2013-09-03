@@ -10,8 +10,8 @@ xml.instruct!
             xml.START feature.start
             xml.END feature.end
             xml.SCORE feature.score
-            xml.ORIENTATION feature.phase
-            xml.PHASE feature.strand #0-6
+            xml.ORIENTATION feature.strand
+            xml.PHASE feature.phase #0-6
           end
         end
       end
