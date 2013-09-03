@@ -9,5 +9,3 @@ xml.instruct!
       end
     end
   end
-
-end
