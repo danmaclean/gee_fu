@@ -424,7 +424,9 @@ class FeaturesController < ApplicationController
 
     featurelimit = 100
 
-    if !params[:datatype].nil? then
+    featureType = params[:datatype]
+
+    unless featureType.nil? then
       @experiment = Feature.where(experiment_id: params[:id], feature: params[:datatype]).limit(featurelimit)
     else
       @experiment = Feature.where(experiment_id: params[:id]).limit(featurelimit)
