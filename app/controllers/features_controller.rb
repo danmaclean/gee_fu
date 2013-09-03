@@ -425,8 +425,8 @@ class FeaturesController < ApplicationController
     @experiment = Feature.where(experiment_id: params[:id]).limit(10)
 
       respond_to do |format|
-        #format.xml { @experiment }
-        format.xml { render :action => "show.xml.builder, :layout => false" }
+        format.xml { @experiment }
+        #format.xml { render :action => "show.xml.builder, :layout => false" }
 
     end
     #render :xml => @experiment,  :layout => false
