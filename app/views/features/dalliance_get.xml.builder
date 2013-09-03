@@ -4,14 +4,14 @@ xml.instruct!
     xml.GFF do
       xml.SEGMENT do
         @experiment.each do |feature|
-          xml.FEATURE "id" => feature.id, "label" => "test2" do
-            xml.TYPE "TODO"
-            xml.METHOD "TODO"
+          xml.FEATURE "id" => feature.id, "label" => "arrow3" do
+            xml.TYPE feature
+            xml.METHOD feature.source
             xml.START feature.start
             xml.END feature.end
             xml.SCORE feature.score
-            xml.ORIENTATION "TODO"
-            xml.PHASE "TODO"
+            xml.ORIENTATION feature.strand
+            xml.PHASE feature.phase
           end
         end
       end
