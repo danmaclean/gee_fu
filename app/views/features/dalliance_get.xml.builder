@@ -5,9 +5,13 @@ xml.instruct!
       xml.SEGMENT do
         @experiment.each do |feature|
           xml.FEATURE do
-            xml.TYPE feature.start
-            xml.from feature.end
-            xml.subject feature.quality
+            xml.TYPE "TODO"
+            xml.METHOD "TODO"
+            xml.START feature.start
+            xml.END feature.end
+            xml.SCORE feature.score
+            xml.ORIENTATION "TODO"
+            xml.PHASE "TODO"
           end
         end
       end
