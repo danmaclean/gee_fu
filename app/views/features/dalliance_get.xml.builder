@@ -1,9 +1,13 @@
 xml.instruct!
 
-@experiments.each do |experiment|
-
   xml.feature do
-    xml.item('togive' => experiment.quality, 'totake' => experiment.quality )
+    @experiments.each do |feature|
+      xml.email do
+        xml.to feature.start
+        xml.from feature.end
+        xml.subject feature.quality
+      end
+    end
   end
 
 end
