@@ -417,13 +417,12 @@ class FeaturesController < ApplicationController
     #respond(objects, params[:format])
     respond objects
   end
-  
+
+
+  # Bio Dalliance
   def dalliance_get
-    # experiment = Feature.find(params[:id])
-    # @experiment = Experiment.find(params[:id]).features
-    # @experiment = Feature.find(:all, :conditions => {:experiment => params[:id]})
-   @experiment = Feature.find(:all, :conditions => [ "experiment_id = ?", params[:id]], :limit => 10)
-    # @experiment = Feature.find(1,2,3,4,5,6,7,8,9)
+    @experiment = Feature.find.find_all_by_experiment_id(params[:id])
+    #@experiment = Feature.find(:all, :conditions => [ "experiment_id = ?", params[:id]], :limit => 10)
     render :xml => @experiment,  :layout => false
   end
 
