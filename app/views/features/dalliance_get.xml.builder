@@ -4,7 +4,7 @@ xml.instruct!
     xml.GFF do
       xml.SEGMENT do
         @experiment.each do |feature|
-          xml.FEATURE do
+          xml.FEATURE "id" => feature.id do
             xml.TYPE "TODO"
             xml.METHOD "TODO"
             xml.START feature.start
