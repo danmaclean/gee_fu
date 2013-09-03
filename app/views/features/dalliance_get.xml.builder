@@ -1,4 +1,7 @@
 xml.instruct!
+
+@experiments.each do |experiment|
+
 xml.feature do
-  xml.item("togive" => @experiments.quality, "totake" => @experiments.quality )
+  xml.item('togive' => experiment.quality, 'totake' => experiment.quality )
 end
