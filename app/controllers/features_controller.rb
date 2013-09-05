@@ -422,7 +422,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
 
-    featurelimit = 100
+    featurelimit = 500
 
     featureType = params[:datatype]
 
