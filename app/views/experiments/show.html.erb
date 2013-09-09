@@ -36,10 +36,10 @@
 
 <script language="javascript">
   var b = new Browser({
-    chr:          '22',
-    viewStart:    30000000,
-    viewEnd:      30030000,
-    cookieKey:    'human2',
+    chr:          '1',
+    viewStart:    0,
+    viewEnd:      10000,
+    cookieKey:    'KW1',
 
     chains: {
       hg19ToHg18: new Chainset('http://www.derkholm.net:8080/das/hg19ToHg18/', 'GRCh37', 'NCBI36',
@@ -49,71 +49,24 @@
                                   auth: 'GRCh',
                                   version: 37
                                })
-    },
-
-    sources:     [{name:                 'Genome',      
-                   twoBitURI:            'http://www.biodalliance.org/datasets/hg18.2bit',
-                   // uri:                  'http://www.derkholm.net:8080/das/hsa_54_36p/',      
-                   tier_type:            'sequence'},
-                  {name:                 'e! transcripts',
-                   uri:                  'http://beta.rest.ensembl.org',
-                   tier_type:            'ensembl',
-                   species:              'human',
-                   type:                 ['transcript', 'exon', 'cds'],
-                   mapping: 'hg19ToHg18',
-                  },
-                  {name:                 'Genes',     
-                   desc:                 'Gene structures from Ensembl 54',
-                   uri:                  'http://www.derkholm.net:8080/das/hsa_54_36p/',      
-                   collapseSuperGroups:  true,
-                   provides_karyotype:   true,
-                   provides_search:      true,
-                   provides_entrypoints: true,
-                   maxbins:              false,
-                   featureInfoPlugin: function(f, info) {
-                      info.add('Testing', 'This is another test!');
-                   }
-                  }, 
-                  {name:                 'Repeats',     
-                   uri:                  'http://www.derkholm.net:8080/das/hsa_54_36p/',      
-                   stylesheet_uri:       'http://www.biodalliance.org/stylesheets/repeats-L1.xml'}, 
-                  {name:                 'CpG Density', 
-                   uri:                  'http://www.derkholm.net:8080/das/hg18comp/',        
-                   // stylesheet_uri:       'http://www.biodalliance.org/stylesheets/cpg-hist.xml',
-                   quantLeapThreshold: 0.8,
-                   forceReduction: -1,
-                   style:                [{type: 'cpgoe',
-                                           style: {glyph: 'LINEPLOT',
-                                                   FGCOLOR: 'green', HEIGHT: '50', MIN: 0, MAX: 1.2}}]},
-                    {name: 'MeDIP-raw',
-                     desc: 'MeDIP-seq reads from Nature Biotech. 26:779-785',
-                     uri: 'http://www.derkholm.net:8080/das/medipseq_reads/'},
-                  {name:                 'BWG test',
-                   bwgURI:               'http://www.biodalliance.org/datasets/spermMethylation.bw',
-                   stylesheet_uri:       'http://www.ebi.ac.uk/das-srv/genomicdas/das/batman_seq_SP/stylesheet',
-                   quantLeapThreshold: 80},
-                  {name:                 'BBD test',
-                   bwgURI:               'http://www.biodalliance.org/datasets/ensGene.bb',
-                   link:                 'http://ncbi36.ensembl.org/Homo_sapiens/Gene/Summary?t=$$',
-                   collapseSuperGroups:  true,
-                   disable: true}
-                 ,{name:                 'BWG hist',
-                   bwgURI:               'http://www.biodalliance.org/datasets/spermMethylation.bw',
-                   style:     [{type: 'default',
-                                style:  {glyph: 'HISTOGRAM', HEIGHT: 50, MIN: 0, MAX: 100}}],
-                   quantLeapThreshold: 80}
-                ],
-
-    setDocumentTitle: true,
-    uiPrefix: '',
-
-    searchEndpoint: new DASSource('http://www.derkholm.net:8080/das/hsa_54_36p/'),
-    browserLinks: {
-        Ensembl: 'http://ncbi36.ensembl.org/Homo_sapiens/Location/View?r=${chr}:${start}-${end}',
-        UCSC: 'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg18&position=chr${chr}:${start}-${end}',
-        Sequence: 'http://www.derkholm.net:8080/das/hg18comp/sequence?segment=${chr}:${start},${end}'
-    }
-  });
+	},
+	
+		sources:     [
+					{name:                 'genes',
+					uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/gene.xml',
+					features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/gene.xml',
+	                stylesheet_uri:       './glyph-test/stylesheet.xml',
+	                dasStaticFeatures: true}
+	                ,{name:                  'mRNSs',
+	                uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/mRNA.xml',
+	                features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/mRNA.xml',
+	                stylesheet_uri:	 './glyph-test/stylesheet.xml',
+	                asStaticFeatures: true}
+	                ],
+	
+		setDocumentTitle: true,
+		uiPrefix: '',
+	});
 
   b.addFeatureInfoPlugin(function(f, info) {
       info.add('Testing', 'This is a test!');
