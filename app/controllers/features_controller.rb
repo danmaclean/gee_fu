@@ -418,6 +418,10 @@ class FeaturesController < ApplicationController
     respond objects
   end
 
+	def feature_types
+		featurelimit = 250
+		@types = Feature.feature.where(experiment_id: params[:exid]).limit(featurelimit)
+	end
 
   # Bio Dalliance
   def dalliance_get
@@ -429,7 +433,7 @@ class FeaturesController < ApplicationController
       if featureType.nil? then
         @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
       else
-        @experiment = Feature.where(experiment_id: params[:exid], feature: params[:datatype]).limit(featurelimit)
+        @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
       end
     end
 
