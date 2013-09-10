@@ -20,6 +20,7 @@ class ExperimentsController < ApplicationController
   # where format = xml or json
   def show 
     if Experiment.exists?(params[:id])
+      @types = Feature.where(experiment_id: params[:id]).limit(featurelimit).pluck(:feature).unique
       @experiment = Experiment.find(params[:id])
       @experiment.meta = JSON::parse @experiment.meta if @experiment.meta
       respond @experiment
@@ -40,6 +41,7 @@ class ExperimentsController < ApplicationController
     @experiment = Experiment.new(params[:experiment])
     genome      = Genome.find(params[:experiment][:genome_id])
     
+
     #format the meta data string from a provided yaml file or get it from the parent genome
     if @experiment.yaml_file
       @experiment.meta = YAML::load_file(@experiment.yaml_file.path).to_json 
