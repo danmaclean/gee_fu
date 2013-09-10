@@ -21,7 +21,7 @@ class ExperimentsController < ApplicationController
   def show 
     if Experiment.exists?(params[:id])
       featurelimit = 250
-      @types = Feature.where(experiment_id: params[:id]).limit(featurelimit).pluck(:feature).unique
+      @types = Feature.where(experiment_id: params[:id]).limit(featurelimit).pluck(:feature).uniq
       @experiment = Experiment.find(params[:id])
       @experiment.meta = JSON::parse @experiment.meta if @experiment.meta
       respond @experiment
