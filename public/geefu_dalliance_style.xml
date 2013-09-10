@@ -8,8 +8,8 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>red</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
+<FGCOLOR>black</FGCOLOR>
+<BGCOLOR>red</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
 </BOX>
@@ -20,8 +20,8 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>blue</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
+<FGCOLOR>black</FGCOLOR>
+<BGCOLOR>blue</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
 </BOX>
@@ -32,8 +32,8 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>yellow</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
+<FGCOLOR>black</FGCOLOR>
+<BGCOLOR>yellow</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
 </BOX>
@@ -43,8 +43,8 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>orange</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
+<FGCOLOR>black</FGCOLOR>
+<BGCOLOR>orange</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
 </BOX>
@@ -54,8 +54,8 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>green</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
+<FGCOLOR>black</FGCOLOR>
+<BGCOLOR>green</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
 </BOX>
@@ -65,8 +65,8 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>yellow</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
+<FGCOLOR>black</FGCOLOR>
+<BGCOLOR>yellow</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
 </BOX>
@@ -76,8 +76,8 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>purple</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
+<FGCOLOR>black</FGCOLOR>
+<BGCOLOR>purple</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
 </BOX>
@@ -87,7 +87,7 @@
         <GLYPH>
 <BOX>
 <HEIGHT>10</HEIGHT>
-<FGCOLOR>white</FGCOLOR>
+<FGCOLOR>black</FGCOLOR>
 <BGCOLOR>white</BGCOLOR>
 <BUMP>yes</BUMP>
 <LABEL>no</LABEL>
