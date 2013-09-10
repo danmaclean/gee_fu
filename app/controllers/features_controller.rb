@@ -429,9 +429,9 @@ class FeaturesController < ApplicationController
     featurelimit = 250
 
     featureType = params[:datatype]
-
+@types = Feature.where(experiment_id: params[:exid]).limit(featurelimit).pluck(:feature)
       if featureType.nil? then
-        @types = Feature.where(experiment_id: params[:exid]).limit(featurelimit).pluck(:feature)
+        # @types = Feature.where(experiment_id: params[:exid]).limit(featurelimit).pluck(:feature)
         @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
       else
         @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
