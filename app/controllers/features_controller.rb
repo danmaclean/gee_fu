@@ -431,18 +431,12 @@ class FeaturesController < ApplicationController
     featureType = params[:datatype]
 
       if featureType.nil? then
+        @types = Feature.where(experiment_id: params[:exid]).limit(featurelimit).pluck(:feature)
         @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
       else
         @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
       end
     end
-
-def dalliance_get_types
-
-featurelimit = 250
-@types = Feature.where(experiment_id: params[:exid]).limit(featurelimit).pluck(:feature)
-render :json => @types.uniq, :layout => false
-end
 
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id

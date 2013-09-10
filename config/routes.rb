@@ -39,10 +39,6 @@ GeeFu::Application.routes.draw do
     post "/:id", to: "features#annoj_post"
   end
 
-scope "/features/dalliance/types" do
-  get "/:exid", to: "features#dalliance_get_types"
-end
-
   scope "/features/dalliance" do
   	get "/:exid", to: "features#dalliance_get"
     get"/:exid/:datatype", to: "features#dalliance_get"

@@ -42,16 +42,21 @@
     cookieKey:    'KW1',
 	
 		sources:     [
+
+<% @types.each do |t| %>
+
 					{name:                 'genes',
-					uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/gene.xml',
-					features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/gene.xml',
+					uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
+					features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
 	        dasStaticFeatures: true}
 	        ,{name:                  'mRNSs',
-	        uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/mRNA.xml',
-	        features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/mRNA.xml',
+	        uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
+	        features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
 	        asStaticFeatures: true}
 	                ],
 	
+<% end %>
+
 		setDocumentTitle: true,
 		// uiPrefix: 'NOUI',
 	});
