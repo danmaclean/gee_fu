@@ -20,6 +20,7 @@ class ExperimentsController < ApplicationController
   # where format = xml or json
   def show 
     if Experiment.exists?(params[:id])
+      featurelimit = 250
       @types = Feature.where(experiment_id: params[:id]).limit(featurelimit).pluck(:feature).unique
       @experiment = Experiment.find(params[:id])
       @experiment.meta = JSON::parse @experiment.meta if @experiment.meta
