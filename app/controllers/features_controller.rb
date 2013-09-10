@@ -437,6 +437,13 @@ class FeaturesController < ApplicationController
       end
     end
 
+def dalliance_get_types
+
+featurelimit = 250
+@types = Feature.where(experiment_id: params[:exid]).limit(featurelimit).pluck(:feature)
+
+end
+
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 

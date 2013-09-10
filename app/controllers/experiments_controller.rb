@@ -35,10 +35,6 @@ class ExperimentsController < ApplicationController
     end
   end
 
-  def NOUIcss
-    # TODO
-  end
-
   def create
     require 'bio'
     @experiment = Experiment.new(params[:experiment])
