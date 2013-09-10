@@ -43,13 +43,16 @@
 	
 		sources:     [
 
-<% @types.each do |t| %>
-					{name:                 '<%= t %>',
-					uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
-					features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
-          type:                 ['datatypetest', 'exon', 'cds'],
+// <% @types.each do |t| %>
+					{name:                 'NAME',
+          // {name:                 '<%= t %>',
+					// uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
+					// features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
+          uri:                  'http://v0311.nbi.ac.uk/features/dalliance/1.xml',
+          features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/1.xml',
+          type:                 ['tss', 'exon', 'cds'],
 	        dasStaticFeatures: true},
-<% end %>
+// <% end %>
 ],
 		setDocumentTitle: true,
 		// uiPrefix: 'NOUI',
