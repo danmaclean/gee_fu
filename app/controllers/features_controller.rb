@@ -441,7 +441,7 @@ def dalliance_get_types
 
 featurelimit = 250
 @types = Feature.where(experiment_id: params[:exid]).limit(featurelimit).pluck(:feature)
-
+render :json => @types, :layout => false
 end
 
 
