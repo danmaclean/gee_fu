@@ -44,19 +44,12 @@
 		sources:     [
 
 <% @types.each do |t| %>
-
 					{name:                 '<%= t %>',
 					uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
 					features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
-	        dasStaticFeatures: true}
-	        ,{name:                  '<%= t %>',
-	        uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
-	        features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= t %>.xml',
-	        asStaticFeatures: true}
-	                ],
-	
+	        dasStaticFeatures: true},
 <% end %>
-
+],
 		setDocumentTitle: true,
 		// uiPrefix: 'NOUI',
 	});
