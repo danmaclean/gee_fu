@@ -19,7 +19,7 @@ class ReferencesController < ApplicationController
   
     if params[:name]
       if Genome.exists?(params[:id])
-        @reference = Reference.find(:first, :conditions => {:genome_id => params[:id], :name => params[:name] } )
+        @reference = Reference.first(:conditions => {:genome_id => params[:id], :name => params[:name] } )
         if @reference
           if params[:sequence] #fold in the reference sequence..
             @reference = { :name => @reference.name,
@@ -44,7 +44,7 @@ class ReferencesController < ApplicationController
 
     else  
       if Genome.exists?(params[:id])
-        @references = Reference.find(:all, :conditions => {:genome_id => params[:id]} )
+        @references = Reference.first(:conditions => {:genome_id => params[:id]} )
         respond @references
       else
         respond :false
