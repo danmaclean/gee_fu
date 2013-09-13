@@ -3,42 +3,43 @@
 <DASSTYLE>
   <STYLESHEET>
     <CATEGORY id="default">
-
       <TYPE id='CDS'>
         <GLYPH>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>red</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
+          <BOX>
+            <HEIGHT>10</HEIGHT>
+            <FGCOLOR>black</FGCOLOR>
+            <BGCOLOR>red</BGCOLOR>
+            <BUMP>yes</BUMP>
+            <LABEL>no</LABEL>
+          </BOX>
         </GLYPH>
       </TYPE>
-
-      <TYPE id='exon'>
+      <TYPE id="exon">
         <GLYPH>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>blue</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
-        </GLYPH>
-      </TYPE>
-
+         <BOX>
+            <BGCOLOR>yellow</BGCOLOR>
+         </BOX>
+      </GLYPH>
+   </TYPE>
       <TYPE id='tts'>
         <GLYPH>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>yellow</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
-        </GLYPH>
-      </TYPE>
+          <BOX>
+            <HEIGHT>10</HEIGHT>
+            <FGCOLOR>black</FGCOLOR>
+            <BGCOLOR>yellow</BGCOLOR>
+            <BUMP>yes</BUMP>
+            <LABEL>no</LABEL>
+        </BOX>
+      </GLYPH>
+    </TYPE>
+    <TYPE id="transcript">
+      <GLYPH>
+        <LINE>
+         <FGCOLOR>black</FGCOLOR>
+         <STYLE>hat</STYLE>
+        </LINE>
+      </GLYPH>
+    </TYPE>
       <TYPE id='five_prime_UTR'>
         <GLYPH>
 <BOX>
