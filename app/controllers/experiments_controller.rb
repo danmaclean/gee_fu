@@ -98,11 +98,19 @@ class ExperimentsController < ApplicationController
        attribute = JSON.generate(record.attributes)
         Rails.logger.info record.seqname
         # ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
-        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
 
-    if ref.nil?
-      logger.error "ERROR: There is no ref!"
-    end
+        if genome.id.nil?
+          logger.error "ERROR: There is no genome.id!"
+        end
+        if record.seqname.nil?
+          logger.error "ERROR: There is no record.seqname!"
+        end
+        
+
+        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+        if ref.nil?
+          logger.error "ERROR: There is no ref!"
+        end
 
         feature = Feature.new(
           :group => "#{attribute}",
