@@ -101,9 +101,13 @@ class ExperimentsController < ApplicationController
 
         if genome.id.nil?
           logger.error "ERROR: There is no genome.id!"
+        else
+          logger.error "DEBUG: genome.id = #{genome.id}" 
         end
         if record.seqname.nil?
           logger.error "ERROR: There is no record.seqname!"
+          else
+          logger.error "DEBUG: record.seqname = #{record.seqname}" 
         end
         
 
