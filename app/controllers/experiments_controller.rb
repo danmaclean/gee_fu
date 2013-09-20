@@ -42,6 +42,9 @@ class ExperimentsController < ApplicationController
     @experiment = Experiment.new(params[:experiment])
     genome      = Genome.find(params[:experiment][:genome_id])
     
+    if gene.nil?
+      puts "ERROR: There is no gene!"
+    end
 
     #format the meta data string from a provided yaml file or get it from the parent genome
     if @experiment.yaml_file
@@ -96,6 +99,10 @@ class ExperimentsController < ApplicationController
         Rails.logger.info record.seqname
         # ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
         ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+
+    if ref.nil?
+      puts "ERROR: There is no ref!"
+    end
 
         feature = Feature.new(
           :group => "#{attribute}",
