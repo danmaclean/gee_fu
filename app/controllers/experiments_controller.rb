@@ -110,6 +110,7 @@ class ExperimentsController < ApplicationController
           logger.error "DEBUG: record.seqname = #{record.seqname}" 
         end
         
+        record.seqname.slice! "seq"
 
         # ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
         ref = Reference.first(:conditions => {:name => record.seqname, :genome_id => genome.id})
