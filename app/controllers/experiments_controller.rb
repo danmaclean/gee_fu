@@ -94,7 +94,8 @@ class ExperimentsController < ApplicationController
 
        attribute = JSON.generate(record.attributes)
         Rails.logger.info record.seqname
-        ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+        # ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
 
         feature = Feature.new(
           :group => "#{attribute}",
