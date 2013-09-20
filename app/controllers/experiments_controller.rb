@@ -42,8 +42,8 @@ class ExperimentsController < ApplicationController
     @experiment = Experiment.new(params[:experiment])
     genome      = Genome.find(params[:experiment][:genome_id])
     
-    if gene.nil?
-      puts "ERROR: There is no gene!"
+    if genome.nil?
+      puts "ERROR: There is no genome!"
     end
 
     #format the meta data string from a provided yaml file or get it from the parent genome
