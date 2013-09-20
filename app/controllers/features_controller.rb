@@ -420,10 +420,7 @@ class FeaturesController < ApplicationController
 
   def dalliance_groups
     exid = params[:exid]
-
-    @group = Feature.where(experiment_id: exid).
-
-
+    @group = Feature.where(experiment_id: exid)
   end
 
   # Bio Dalliance
