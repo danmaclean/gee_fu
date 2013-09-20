@@ -108,7 +108,7 @@ class ExperimentsController < ApplicationController
         
 
         # ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
-        ref = Reference.find(:first, :conditions => [:name = record.seqname, :genome_id = genome.id])
+        ref = Reference.find(:first, :conditions => [:name => record.seqname, :genome_id => genome.id])
         if ref.nil?
           logger.error "ERROR: There is no ref!"
         end
