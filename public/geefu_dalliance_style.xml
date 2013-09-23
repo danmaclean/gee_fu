@@ -3,7 +3,7 @@
 <DASSTYLE>
   <STYLESHEET>
     <CATEGORY id="default">
-      <TYPE id="exon">
+      <TYPE id="cpgoe">
 <GLYPH>
 <LINEPLOT>
 <HEIGHT>50</HEIGHT>
