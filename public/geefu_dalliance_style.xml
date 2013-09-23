@@ -3,6 +3,17 @@
 <DASSTYLE>
   <STYLESHEET>
     <CATEGORY id="default">
+      <TYPE id="exon">
+<GLYPH>
+<LINEPLOT>
+<HEIGHT>50</HEIGHT>
+<MIN>0.0</MIN>
+<MAX>1.2</MAX>
+<COLOR1>red</COLOR1>
+<LINEWIDTH>2</LINEWIDTH>
+</LINEPLOT>
+</GLYPH>
+</TYPE>
       <TYPE id='CDS'>
         <GLYPH>
           <BOX>
