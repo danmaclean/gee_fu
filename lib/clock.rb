@@ -4,7 +4,7 @@ require_relative "../config/environment"
 require 'clockwork'
 
 module Clockwork
-  every(48.hours, 'DataRepositoryWorker') do
+  every(7.days, 'DataRepositoryWorker') do
     DataRepositoryWorker.perform_async
   end
 end
