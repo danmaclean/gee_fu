@@ -28,6 +28,7 @@
             <TYPE id="exon">
                 <GLYPH>
                     <BOX>
+                        <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>yellow</BGCOLOR>
                         <LABEL>yes</LABEL>
                     </BOX>
