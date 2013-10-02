@@ -12,9 +12,6 @@ xml.instruct!
             xml.SCORE feature.score
             xml.ORIENTATION feature.strand
             xml.PHASE feature.phase #0-6
-            # xml.GROUP_ID feature.group
-            xmk.SEQUENCE feature.seqid
-            # <PARENT id="parent id1" />
           end
         end
       end
