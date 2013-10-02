@@ -5,7 +5,7 @@ xml.instruct!
       @seqs.each do |seq|
         xml.SEGMENT 'id' => seq do
           logger.error"-----------------------------#{seq}"
-          @experiment = Feature.where(experiment_id: eid, seqid: seq, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(250).each do |feature|
+          @experiment = Feature.where(experiment_id: @eid, seqid: seq, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(250).each do |feature|
             xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
               xml.TYPE feature.feature ,'id' => feature.feature
               xml.METHOD feature.source
