@@ -29,6 +29,7 @@
                 <GLYPH>
                     <BOX>
                         <BGCOLOR>yellow</BGCOLOR>
+                        <LABEL>yes</LABEL>
                     </BOX>
                 </GLYPH>
             </TYPE>
