@@ -426,9 +426,9 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
 
-Sequence.all.each do |seq|
-  logger.error "---------------------- found seq: #{seq.sequence}"
-end
+# Sequence.all.each do |seq|
+  # logger.error "---------------------- found seq: #{seq.sequence}"
+# end
 
     featurelimit = 250
 
@@ -439,6 +439,7 @@ end
       else
         @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
       end
+      @seqs = @experiment.map { |r| r.seqid }
     end
 
 
