@@ -1,5 +1,9 @@
 xml.instruct!
 
+Sequence.each do |seq|
+  logger.error "---------------------- found seq!!"
+end
+
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
       xml.SEGMENT 'id' => 1 do

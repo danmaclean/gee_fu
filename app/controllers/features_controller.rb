@@ -431,7 +431,7 @@ class FeaturesController < ApplicationController
     featureType = params[:datatype]
       if featureType.nil? then
         # @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
-         @experiment = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit)
+        @experiment = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit)
       else
         @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
       end
