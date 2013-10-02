@@ -426,7 +426,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
 
-    featurelimit = 250
+    featurelimit = 25000
 
     featureType = params[:datatype]
       if featureType.nil? then
