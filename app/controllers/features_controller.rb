@@ -427,7 +427,7 @@ class FeaturesController < ApplicationController
   def dalliance_get
 
 Sequence.all.each do |seq|
-  logger.error "---------------------- found seq!!"
+  logger.error "---------------------- found seq: #{seq.sequence}"
 end
 
     featurelimit = 250
