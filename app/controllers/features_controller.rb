@@ -426,7 +426,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
 
-Sequence.each do |seq|
+Sequence.all.each do |seq|
   logger.error "---------------------- found seq!!"
 end
 
