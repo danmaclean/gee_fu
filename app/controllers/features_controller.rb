@@ -430,7 +430,7 @@ class FeaturesController < ApplicationController
   # logger.error "---------------------- found seq: #{seq.sequence}"
 # end
 
-    featurelimit = 250
+    featurelimit = 2500000
 
     featureType = params[:datatype]
       if featureType.nil? then
