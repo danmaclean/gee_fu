@@ -1,11 +1,11 @@
 xml.instruct!
-@seqs.each do |seq|
+@seqs.uniq.each do |seq|
   logger.error"-----------------------------------#{seq}"
 end
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
       xml.SEGMENT 'id' => 1 do
-        @experiment.uniq.each do |feature|
+        @experiment.each do |feature|
           xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
             xml.TYPE feature.feature ,'id' => feature.feature
             xml.METHOD feature.source
