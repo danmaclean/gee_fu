@@ -441,6 +441,7 @@ class FeaturesController < ApplicationController
         # @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
       # end
       @seqs = Feature.all.pluck(:seqid).uniq
+      logger.error "------------------------------------ LOADED ALL SEQs"
       # @seqs = @experiment.map { |r| r.seqid }
     end
 
