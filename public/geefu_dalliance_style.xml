@@ -30,7 +30,8 @@
                     <BOX>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>yellow</BGCOLOR>
-                        <LABEL>yes</LABEL>
+                        <LABEL>no</LABEL>
+                        <BUMP>no</BUMP>
                     </BOX>
                 </GLYPH>
             </TYPE>
@@ -102,7 +103,7 @@
                     <LINE>
                         <FGCOLOR>black</FGCOLOR>
                         <STYLE>hat</STYLE>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <HEIGHT>10</HEIGHT>
                         <LABEL>no</LABEL>
                     </LINE>
