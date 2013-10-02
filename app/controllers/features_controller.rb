@@ -440,7 +440,7 @@ class FeaturesController < ApplicationController
       # else
         # @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
       # end
-      @seqs = Sequence.all.uniq
+      @seqs = Feature.all.pluck(:seqid).uniq
       # @seqs = @experiment.map { |r| r.seqid }
     end
 
