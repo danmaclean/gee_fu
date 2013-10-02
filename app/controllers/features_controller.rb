@@ -426,6 +426,10 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
 
+Sequence.each do |seq|
+  logger.error "---------------------- found seq!!"
+end
+
     featurelimit = 250
 
     featureType = params[:datatype]
