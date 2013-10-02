@@ -14,6 +14,7 @@ xml.instruct!
             xml.PHASE feature.phase #0-6
             @feature.parents.each do |parent|
               xml.PERENT 'id' =>parent.id
+              logger.error "----- parent ID =  #{parent.id}"
             end
           end
         end
