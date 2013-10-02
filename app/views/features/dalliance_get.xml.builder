@@ -12,7 +12,7 @@ xml.instruct!
             xml.SCORE feature.score
             xml.ORIENTATION feature.strand
             xml.PHASE feature.phase #0-6
-            @feature.parents.each do |parent|
+            feature.parents.each do |parent|
               xml.PERENT 'id' =>parent.id
               logger.error "----- parent ID =  #{parent.id}"
             end
