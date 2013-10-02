@@ -3,7 +3,7 @@ xml.instruct!
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
       Sequence.each do |seqqq|
-        xml.SEGMENT 'id' => 1 do
+        xml.SEGMENT 'id' => seqqq.sequence do
           @experiment.each do |feature|
             xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
               xml.TYPE feature.feature ,'id' => feature.feature
