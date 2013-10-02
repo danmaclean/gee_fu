@@ -1,120 +1,120 @@
 <?xml version="1.0" standalone="yes"?>
 
 <DASSTYLE>
-  <STYLESHEET>
-    <CATEGORY id="default">
-      <TYPE id="cpgoe">
-<GLYPH>
-<LINEPLOT>
-<HEIGHT>50</HEIGHT>
-<MIN>0.0</MIN>
-<MAX>1.2</MAX>
-<COLOR1>red</COLOR1>
-<LINEWIDTH>2</LINEWIDTH>
-</LINEPLOT>
-</GLYPH>
-</TYPE>
-      <TYPE id='CDS'>
-        <GLYPH>
-          <BOX>
-            <HEIGHT>10</HEIGHT>
-            <FGCOLOR>black</FGCOLOR>
-            <BGCOLOR>red</BGCOLOR>
-            <BUMP>yes</BUMP>
-            <LABEL>no</LABEL>
-          </BOX>
-        </GLYPH>
-      </TYPE>
-      <TYPE id="exon">
-        <GLYPH>
-         <BOX>
-            <BGCOLOR>yellow</BGCOLOR>
-         </BOX>
-      </GLYPH>
-   </TYPE>
-      <TYPE id='tts'>
-        <GLYPH>
-          <BOX>
-            <HEIGHT>10</HEIGHT>
-            <FGCOLOR>black</FGCOLOR>
-            <BGCOLOR>yellow</BGCOLOR>
-            <BUMP>yes</BUMP>
-            <LABEL>no</LABEL>
-        </BOX>
-      </GLYPH>
-    </TYPE>
-    <TYPE id="transcript">
-      <GLYPH>
-        <LINE>
-         <FGCOLOR>black</FGCOLOR>
-         <STYLE>hat</STYLE>
-        </LINE>
-      </GLYPH>
-    </TYPE>
-      <TYPE id='five_prime_UTR'>
-        <GLYPH>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>orange</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
-        </GLYPH>
-      </TYPE>
- <TYPE id='three_prime_UTR'>
-        <GLYPH>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>green</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
-        </GLYPH>
-      </TYPE>
-       <TYPE id='gene'>
-        <GLYPH>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>yellow</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
-        </GLYPH>
-      </TYPE>
-       <TYPE id='mRNA'>
-        <GLYPH>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>purple</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
-        </GLYPH>
-      </TYPE>
-        <TYPE id='intron'>
-        <GLYPH>
-<LINE>
-  <FGCOLOR>sienna</FGCOLOR>
-  <STYLE>hat</STYLE>
-  <BUMP>yes</BUMP>
-  <HEIGHT>10</HEIGHT>
-  <LABEL>yes</LABEL>
-</LINE>
-        </GLYPH>
-      </TYPE>
-       <TYPE id='tss'>
-<BOX>
-<HEIGHT>10</HEIGHT>
-<FGCOLOR>black</FGCOLOR>
-<BGCOLOR>white</BGCOLOR>
-<BUMP>yes</BUMP>
-<LABEL>no</LABEL>
-</BOX>
-      </TYPE>
-    </CATEGORY>
-  </STYLESHEET>
+    <STYLESHEET>
+        <CATEGORY id="default">
+            <TYPE id="cpgoe">
+                <GLYPH>
+                    <LINEPLOT>
+                        <HEIGHT>50</HEIGHT>
+                        <MIN>0.0</MIN>
+                        <MAX>1.2</MAX>
+                        <COLOR1>red</COLOR1>
+                        <LINEWIDTH>2</LINEWIDTH>
+                    </LINEPLOT>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='CDS'>
+                <GLYPH>
+                    <BOX>
+                        <HEIGHT>10</HEIGHT>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>red</BGCOLOR>
+                        <BUMP>yes</BUMP>
+                        <LABEL>no</LABEL>
+                    </BOX>
+                </GLYPH>
+            </TYPE>
+            <TYPE id="exon">
+                <GLYPH>
+                    <BOX>
+                        <BGCOLOR>yellow</BGCOLOR>
+                    </BOX>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='tts'>
+                <GLYPH>
+                    <BOX>
+                        <HEIGHT>10</HEIGHT>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>yellow</BGCOLOR>
+                        <BUMP>yes</BUMP>
+                        <LABEL>no</LABEL>
+                    </BOX>
+                </GLYPH>
+            </TYPE>
+            <TYPE id="transcript">
+                <GLYPH>
+                    <LINE>
+                        <FGCOLOR>black</FGCOLOR>
+                        <STYLE>hat</STYLE>
+                    </LINE>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='five_prime_UTR'>
+                <GLYPH>
+                    <BOX>
+                        <HEIGHT>10</HEIGHT>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>orange</BGCOLOR>
+                        <BUMP>yes</BUMP>
+                        <LABEL>no</LABEL>
+                    </BOX>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='three_prime_UTR'>
+                <GLYPH>
+                    <BOX>
+                        <HEIGHT>10</HEIGHT>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>green</BGCOLOR>
+                        <BUMP>yes</BUMP>
+                        <LABEL>no</LABEL>
+                    </BOX>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='gene'>
+                <GLYPH>
+                    <BOX>
+                        <HEIGHT>10</HEIGHT>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>yellow</BGCOLOR>
+                        <BUMP>yes</BUMP>
+                        <LABEL>no</LABEL>
+                    </BOX>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='mRNA'>
+                <GLYPH>
+                    <BOX>
+                        <HEIGHT>10</HEIGHT>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>purple</BGCOLOR>
+                        <BUMP>yes</BUMP>
+                        <LABEL>no</LABEL>
+                    </BOX>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='intron'>
+                <GLYPH>
+                    <LINE>
+                        <FGCOLOR>black</FGCOLOR>
+                        <STYLE>hat</STYLE>
+                        <BUMP>yes</BUMP>
+                        <HEIGHT>10</HEIGHT>
+                        <LABEL>no</LABEL>
+                    </LINE>
+                </GLYPH>
+            </TYPE>
+            <TYPE id='tss'>
+                <BOX>
+                    <HEIGHT>10</HEIGHT>
+                    <FGCOLOR>black</FGCOLOR>
+                    <BGCOLOR>white</BGCOLOR>
+                    <BUMP>yes</BUMP>
+                    <LABEL>no</LABEL>
+                </BOX>
+            </TYPE>
+        </CATEGORY>
+    </STYLESHEET>
 </DASSTYLE>
