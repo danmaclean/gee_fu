@@ -430,16 +430,16 @@ class FeaturesController < ApplicationController
   # logger.error "---------------------- found seq: #{seq.sequence}"
 # end
 
-    featurelimit = 2500000
+    featurelimit = 250
 
-    featureType = params[:datatype]
-      if featureType.nil? then
+    # featureType = params[:datatype]
+      # if featureType.nil? then
         eid = params[:exid]
         # @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
         @experiment = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit)
-      else
-        @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
-      end
+      # else
+        # @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
+      # end
       @seqs = @experiment.map { |r| r.seqid }
     end
 
