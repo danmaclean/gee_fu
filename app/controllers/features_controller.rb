@@ -422,6 +422,8 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
 
+
+
     featurelimit = 1
       @eid = params[:exid]
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
@@ -429,6 +431,10 @@ class FeaturesController < ApplicationController
       @seqs = Feature.where(experiment_id: @eid, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit).pluck(:seqid).uniq
       logger.error "------------------------------------ LOADED ALL SEQs"
       logger.error "------------------------------------ found #{@seqs.length} sequences"
+
+
+      @experiments_tmp = Experiment.find(experiment_id:@eid).features.length;
+      logger.error "------------------------------------ Found #{@experiments_tmp} features"
     end
 
 
