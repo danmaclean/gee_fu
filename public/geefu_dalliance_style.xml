@@ -99,7 +99,7 @@
                 </GLYPH>
             </TYPE>
             <TYPE id='intron'>
-                <GLYPH>
+                <!-- <GLYPH>
                     <LINE>
                         <FGCOLOR>black</FGCOLOR>
                         <STYLE>hat</STYLE>
@@ -107,7 +107,13 @@
                         <HEIGHT>10</HEIGHT>
                         <LABEL>no</LABEL>
                     </LINE>
-                </GLYPH>
+                </GLYPH> -->
+                <BOX>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>white</BGCOLOR>
+                        <LABEL>no</LABEL>
+                        <BUMP>yes</BUMP>
+                    </BOX>
             </TYPE>
             <TYPE id='tss'>
                 <BOX>
