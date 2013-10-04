@@ -15,6 +15,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
+                xml.PARENT feature.parents ,'id' => feature.parents
               end
             end
             logger.error "------------------------------------ end of features"
