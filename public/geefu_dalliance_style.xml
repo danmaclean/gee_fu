@@ -109,7 +109,7 @@
                     </LINE> -->
                     <BOX>
                         <FGCOLOR>black</FGCOLOR>
-                        <BGCOLOR>yellow</BGCOLOR>
+                        <BGCOLOR>white</BGCOLOR>
                         <LABEL>no</LABEL>
                         <BUMP>yes</BUMP>
                     </BOX>
