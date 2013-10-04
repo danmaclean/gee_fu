@@ -122,7 +122,7 @@ class ExperimentsController < ApplicationController
           #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
           #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
           ###sort out the Parents if any, but only connects up the parent via the first gff id
-  if experiment.find_parents
+  if @experiment.find_parents
                 parents = record.attributes.select { |a| a.first == 'Parent' }
                 if !parents.empty?
                   parents.each do |label, parentFeature_gff_id|
