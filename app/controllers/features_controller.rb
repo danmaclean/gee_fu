@@ -434,15 +434,17 @@ class FeaturesController < ApplicationController
 
     # featureType = params[:datatype]
       # if featureType.nil? then
-        @eid = params[:exid]
-        # @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
-        # @experiment = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit)
+      @eid = params[:exid]
+      logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
+      # @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
+      # @experiment = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit)
       # else
-        # @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
+      # @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
       # end
       logger.error "------------------------------------ GETTING SEQs"
       @seqs = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit).pluck(:seqid).uniq
       logger.error "------------------------------------ LOADED ALL SEQs"
+      logger.error "------------------------------------ found #{@seqs.length} sequences"
       # @seqs = @experiment.map { |r| r.seqid }
     end
 
