@@ -433,7 +433,7 @@ class FeaturesController < ApplicationController
       logger.error "------------------------------------ found #{@seqs.length} sequences"
 
 
-      @experiments_tmp = Experiment.find(experiment_id:@eid).features.length;
+      @experiments_tmp = Experiment.find(@eid).features.length;
       logger.error "------------------------------------ Found #{@experiments_tmp} features"
     end
 
