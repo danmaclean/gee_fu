@@ -42,7 +42,7 @@
     cookieKey:    'KW1',
 
     coordSystem: {
-          speciesName: 'NAME ME',
+          speciesName: '<%= @experiment.name %>',
           taxon: 10090,
           auth: 'NCBIM',
           version: 37
@@ -56,7 +56,7 @@ type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
 ],
-setDocumentTitle: true,
+setDocumentTitle: false,
 });
 
   // b.addFeatureInfoPlugin(function(f, info) {
