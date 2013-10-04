@@ -6,7 +6,7 @@ xml.instruct!
             # logger.error"-----------------------------#{seq}"
             @features = Feature.where(experiment_id: @eid, seqid: seq, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"])
             logger.error "------------------------------------ found #{@features.length} features"
-            features.each do |feature|
+            @features.each do |feature|
               xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
                 xml.TYPE feature.feature ,'id' => feature.feature
                 xml.METHOD feature.source
