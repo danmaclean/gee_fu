@@ -72,6 +72,8 @@ setDocumentTitle: false,
   <h1>Experiment ID <%= @experiment.id%></h1>
 </div>
 
+<p>Example: <%=@seqs.first%></p>
+
 <input type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%=@seqs%>'>
 
 <div id='svgHolder'>Dalliance genome browser goes here.  Unless you have an ancient web browser or something.</div>
