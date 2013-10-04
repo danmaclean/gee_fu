@@ -426,7 +426,7 @@ class FeaturesController < ApplicationController
       @eid = params[:exid]
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
       logger.error "------------------------------------ GETTING SEQs"
-      @features = Feature.where(experiment_id: @eid, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(500);
+      @features = Feature.where(experiment_id: @eid).limit(500);
       logger.error "------------------------------------ found #{@features.length} features"
       @seqs = Feature.where(experiment_id: @eid, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit).pluck(:seqid).uniq
       logger.error "------------------------------------ LOADED ALL SEQs"
