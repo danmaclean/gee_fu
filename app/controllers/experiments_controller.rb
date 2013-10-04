@@ -132,7 +132,13 @@ class ExperimentsController < ApplicationController
                         parent = nil
                         parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
                         if parent
-                          parent.save 
+                          if(parent.kind_of?(Array))
+                            parent.each do |parrr|
+                              parr.save
+                            end
+                            else
+                          parent.save
+                          end
                         else
                           parent = Parent.new(:parent_feature => pf.id)
                           parent.save 
