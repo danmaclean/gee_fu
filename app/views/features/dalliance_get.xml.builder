@@ -15,7 +15,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                feature.parents.each do |parent|
+                Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
                   xml.PARENT parent ,'id' => parent
                 end
               end
