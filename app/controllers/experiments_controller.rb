@@ -122,30 +122,30 @@ class ExperimentsController < ApplicationController
           #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
           #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
           ###sort out the Parents if any, but only connects up the parent via the first gff id
-          if @experiment.find_parents
-            parents = record.attributes.select { |a| a.first == 'Parent' }
-            if !parents.empty?
-              parents.each do |label, parentFeature_gff_id|
-                parentFeats = Feature.all(:conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
-                if (parentFeats)
-                  parentFeats.each do |pf|
-                    parent = nil
-                    parent = Parent.all(:conditions => {:parent_feature => pf.id})
-                    if parent
-                      parent.save 
-                    else
-                      parent = Parent.new(:parent_feature => pf.id)
-                      parent.save 
+  if experiment.find_parents
+                parents = record.attributes.select { |a| a.first == 'Parent' }
+                if !parents.empty?
+                  parents.each do |label, parentFeature_gff_id|
+                    parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+                    if (parentFeats)
+                      parentFeats.each do |pf|
+                        parent = nil
+                        parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                        if parent
+                          parent.save 
+                        else
+                          parent = Parent.new(:parent_feature => pf.id)
+                          parent.save 
+                        end
+                        feature.parents << parent
+                      end
                     end
-                    feature.parents << parent
                   end
                 end
               end
-            end
+              experiment.features << feature
+    #      end
           end
-          @experiment.features << feature
-#      end
-      end
     elsif @experiment.expected_file == "bam"
       @experiment.uses_bam_file = true
       
