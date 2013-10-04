@@ -418,34 +418,17 @@ class FeaturesController < ApplicationController
     respond objects
   end
 
-  # def dalliance_groups
-  #   exid = params[:exid]
-  #   @group = Feature.where(experiment_id: exid)
-  # end
 
   # Bio Dalliance
   def dalliance_get
 
-# Sequence.all.each do |seq|
-  # logger.error "---------------------- found seq: #{seq.sequence}"
-# end
-
-    featurelimit = 250000
-
-    # featureType = params[:datatype]
-      # if featureType.nil? then
+    featurelimit = 250
       @eid = params[:exid]
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
-      # @experiment = Feature.where(experiment_id: params[:exid]).limit(featurelimit)
-      # @experiment = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit)
-      # else
-      # @experiment = Feature.where(experiment_id: params[:exid], feature: featureType).limit(featurelimit)
-      # end
       logger.error "------------------------------------ GETTING SEQs"
       @seqs = Feature.where(experiment_id: params[:exid], feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(featurelimit).pluck(:seqid).uniq
       logger.error "------------------------------------ LOADED ALL SEQs"
       logger.error "------------------------------------ found #{@seqs.length} sequences"
-      # @seqs = @experiment.map { |r| r.seqid }
     end
 
 
