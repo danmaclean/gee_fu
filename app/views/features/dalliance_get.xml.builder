@@ -1,7 +1,7 @@
 xml.instruct!
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
-      @seqs.each do |seq|
+      @seqs.first do |seq|
         xml.SEGMENT 'id' => seq do
             # logger.error"-----------------------------#{seq}"
             Feature.where(experiment_id: @eid, seqid: seq, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).limit(2500).each do |feature|

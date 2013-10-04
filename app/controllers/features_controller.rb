@@ -421,10 +421,7 @@ class FeaturesController < ApplicationController
 
   # Bio Dalliance
   def dalliance_get
-
-
-
-    featurelimit = 1
+    featurelimit = 999
       @eid = params[:exid]
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
       logger.error "------------------------------------ GETTING SEQs"
