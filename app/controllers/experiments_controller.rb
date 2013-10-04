@@ -149,7 +149,7 @@ class ExperimentsController < ApplicationController
                   end
                 end
               end
-              experiment.features << feature
+              @experiment.features << feature
     #      end
           end
     elsif @experiment.expected_file == "bam"
