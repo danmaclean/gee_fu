@@ -425,7 +425,7 @@ class FeaturesController < ApplicationController
       @eid = params[:exid]
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
       logger.error "------------------------------------ GETTING SEQs"
-      Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:id).take(50).each do |parid|
+      Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:id).uniq.each do |parid|
         logger.error Parent.find(:all, :conditions => {:parent_feature => parid})
       end
 
