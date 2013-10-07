@@ -15,9 +15,9 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                feature.parents do |parent|
-                  xml.PARENT parent.parent_feature ,'id' => parent.parent_feature
-                end
+                feature.parents.collect {|x|
+                  xml.PARENT x.parent_obj.id.to_s ,'id' => x.parent_obj.id.to_s
+                }
               end
             end
             logger.error "------------------------------------ end of features"
