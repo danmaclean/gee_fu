@@ -15,7 +15,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                Parent.where(:feature_id => feature.id).first.id do |parent|
+                feature.parents do |parent|
                   xml.PARENT parent ,'id' => parent
                 end
               end
