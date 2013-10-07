@@ -4,7 +4,7 @@ xml.instruct!
       # @seqs.take(1).each do |seq|
       # @seqs.each do |x|
         # xml.SEGMENT 'id' => x.parent_obj.id.to_s do
-            @features = Feature.where(experiment_id: @eid, seqid: seq, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"])
+            @features = Feature.where(experiment_id: @eid, seqid: 1, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"])
             logger.error "------------------------------------ found #{@features.length} features"
             @features.each do |feature|
               xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
