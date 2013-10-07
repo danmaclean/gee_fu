@@ -17,7 +17,8 @@ xml.instruct!
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
-                    x.parent_obj.id.to_s
+                    xmpar = x.parent_obj.id.to_s
+                    xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
                 # Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
