@@ -425,7 +425,7 @@ class FeaturesController < ApplicationController
       @eid = params[:exid]
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
       logger.error "------------------------------------ GETTING SEQs"
-      @feats = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).each.parents.each.parent_obj
+      @feats = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).parents
 
       #   # feat.parents.each do |par|
       #     logger.error "------------------------------------ found parent: #{par.parent_obj.to_s}"
