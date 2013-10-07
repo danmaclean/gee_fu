@@ -10,6 +10,7 @@
                         <MIN>0.0</MIN>
                         <MAX>1.2</MAX>
                         <COLOR1>red</COLOR1>
+                        <BUMP>no</BUMP>
                         <LINEWIDTH>2</LINEWIDTH>
                     </LINEPLOT>
                 </GLYPH>
@@ -20,7 +21,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>red</BGCOLOR>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
@@ -31,7 +32,7 @@
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>yellow</BGCOLOR>
                         <LABEL>no</LABEL>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                     </BOX>
                 </GLYPH>
             </TYPE>
@@ -41,7 +42,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>yellow</BGCOLOR>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
@@ -51,6 +52,7 @@
                     <LINE>
                         <FGCOLOR>black</FGCOLOR>
                         <STYLE>hat</STYLE>
+                        <BUMP>no</BUMP>
                     </LINE>
                 </GLYPH>
             </TYPE>
@@ -60,7 +62,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>orange</BGCOLOR>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
@@ -71,7 +73,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>green</BGCOLOR>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
@@ -82,7 +84,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>yellow</BGCOLOR>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
@@ -93,7 +95,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>purple</BGCOLOR>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
@@ -111,7 +113,7 @@
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>white</BGCOLOR>
                         <LABEL>no</LABEL>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                     </BOX>
                 </GLYPH>
             </TYPE>
@@ -121,7 +123,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>white</BGCOLOR>
-                        <BUMP>yes</BUMP>
+                        <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
