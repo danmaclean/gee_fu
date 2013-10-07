@@ -22,7 +22,7 @@ xml.instruct!
                   }
                 end
 
-                Parent.where(:parent_feature => feature.id).first.features.each do |c|
+                Parent.where(:parent_feature => feature.id).first do |c|
                   logger.error "------------------------------------ Child: #{c.id}"
                 end
                 # Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
