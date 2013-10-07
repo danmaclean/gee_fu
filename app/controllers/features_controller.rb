@@ -427,7 +427,7 @@ class FeaturesController < ApplicationController
       logger.error "------------------------------------ GETTING SEQs"
       Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).each do |feat|
         feat.parents.each do |par|
-          logger.error "------------------------------------ found parent: #{par.parent_obj}"
+          logger.error "------------------------------------ found parent: #{par.parent_obj.to_s}"
         end
       end
       logger.error "------------------------------------ LOADED ALL SEQs"
