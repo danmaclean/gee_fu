@@ -427,7 +427,7 @@ class FeaturesController < ApplicationController
       logger.error "------------------------------------ GETTING SEQs"
       @seqs = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).parents.uniq.collect
       logger.error "------------------------------------ LOADED ALL SEQs"
-      logger.error "------------------------------------ found #{@seqs.length} sequences"
+      # logger.error "------------------------------------ found #{@seqs.length} sequences"
     end
 
 
