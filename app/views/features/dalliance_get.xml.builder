@@ -21,13 +21,6 @@ xml.instruct!
                     xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
-
-                Parent.where(:parent_feature => feature.id).first.features do |c|
-                  logger.error "------------------------------------ Child: #{c.id}"
-                end
-                # Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
-                  # xml.PARENT parent.id ,'id' => parent.id
-                # end
               end
             end
             logger.error "------------------------------------ end of features"
