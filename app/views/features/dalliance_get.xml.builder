@@ -16,6 +16,7 @@ xml.instruct!
                 xml.PHASE feature.phase #0-6
                 if feature.has_parent?
                   feature.parents.collect {|x|
+                    logger.error "------------------------------------ found parent!!!!!!!"
                     x.parent_obj.id.to_s
                   }
                 end
