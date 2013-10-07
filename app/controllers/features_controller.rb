@@ -423,6 +423,8 @@ class FeaturesController < ApplicationController
   def dalliance_get
     # featurelimit = 999
       @eid = params[:exid]
+      start = 0
+      ending = 10000
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
       logger.error "------------------------------------ GETTING SEQs"
       @seqs = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:seqid).uniq;
