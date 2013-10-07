@@ -16,7 +16,7 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
-                  xml.PARENT parent ,'id' => parent
+                  xml.PARENT parent.parent_obj.id.to_s ,'id' => parent.parent_obj.id.to_s
                 end
               end
             end
