@@ -21,12 +21,10 @@ xml.instruct!
                     xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
-                if feature.has_children?
-                  logger.error "------------------------------------ HAS CHILD!!!!!!!"
+
+                Parent.find(:first, :conditions => {:parent_feature => self.id} ).features do |c|
+                  logger.error "------------------------------------ Child: #{c.id}"
                 end
-                # feature.children do |c|
-                  # logger.error "------------------------------------ Child: #{c.id}"
-                # end
                 # Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
                   # xml.PARENT parent.id ,'id' => parent.id
                 # end
