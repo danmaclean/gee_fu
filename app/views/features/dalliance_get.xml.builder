@@ -14,8 +14,8 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                if f.has_parent?
-                  f.parents.collect {|x|
+                if feature.has_parent?
+                  feature.parents.collect {|x|
                     x.parent_obj.id.to_s
                   }
                 end
