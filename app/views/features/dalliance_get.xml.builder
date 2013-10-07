@@ -3,7 +3,7 @@ xml.instruct!
     xml.GFF 'version' => '1.0' do
         xml.SEGMENT 'id' => "seg1" do
             # logger.error"-----------------------------#{seq}"
-            @features = Feature.where(experiment_id: @eid, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"])
+            @features = Feature.where(experiment_id: @eid, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(20)
             logger.error "------------------------------------ found #{@features.length} features"
             @features.each do |feature|
               xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
@@ -21,9 +21,12 @@ xml.instruct!
                     xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
-                feature.children do |c|
-                  logger.error "------------------------------------ Child: #{c.id}"
+                if feature.has_children?
+                  logger.error "------------------------------------ HAS CHILD!!!!!!!"
                 end
+                # feature.children do |c|
+                  # logger.error "------------------------------------ Child: #{c.id}"
+                # end
                 # Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
                   # xml.PARENT parent.id ,'id' => parent.id
                 # end
