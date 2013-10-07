@@ -1,8 +1,7 @@
 xml.instruct!
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
-      @seqs.take(1).each do |seq|
-        xml.SEGMENT 'id' => seq do
+        # xml.SEGMENT 'id' => seq do
             # logger.error"-----------------------------#{seq}"
             @features = Feature.where(experiment_id: @eid, seqid: seq, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"])
             logger.error "------------------------------------ found #{@features.length} features"
@@ -15,13 +14,17 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
-                  xml.PARENT parent.id ,'id' => parent.id
+                if f.has_parent?
+                  f.parents.collect {|x|
+                    x.parent_obj.id.to_s
+                  }
                 end
+                # Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
+                  # xml.PARENT parent.id ,'id' => parent.id
+                # end
               end
             end
             logger.error "------------------------------------ end of features"
-        end
-      end
+      # end
     end
   end
