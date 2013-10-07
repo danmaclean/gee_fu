@@ -21,9 +21,9 @@ xml.instruct!
                     xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
-                feature.children {|c|
+                feature.children do |c|
                   logger.error "------------------------------------ Child: #{c.id}"
-                }
+                end
                 # Parent.find :first, :conditions => {:feature_id => feature.id} do |parent|
                   # xml.PARENT parent.id ,'id' => parent.id
                 # end
