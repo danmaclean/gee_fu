@@ -425,16 +425,9 @@ class FeaturesController < ApplicationController
       @eid = params[:exid]
       logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
       logger.error "------------------------------------ GETTING SEQs"
-      Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:id).uniq.each do |parid|
-        logger.error Parent.find(:all, :conditions => {:parent_feature => parid})
-      end
-
-      #   # feat.parents.each do |par|
-      #     logger.error "------------------------------------ found parent: #{par.parent_obj.to_s}"
-      #   end
-      # end
+      @seqs = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:seqid).uniq;
       logger.error "------------------------------------ LOADED ALL SEQs"
-      # logger.error "------------------------------------ found #{@seqs.length} sequences"
+      logger.error "------------------------------------ found #{@seqs.length} sequences"
     end
 
 
