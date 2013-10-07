@@ -425,11 +425,11 @@ class FeaturesController < ApplicationController
       @eid = params[:exid]
       start = 0
       ending = 10000
-      logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
-      logger.error "------------------------------------ GETTING SEQs"
-      @seqs = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:seqid).uniq;
-      logger.error "------------------------------------ LOADED ALL SEQs"
-      logger.error "------------------------------------ found #{@seqs.length} sequences"
+      # logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
+      # logger.error "------------------------------------ GETTING SEQs"
+      # @seqs = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:seqid).uniq;
+      # logger.error "------------------------------------ LOADED ALL SEQs"
+      # logger.error "------------------------------------ found #{@seqs.length} sequences"
     end
 
 
