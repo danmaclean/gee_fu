@@ -1,9 +1,8 @@
 xml.instruct!
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
-      # @seqs.take(1).each do |seq|
-      @seqs.each do |x|
-        xml.SEGMENT 'id' => x.parent_obj.id.to_s do
+      @seqs.take(1).each do |seq|
+        xml.SEGMENT 'id' => seq.parent_obj.id.to_s do
             # logger.error"-----------------------------#{seq}"
             @features = Feature.where(experiment_id: @eid, seqid: seq, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"])
             logger.error "------------------------------------ found #{@features.length} features"
