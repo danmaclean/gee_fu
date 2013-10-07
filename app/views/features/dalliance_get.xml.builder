@@ -24,6 +24,5 @@ xml.instruct!
             logger.error "------------------------------------ end of features"
         end
       }
-      end
     end
   end
