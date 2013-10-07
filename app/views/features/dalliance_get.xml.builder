@@ -16,7 +16,7 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 feature.parents do |parent|
-                  xml.PARENT parent ,'id' => parent
+                  xml.PARENT parent.id ,'id' => parent.id
                 end
               end
             end
