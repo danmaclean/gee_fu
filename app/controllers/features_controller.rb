@@ -422,7 +422,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
     # featurelimit = 999
-    Parent.where(parent_feature: feature.id).each {|alls|
+    Parent.all.each {|alls|
                   logger.error "#{alls.id}"
                 }
       @eid = params[:exid]
