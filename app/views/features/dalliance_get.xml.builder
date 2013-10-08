@@ -14,6 +14,15 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
+
+                if feature.has_children?
+                  logger.error "------------------------------------ has child"
+                end
+
+                if feature.has_child?
+                  logger.error "------------------------------------ has child"
+                end
+
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
