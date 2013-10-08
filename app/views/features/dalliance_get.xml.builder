@@ -14,15 +14,12 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                @children = Parent.where(:parent_feature => feature.id)
-                # @children.each do |child|
-                  logger.error "------------------------------------ #{@children.length}"
-                # end
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
                     xmpar = x.parent_obj.id.to_s
                     logger.error "#{x.parent_feature}"
+                    logger.error "#{Parent.where(:parent_feature => x.parent_feature).first.features.length}"
                     xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
