@@ -19,7 +19,7 @@ xml.instruct!
                     logger.error "------------------------------------ found parent!!!!!!!"
                     xmpar = x.parent_obj.id.to_s
                     logger.error "#{x.parent_feature}"
-                    logger.error "#{Parent.where(:parent_feature => x.parent_feature).id}"
+                    logger.error "#{Parent.where(:parent_feature => x.parent_feature).first.id}"
                     xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
