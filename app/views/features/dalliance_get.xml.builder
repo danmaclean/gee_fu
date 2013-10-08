@@ -15,7 +15,7 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
 
-                logger.error "found child id: #{Parent.where(parent_feature: feature.id.to_s).length}"
+                logger.error "found child id: #{Parent.where(parent_feature: feature.id).length}"
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
