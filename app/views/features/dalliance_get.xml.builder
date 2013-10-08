@@ -14,7 +14,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                @children = Parent.where(:parent_feature => feature.id).features
+                @children = Parent.where(:parent_feature => feature.id).first.features
                 @children.each do |child|
                   logger.error "------------------------------------ found child!!!!!!!"
                 end
