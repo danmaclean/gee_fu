@@ -423,7 +423,7 @@ class FeaturesController < ApplicationController
   def dalliance_get
     # featurelimit = 999
     Parent.all.take(500).each {|alls|
-                  logger.error "#{alls.parent_feature}"
+                  logger.error "#{alls.parent_feature.class.name}"
                 }
       @eid = params[:exid]
       start = 0
