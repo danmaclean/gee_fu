@@ -16,7 +16,7 @@ xml.instruct!
                 xml.PHASE feature.phase #0-6
                 @children = Parent.where(:parent_feature => feature.id)
                 # @children.each do |child|
-                  logger.error "------------------------------------ @children.length"
+                  logger.error "------------------------------------ #{@children.length}"
                 # end
                 if feature.has_parent?
                   feature.parents.collect {|x|
