@@ -15,9 +15,9 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 @children = Parent.where(:parent_feature => feature.id)
-                @children.each do |child|
-                  logger.error "------------------------------------ found big brother!!!!!!!"
-                end
+                # @children.each do |child|
+                  logger.error "------------------------------------ @children.length"
+                # end
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
