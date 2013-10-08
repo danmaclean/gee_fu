@@ -14,11 +14,12 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                logger.error "current feature: #{feature.id}"
+                # logger.error "current feature: #{feature.id}"
                 logger.error "found #{Parent.where(parent_feature: 239544).length} parents with id of 239544"
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     # logger.error "------------------------------------ found parent!!!!!!!"
+                    logger.error "my parent id is: #{x.id}"
                     xmpar = x.parent_obj.id.to_s
                     # logger.error "#{x.parent_feature}"
                     xml.PARENT xmpar, 'id' => xmpar
