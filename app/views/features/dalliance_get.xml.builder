@@ -19,7 +19,7 @@ xml.instruct!
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     # logger.error "------------------------------------ found parent!!!!!!!"
-                    logger.error "my parent id is: #{x.id}"
+                    logger.error "my parent_feature is: #{x.parent_feature} and id is: #{x.id}"
                     xmpar = x.parent_obj.id.to_s
                     # logger.error "#{x.parent_feature}"
                     xml.PARENT xmpar, 'id' => xmpar
