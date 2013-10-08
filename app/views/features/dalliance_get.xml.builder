@@ -3,7 +3,7 @@ xml.instruct!
     xml.GFF 'version' => '1.0' do
         xml.SEGMENT 'id' => "seg1" do
             # logger.error"-----------------------------#{seq}"
-            @features = Feature.where(experiment_id: @eid, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(20)
+            @features = Feature.where(experiment_id: @eid, feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(200)
             logger.error "------------------------------------ found #{@features.length} features"
             @features.each do |feature|
               xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
