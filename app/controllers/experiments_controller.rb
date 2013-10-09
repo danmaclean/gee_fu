@@ -229,7 +229,7 @@ class ExperimentsController < ApplicationController
 
            attribute = JSON.generate(record.attributes)
 
-            ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{experiment.genome_id}"])
+            ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{experiment.genome_id}"])
 
             feature = Feature.new(
               :group => "#{attribute}",
@@ -256,11 +256,11 @@ class ExperimentsController < ApplicationController
                 parents = record.attributes.select { |a| a.first == 'Parent' }
                 if !parents.empty?
                   parents.each do |label, parentFeature_gff_id|
-                    parentFeats = Feature.all(:conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+                    parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
                     if (parentFeats)
                       parentFeats.each do |pf|
                         parent = nil
-                        parent = Parent.first(:conditions => {:parent_feature => pf.id})
+                        parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
                         if parent
                           parent.save 
                         else
