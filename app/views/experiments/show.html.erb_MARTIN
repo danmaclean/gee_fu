@@ -1,0 +1,110 @@
+<script language="javascript" src="/dalliance/js/bam.js"></script>
+<script language="javascript" src="/dalliance/js/bigwig.js"></script>
+<script language="javascript" src="/dalliance/js/das.js"></script>
+<script language="javascript" src="/dalliance/js/spans.js"></script>
+<script language="javascript" src="/dalliance/js/utils.js"></script>
+<script language="javascript" src="/dalliance/js/cbrowser.js"></script>
+<script language="javascript" src="/dalliance/js/feature-popup.js"></script>
+<script language="javascript" src="/dalliance/js/tier.js"></script>
+<script language="javascript" src="/dalliance/js/features.js"></script>
+<script language="javascript" src="/dalliance/js/color.js"></script>
+<script language="javascript" src="/dalliance/js/feature-draw.js"></script>
+<script language="javascript" src="/dalliance/js/sequence-draw.js"></script>
+<script language="javascript" src="/dalliance/js/domui.js"></script>
+<script language="javascript" src="/dalliance/js/karyoscape.js"></script>
+<script language="javascript" src="/dalliance/js/quant-config.js"></script>
+<script language="javascript" src="/dalliance/js/track-adder.js"></script>
+<script language="javascript" src="/dalliance/js/chainset.js"></script>
+<script language="javascript" src="/dalliance/js/version.js"></script>
+<script language="javascript" src="/dalliance/js/sha1.js"></script>
+<script language="javascript" src="/dalliance/js/sample.js"></script>
+<script language="javascript" src="/dalliance/js/kspace.js"></script>
+<script language="javascript" src="/dalliance/json/json2.js"></script>
+<script language="javascript" src="/dalliance/js/bin.js"></script>
+<script language="javascript" src="/dalliance/js/twoBit.js"></script>
+<script language="javascript" src="/dalliance/js/thub.js"></script>
+<script language="javascript" src="/dalliance/js/svg-export.js"></script>
+<script language="javascript" src="/dalliance/jszlib/js/inflate.js"></script>
+<script language="javascript" src="/dalliance/js/browser-ui.js"></script>
+<script language="javascript" src="/dalliance/js/glyphs.js"></script>
+<script language="javascript" src="/dalliance/js/session.js"></script>
+<script language="javascript" src="/dalliance/js/jbjson.js"></script>
+<script language="javascript" src="/dalliance/js/sourceadapters.js"></script>
+<script language="javascript" src="/dalliance/polyfills/html5slider.js"></script>
+<script language="javascript" src="/dalliance/js/ensembljson.js"></script>
+<script language="javascript" src="/dalliance/js/overlay.js"></script>
+
+<script language="javascript">
+  var b = new Browser({
+    chr:          '1',
+    viewStart:    0,
+    viewEnd:      10000,
+    cookieKey:    'KW1',
+
+    coordSystem: {
+          speciesName: '<%= @experiment.name %>',
+          taxon: 10090,
+          auth: 'NCBIM',
+          version: 37
+      },
+	
+sources:     [
+{name:                 'mRNA',
+uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
+features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
+type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
+stylesheet_uri: '/geefu_dalliance_style.xml',
+dasStaticFeatures: true},
+],
+
+disablePoweredBy: true,
+setDocumentTitle: false,
+});
+
+  // b.addFeatureInfoPlugin(function(f, info) {
+  //     info.add('Testing', 'This is a test!');
+  //   });
+</script>
+
+<%- model_class = Experiment -%>
+<p>DEBUG: found <%=@seqs.length%> sequences</p>
+<div class="page-header">
+  <h1>Experiment ID <%= @experiment.id%></h1>
+</div>
+
+<p>Example: <%=@seqs.first%></p>
+
+<input type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%=@seqs%>'>
+
+<div id='svgHolder'>Dalliance genome browser goes here.  Unless you have an ancient web browser or something.</div>
+
+<hr>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @experiment.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @experiment.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:uses_bam_file) %>:</strong></dt>
+  <dd><%= @experiment.uses_bam_file %></dd>
+  <% if @experiment.uses_bam_file %>
+    <dt><strong><%= model_class.human_attribute_name(:bam_file_path) %>:</strong></dt>
+    <dd><%= @experiment.bam_file_path %></dd>
+  <% end %>
+  <dt><strong>Number of features:</strong></dt>
+  <dd><%= @experiment.features.count %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:meta) %>:</strong></dt>
+  <dd><%= @experiment.html_meta %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              experiments_path, :class => 'btn'  %>
+  <%#= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_experiment_path(@experiment), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              experiment_path(@experiment),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
