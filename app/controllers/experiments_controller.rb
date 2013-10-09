@@ -93,7 +93,7 @@ class ExperimentsController < ApplicationController
 
        attribute = JSON.generate(record.attributes)
         Rails.logger.info record.seqname
-        ref = Reference.where(name: record.seqname, genome_id: genome.id)
+        ref = Reference.where(name: record.seqname, genome_id: genome.id).first
 
         feature = Feature.new(
           :group => "#{attribute}",
