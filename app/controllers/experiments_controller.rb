@@ -118,6 +118,7 @@ class ExperimentsController < ApplicationController
           ###sort out the Parents if any, but only connects up the parent via the first gff id
           if @experiment.find_parents
             parents = record.attributes.select { |a| a.first == 'Parent' }
+            logger.error "found #{parents.length} parents"
             if !parents.empty?
               parents.each do |label, parentFeature_gff_id|
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
@@ -126,9 +127,11 @@ class ExperimentsController < ApplicationController
                     parent = nil
                     parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
                     if parent
+                      logger.error "not nill"
                       parent.save 
                     else
                       parent = Parent.new(:parent_feature => pf.id)
+                      logger.error "nill"
                       parent.save 
                     end
                     feature.parents << parent
