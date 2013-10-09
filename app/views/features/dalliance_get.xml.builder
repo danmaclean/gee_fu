@@ -21,7 +21,6 @@ xml.instruct!
                 if feature.has_children?
                   logger.error "found child"
                 end
-                logger.error "found #{Parent.where(parent_feature: feature.id).length} parents with id of #{feature.id}"
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     # logger.error "------------------------------------ found parent!!!!!!!"
