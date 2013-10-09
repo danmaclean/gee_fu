@@ -64,16 +64,11 @@ class ExperimentsController < ApplicationController
       
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
-#      cmdComplete = "SUCCESSFUL"
-#      if(!cmdOne)
-#        cmdComplete = "FAILED, Please add manually"
-#      end
-
       logger.error "cmdOne #{cmdOne}"
       logger.error "cmdTwo #{cmdTwo}"
 
 
-      File.open( "#{@experiment.gff_file.path}" ).each do |line|
+     File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/
         break if line =~ /^##fasta/ or line =~ /^>/
         record = Bio::GFF::GFF3::Record.new(line)
@@ -98,8 +93,7 @@ class ExperimentsController < ApplicationController
 
        attribute = JSON.generate(record.attributes)
         Rails.logger.info record.seqname
-        ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
-
+        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
 
         feature = Feature.new(
           :group => "#{attribute}",
@@ -122,49 +116,32 @@ class ExperimentsController < ApplicationController
           #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
           #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
           ###sort out the Parents if any, but only connects up the parent via the first gff id
-  if @experiment.find_parents
-                parents = record.attributes.select { |a| a.first == 'Parent' }
-                if !parents.empty?
-                  parents.each do |label, parentFeature_gff_id|
-                    parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
-                    if (parentFeats)
-                      parentFeats.each do |pf|
-                        parent = nil
-                        parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
-                        if parent
-                          if(parent.kind_of?(Array))
-                            parent.each do |parrr|
-                              parr.save
-                            end
-                            else
-                          parent.save
-                          end
-                        else
-                          parent = Parent.new(:parent_feature => pf.id)
-                          parent.save 
-                        end
-                        feature.parents << parent
-                      end
+          if @experiment.find_parents
+            parents = record.attributes.select { |a| a.first == 'Parent' }
+            if !parents.empty?
+              parents.each do |label, parentFeature_gff_id|
+                parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+                if (parentFeats)
+                  parentFeats.each do |pf|
+                    parent = nil
+                    parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                    if parent
+                      parent.save 
+                    else
+                      parent = Parent.new(:parent_feature => pf.id)
+                      parent.save 
                     end
+                    feature.parents << parent
                   end
                 end
               end
-              @experiment.features << feature
-    #      end
+            end
           end
+          @experiment.features << feature
+#      end
+      end
     elsif @experiment.expected_file == "bam"
       @experiment.uses_bam_file = true
-      
-
-#      cmdZero = `ln -s #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/`
-#      bamFileName = File.basename(@experiment.bam_file_path)
-#      logger.error "DEBUG: #{@experiment.bam_file_path} #{WebApolloAppPath}/jbrowse/data/bam/ ...   #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName}"
-#      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/add_bam_track.pl --bam_url #{WebApolloAppPath}/jbrowse/data/bam/#{bamFileName} --label simulated_bam --key "simulated BAM" --out #{WebApolloAppPath}/jbrowse/data/trackList.json`
-#      cmdComplete = "SUCCESSFUL"
-#      if(!cmdOne)
-#        logger.error "Add bam output: #{cmdOne}."
-#      end
-#      logger.debug "cmdOne #{cmdOne}"
     end
     
     if @experiment.save
