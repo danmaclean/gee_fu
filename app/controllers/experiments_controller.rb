@@ -93,7 +93,7 @@ class ExperimentsController < ApplicationController
 
        attribute = JSON.generate(record.attributes)
         Rails.logger.info record.seqname
-        ref = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+        ref = Reference.where(name: record.seqname, genome_id: genome.id)
 
         feature = Feature.new(
           :group => "#{attribute}",
@@ -121,11 +121,11 @@ class ExperimentsController < ApplicationController
             logger.error "found #{parents.length} parents"
             if !parents.empty?
               parents.each do |label, parentFeature_gff_id|
-                parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+                parentFeats = Feature.where(gff_id: parentFeature_gff_id)
                 if (parentFeats)
                   parentFeats.each do |pf|
                     parent = nil
-                    parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                    parent = Parent.where(parent_feature:pf.id)
                     if parent
                       logger.error "not nill"
                       parent.save 
