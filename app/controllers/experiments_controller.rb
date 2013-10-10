@@ -96,6 +96,8 @@ class ExperimentsController < ApplicationController
           ###sort out the Parents if any, but only connects up the parent via the first gff id
           if @experiment.find_parents
             parents = record.attributes.select { |a| a.first == 'Parent' }
+            logger.error "there are #{parents.length} parents"
+            logger.error "#{parents}"
             # parents = feature.group.select { |a| a.first == 'Parent' }             
             if !parents.empty?
               parents.each do |label, parentFeature_gff_id|
