@@ -114,6 +114,7 @@ class ExperimentsController < ApplicationController
                       parent.save 
                     end
                     feature.parents << parent
+                    feature.save
                   end
                 end
               end
