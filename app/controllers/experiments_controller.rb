@@ -100,13 +100,16 @@ class ExperimentsController < ApplicationController
               parents.each do |label, parentFeature_gff_id|
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
                 if (parentFeats)
+                  logger.error "#{parentFeats.length} parents"
                   parentFeats.each do |pf|
                     parent = nil
                     parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
                     if parent
+                      logger.error "parent found with id: #{parent_feature}"
                       parent.save 
                     else
                       parent = Parent.new(:parent_feature => pf.id)
+                      logger.error "parent not found, so created with id: #{pf.id}"
                       parent.save 
                     end
                     feature.parents << parent
