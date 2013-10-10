@@ -95,7 +95,8 @@ class ExperimentsController < ApplicationController
           #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
           ###sort out the Parents if any, but only connects up the parent via the first gff id
           if @experiment.find_parents
-            parents = record.attributes.select { |a| a.first == 'Parent' }
+            # parents = record.attributes.select { |a| a.first == 'Parent' }
+            parents = feature.group.select { |a| a.first == 'Parent' }             
             if !parents.empty?
               parents.each do |label, parentFeature_gff_id|
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
