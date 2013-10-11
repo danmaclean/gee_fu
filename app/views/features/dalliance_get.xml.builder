@@ -21,7 +21,7 @@ xml.instruct!
                   logger.error "HAS CHILDREN"
                 end
 
-                for Parent.where(parent_feature: feature.id).each do |child|
+                for Parent.where(parent_feature: feature.id).all.each do |child|
                   xml.PART child, 'id' => child
                 end
 
