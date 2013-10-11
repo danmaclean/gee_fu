@@ -15,15 +15,11 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
-                child = Parent.find(feature.id).parent_feature
-                logger.error "child is #{child}"
-                Feature.all.each do |chichi|
-                  logger.error "#{chichi.parents}"
-                  if chichi.parents.collect.include?(feature.id)
-                    xml.PART chichi.id, 'id' => chichi.id
-                    logger.error "child: #{chichi.id}"
-                  end
-                end
+
+
+              logger.error "TODO #{Parent.find(feature.id)}"
+
+                
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
