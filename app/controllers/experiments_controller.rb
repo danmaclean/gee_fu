@@ -141,7 +141,8 @@ class ExperimentsController < ApplicationController
                           end
                         else
                           parent = Parent.new(:parent_feature => pf.id)
-                          parent.save 
+                          parent.save
+                          logger.error "parent id is #{feature.id} and parent id is #{parent.id}"
                         end
                         feature.parents << parent
                       end
