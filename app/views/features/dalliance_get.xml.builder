@@ -17,7 +17,7 @@ xml.instruct!
                 logger.error "feature id #{feature.id}"
                 child = Parent.find(feature.id).parent_feature
                 logger.error "child is #{child}"
-                Feature.each do |chichi|
+                Feature.all.each do |chichi|
                   if chichi.parents.include?(feature.id)
                     logger.error "child: #{chichi.id}"
                     xml.PART chichi.id, 'id' => chichi.id
