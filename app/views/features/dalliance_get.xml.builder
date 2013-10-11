@@ -17,7 +17,9 @@ xml.instruct!
                 logger.error "feature id #{feature.id}"
 
 
-              logger.error "TODO #{Parent.find(feature.id).features}"
+              Parent.find(feature.id).features.each do |child|
+                xml.PART child.id, 'id' => child.id
+                logger.error "child: #{child.id}"
 
                 
                 if feature.has_parent?
