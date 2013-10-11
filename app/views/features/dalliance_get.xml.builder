@@ -17,10 +17,10 @@ xml.instruct!
                 logger.error "feature id #{feature.id}"
 
 
-              Parent.find(feature.id).features.each do |child|
-                xml.PART child.id, 'id' => child.id
-                logger.error "child: #{child.id}"
-              end
+              # Parent.find(feature.id).features.each do |child|
+              #   xml.PART child.id, 'id' => child.id
+              #   logger.error "child: #{child.id}"
+              # end
 
                 
                 if feature.has_parent?
