@@ -36,11 +36,11 @@ xml.instruct!
               end
             end
             logger.error "------------------------------------ end of features"
-            Parent.all.each do |child|
-                # xml.PART child.id, 'id' => child.id
-                logger.error "#{child.id} has:"
-                logger.error "child: #{child.features}"
-              end
+            # Parent.all.each do |child|
+            #     # xml.PART child.id, 'id' => child.id
+            #     logger.error "#{child.id} has:"
+            #     logger.error "child: #{child.features}"
+            #   end
       end
     end
   end
