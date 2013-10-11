@@ -104,7 +104,7 @@ class ExperimentsController < ApplicationController
               logger.error "#{parents}"
               parents.each do |label, parentFeature_gff_id|
                 logger.error "#{label} #{parentFeature_gff_id}"
-                 logger.error "FIRST #{Feature.find(:all).first}"
+                 logger.error "DB holds #{Feature.all.length}"
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
               logger.error "UNWRAP #{parentFeats}"
                 # sleep 1
