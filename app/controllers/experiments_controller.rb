@@ -116,7 +116,8 @@ class ExperimentsController < ApplicationController
             end
           end
           @experiment.features << feature
-          feature.save
+          @experiment.save
+          logger.error "saved experiment"
           logger.error "all features: #{Feature.all}"
 #      end
       end
