@@ -1,5 +1,5 @@
 xml.instruct!
-logger.error "#{Parent.all}"
+# logger.error "#{Parent.all}"
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
         xml.SEGMENT 'id' => "seg1" do
@@ -17,8 +17,13 @@ logger.error "#{Parent.all}"
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
-                
-                logger.error "#{Parent.where(parent_feature: feature.id).all}"
+                if feature.has_children?
+                  logger.error "HAS CHILDREN"
+                end
+
+                for Parent.where(parent_feature: feature.id).each do |child|
+                  xml.PART child, 'id' => child
+                end
 
 
                 if feature.has_parent?
