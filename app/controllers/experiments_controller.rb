@@ -89,7 +89,7 @@ class ExperimentsController < ApplicationController
           :quality => "#{qual}",
           :reference_id => "#{ref.id}"
           )
-          feature.save
+          # feature.save
     
           #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
           #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
