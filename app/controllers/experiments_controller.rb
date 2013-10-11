@@ -103,6 +103,7 @@ class ExperimentsController < ApplicationController
             if !parents.empty?
               logger.error "#{parents}"
               parents.each do |label, parentFeature_gff_id|
+                logger.error "#{label} #{parentFeature_gff_id}"
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
               logger.error "UNWRAP #{parentFeats}"
                 # sleep 1
