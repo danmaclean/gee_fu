@@ -20,7 +20,7 @@ xml.instruct!
                 if feature.has_children?
                   logger.error "HAS CHILDREN"
                   feature.children.each do |child|
-                    xml.PART child
+                    xml.PART child.id
                   end
                 end
 
