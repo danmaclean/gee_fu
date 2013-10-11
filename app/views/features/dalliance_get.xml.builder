@@ -17,7 +17,7 @@ xml.instruct!
                 logger.error "feature id #{feature.id}"
                 Parent.where(id: feature.id).each do |child|
                   xml.PART child.id
-                  logger.error "#{child}"
+                  logger.error " child #{child}"
                 end
 
 
