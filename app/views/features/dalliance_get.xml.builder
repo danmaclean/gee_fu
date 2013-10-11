@@ -15,7 +15,9 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
-
+                Parent.where(id: feature.id).each do |child|
+                  xml.PART child.id
+                end
 
 
 
@@ -31,11 +33,11 @@ xml.instruct!
               end
             end
             logger.error "------------------------------------ end of features"
-            Parent.all.each do |child|
-                # xml.PART child.id, 'id' => child.id
-                logger.error "#{child.id} has:"
-                logger.error "child: #{child.features}"
-              end
-      end
+      #       Parent.all.each do |child|
+      #           # xml.PART child.id, 'id' => child.id
+      #           logger.error "#{child.id} has:"
+      #           logger.error "child: #{child.features}"
+      #         end
+      # end
     end
   end
