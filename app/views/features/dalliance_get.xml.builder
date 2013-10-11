@@ -38,6 +38,6 @@ xml.instruct!
       #           logger.error "#{child.id} has:"
       #           logger.error "child: #{child.features}"
       #         end
-      # end
+      end
     end
   end
