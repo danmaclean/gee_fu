@@ -17,6 +17,7 @@ xml.instruct!
                 logger.error "need parent with id #{feature.id}"
                 Parent.last.parent_feature.features.each do |son|
                   logger.error "my name is #{son.id}"
+                end
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
