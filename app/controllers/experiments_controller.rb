@@ -115,6 +115,8 @@ class ExperimentsController < ApplicationController
                       logger.error "parent not found, so created with id: #{pf.id}"
                       parent.save 
                     end
+                    sleep(1.0/24.0)
+                    sleep(1.0/24.0)
                     feature.parents << parent
                     feature.save
                   end
