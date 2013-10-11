@@ -14,8 +14,8 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                logger.error "need parent with id #{feature.id}"
-                logger.error "children features #{Parent.where(feature_id: feature.id).length}"
+                logger.error "feature id #{feature.id}"
+                logger.error "children features #{feature.descendants.length}"
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
