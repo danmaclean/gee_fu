@@ -91,13 +91,13 @@
             </TYPE>
             <TYPE id='mRNA'>
                 <GLYPH>
-                    <BOX>
+                   <!--  <BOX>
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>purple</BGCOLOR>
                         <BUMP>no</BUMP>
                         <LABEL>no</LABEL>
-                    </BOX>
+                    </BOX> -->
                 </GLYPH>
             </TYPE>
             <TYPE id='intron'>
