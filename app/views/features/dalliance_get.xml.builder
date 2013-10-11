@@ -16,6 +16,7 @@ xml.instruct!
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
                 child = Parent.first.parent_feature
+                logger.error "child is #{child}"
                 xml.Part child, 'id' => child
                 if feature.has_parent?
                   feature.parents.collect {|x|
