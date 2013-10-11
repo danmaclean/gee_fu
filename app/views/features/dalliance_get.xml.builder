@@ -17,7 +17,7 @@ xml.instruct!
                 logger.error "feature id #{feature.id}"
 
 
-              Parent.find(feature.id).features.each do |child|
+              Parent.where(parent_feature: feature.id).features.each do |child|
                 xml.PART child.id, 'id' => child.id
                 logger.error "child: #{child.id}"
               end
