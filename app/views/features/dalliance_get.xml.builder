@@ -15,10 +15,12 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
-                Parent.where(id: feature.id).each do |child|
-                  xml.PART child.id
-                  logger.error " child #{child}"
-                end
+
+                logger.error "TEST: #{feature.parents}"
+                # Feature.where(parents:).each do |child|
+                #   xml.PART child.id
+                #   logger.error " child #{child}"
+                # end
 
 
 
