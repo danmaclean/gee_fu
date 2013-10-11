@@ -127,13 +127,14 @@ class ExperimentsController < ApplicationController
                     # sleep 1
                     feature.parents << parent
                     # sleep 1
-                    feature.save
+                    # feature.save
                   end
                 end
               end
-              feature.save
+
             end
           end
+          feature.save
           @experiment.features << feature
 #      end
       end
