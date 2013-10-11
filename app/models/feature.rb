@@ -159,7 +159,8 @@ class Feature < ActiveRecord::Base
   #returns a list of all child feature objects for self
   def children
     begin
-      Parent.find(:first, :conditions => {:parent_feature => self.id} ).features
+      # Parent.find(:first, :conditions => {:parent_feature => self.id} ).features
+      Parent.find :first, :conditions => {:feature_id => self.id}.features
     rescue
       []
     end
