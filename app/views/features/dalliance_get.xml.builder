@@ -15,9 +15,9 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
-                child = Parent.first.parent_feature
+                child = Parent.where(id: feature.id).parent_feature
                 logger.error "child is #{child}"
-                xml.Part child, 'id' => child
+                xml.PART child, 'id' => child
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     logger.error "------------------------------------ found parent!!!!!!!"
