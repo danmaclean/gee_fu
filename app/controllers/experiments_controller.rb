@@ -33,7 +33,7 @@ class ExperimentsController < ApplicationController
     end
   end
 
-  def create
+ def create
     require 'bio'
     @experiment = Experiment.new(params[:experiment])
     genome      = Genome.find(params[:experiment][:genome_id])
@@ -89,53 +89,34 @@ class ExperimentsController < ApplicationController
           :quality => "#{qual}",
           :reference_id => "#{ref.id}"
           )
-          # feature.save
+    
     
           #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as 
           #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
           ###sort out the Parents if any, but only connects up the parent via the first gff id
           if @experiment.find_parents
             parents = record.attributes.select { |a| a.first == 'Parent' }
-            logger.error "there are #{parents.length} parents"
-            logger.error "#{parents}"
-            # sleep 1
-            # parents = feature.group.select { |a| a.first == 'Parent' }             
             if !parents.empty?
-              logger.error "#{parents}"
               parents.each do |label, parentFeature_gff_id|
-                logger.error "#{label} #{parentFeature_gff_id}"
-                 logger.error "DB holds #{Feature.all.length}"
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
-              logger.error "UNWRAP #{parentFeats}"
-                # sleep 1
                 if (parentFeats)
-
-                  logger.error "#{parentFeats.length} parents"
                   parentFeats.each do |pf|
                     parent = nil
                     parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
                     if parent
-                      logger.error "parent found with id: #{parent_feature}"
-                      parent.save
-                      # sleep 1
+                      parent.save 
                     else
                       parent = Parent.new(:parent_feature => pf.id)
-                      logger.error "parent not found, so created with id: #{pf.id}"
-                      parent.save
-                      # sleep 1
+                      parent.save 
                     end
-                    # sleep 1
                     feature.parents << parent
-                    # sleep 1
-                    # feature.save
                   end
                 end
               end
-
             end
           end
-          feature.save
           @experiment.features << feature
+          logger.error "all features: #{Feature.all}"
 #      end
       end
     elsif @experiment.expected_file == "bam"
