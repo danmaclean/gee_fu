@@ -19,6 +19,7 @@ xml.instruct!
 
               Parent.all.each do |child|
                 # xml.PART child.id, 'id' => child.id
+                logger.error "#{child.id} has:"
                 logger.error "child: #{child.features}"
               end
 
