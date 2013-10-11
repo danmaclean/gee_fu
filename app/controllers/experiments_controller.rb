@@ -104,9 +104,10 @@ class ExperimentsController < ApplicationController
               parents
               parents.each do |label, parentFeature_gff_id|
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+              "UNWRAP #{parentFeats}"
                 # sleep 1
                 if (parentFeats)
-                  "#{parentFeats}"
+
                   logger.error "#{parentFeats.length} parents"
                   parentFeats.each do |pf|
                     parent = nil
