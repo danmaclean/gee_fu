@@ -17,18 +17,9 @@ xml.instruct!
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
 
-                logger.error "feature id #{Parent.where(parent_feature: feature.id).all}"
-
-                logger.error "TEST: #{feature.parents}"
-                logger.error "#{feature}"
-                # Feature.where(parents:).each do |child|
-                #   xml.PART child.id
-                #   logger.error " child #{child}"
-                # end
+                logger.error "#{Parent.where(parent_feature: feature.id).all}"
 
 
-
-                
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     xmpar = x.parent_obj.id.to_s
