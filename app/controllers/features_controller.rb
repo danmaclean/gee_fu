@@ -34,7 +34,7 @@ class FeaturesController < ApplicationController
     ##get the genome from the reference, only look in the same reference... 
     genome_id = Reference.find(old_feature.reference_id).genome_id
 
-    @feature.reference_id = Reference.find(:first, :conditions => {:genome_id => genome_id, :name => @feature.seqid} ).id || old_feature.ref_id
+    @feature.reference_id = Reference.first(:conditions => {:genome_id => genome_id, :name => @feature.seqid} ).id || old_feature.ref_id
     
     @feature.group = []
     if params[:feature][:group]
@@ -63,11 +63,11 @@ class FeaturesController < ApplicationController
     puts "parents are #{parents}"
     if !parents.empty?
       parents.each do |label, parentFeature_gff_id|
-        parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+        parentFeats = Feature.all(:conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
         if (parentFeats)
           parentFeats.each do |pf|
             parent = nil
-            parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+            parent = Parent.all(:conditions => {:parent_feature => pf.id})
             if parent
               parent.save 
             else
@@ -132,7 +132,7 @@ class FeaturesController < ApplicationController
   end
 
   def show 
-    begin 
+    begin
       @feature = Feature.find(params[:id])
       respond @feature
     rescue
@@ -167,7 +167,7 @@ class FeaturesController < ApplicationController
   
   def find_annotation
     flash[:error] = []
-    @features = Feature.find(:all)
+    @features = Feature.all()
     @features.delete_if {|x| x.group !~ /#{params[:search_string]}/}
 
 
@@ -207,7 +207,7 @@ class FeaturesController < ApplicationController
 
     
   #method for returning preformatted feature objects in a range for plotting by the javascript feature renderer. Groups features with a parent that have type in list Features::aggregate_features.
-    ref = Reference.find(:first, :conditions => {:genome_id => params[:genome_id], :name => params[:reference]})
+    ref = Reference.first(:conditions => {:genome_id => params[:genome_id], :name => params[:reference]})
     @features = []
     @start = params[:start]
     @end = params[:end]
@@ -245,7 +245,7 @@ class FeaturesController < ApplicationController
 
     # method for returning preformatted feature objects in a range for plotting by the javascript feature renderer. 
     # Groups features with a parent that have type in list Features::aggregate_features.
-    ref       = Reference.find(:first, :conditions => {:genome_id => genome_id, :name => reference})
+    ref       = Reference.first(:conditions => {:genome_id => genome_id, :name => reference})
     @start    = start
     @end      = _end
     @features = Feature.find_in_range_no_overlap(ref.id, start, _end, experiment.id)
@@ -417,7 +417,24 @@ class FeaturesController < ApplicationController
     #respond(objects, params[:format])
     respond objects
   end
-  
+
+
+  # Bio Dalliance
+  def dalliance_get
+    # featurelimit = 999
+    Parent.all.take(500).each {|alls|
+                  logger.error "#{alls.parent_feature}"
+                }
+      @eid = params[:exid]
+      start = 0
+      ending = 10000
+      # logger.error "------------------------------------ LOOKING FOR EXPERIMENT #{@eid}"
+      # logger.error "------------------------------------ GETTING SEQs"
+      # @seqs = Experiment.find(@eid).features.where(feature: ["five_prime_UTR", "exon", "intron","three_prime_UTR"]).pluck(:seqid).uniq;
+      # logger.error "------------------------------------ LOADED ALL SEQs"
+      # logger.error "------------------------------------ found #{@seqs.length} sequences"
+    end
+
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
@@ -471,7 +488,7 @@ class FeaturesController < ApplicationController
         #now do the specific stuff based on the annoj action... 
       if annoj_params['action'] == 'range'
           #remember params[:id] is genome id and annoj_params['assembly'] is the chromosome
-          sequence = Reference.find(:first, :conditions => {:genome_id => params[:id], :name => annoj_params['assembly']}).sequence.sequence
+          sequence = Reference.first(:conditions => {:genome_id => params[:id], :name => annoj_params['assembly']}).sequence.sequence
           subseq = sequence[annoj_params['left'].to_i - 3..annoj_params['right'].to_i - 3]
           f = LightFeature.new(
             :group => '.',
@@ -534,7 +551,7 @@ class FeaturesController < ApplicationController
     zoom_factor = bases.to_i / pixels.to_i
     response = new_response
     exp = Experiment.find(experiment_id)
-    reference = Reference.find(:first, :conditions => ["name = ? AND genome_id = ?", "#{ assembly }", "#{exp.genome_id}"])
+    reference = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ assembly }", "#{exp.genome_id}"])
     features = Feature.find_in_range_no_overlap(reference.id, left, right, experiment_id)
     return response if features.empty?
     #case features.first.feature
@@ -674,7 +691,7 @@ class FeaturesController < ApplicationController
   end
   # Feature Metadata accessor, AnnoJ only
   def describe(id)
-    f = Feature.find(:first, :conditions => {:gff_id => id} )
+    f = Feature.first(:conditions => {:gff_id => id} )
     response = new_response
     response[:data] = {}
     response[:data][:id] = f.gff_id
@@ -687,7 +704,7 @@ class FeaturesController < ApplicationController
   # Feature metadata accessor, AnnoJ only
   def lookup(query, id)
     response = new_response
-    rows = Feature.find(:all, :conditions => ["experiment_id = ? and features.group like ?", id, "%" + query + "%"]).collect! {|f| f.to_lookup}
+    rows = Feature.first(:conditions => ["experiment_id = ? and features.group like ?", id, "%" + query + "%"]).collect! {|f| f.to_lookup}
     response[:count] = rows.length
     response[:rows] = rows
     return response
@@ -715,10 +732,4 @@ class FeaturesController < ApplicationController
       render
     end
   end
-  # Bio Dalliance
-  def dalliance_get
-      @eid = params[:exid]
-      start = 0
-      ending = 10000
-    end
 end
