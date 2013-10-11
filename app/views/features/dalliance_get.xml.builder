@@ -19,10 +19,9 @@ xml.instruct!
                 logger.error "feature id #{feature.id}"
                 if feature.has_children?
                   logger.error "HAS CHILDREN"
-                end
-
-                Parent.where(parent_feature: feature.id).each do |child|
-                  xml.PART child, 'id' => child
+                  feature.children.each do |child|
+                    xml.PART chil
+                  end
                 end
 
 
