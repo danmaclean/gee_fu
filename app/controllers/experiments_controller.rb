@@ -149,6 +149,7 @@ class ExperimentsController < ApplicationController
                   end
                 end
               end
+              @experiment.save
               @experiment.features << feature
     #      end
           end
