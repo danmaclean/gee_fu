@@ -14,6 +14,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
+                logger.error "need parent with id #{feature.id}"
                 if feature.has_child?
                   logger.error "FOUND CHILD"
                 end
