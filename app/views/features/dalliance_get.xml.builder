@@ -16,7 +16,7 @@ xml.instruct!
                 xml.PHASE feature.phase #0-6
                 logger.error "feature id #{feature.id}"
 
-                logger.error "feature id #{Parent.where(parent_feature: feature.id).id}"
+                logger.error "feature id #{Parent.where(parent_feature: feature.id).to_s}"
 
                 logger.error "TEST: #{feature.parents}"
                 # Feature.where(parents:).each do |child|
