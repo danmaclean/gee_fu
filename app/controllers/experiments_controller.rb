@@ -98,10 +98,12 @@ class ExperimentsController < ApplicationController
             parents = record.attributes.select { |a| a.first == 'Parent' }
             logger.error "there are #{parents.length} parents"
             logger.error "#{parents}"
+            sleep 1
             # parents = feature.group.select { |a| a.first == 'Parent' }             
             if !parents.empty?
               parents.each do |label, parentFeature_gff_id|
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+                sleep 1
                 if (parentFeats)
                   logger.error "#{parentFeats.length} parents"
                   parentFeats.each do |pf|
@@ -109,15 +111,17 @@ class ExperimentsController < ApplicationController
                     parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
                     if parent
                       logger.error "parent found with id: #{parent_feature}"
-                      parent.save 
+                      parent.save
+                      sleep 1
                     else
                       parent = Parent.new(:parent_feature => pf.id)
                       logger.error "parent not found, so created with id: #{pf.id}"
-                      parent.save 
+                      parent.save
+                      sleep 1
                     end
-                    sleep(1.0/24.0)
-                    sleep(1.0/24.0)
+                    sleep 1
                     feature.parents << parent
+                    sleep 1
                     feature.save
                   end
                 end
