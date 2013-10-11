@@ -17,7 +17,7 @@ xml.instruct!
                 logger.error "feature id #{feature.id}"
 
 
-              logger.error "TODO #{Parent.find(feature.id)}"
+              logger.error "TODO #{Parent.find(feature.id).features}"
 
                 
                 if feature.has_parent?
