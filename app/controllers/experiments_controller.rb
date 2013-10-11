@@ -101,7 +101,7 @@ class ExperimentsController < ApplicationController
             # sleep 1
             # parents = feature.group.select { |a| a.first == 'Parent' }             
             if !parents.empty?
-              parents
+              "#{parents}"
               parents.each do |label, parentFeature_gff_id|
                 parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
               "UNWRAP #{parentFeats}"
