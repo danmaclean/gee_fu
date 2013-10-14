@@ -42,7 +42,7 @@ GeeFu::Application.routes.draw do
   scope "/features/dalliance" do
   	get "/:exid", to: "features#dalliance_get"
     get "/reference/:exid", to:"features#dallience_reference"
-    get "/features/dalliance/reference/11.xml/sequence", to:"features#dallience_reference"
+    get "/reference/11.xml/sequence", to:"features#dallience_reference"
   end
 
   scope "/genomes/annoj" do
