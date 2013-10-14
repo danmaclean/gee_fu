@@ -437,6 +437,7 @@ class FeaturesController < ApplicationController
       logger.error "looking for: #{name}"
       ref = Reference.first
       @seqienceText = ref.sequence.sequence
+      logger.error "found: #{@seqienceText}"
     end
 
 
