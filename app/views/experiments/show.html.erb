@@ -50,13 +50,13 @@
 	
 sources:     [
 {name:                 'Genome',      
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/reference/<%= @experiment.id %>',     
+uri:                  'http://v0311.nbi.ac.uk/features/dalliance/reference/<%= @experiment.id %>.xml',     
 tier_type:            'sequence',
 dasStaticFeatures: true},
 
 {name:                 'mRNA',
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>',
+uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
+features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
 type:                 ['mRNA','five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true}
