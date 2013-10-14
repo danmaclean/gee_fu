@@ -434,7 +434,7 @@ class FeaturesController < ApplicationController
 
     def dallience_reference
       name = Experiment.find(params[:exid]).name
-      # logger.error "sequence: #{@sequenceText}"
+      logger.error "looking for: #{name}"
       ref = Reference.where(name: name)
       @seqienceText = ref.sequence
     end
