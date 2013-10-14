@@ -422,6 +422,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
     def dalliance_get
       @eid = params[:exid]
+      logger.error "#{params[:feattype]}"
     end
 
     def dallience_reference
