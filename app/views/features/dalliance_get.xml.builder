@@ -6,7 +6,7 @@ xml.instruct!
             @features = Feature.where(experiment_id: @eid, feature: ["mRNA","five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(200)
             logger.error "------------------------------------ found #{@features.length} features"
             @features.each do |feature|
-              logger.error "___________________________________________________"
+              # logger.error "___________________________________________________"
               xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
                 xml.TYPE feature.feature ,'id' => feature.feature
                 xml.METHOD feature.source
@@ -15,7 +15,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                logger.error "feature id #{feature.id}"
+                # logger.error "feature id #{feature.id}"
                 if feature.has_children?
                   logger.error "HAS CHILDREN"
                   feature.children.each do |child|
@@ -27,11 +27,11 @@ xml.instruct!
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     xmpar = x.parent_obj.id.to_s
-                    logger.error "parent is #{x.parent_feature}"
+                    # logger.error "parent is #{x.parent_feature}"
                     xml.PARENT xmpar, 'id' => xmpar
                   }
                 end
-                logger.error "___________________________________________________"
+                # logger.error "___________________________________________________"
               end
             end
             logger.error "------------------------------------ end of features"
