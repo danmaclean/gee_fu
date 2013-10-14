@@ -436,7 +436,7 @@ class FeaturesController < ApplicationController
       name = "Cf746836_TGAC_s1v1_scaffold_1672"
       logger.error "looking for: #{name}"
       ref = Reference.where(name: name)
-      @seqienceText = ref.sequence
+      @seqienceText = ref.sequence.sequence
     end
 
 
