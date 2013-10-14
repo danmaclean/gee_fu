@@ -434,7 +434,7 @@ class FeaturesController < ApplicationController
 
     def dallience_reference
       @sequenceText = Experiment.find(params[:exid]).genome.to_fasta
-      logger.error "sequence: #{@sequenceText}"
+      # logger.error "sequence: #{@sequenceText}"
     end
 
 
