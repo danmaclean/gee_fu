@@ -49,7 +49,11 @@
       },
 	
 sources:     [
-{name:                 'mRNA',
+{name:                 'Genome',      
+uri:                  'http://www.derkholm.net:8080/das/hg18comp/',        
+tier_type:            'sequence',
+provides_entrypoints: true,
+name:                 'mRNA',
 uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
 features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
 type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
