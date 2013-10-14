@@ -423,6 +423,7 @@ class FeaturesController < ApplicationController
     def dalliance_get
       @eid = params[:exid]
       logger.error "-------------------------------- feature type = #{params[:featutype]}"
+      render xml: "hello"
     end
 
     def dallience_reference
@@ -431,6 +432,7 @@ class FeaturesController < ApplicationController
       ref = Reference.first
       @sequenceText = ref.sequence.sequence.to_s
       logger.error "found: #{@sequenceText}"
+      render xml: "hello"
     end
 
 
