@@ -422,7 +422,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
       @eid = params[:exid]
-      render :xml
+      respond_to :xml
     end
 
     def dallience_reference
