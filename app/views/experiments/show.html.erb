@@ -50,7 +50,8 @@
 	
 sources:     [
 {name:                 'Genome',      
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/reference/<%= @experiment.id %>.xml',        
+uri:                  'http://v0311.nbi.ac.uk/features/dalliance/reference/<%= @experiment.id %>.xml',
+stylesheet_uri: '/geefu_dalliance_style.xml',        
 // tier_type:            'sequence',
 dasStaticFeatures: true},
 {name:                 'mRNA',
