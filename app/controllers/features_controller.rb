@@ -433,7 +433,7 @@ class FeaturesController < ApplicationController
     end
 
     def dallience_reference
-      name = "Cf746836_TGAC_s1v1_scaffold_1672"
+      name = "Cf746836_TGAC_s1v1_scaffold_6"
       logger.error "looking for: #{name}"
       ref = Reference.first
       @sequenceText = ref.sequence.sequence.to_s
