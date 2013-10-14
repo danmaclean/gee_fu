@@ -436,8 +436,8 @@ class FeaturesController < ApplicationController
       name = "Cf746836_TGAC_s1v1_scaffold_1672"
       logger.error "looking for: #{name}"
       ref = Reference.first
-      @seqienceText = ref.sequence.sequence
-      logger.error "found: #{@seqienceText}"
+      @sequenceText = ref.sequence.sequence.to_s
+      logger.error "found: #{@sequenceText}"
     end
 
 
