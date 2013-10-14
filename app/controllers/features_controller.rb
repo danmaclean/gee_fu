@@ -422,13 +422,11 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
   def dalliance_get
       @eid = params[:exid]
-      # start = 0
-      # ending = 10000
     end
 
     def dallience_reference
       name = "Cf746836_TGAC_s1v1_scaffold_6"
-      logger.error "looking for: #{name}"
+      logger.error "looking for: #{name} #{params[:sequence]}"
       ref = Reference.first
       @sequenceText = ref.sequence.sequence.to_s
       logger.error "found: #{@sequenceText}"
