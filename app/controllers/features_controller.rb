@@ -425,7 +425,7 @@ class FeaturesController < ApplicationController
       @eid = params[:exid]
 
       Experiment.where(genome_id: 1).each do |experi|
-        logger.error "#{experi}"
+        logger.error "#{experi.id}"
       end
 
       @segment = "Cf746836_TGAC_s1v1_scaffold_6"
