@@ -433,7 +433,7 @@ class FeaturesController < ApplicationController
     end
 
     def dallience_reference
-      @sequenceText = Experiment.find(params[:exid]).genome.to_s
+      @sequenceText = Experiment.find(params[:exid]).meta_as_data_structure
       logger.error "sequence: #{@sequenceText}"
     end
 
