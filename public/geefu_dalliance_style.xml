@@ -96,7 +96,7 @@
                         <FGCOLOR>white</FGCOLOR>
                         <BGCOLOR>white</BGCOLOR>
                         <BUMP>no</BUMP>
-                        <LABEL>no</LABEL>
+                        <LABEL>yes</LABEL>
                     </BOX>
                 </GLYPH>
             </TYPE>
