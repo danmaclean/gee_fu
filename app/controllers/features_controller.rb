@@ -433,7 +433,7 @@ class FeaturesController < ApplicationController
     end
 
     def dallience_reference
-      name = Experiment.find(params[:exid]).name
+      name = "Cf746836_TGAC_s1v1_scaffold_1672"
       logger.error "looking for: #{name}"
       ref = Reference.where(name: name)
       @seqienceText = ref.sequence
