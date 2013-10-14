@@ -432,6 +432,11 @@ class FeaturesController < ApplicationController
       # logger.error "------------------------------------ found #{@seqs.length} sequences"
     end
 
+    def dallience_reference
+      sequenceText = Experiment.find(params[:exid]).genome
+    end
+
+
 
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
