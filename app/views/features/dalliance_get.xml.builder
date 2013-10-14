@@ -1,5 +1,4 @@
 xml.instruct!
-# logger.error "#{Parent.all}"
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
         xml.SEGMENT 'id' => "seg1" do
