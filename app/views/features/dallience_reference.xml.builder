@@ -1,6 +1,5 @@
 xml.instruct!
   xml.DASSEQUENCE do
-        xml.SEQUENCE 'id' => "id", 'start' => "start", 'stop' => "stop", 'version' => "X.XX", 'label' => "Label" do
-         @sequenceText
+        xml.SEQUENCE @sequenceText, 'id' => "id", 'start' => "start", 'stop' => "stop", 'version' => "X.XX", 'label' => "Label"     
   end
 end
