@@ -433,7 +433,7 @@ class FeaturesController < ApplicationController
     end
 
     def dallience_reference
-      sequenceText = Experiment.find(params[:exid]).genome
+      sequenceText = Experiment.find(params[:exid]).genome.meta
     end
 
 
