@@ -421,7 +421,14 @@ class FeaturesController < ApplicationController
 
   # Bio Dalliance
   def dalliance_get
+
       @eid = params[:exid]
+
+      Experiment.where(genome_id: 1).each do |experi|
+        logger.error "#{experi}"
+      end
+
+      @segment = "Cf746836_TGAC_s1v1_scaffold_6"
     end
 
     def dallience_reference
