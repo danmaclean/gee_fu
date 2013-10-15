@@ -434,7 +434,6 @@ class FeaturesController < ApplicationController
         @features = Feature.where(experiment_id: @eid, feature: ["mRNA","five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(200)
         logger.error "------------------------------------ found #{@features.length} features"
         end
-      end
     end
 
     def dallience_reference
