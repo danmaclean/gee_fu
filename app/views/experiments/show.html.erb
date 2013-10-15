@@ -67,11 +67,11 @@ features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment
 // type:                 ['mRNA','five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
-],
+
 {name:                 'CDS',
 provides_entrypoints: true,
 uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/CDS.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/CDS.xml',
+features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/tss.xml',
 // type:                 ['mRNA','five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
