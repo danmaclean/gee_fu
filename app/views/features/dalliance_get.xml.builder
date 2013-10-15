@@ -12,7 +12,7 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 # logger.error "feature id #{feature.id}"
-                logger.error "#{feature.quality}"
+                # logger.error "#{feature.quality}"
                 if feature.has_children?
                   logger.error "HAS CHILDREN"
                   feature.children.each do |child|
@@ -24,6 +24,9 @@ xml.instruct!
                 if feature.has_parent?
                   feature.parents.collect {|x|
                     xmpar = x.parent_obj.id.to_s
+                    unless @suggested_horses.include?(xmpar)
+                      @suggested_horses << xmpar
+                    end
                     # logger.error "parent is #{x.parent_feature}"
                     xml.PARENT xmpar, 'id' => xmpar
                   }
