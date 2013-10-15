@@ -12,6 +12,7 @@ xml.instruct!
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
                 # logger.error "feature id #{feature.id}"
+                logger.error "#{feature.quality}"
                 if feature.has_children?
                   logger.error "HAS CHILDREN"
                   feature.children.each do |child|
