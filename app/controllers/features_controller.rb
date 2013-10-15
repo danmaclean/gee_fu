@@ -424,9 +424,9 @@ class FeaturesController < ApplicationController
       @eid = params[:exid]
       @featuretype = params[:featutype]
       if @featuretype.nil?
-
+        logger.error "-------------------------------- feature type = #{params[:featutype]}"
       end
-      logger.error "-------------------------------- feature type = #{params[:featutype]}"
+      
     end
 
     def dallience_reference
