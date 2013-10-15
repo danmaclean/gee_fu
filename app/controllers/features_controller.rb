@@ -423,8 +423,12 @@ class FeaturesController < ApplicationController
     def dalliance_get
       @eid = params[:exid]
       @featuretype = params[:featutype]
-      if !@featuretype.nil?
-        logger.error "-------------------------------- feature type = #{params[:featutype]}"
+        if !@featuretype.nil?
+          logger.error "-------------------------------- feature type = #{params[:featutype]}"
+          respond_to do |format|
+          format.html # index.html.erb
+          format.xml # index.xml.builder
+        end
       end
       
     end
