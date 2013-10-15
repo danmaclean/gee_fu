@@ -425,10 +425,17 @@ class FeaturesController < ApplicationController
       @featuretype = params[:featutype]
         if !@featuretype.nil?
           logger.error "-------------------------------- feature type = #{params[:featutype]}"
+
+
+            @features = Feature.where(experiment_id: @eid, feature: @featuretype).take(200)
+            logger.error "------------------------------------ found #{@features.length} features"
+
           respond_to do |format|
           format.html # index.html.erb
           format.xml # index.xml.builder
         end
+        @features = Feature.where(experiment_id: @eid, feature: ["mRNA","five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(200)
+            logger.error "------------------------------------ found #{@features.length} features"
       end
       
     end
