@@ -422,8 +422,11 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
     def dalliance_get
       @eid = params[:exid]
+      @featuretype = params[:featutype]
+      if @featuretype.nil?
+
+      end
       logger.error "-------------------------------- feature type = #{params[:featutype]}"
-      render xml: "hello"
     end
 
     def dallience_reference
