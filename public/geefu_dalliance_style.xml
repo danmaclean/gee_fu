@@ -21,7 +21,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>red</BGCOLOR>
-                        <BUMP>no</BUMP>
+                        <BUMP>yes</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
@@ -33,17 +33,6 @@
                         <BGCOLOR>yellow</BGCOLOR>
                         <LABEL>no</LABEL>
                         <BUMP>no</BUMP>
-                    </BOX>
-                </GLYPH>
-            </TYPE>
-            <TYPE id='tts'>
-                <GLYPH>
-                    <BOX>
-                        <HEIGHT>10</HEIGHT>
-                        <FGCOLOR>black</FGCOLOR>
-                        <BGCOLOR>yellow</BGCOLOR>
-                        <BUMP>no</BUMP>
-                        <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
             </TYPE>
@@ -123,7 +112,7 @@
                         <HEIGHT>10</HEIGHT>
                         <FGCOLOR>black</FGCOLOR>
                         <BGCOLOR>white</BGCOLOR>
-                        <BUMP>no</BUMP>
+                        <BUMP>yes</BUMP>
                         <LABEL>no</LABEL>
                     </BOX>
                 </GLYPH>
