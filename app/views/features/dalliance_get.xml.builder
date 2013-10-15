@@ -23,9 +23,10 @@ xml.instruct!
 
                 if feature.has_parent?
                   feature.parents.collect {|x|
-                    xmpar = x.parent_obj.id.to_s
-                    unless @features.include?(xmpar)
-                      @features << xmpar
+                    parent_obj = x.parent_obj
+                    xmpar = parent_obj.id.to_s
+                    unless @features.include?(parent_obj)
+                      @features << parent_obj
                     end
                     # logger.error "parent is #{x.parent_feature}"
                     xml.PARENT xmpar, 'id' => xmpar
