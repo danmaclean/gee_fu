@@ -2,11 +2,7 @@ xml.instruct!
   xml.DASGFF do
     xml.GFF 'version' => '1.0' do
         xml.SEGMENT 'id' => "seg1" do
-            # logger.error"-----------------------------#{seq}"
-            # @features = Feature.where(experiment_id: @eid, feature: ["mRNA","five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(200)
-            # logger.error "------------------------------------ found #{@features.length} features"
             @features.each do |feature|
-              # logger.error "___________________________________________________"
               xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
                 xml.TYPE feature.feature ,'id' => feature.feature
                 xml.METHOD feature.source
