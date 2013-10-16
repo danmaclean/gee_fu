@@ -456,7 +456,7 @@ class FeaturesController < ApplicationController
       when "describe"
         @response = describe(params["id"])
     end
-    logger.error "#{@response}"
+    logger.error "#ANNOJ: {@response}"
     render :json => @response,  :layout => false
   end
 
