@@ -3,12 +3,22 @@ tracks:
       name: My Gene Models Track
       type: ModelsTrack
       path: Gene Models
-      data: /features/annoj/11
+      data: /features/annoj/1
       showControls: true
       height: 80
+    - id: 2
+      name: Reads from an RDBMS provided experiment loaded via gff
+      type: ReadsTrack
+      path: Reads
+      data: /features/annoj/2
+      showControls: true
+      minHeight: 20
+      maxHeight: 500
+      height: 70
 #A list of tracks that will be active by default (use the ID of the track)
 active:
     - 1
+    - 2
 #genome - the service that knows about the genome
 genome: genomes/annoj/1
 # bookmarks - the service that keeps the bookmarks
