@@ -450,6 +450,7 @@ class FeaturesController < ApplicationController
   #AnnoJ request method, not normally called directly used in config.yml and config.js. Gets features for an experiment at id
   # => use /features/annoj/id 
   def annoj_get
+    logger.error "About to: #{params[:annoj_action]}"
     case params[:annoj_action]
       when "syndicate"
         @response = syndicate(params[:id])
