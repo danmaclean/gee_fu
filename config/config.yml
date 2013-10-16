@@ -6,15 +6,6 @@ tracks:
       data: /features/annoj/11
       showControls: true
       height: 80
-    # - id: 2
-    #   name: Reads from an RDBMS provided experiment loaded via gff
-    #   type: ReadsTrack
-    #   path: Reads
-    #   data: /features/annoj/2
-    #   showControls: true
-    #   minHeight: 20
-    #   maxHeight: 500
-    #   height: 70
 #A list of tracks that will be active by default (use the ID of the track)
 active:
     - 1
