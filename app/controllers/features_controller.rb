@@ -454,10 +454,10 @@ class FeaturesController < ApplicationController
     # case params[:annoj_action]
     case request.method
       # when "syndicate"
-      when "POST"
+      when "GET"
         @response = syndicate(params[:id])
       # when "describe"
-    when "GET"
+    when "POST"
         @response = describe(params["id"])
     end
     logger.error "#ANNOJ: #{@response}"
