@@ -451,10 +451,13 @@ class FeaturesController < ApplicationController
   # => use /features/annoj/id 
   def annoj_get
     logger.error "About to: #{params[:annoj_action]}"
-    case params[:annoj_action]
-      when "syndicate"
+    # case params[:annoj_action]
+    case request.method
+      # when "syndicate"
+      when "GET"
         @response = syndicate(params[:id])
-      when "describe"
+      # when "describe"
+    when "POST"
         @response = describe(params["id"])
     end
     logger.error "#ANNOJ: #{@response}"
