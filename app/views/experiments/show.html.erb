@@ -49,6 +49,11 @@
       },
 	
 sources:     [
+
+{name: 'JBTest',
+ jbURI: 'http://my.server.com/jbrowse/rest',
+ jbQuery: 'type=IntergenicRegion'},
+
 {name:                 'Genome',      
 uri:                  'http://v0311.nbi.ac.uk/features/dalliance/reference/<%= @experiment.id %>.xml',     
 tier_type:            'sequence'},
@@ -64,7 +69,7 @@ dasStaticFeatures: true},
 provides_entrypoints: true,
 uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/tss.xml',
 features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/tss.xml',
-// type:                 ['mRNA','five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
+type:                 ['tss'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
 
@@ -72,7 +77,7 @@ dasStaticFeatures: true},
 provides_entrypoints: true,
 uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/CDS.xml',
 features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/CDS.xml',
-// type:                 ['mRNA','five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
+type:                 ['cds'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
 ],
