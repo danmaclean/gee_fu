@@ -3,7 +3,7 @@ tracks:
       name: My Gene Models Track
       type: ModelsTrack
       path: Gene Models
-      data: /features/annoj/1
+      data: /features/annoj/11
       showControls: true
       height: 80
     - id: 2
