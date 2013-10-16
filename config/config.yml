@@ -9,7 +9,6 @@ tracks:
 #A list of tracks that will be active by default (use the ID of the track)
 active:
     - 1
-    - 2
 #genome - the service that knows about the genome
 genome: genomes/annoj/1
 # bookmarks - the service that keeps the bookmarks
