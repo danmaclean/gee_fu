@@ -23,7 +23,7 @@ class ExperimentsController < ApplicationController
       # featurelimit = 250
       # @types = Feature.where(experiment_id: params[:id]).limit(featurelimit).pluck(:feature).uniq
       @experiment = Experiment.find(params[:id])
-      @seqs = @experiment.features.pluck(:seqid).uniq;
+      @seqs = @experiment.features.pluck(:seqid).uniq
       @experiment.meta = JSON::parse @experiment.meta if @experiment.meta
       respond @experiment
     else

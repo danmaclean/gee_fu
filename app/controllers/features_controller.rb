@@ -427,6 +427,8 @@ class FeaturesController < ApplicationController
 
       @featcount = Feature.where(experiment_id: params[:exid], seqid: params[:part])
 
+      @featureType = Feature.where(experiment_id: params[:exid], seqid: params[:part]).pluck(:feature).uniq;
+
       render :layout => false
     end
 

@@ -37,6 +37,8 @@
 
 <h2><%= @part %> - found <%= @featcount.length %> features</h2>
 
+<% @featureType.each do |feat| <%= feat %> end%>
+
 <script language="javascript">
 
   var b = new Browser({
