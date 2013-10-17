@@ -55,29 +55,47 @@
       },
 	
 sources:     [
-{name:                 'mRNA',
+
+<% @featureType.each do |feat|
+
+{name:                 'feat',
 provides_entrypoints: true,
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>.xml',
+uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/feat.xml',
+features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/feat.xml',
 type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
-{name:                 'TSS',
-provides_entrypoints: true,
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/tss.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/tss.xml',
-type:                 ['tss'],
-stylesheet_uri: '/geefu_dalliance_style.xml',
-dasStaticFeatures: true},
 
-{name:                 'CDS',
-provides_entrypoints: true,
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/CDS.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/CDS.xml',
-type:                 ['cds'],
-stylesheet_uri: '/geefu_dalliance_style.xml',
-dasStaticFeatures: true},
-],
+
+ logger.error "#{feat}" 
+
+
+
+ end%>
+
+// {name:                 'mRNA',
+// provides_entrypoints: true,
+// uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>.xml',
+// features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>.xml',
+// type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
+// stylesheet_uri: '/geefu_dalliance_style.xml',
+// dasStaticFeatures: true},
+// {name:                 'TSS',
+// provides_entrypoints: true,
+// uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/tss.xml',
+// features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/tss.xml',
+// type:                 ['tss'],
+// stylesheet_uri: '/geefu_dalliance_style.xml',
+// dasStaticFeatures: true},
+
+// {name:                 'CDS',
+// provides_entrypoints: true,
+// uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/CDS.xml',
+// features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/CDS.xml',
+// type:                 ['cds'],
+// stylesheet_uri: '/geefu_dalliance_style.xml',
+// dasStaticFeatures: true},
+// ],
 
 disablePoweredBy: true,
 setDocumentTitle: false,
