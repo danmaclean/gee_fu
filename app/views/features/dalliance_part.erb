@@ -37,7 +37,7 @@
 
 <h2><%= @part %> - found <%= @featcount.length %> features</h2>
 
-<% @featureType.each do |feat| feat end%>
+<% @featureType.each do |feat| logger.error "#{feat}" end%>
 
 <script language="javascript">
 
