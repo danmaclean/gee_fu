@@ -434,10 +434,10 @@ class FeaturesController < ApplicationController
       @featuretype = params[:featutype]
         if !@featuretype.nil?
           logger.error "-------------------------------- feature type = #{params[:featutype]}"
-          @features = Feature.where(experiment_id: @eid, feature: @featuretype)
+          @features = Feature.where(experiment_id: @eid, feature: @featuretype, seqid: part)
           logger.error "------------------------------------ found #{@features.length} features"
         else
-        @features = Feature.where(experiment_id: @eid, feature: ["mRNA","five_prime_UTR", "exon", "intron","three_prime_UTR"])
+        @features = Feature.where(experiment_id: @eid, feature: ["mRNA","five_prime_UTR", "exon", "intron","three_prime_UTR"], seqid: part)
         logger.error "------------------------------------ found #{@features.length} features"
         end
     end
