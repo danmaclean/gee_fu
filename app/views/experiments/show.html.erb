@@ -10,8 +10,8 @@
 
 <input type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%=@seqs%>'>
 
-<div id="mydiv"><iframe id="frame" src="" width="100%" height="100%">
-   </iframe></div>
+<iframe id="frame" src="" width="100%" height="100%">
+   </iframe>
   <button id="button">Load</button>
 
   <script>
@@ -26,10 +26,10 @@
 function calcHeight()
 {
 //find the height of the internal page
-var the_height=document.getElementById('mydiv').contentWindow.document.body.scrollHeight;
+var the_height=document.getElementById('frame').contentWindow.document.body.scrollHeight;
 
 //change the height of the iframe
-document.getElementById('mydiv').height=the_height;
+document.getElementById('frame').height=the_height;
 }
 //-->
 </script>
