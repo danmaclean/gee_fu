@@ -66,6 +66,12 @@ sources:     [
     stylesheet_uri: '/geefu_dalliance_style.xml',
     dasStaticFeatures: true},
 
+    <% if @featureType.include? "mRNA"; @featureType.delete("mRNA"); end %>
+    <% if @featureType.include? "five_prime_UTR"; @featureType.delete("five_prime_UTR"); end %>
+    <% if @featureType.include? "exon"; @featureType.delete("exon"); end %>
+    <% if @featureType.include? "intron"; @featureType.delete("intron"); end %>
+    <% if @featureType.include? "three_prime_UTR"; @featureType.delete("three_prime_UTR"); end %>
+
 <%end%>
 
 <% @featureType.each do |feat| %>
