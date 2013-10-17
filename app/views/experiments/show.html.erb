@@ -20,6 +20,10 @@
     $("#frame").empty();
     seq = $("#seqname").val();
 
+    if(!seq || 0 === seq.length){
+      seq = "UNKNOWN"
+    }
+
     $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/"+seq);
 
 });
