@@ -15,15 +15,7 @@
   <button id="button">Load</button>
 
   <script>
-  $("#button").click(function () { 
-      $("#frame").attr("src", "/features/dalliance/part/1/Cf746836_TGAC_s1v1_scaffold_5");
-});
-  </script>
-
-
-<script language="JavaScript">
-<!--
-function calcHeight()
+  function calcHeight()
 {
 //find the height of the internal page
 var the_height=document.getElementById('frame').contentWindow.document.body.scrollHeight;
@@ -31,9 +23,18 @@ var the_height=document.getElementById('frame').contentWindow.document.body.scro
 //change the height of the iframe
 document.getElementById('frame').height=the_height;
 }
-calcHeight();
-//-->
-</script>
+
+
+  $("#button").click(function () { 
+      $("#frame").attr("src", "/features/dalliance/part/1/Cf746836_TGAC_s1v1_scaffold_5");
+      $("#frame").load(function (){
+    // do something once the iframe is loaded
+    calcHeight();
+});
+});
+  </script>
+
+
 
 <hr>
 
