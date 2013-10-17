@@ -16,7 +16,8 @@
 
   <script>
   $("#seqname").change(function () { 
-      $("#frame").attr("src", "/features/dalliance/part/1/"+$("#seqname").text);
+
+      $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/"+$("#seqname").text);
 
 });
   </script>
