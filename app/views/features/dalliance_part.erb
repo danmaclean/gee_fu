@@ -58,10 +58,10 @@ sources:     [
 
 <% @featureType.each do |feat|
 
-{name:                 '<%=feat%>',
+{name:                 'feat',
 provides_entrypoints: true,
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/<%=feat%>.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/<%=feat%>.xml',
+uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/feat.xml',
+features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/feat.xml',
 type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
