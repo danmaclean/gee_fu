@@ -423,6 +423,7 @@ class FeaturesController < ApplicationController
 
     def dalliance_part
       part = params[:part]
+      render :layout => false
     end
 
     def dalliance_get
