@@ -27,7 +27,7 @@ document.getElementById('frame').height=the_height;
 
   $("#button").click(function () { 
       $("#frame").attr("src", "/features/dalliance/part/1/Cf746836_TGAC_s1v1_scaffold_5");
-      $("#frame").load(function (){
+      $("#frame").ready(function (){
     // do something once the iframe is loaded
     alert("setting height now");
     calcHeight();
