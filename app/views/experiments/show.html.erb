@@ -1,95 +1,4 @@
-<script language="javascript" src="/dalliance/js/bam.js"></script>
-<script language="javascript" src="/dalliance/js/bigwig.js"></script>
-<script language="javascript" src="/dalliance/js/das.js"></script>
-<script language="javascript" src="/dalliance/js/spans.js"></script>
-<script language="javascript" src="/dalliance/js/utils.js"></script>
-<script language="javascript" src="/dalliance/js/cbrowser.js"></script>
-<script language="javascript" src="/dalliance/js/feature-popup.js"></script>
-<script language="javascript" src="/dalliance/js/tier.js"></script>
-<script language="javascript" src="/dalliance/js/features.js"></script>
-<script language="javascript" src="/dalliance/js/color.js"></script>
-<script language="javascript" src="/dalliance/js/feature-draw.js"></script>
-<script language="javascript" src="/dalliance/js/sequence-draw.js"></script>
-<script language="javascript" src="/dalliance/js/domui.js"></script>
-<script language="javascript" src="/dalliance/js/karyoscape.js"></script>
-<script language="javascript" src="/dalliance/js/quant-config.js"></script>
-<script language="javascript" src="/dalliance/js/track-adder.js"></script>
-<script language="javascript" src="/dalliance/js/chainset.js"></script>
-<script language="javascript" src="/dalliance/js/version.js"></script>
-<script language="javascript" src="/dalliance/js/sha1.js"></script>
-<script language="javascript" src="/dalliance/js/sample.js"></script>
-<script language="javascript" src="/dalliance/js/kspace.js"></script>
-<script language="javascript" src="/dalliance/json/json2.js"></script>
-<script language="javascript" src="/dalliance/js/bin.js"></script>
-<script language="javascript" src="/dalliance/js/twoBit.js"></script>
-<script language="javascript" src="/dalliance/js/thub.js"></script>
-<script language="javascript" src="/dalliance/js/svg-export.js"></script>
-<script language="javascript" src="/dalliance/jszlib/js/inflate.js"></script>
-<script language="javascript" src="/dalliance/js/browser-ui.js"></script>
-<script language="javascript" src="/dalliance/js/glyphs.js"></script>
-<script language="javascript" src="/dalliance/js/session.js"></script>
-<script language="javascript" src="/dalliance/js/jbjson.js"></script>
-<script language="javascript" src="/dalliance/js/sourceadapters.js"></script>
-<script language="javascript" src="/dalliance/polyfills/html5slider.js"></script>
-<script language="javascript" src="/dalliance/js/ensembljson.js"></script>
-<script language="javascript" src="/dalliance/js/overlay.js"></script>
 
-<script language="javascript">
-  var b = new Browser({
-    chr:          '1',
-    viewStart:    0,
-    viewEnd:      10000,
-    cookieKey:    'KW1',
-
-    coordSystem: {
-          speciesName: '<%= @experiment.name %>',
-          taxon: 10090,
-          auth: 'NCBIM',
-          version: 37
-      },
-	
-sources:     [
-
-{name: 'JBTest',
- jbURI: 'http://v0311.nbi.ac.uk/features/annoj/11',
- jbQuery: 'type=IntergenicRegion'},
-
-{name:                 'Genome',      
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/reference/<%= @experiment.id %>.xml',     
-tier_type:            'sequence'},
-
-{name:                 'mRNA',
-provides_entrypoints: true,
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>.xml',
-type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
-stylesheet_uri: '/geefu_dalliance_style.xml',
-dasStaticFeatures: true},
-{name:                 'TSS',
-provides_entrypoints: true,
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/tss.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/tss.xml',
-type:                 ['tss'],
-stylesheet_uri: '/geefu_dalliance_style.xml',
-dasStaticFeatures: true},
-
-{name:                 'CDS',
-provides_entrypoints: true,
-uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/CDS.xml',
-features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/CDS.xml',
-type:                 ['cds'],
-stylesheet_uri: '/geefu_dalliance_style.xml',
-dasStaticFeatures: true},
-],
-
-disablePoweredBy: true,
-setDocumentTitle: false,
-});
-
-  // b.addFeatureInfoPlugin(function(f, info) {
-  //     info.add('Testing', 'This is a test!');
-  //   });
-</script>
 
 <%- model_class = Experiment -%>
 <p>DEBUG: found <%=@seqs.length%> sequences</p>
@@ -101,7 +10,16 @@ setDocumentTitle: false,
 
 <input type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%=@seqs%>'>
 
-<div id='svgHolder'>Dalliance genome browser goes here.  Unless you have an ancient web browser or something.</div>
+<div id="mydiv"><iframe id="frame" src="" width="100%" height="300">
+   </iframe></div>
+  <button id="button">Load</button>
+
+  <script>
+  $("#button").click(function () { 
+      $("#frame").attr("src", "http://www.google.com/");
+});
+  </script>
+
 
 <hr>
 

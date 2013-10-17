@@ -40,6 +40,7 @@ GeeFu::Application.routes.draw do
   end
 
   scope "/features/dalliance" do
+    get "/part/:part", to: "features#dalliance_part"
   	get "/:exid", to: "features#dalliance_get"
     get "/:exid/:featutype", to: "features#dalliance_get"
   end

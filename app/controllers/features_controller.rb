@@ -420,6 +420,11 @@ class FeaturesController < ApplicationController
 
 
   # Bio Dalliance
+
+    def dalliance_part
+      part = params[:part]
+    end
+
     def dalliance_get
       @eid = params[:exid]
       @featuretype = params[:featutype]
@@ -427,9 +432,6 @@ class FeaturesController < ApplicationController
           logger.error "-------------------------------- feature type = #{params[:featutype]}"
           @features = Feature.where(experiment_id: @eid, feature: @featuretype).take(200)
           logger.error "------------------------------------ found #{@features.length} features"
-          # respond_to do |format|
-          # format.html # index.html.erb
-          # format.xml # index.xml.builder
         else
         @features = Feature.where(experiment_id: @eid, feature: ["mRNA","five_prime_UTR", "exon", "intron","three_prime_UTR"]).take(200)
         logger.error "------------------------------------ found #{@features.length} features"
