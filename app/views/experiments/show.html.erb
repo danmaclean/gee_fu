@@ -15,9 +15,9 @@
   
 
   <script>
-  $("#seqname").change(function () { 
+  $("#seqname").keyup(function () { 
 
-seq = $("#seqname").text;
+      seq = $("#seqname").val();
 
       $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/"+seq);
 
