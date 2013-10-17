@@ -37,8 +37,6 @@
 
 <script language="javascript">
 
-parent.document.getElementById('frame').style.height = document['body'].offsetHeight + 'px';
-
   var b = new Browser({
     chr:          '1',
     viewStart:    0,
@@ -95,6 +93,18 @@ setDocumentTitle: false,
   //   });
 </script>
 
+
+<script>
+try
+  {
+  //Run some code here
+  parent.document.getElementById('frame').style.height = document['body'].offsetHeight + 'px';
+  }
+catch(err)
+  {
+  //Handle errors here
+  }
+</script>
 
 
 <div id='svgHolder'>Dalliance genome browser goes here.  Unless you have an ancient web browser or something.</div>
