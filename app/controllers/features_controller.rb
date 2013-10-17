@@ -422,7 +422,7 @@ class FeaturesController < ApplicationController
   # Bio Dalliance
 
     def dalliance_part
-      part = params[:part]
+      @part = params[:part]
       @experiment = Experiment.find(params[:exid])
 
 
