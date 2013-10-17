@@ -98,8 +98,8 @@ setDocumentTitle: false,
 try
   {
   //Run some code here
-  parent.document.getElementById('frame').style.height = document.height + 'px';
-  alert("height was "+parent.document.getElementById('frame').style.height+", now "+document.height + 'px');
+  parent.document.getElementById('frame').style.height = document['body'].offsetHeight + 'px';
+  alert("height was "+parent.document.getElementById('frame').style.height+", now "+document['body'].offsetHeight + 'px');
   }
 catch(err)
   {
