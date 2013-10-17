@@ -431,6 +431,7 @@ class FeaturesController < ApplicationController
 
     def dalliance_get
       @eid = params[:exid]
+      @part = params[:part]
       @featuretype = params[:featutype]
         if !@featuretype.nil?
           logger.error "-------------------------------- feature type = #{params[:featutype]}"
