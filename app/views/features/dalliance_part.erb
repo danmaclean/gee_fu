@@ -56,7 +56,7 @@
 	
 sources:     [
 
-<% @featureType.each do |feat|
+<%= @featureType.each do |feat|
 
 {name:                 'feat',
 provides_entrypoints: true,
@@ -66,10 +66,7 @@ type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
 stylesheet_uri: '/geefu_dalliance_style.xml',
 dasStaticFeatures: true},
 
-
-
-
- end%>
+end %>
 
 // {name:                 'mRNA',
 // provides_entrypoints: true,
