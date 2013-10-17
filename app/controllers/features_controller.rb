@@ -425,6 +425,7 @@ class FeaturesController < ApplicationController
       @part = params[:part]
       @experiment = Experiment.find(params[:exid])
 
+      @featcount = Feature.where(experiment_id: params[:exid], seqid: params[:part])
 
       render :layout => false
     end
