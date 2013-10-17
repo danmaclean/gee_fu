@@ -17,6 +17,7 @@
   <script>
   $("#seqname").keyup(function () { 
 
+    $("#frame").empty();
       seq = $("#seqname").val();
 
       $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/"+seq);
