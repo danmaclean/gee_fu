@@ -423,6 +423,9 @@ class FeaturesController < ApplicationController
 
     def dalliance_part
       part = params[:part]
+      @experiment = Experiment.find(params[:exid])
+
+
       render :layout => false
     end
 
