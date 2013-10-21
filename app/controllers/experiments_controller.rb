@@ -60,7 +60,7 @@ class ExperimentsController < ApplicationController
 
       filenamebase = @experiment.name.downcase.tr(" ", "_")
             
-      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
+      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --subfeatureClasses '{"wholeCDS": null, "mRNA":"brightgreen-80pct", "CDS":"brightgreen-80pct", "UTR": "darkgreen-60pct", "exon":"container-100pct"}' --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
 
 # bin/flatfile-to-json.pl --gff $WEB_APOLLO_SAMPLE_DIR/split_gff/maker.gff --arrowheadClass trellis-arrowhead --getSubfeatures --subfeatureClasses '{"wholeCDS": null, "CDS":"brightgreen-80pct", "UTR": "darkgreen-60pct", "exon":"container-100pct"}' --cssClass container-16px --type mRNA --trackLabel maker
 
