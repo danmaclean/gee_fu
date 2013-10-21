@@ -60,7 +60,7 @@ class ExperimentsController < ApplicationController
 
       filenamebase = @experiment.name.downcase.tr(" ", "_")
       
-      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubfeatures --trackLabel #{filenamebase} --webApollo --renderClassName gray-center-20pct --out #{WebApolloAppPath}/jbrowse/data/`
+      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubfeatures --trackLabel #{filenamebase} --webApollo --out #{WebApolloAppPath}/jbrowse/data/`
       
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
