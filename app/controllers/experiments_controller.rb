@@ -60,18 +60,9 @@ class ExperimentsController < ApplicationController
 
       filenamebase = @experiment.name.downcase.tr(" ", "_")
       
-
-      cmdOne = 'unknown'
-      cmdTwo = 'unknown'
+      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --arrowheadClass webapollo-arrowhead --getSubfeatures --trackLabel #{filenamebase} --webApollo --renderClassName gray-center-20pct --out #{WebApolloAppPath}/jbrowse/data/`
       
-
-      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubfeatures --trackLabel #{filenamebase} --webApollo --out #{WebApolloAppPath}/jbrowse/data/`
-      
-# bin/flatfile-to-json.pl --gff $WEB_APOLLO_SAMPLE_DIR/split_gff/maker.gff --getSubfeatures --type mRNA --trackLabel maker
-
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
-
-      
 
 #      cmdComplete = "SUCCESSFUL"
 #      if(!cmdOne)
