@@ -68,13 +68,14 @@ class ExperimentsController < ApplicationController
 
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
+
 #      cmdComplete = "SUCCESSFUL"
 #      if(!cmdOne)
 #        cmdComplete = "FAILED, Please add manually"
 #      end
 
-      logger.error "cmdOne #{cmdOne}"
-      logger.error "cmdTwo #{cmdTwo}"
+      logger.error "cmdOne = #{cmdOne}"
+      logger.error "cmdTwo = #{cmdTwo}"
 
 
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
