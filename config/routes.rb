@@ -45,6 +45,10 @@ GeeFu::Application.routes.draw do
     get "/:exid/:part/:featutype/", to: "features#dalliance_get"
   end
 
+scope "/users" do
+  get "/admin", to: "AdminController#index"
+end
+
   scope "/genomes/annoj" do
     get  "/:id", to: "genomes#annoj"
   end
