@@ -320,5 +320,7 @@ class ExperimentsController < ApplicationController
   def findfromss
     id = params[:id]
     db = params[:db]
+
+    
   end
 end 
