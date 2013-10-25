@@ -2,7 +2,9 @@
 
 <% @experiments.each do |experiment| %>
 
-<p><a href="/experiments/<%= experiment %>">Experiment #<%= "#{experiment}" %></a></p>
+<%exp = Experiment.find(experiment)%>
+
+<p><a href="/experiments/<%= experiment %>">Experiment <%= "#{exp.name }" %> - <%= "#{exp.description}" %></a></p>
 <%end%>
 
 
