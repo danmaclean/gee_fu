@@ -57,6 +57,10 @@ end
 
  mount SequenceServer::App, :at => "sequenceserver"
 
+ 
+ scope "/sequenceserver" do 
+  get "/get_sequence", to: "experiments#findfromss"
+
 match "/webapollo" => redirect("http://v0311.nbi.ac.uk:8080/WebApollo/"), :as => :webapollo
 
 

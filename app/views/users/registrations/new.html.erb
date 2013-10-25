@@ -8,6 +8,13 @@
     <%= f.input :first_name, :placeholder => 'First name', label: false, :required => true %>
     <%= f.input :last_name, :placeholder => 'Last name', label: false, :required => true %>
     <%= f.input :affiliation, :placeholder => 'Affiliation / Place of work', label: false %>
+
+<p>By clicking submit you are agreeing to the following: </p>
+<p>* We will store the data you have provided for use in GeeFu</p>
+<p>* Only data needed to use GeeFu effectively will be stored</p>
+<p>* All data is sent over SSL and uses 256-bit encryption</p>
+<p>* We will not give or sell your data to anyone</p>
+
     <%= f.input :role, :placeholder => 'Role', label: false %>
     <p>
       <button type="submit" name="commit" class='btn btn-success'>

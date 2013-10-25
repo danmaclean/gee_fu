@@ -316,4 +316,9 @@ class ExperimentsController < ApplicationController
     genome = Experiment.find(params[:id]).genome
     respond genome.references.collect {|x| x.name }
   end
+
+  def findfromss
+    id = params[:id]
+    db = params[:db]
+  end
 end 
