@@ -4,7 +4,7 @@
 
 <%exp = Experiment.find(experiment)%>
 
-<p><a href="/experiments/<%= experiment %>">Experiment <%= "#{exp.name }" %> - <%= "#{exp.description}" %></a></p>
+<p><a href="/experiments/<%= experiment %>">Experiment: #<%= "#{experiment}" %> - <%= "#{exp.name }" %> - <%= "#{exp.description}" %></a></p>
 <%end%>
 
 
