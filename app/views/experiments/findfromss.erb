@@ -1,3 +1,8 @@
 <p>Experiments that contain</p>
 
-<% @experiments.each do |experiment| logger.error "#{experiment}" end%>
+<% @experiments.each do |experiment| logger.error %>
+
+<p><%="#{experiment}"%></p>
+<%end%>
+
+
