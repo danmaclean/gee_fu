@@ -323,7 +323,7 @@ class ExperimentsController < ApplicationController
 
     @experiments = Feature.where(seqid: id).pluck(:experiment_id).uniq
 
-    if(@experiments.length == 1){
+    if @experiments.length == 1
       @experiments = "JUST ONE";
     end
   end
