@@ -321,6 +321,6 @@ class ExperimentsController < ApplicationController
     id = params[:id]
     db = params[:db]
 
-    
+    @experiments = Feature.where(seqid: id).pluck(:experiment_id).uniq
   end
 end 
