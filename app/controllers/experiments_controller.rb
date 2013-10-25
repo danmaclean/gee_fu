@@ -325,6 +325,6 @@ class ExperimentsController < ApplicationController
 
     if(@experiments.length == 1){
       @experiments = "JUST ONE";
-    }
+    end
   end
 end 
