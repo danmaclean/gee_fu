@@ -325,6 +325,7 @@ class ExperimentsController < ApplicationController
 
     if @experiments.length == 1
       @experiments = "JUST ONE";
+      redirect_to :action => "show", :id => @experiments.first
     end
   end
 end 
