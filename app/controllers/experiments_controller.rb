@@ -22,6 +22,7 @@ class ExperimentsController < ApplicationController
     if Experiment.exists?(params[:id])
       # featurelimit = 250
       # @types = Feature.where(experiment_id: params[:id]).limit(featurelimit).pluck(:feature).uniq
+      logger.error "looking up exp: #{params[:id]}"
       @experiment = Experiment.find(params[:id])
       @seqs = @experiment.features.pluck(:seqid).uniq
       @experiment.meta = JSON::parse @experiment.meta if @experiment.meta
@@ -324,7 +325,6 @@ class ExperimentsController < ApplicationController
     @experiments = Feature.where(seqid: id).pluck(:experiment_id).uniq
 
     if @experiments.length == 1
-      @experiments = "JUST ONE";
       redirect_to :action => "show", :id => @experiments.first
     end
   end
