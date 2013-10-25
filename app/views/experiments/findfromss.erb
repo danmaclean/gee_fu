@@ -1,8 +1,8 @@
-<p>Experiments that contain</p>
+<p>Experiments that contain <%="#{id}"%></p>
 
 <% @experiments.each do |experiment| %>
 
-<p><%="#{experiment}"%></p>
+<a href="/experiments/<%= experiment %>">experiment</a>
 <%end%>
 
 
