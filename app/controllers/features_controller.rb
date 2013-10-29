@@ -447,14 +447,14 @@ class FeaturesController < ApplicationController
         end
     end
 
-    def dallience_reference
-      name = "Cf746836_TGAC_s1v1_scaffold_6"
-      logger.error "looking for: #{name} #{params[:sequence]}"
-      ref = Reference.first
-      @sequenceText = ref.sequence.sequence.to_s
-      logger.error "found: #{@sequenceText}"
-      render xml: "hello"
-    end
+    #def dallience_reference
+    #  name = "Cf746836_TGAC_s1v1_scaffold_6"
+    #  logger.error "looking for: #{name} #{params[:sequence]}"
+    #  ref = Reference.first
+    #  @sequenceText = ref.sequence.sequence.to_s
+    #  logger.error "found: #{@sequenceText}"
+    #  render xml: "hello"
+    #end
 
 
 
