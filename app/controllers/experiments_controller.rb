@@ -68,7 +68,7 @@ if File.readlines(@experiment.gff_file.path).grep(/mRNA/).size > 0
   # do something
   cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/`
 else 
-
+logger.errror "NO mRNA DATA!"
       cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
 end
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
