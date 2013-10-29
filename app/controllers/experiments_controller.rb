@@ -65,11 +65,11 @@ typeText = ""
 
 if File.readlines(@experiment.gff_file.path).grep(/mRNA/).size > 0
   # do something
-  typeText = "mRNA"
+  cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/`
+else 
+
+      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
 end
-
-      cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type #{typeText} --out #{WebApolloAppPath}/jbrowse/data/`
-
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
 #      cmdComplete = "SUCCESSFUL"
