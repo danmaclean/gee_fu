@@ -86,28 +86,6 @@ dasStaticFeatures: true},
 
 <%end %>
 
-// {name:                 'mRNA',
-// provides_entrypoints: true,
-// uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>.xml',
-// features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>.xml',
-// type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
-// stylesheet_uri: '/geefu_dalliance_style.xml',
-// dasStaticFeatures: true},
-// {name:                 'TSS',
-// provides_entrypoints: true,
-// uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/tss.xml',
-// features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/tss.xml',
-// type:                 ['tss'],
-// stylesheet_uri: '/geefu_dalliance_style.xml',
-// dasStaticFeatures: true},
-
-// {name:                 'CDS',
-// provides_entrypoints: true,
-// uri:                  'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/CDS.xml',
-// features_uri:         'http://v0311.nbi.ac.uk/features/dalliance/<%= @experiment.id %>/<%= @part %>/CDS.xml',
-// type:                 ['cds'],
-// stylesheet_uri: '/geefu_dalliance_style.xml',
-// dasStaticFeatures: true},
 ],
 
 disablePoweredBy: true,
@@ -115,12 +93,12 @@ uiPrefix: '/dalliance/',
 setDocumentTitle: false,
 });
 
-  // b.addFeatureInfoPlugin(function(f, info) {
-  //     info.add('Testing', 'This is a test!');
-  //   });
+
 </script>
 
 
 
 
 <div id='svgHolder'>Dalliance genome browser goes here.  Unless you have an ancient web browser or something.</div>
+
+<a href="http://v0311.nbi.ac.uk:8080/WebApollo/jbrowse/?loc=#{@part}">View in WebApollo</a>
