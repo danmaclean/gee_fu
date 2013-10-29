@@ -64,6 +64,7 @@ class ExperimentsController < ApplicationController
 typeText = ""
 
 if File.readlines(@experiment.gff_file.path).grep(/mRNA/).size > 0
+  logger.errror "ITS CONTAINS mRNA DATA!"
   # do something
   cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/`
 else 
