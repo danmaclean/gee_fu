@@ -7,7 +7,7 @@ gem 'unicorn-rails'
 gem 'foreman'
 
 gem 'bio'
-#gem 'bio-samtools'
+gem 'bio-samtools'
 gem 'bio-svgenes'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
