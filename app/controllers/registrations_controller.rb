@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
     email = params[:user][:email]
     password = params[:user][:password]
 
-    logger.error "Hello #{email} #{password}"
+    logger.error "Hello #{email} - #{password}"
 
     webApolloOutput = `createuser -U postgres #{email} --createdb --no-superuser --no-createrole`
 
