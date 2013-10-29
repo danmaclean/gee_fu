@@ -65,8 +65,10 @@ typeText = ""
 
 if File.readlines(@experiment.gff_file.path).grep(/mRNA/).size > 0
   # do something
+  logger.error "It is mRNA"
   cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/`
 else 
+  logger.error "Its not mRNA"
       cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
 end
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
@@ -76,8 +78,8 @@ end
 #        cmdComplete = "FAILED, Please add manually"
 #      end
 
-      logger.error "cmdOne #{cmdOne}"
-      logger.error "cmdTwo #{cmdTwo}"
+      logger.error "cmdOne  = #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/}"
+      logger.error "cmdTwo  = #{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data}"
 
 
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
