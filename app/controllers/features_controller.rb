@@ -433,6 +433,12 @@ class FeaturesController < ApplicationController
       render :layout => false
     end
 
+  def dalliance_genome
+    @eid = params[:exid]
+    @part = params[:part]
+
+  end
+
     def dalliance_get
       @eid = params[:exid]
       @part = params[:part]
