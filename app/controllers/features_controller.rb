@@ -445,7 +445,7 @@ class FeaturesController < ApplicationController
     @seq = Reference.where(name: @part).sequence[start..ending]
     logger.error "#{@seq}"
     #/sequence?segment=1:5008,5605
-
+return @seq
   end
 
     def dalliance_get
