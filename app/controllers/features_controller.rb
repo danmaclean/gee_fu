@@ -444,7 +444,7 @@ class FeaturesController < ApplicationController
     @ending = seeq.last.to_i
 
 
-    seq = Reference.where(name: @part).first.sequence.sequence[@start..@ending].to_s
+    endseq = Reference.where(name: @part).first.sequence.sequence[@start..@ending].to_s
 
     render :dalliance_genome
   end
