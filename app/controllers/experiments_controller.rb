@@ -127,11 +127,11 @@ end
                 parents = record.attributes.select { |a| a.first == 'Parent' }
                 if !parents.empty?
                   parents.each do |label, parentFeature_gff_id|
-                    parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"] )
+                    parentFeats = Feature.where(gff_id: parentFeature_gff_id )
                     if (parentFeats)
                       parentFeats.each do |pf|
                         parent = nil
-                        parent = Parent.find(:first, :conditions => {:parent_feature => pf.id})
+                        parent = Parent.where(parent_feature: pf.id)
                         if parent
                           if(parent.kind_of?(Array))
                             parent.each do |parrr|
