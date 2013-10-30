@@ -446,7 +446,7 @@ class FeaturesController < ApplicationController
 
     seq = Reference.where(name: @part).first.sequence.sequence[start..ending]
 
-    render :xml => seq
+    render :xml
 
     #render :text => seq
   end
