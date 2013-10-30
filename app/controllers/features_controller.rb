@@ -450,7 +450,7 @@ class FeaturesController < ApplicationController
 
     #format.xml  { seq }
 
-    render :genome
+    render :dalliance_genome
   end
 
     def dalliance_get
