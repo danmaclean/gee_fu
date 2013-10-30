@@ -47,6 +47,7 @@ GeeFu::Application.routes.draw do
 
   scope "/genomes/dalliance/" do
     get "/:exid/:part", to: "features#dalliance_genome"
+    get "/:exid/:part/sequence", to: "features#dalliance_genome"
   end
 
 scope "/users" do

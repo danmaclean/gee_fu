@@ -436,6 +436,15 @@ class FeaturesController < ApplicationController
   def dalliance_genome
     @eid = params[:exid]
     @part = params[:part]
+    segment=params[:segment]
+
+
+    seeq = segment.partition(':').last.partition(',')
+    start = seeq.first
+    ending = seeq.last
+    @seq = Reference.where(name: @part).sequence[start..ending]
+    logger.error "#{@seq}"
+    #/sequence?segment=1:5008,5605
 
   end
 
