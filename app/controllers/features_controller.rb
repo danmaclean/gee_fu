@@ -446,7 +446,9 @@ class FeaturesController < ApplicationController
 
     seq = Reference.where(name: @part).first.sequence.sequence[start..ending]
 
-    render :text => seq
+    render :xml => seq
+
+    #render :text => seq
   end
 
     def dalliance_get
