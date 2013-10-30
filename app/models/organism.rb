@@ -1,12 +1,12 @@
 class Organism < ActiveRecord::Base
   include Concerns::Versioning
-  
-  has_many  :genomes
-  validates :genus,       presence: true
-  validates :species,     presence: true
-  validates :strain,      presence: true
-  validates :taxid,       presence: true
-  validates :local_name,  presence: true
+
+  has_many :genomes
+  validates :genus, presence: true
+  validates :species, presence: true
+  validates :strain, presence: true
+  validates :taxid, presence: true
+  validates :local_name, presence: true
   validates_uniqueness_of :local_name, message: "The local name of the organism must be unique."
 
   attr_accessible :genus, :species, :strain, :pv, :taxid, :local_name

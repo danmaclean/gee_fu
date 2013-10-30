@@ -3,6 +3,6 @@ class Parent < ActiveRecord::Base
   attr_accessible :parent_feature
 
   def parent_obj
-    Feature.find(:first, :conditions => {:id => self.parent_feature} )
+    Feature.find(:first, :conditions => {:id => self.parent_feature})
   end
 end

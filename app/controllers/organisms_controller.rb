@@ -7,7 +7,7 @@ class OrganismsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render :json => response, :layout => false }
-      format.xml  { render :xml => response, :layout => false }
+      format.xml { render :xml => response, :layout => false }
     end
   end
 
@@ -73,16 +73,18 @@ class OrganismsController < ApplicationController
   # DELETE /organisms/1
   # DELETE /organisms/1.xml
   def destroy
-    @organism = Organism.find(params[:id])
-    @organism.destroy
-    respond_to do |format|
-      format.html { redirect_to(organisms_url) }
+    if (current_user.admin)
+      @organism = Organism.find(params[:id])
+      @organism.destroy
+      respond_to do |format|
+        format.html { redirect_to(organisms_url) }
+      end
     end
   end
 
   def require_admin
     return if current_user && current_user.admin?
-    sign_out current_user 
-    redirect_to root_path, flash: { notice: "You have been signed out for security reasons." }
+    sign_out current_user
+    redirect_to root_path, flash: {notice: "You have been signed out for security reasons."}
   end
 end

@@ -3,14 +3,14 @@
 class GenomesController < ApplicationController
 
   before_filter :require_organism
-  
+
   #returns the genome information on an AnnoJ genome request
   # only for use by AnnoJ
-  def annoj  #a method for annoj
+  def annoj #a method for annoj
     genome = Genome.find(params[:id])
     @response = {}
     @response["success"] = true
-    @response["data"] = JSON::parse( "#{genome.meta}" ) #{}
+    @response["data"] = JSON::parse("#{genome.meta}") #{}
     @response["data"]["genome"]["assemblies"] = []
     genome.references.each do |r|
       @response["data"]["genome"]["assemblies"] << {:id => r.name, :size => r.length}
@@ -34,46 +34,46 @@ class GenomesController < ApplicationController
   # where format = xml or json
   def show
     if Genome.exists?(params[:id])
-     @genome = Genome.find(params[:id])
-     @genome.meta = @genome.meta_as_data_structure     
-     respond @genome
+      @genome = Genome.find(params[:id])
+      @genome.meta = @genome.meta_as_data_structure
+      respond @genome
     else
       respond :false
     end
   end
-  
+
   def edit
     @genome = Genome.find(params[:id])
   end
-  
+
   def new
     @organisms = Organism.all
     @genome = Genome.new
     respond @genome
   end
-  
+
   #returns a list of references for the genome for the ajax autofill box
   def reference_list
     genome = Genome.find(params[:id])
-    respond genome.references.collect {|x| x.name }
+    respond genome.references.collect { |x| x.name }
   end
 
   def create
     require 'bio'
     @genome = Genome.new(params[:genome])
-    
+
     #fastasavename = rand(1000000).to_s
     #FileUtils.mv @genome.fasta_file.path, "#{RAILS_ROOT}/tmp/#{fastasavename}" if @genome.fasta_file
     #fasta = File.new("#{RAILS_ROOT}/tmp/#{savename}", "r")
-   
+
     #fasta = params[:genome][:fasta_file]
     #yaml = params[:genome][:yaml]
-    
+
     #format the meta data string from a provided yaml file
     if @genome.yaml_file
-      @genome.meta = YAML::load_file(@genome.yaml_file.path).to_json 
+      @genome.meta = YAML::load_file(@genome.yaml_file.path).to_json
     end
-    
+
     #add the reference objects and sequence objects for this file...
     if @genome.fasta_file
 
@@ -88,42 +88,44 @@ class GenomesController < ApplicationController
       logger.debug "cmdFour #{cmdFour}"
 
       cmdComplete = "SUCCESSFUL"
-      if(!cmdOne || !cmdTwo || !cmdThree || !cmdFour)
+      if (!cmdOne || !cmdTwo || !cmdThree || !cmdFour)
         cmdComplete = "FAILED, Please add manually"
       end
 
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
-          seq = entry.to_seq
-          reference = Reference.new(:name => entry.entry_id, :length => entry.length)
-          sequence = Sequence.new(:sequence => "#{seq.seq}")
-          reference.sequence = sequence        
-          @genome.references << reference
-        end
+        seq = entry.to_seq
+        reference = Reference.new(:name => entry.entry_id, :length => entry.length)
+        sequence = Sequence.new(:sequence => "#{seq.seq}")
+        reference.sequence = sequence
+        @genome.references << reference
+      end
     end
-    
+
     respond_to do |format|
       if @genome.save
         flash[:notice] = "Genome was successfully created. WebApollo import: #{cmdComplete}"
         format.html { redirect_to(@genome) }
-     else
+      else
         format.html { render :action => "new" }
-    end
+      end
     end
   end
-  
+
   def destroy
-    @genome = Genome.find(params[:id])
-    @genome.destroy
-    respond_to do |format|
-      format.html { redirect_to(genomes_url) }
+    if (current_user.admin)
+      @genome = Genome.find(params[:id])
+      @genome.destroy
+      respond_to do |format|
+        format.html { redirect_to(genomes_url) }
+      end
     end
   end
-  
+
   def respond(response)
     respond_to do |format|
       format.html
       format.json { render :json => response, :layout => false }
-      format.xml  { render :xml => response, :layout => false }
+      format.xml { render :xml => response, :layout => false }
     end
   end
 
