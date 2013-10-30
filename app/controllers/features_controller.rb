@@ -444,6 +444,8 @@ class FeaturesController < ApplicationController
     ending = seeq.last
     seq = Reference.where(name: @part).first.sequence[start..ending]
 
+    logger.error "SEQ IS #{Reference.where(name: @part).first.sequence}"
+
     logger.error "Seq from #{start} to #{ending}"
 
     logger.error "seq is #{@seq}"
