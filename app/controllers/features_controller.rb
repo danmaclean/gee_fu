@@ -444,11 +444,7 @@ class FeaturesController < ApplicationController
     @ending = seeq.last.to_i
 
 
-    @seq = Reference.where(name: @part).first.sequence.sequence[@start..@ending]
-
-
-
-    #format.xml  { seq }
+    seq = Reference.where(name: @part).first.sequence.sequence[@start..@ending]
 
     render :dalliance_genome
   end
