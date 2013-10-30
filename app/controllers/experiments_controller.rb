@@ -73,14 +73,6 @@ else
 end
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
-#      cmdComplete = "SUCCESSFUL"
-#      if(!cmdOne)
-#        cmdComplete = "FAILED, Please add manually"
-#      end
-
-      logger.error "cmdOne  = #{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/}"
-      logger.error "cmdTwo  = #{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data}"
-
 
       File.open( "#{@experiment.gff_file.path}" ).each do |line|
         next if line =~ /^#/
