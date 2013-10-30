@@ -450,7 +450,7 @@ class FeaturesController < ApplicationController
 
     #format.xml  { seq }
 
-    render :dalliance_get.xml
+    render :dalliance_get
   end
 
     def dalliance_get
