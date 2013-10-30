@@ -444,15 +444,8 @@ class FeaturesController < ApplicationController
     ending = seeq.last.to_i
 
 
-    logger.error "SEQ IS #{Reference.where(name: @part).first.sequence.sequence}"
-
     seq = Reference.where(name: @part).first.sequence.sequence[start..ending]
 
-    logger.error "Seq from #{start} to #{ending}"
-
-    logger.error "seq is #{@seq}"
-    #/sequence?segment=1:5008,5605
-    #render :layout => false
     render :text => seq
   end
 
