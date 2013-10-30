@@ -26,7 +26,7 @@
           <td>
             <%#= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_experiment_path(experiment), :class => 'btn btn-mini' %>
-              <% if user_signed_in? %>
+              <% if admin_signed_in? %>
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                         experiment_path(experiment),
                         :method => :delete,
