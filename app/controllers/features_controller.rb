@@ -440,8 +440,8 @@ class FeaturesController < ApplicationController
 
 
     seeq = segment.partition(':').last.partition(',')
-    start = seeq.first
-    ending = seeq.last
+    start = seeq.first.to_i
+    ending = seeq.last.to_i
 
 
     logger.error "SEQ IS #{Reference.where(name: @part).first.sequence.sequence}"
