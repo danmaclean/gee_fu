@@ -448,7 +448,7 @@ class FeaturesController < ApplicationController
 
 
 
-    format.xml  { seq }
+    #format.xml  { seq }
 
     #render :text => seq
   end
