@@ -59,7 +59,7 @@ sources:     [
     {name:                 'Genome',
         uri:                  '/genomes/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
         tier_type:            'sequence',
-        provides_entrypoints: true},
+        /*provides_entrypoints: true*/},
 
 <% if @featureType.include? "mRNA" %>
    {name:                 'mRNA',
