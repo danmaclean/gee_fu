@@ -440,11 +440,11 @@ class FeaturesController < ApplicationController
 
 
     seeq = segment.partition(':').last.partition(',')
-    start = seeq.first.to_i
-    ending = seeq.last.to_i
+    @start = seeq.first.to_i
+    @ending = seeq.last.to_i
 
 
-    seq = Reference.where(name: @part).first.sequence.sequence[start..ending]
+    seq = Reference.where(name: @part).first.sequence.sequence[@start..@ending]
 
 
 
