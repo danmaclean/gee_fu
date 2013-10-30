@@ -35,8 +35,6 @@ GeeFu::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
-  config.secret_key = '0627346ec9ffcbb9cb2d3bd67bcdba946b2f2b70298df54bed31d361c1d5ce1c8a8bac6fa7424b26029a996c3bd07c995160f105072fe00bf037e3795c71b674'
-
   config.action_mailer.default_url_options = { :host => 'geefu.oadb.tsl.ac.uk' }
 
 end
