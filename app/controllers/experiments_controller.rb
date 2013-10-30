@@ -304,8 +304,10 @@ end
           end
   end
   def destroy
-    @experiment = Experiment.find(params[:id])
-    @experiment.destroy
+    if(current_user.admin)
+      @experiment = Experiment.find(params[:id])
+      @experiment.destroy
+    end
     respond_to do |format|
       format.html { redirect_to(experiments_url) }
     end
