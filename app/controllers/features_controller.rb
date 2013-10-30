@@ -442,10 +442,11 @@ class FeaturesController < ApplicationController
     seeq = segment.partition(':').last.partition(',')
     start = seeq.first
     ending = seeq.last
-    @seq = Reference.where(name: @part).first.sequence[start..ending]
+    seq = Reference.where(name: @part).first.sequence[start..ending]
     logger.error "#{@seq}"
     #/sequence?segment=1:5008,5605
-return @seq
+    #render :layout => false
+    render :text => seq
   end
 
     def dalliance_get
