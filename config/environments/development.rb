@@ -37,6 +37,10 @@ GeeFu::Application.configure do
 
   config.secret_key = '7333c4a81a839db8f0c0abc4b25e0a76f4797f82e702f6a3fbace762ae3f6be2bdc7b7e5e8a3e7ad21d08888294fcc0bcf726fda5a64d9453d118424de7debbb'
 
-  config.action_mailer.default_url_options = { :host => 'geefu.oadb.tsl.ac.uk' }
+  config.action_mailer.default_url_options = {
+      :host => "geefu.oadb.tsl.ac.uk",
+      :protocol => 'https',
+      :only_path => false,
+  }
 
 end
