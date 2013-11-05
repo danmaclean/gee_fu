@@ -1,4 +1,4 @@
-if %w(development production).include?(Rails.env)
+#if %w(development production).include?(Rails.env)
   ActionMailer::Base.smtp_settings = {
       :port =>           '587',
       :address =>        'smtp.mandrillapp.com',
@@ -7,4 +7,4 @@ if %w(development production).include?(Rails.env)
       :authentication => :plain
   }
   ActionMailer::Base.delivery_method = :smtp
-end
+#end
