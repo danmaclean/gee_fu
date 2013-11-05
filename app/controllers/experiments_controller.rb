@@ -99,8 +99,11 @@ class ExperimentsController < ApplicationController
 
         attribute = JSON.generate(record.attributes)
         logger.error record.seqname
-        ref = 0 #FIXME
         ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+
+        if ref.nil?
+          ref = Reference.first #TODO
+        end
 
 
         feature = Feature.new(
