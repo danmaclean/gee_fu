@@ -185,7 +185,6 @@ class ExperimentsController < ApplicationController
     end
     elsif @experiment.expected_file == "bam"
     @experiment.uses_bam_file = true
-  end
 
 #      cmdZero = `ln -s #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/`
 #      bamFileName = File.basename(@experiment.bam_file_path)
