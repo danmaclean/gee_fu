@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load
+
 #if %w(development production).include?(Rails.env)
   ActionMailer::Base.smtp_settings = {
       :port =>           '587',
