@@ -43,9 +43,5 @@ GeeFu::Application.configure do
       :only_path => false,
   }
 
-  config.action_mailer.smtp_settings = {
-      address: "smtp.nbi.ac.uk",
-      port: 587
-  }
 
 end
