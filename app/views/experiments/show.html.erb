@@ -21,19 +21,19 @@
 <script type="text/javascript">
 
 
-    $(document).ready(function () {
-        $('#frame').ready(function () {
-            setTimeout(
-                    function()
-                    {
-                        var iframe = $('#iframe');
-                        //do something special
-                        iframe.contents().("svgHolder").scrollHeight
-                        iframe.height = "";
-                        iframe.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
-                    }, 5000);
-        });
-    })
+//    $(document).ready(function () {
+//        $('#frame').ready(function () {
+//            setTimeout(
+//                    function()
+//                    {
+//                        var iframe = $('#iframe');
+//                        //do something special
+//                        iframe.contents().("svgHolder").scrollHeight
+//                        iframe.height = "";
+//                        iframe.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+//                    }, 5000);
+//        });
+//    })
 
     function goToAddress() {
         seq = $("#seqname").val();
