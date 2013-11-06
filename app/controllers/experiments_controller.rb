@@ -42,7 +42,7 @@ class ExperimentsController < ApplicationController
 
   def create
     require 'bio'
-    @experiment = Experiment.new(params[:experiment])
+    @experiment = Experiment.new(params[:experiment]) #TODO save experiment here?
     genome = Genome.find(params[:experiment][:genome_id])
 
     if genome.nil?
@@ -74,6 +74,8 @@ class ExperimentsController < ApplicationController
       end
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
+
+      #TODO return here? bg-job?
 
       File.open("#{@experiment.gff_file.path}").each do |line|
         next if line =~ /^#/
@@ -185,7 +187,7 @@ class ExperimentsController < ApplicationController
             end
           end
         end
-        @experiment.features << feature
+        @experiment.features << feature #TODO save at each update?
 #      end
       end
     elsif @experiment.expected_file == "bam"
