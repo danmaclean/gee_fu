@@ -67,7 +67,7 @@ end
   get "/get_sequence", to: "experiments#findfromss"
 end
 
-match "/webapollo" => redirect("http://v0311.nbi.ac.uk:8080/WebApollo/"), :as => :webapollo
+match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
 
 
   # TODO review these for security

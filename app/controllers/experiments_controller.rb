@@ -8,7 +8,6 @@ class ExperimentsController < ApplicationController
   # where format = xml or json
   def index
     # Badge.give_badge
-    logger.error "EMAIL SEND BY USER: #{ENV['MANDRILL_USERNAME']}" #TODO
     @experiments = Experiment.all
     @experiments.each do |exp|
       exp.meta = JSON::parse exp.meta if exp.meta
@@ -105,7 +104,9 @@ class ExperimentsController < ApplicationController
         ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
 
         if ref.nil?
-          ref = Reference.first #TODO
+          #ref = Reference.first #TODO
+          error.logger "THE REFERENCE NAME IS WRONG, PLEASE CHECK!"
+          render :new
         end
 
 
