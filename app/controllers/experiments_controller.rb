@@ -105,7 +105,9 @@ class ExperimentsController < ApplicationController
 
         if ref.nil?
           #ref = Reference.first #TODO
-          error.logger "THE REFERENCE NAME IS WRONG, PLEASE CHECK!"
+          logger.error "------------------------------------------"
+          logger.error "THE REFERENCE NAME IS WRONG, PLEASE CHECK!"
+          logger.error "------------------------------------------"
           render :new
         end
 
