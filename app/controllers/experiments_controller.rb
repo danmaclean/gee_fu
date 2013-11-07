@@ -71,6 +71,9 @@ class ExperimentsController < ApplicationController
         logger.error "Its not mRNA"
         cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
       end
+
+
+      #This task is becoming a hassle, the more experiments, the longer this takes
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
 
@@ -133,40 +136,6 @@ class ExperimentsController < ApplicationController
         #### this bit isnt very rails-ish but I dont know a good rails way to do it... features are parents as well as
         #### features so doesnt follow for auto update ... I think ... this works for now... although it is slow...
         ###sort out the Parents if any, but only connects up the parent via the first gff id
-        #    if @experiment.find_parents
-        #      parents = record.attributes.select { |a| a.first == 'Parent' }
-        #      if !parents.empty?
-        #        parents.each do |label, parentFeature_gff_id|
-        #          parentFeats = Feature.where(gff_id: parentFeature_gff_id)
-        #          if (parentFeats)
-        #            parentFeats.each do |pf|
-        #              parent = nil
-        #              parent = Parent.where(parent_feature: pf.id)
-        #              if parent
-        #                if (parent.kind_of?(Array))
-        #                  parent.each do |parrr|
-        #                    parr.save
-        #                  end
-        #                else
-        #                  parent.save ## FIXME
-        #                end
-        #              else
-        #                parent = Parent.new(:parent_feature => pf.id)
-        #                parent.id = feature.id
-        #                parent.save
-        #              end
-        #              feature.parents << parent
-        #            end
-        #          end
-        #        end
-        #      end
-        #    end
-        #    @experiment.save
-        #    @experiment.features << feature
-        #    #      end
-        #  end
-        #elsif @experiment.expected_file == "bam"
-        #  @experiment.uses_bam_file = true
 
 
         if @experiment.find_parents
