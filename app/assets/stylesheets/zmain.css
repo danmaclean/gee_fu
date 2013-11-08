@@ -33,6 +33,7 @@ body {
 	padding: 12px;
 	text-align: center;
 	font-size: 80px;
+    line-height: 1em;
 }
 
 .table-striped tbody>tr:nth-child(odd)>td,.table-striped tbody>tr:nth-child(odd)>th
