@@ -1,37 +1,61 @@
-<div class="well">
-<div class="jumbotron">
-    <h1>Welcome to GeeFU</h1>
-    <p class="lead">
+<!--<div class="well">-->
+<!--<div class="jumbotron">-->
+    <!--<h1>Welcome to GeeFU</h1>-->
+    <!--<p class="lead">-->
         You need to <%= link_to "sign in", new_user_session_path%>
-        (or <%= link_to "sign up", new_user_registration_path%>) before you can access the data.
-    </p>
-    <p class="lead">
-        Or you can
-        <%= link_to "browse", browse_path %>
-        the data that already exists.
-    </p>
-    <div class="row-fluid">
-        <%= link_to(new_user_session_path, :class => "btn btn-primary") do%>
-            <i class="icon-user icon-white"></i>
-            Sign In
-        <% end %>
-        <%= link_to(new_user_registration_path, :class => "btn btn-success") do %>
-            <i class="icon-pencil icon-white"></i>
-            Sign up
-        <% end %>
-        <%= link_to(browse_path, :class => "btn btn-action") do %>
-            <i class="icon-search icon-white"></i>
-            Browse
-        <% end %>
-    </div>
-</div>
-</div>
+        <!--(or <%= link_to "sign up", new_user_registration_path%>) before you can access the data.-->
+    <!--</p>-->
+    <!--<p class="lead">-->
+        <!--Or you can-->
+        <!--<%= link_to "browse", browse_path %>-->
+        <!--the data that already exists.-->
+    <!--</p>-->
+    <!--<div class="row-fluid">-->
+        <!--<%= link_to(new_user_session_path, :class => "btn btn-primary") do%>-->
+            <!--<i class="icon-user icon-white"></i>-->
+            <!--Sign In-->
+        <!--<% end %>-->
+        <!--<%= link_to(new_user_registration_path, :class => "btn btn-success") do %>-->
+            <!--<i class="icon-pencil icon-white"></i>-->
+            <!--Sign up-->
+        <!--<% end %>-->
+        <!--<%= link_to(browse_path, :class => "btn btn-action") do %>-->
+            <!--<i class="icon-search icon-white"></i>-->
+            <!--Browse-->
+        <!--<% end %>-->
+    <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 
 <div class="jumbotron">
 
     <h1>OpenAshDieBack - GeeFu</h1>
 
-<p>Welcome to the OpenAshDieBack GeeFu site.</p>
+<p class="lead">Welcome to the OpenAshDieBack GeeFu site.</p>
+
+    <!--TMP-->
+    <p class="lead">
+    You need to <%= link_to "sign in", new_user_session_path%>
+    (or <%= link_to "sign up", new_user_registration_path%>) before you can access the data.
+    </p>
+    <p class="lead">
+    Or you can
+    <%= link_to "browse", browse_path %>
+    the data that already exists.
+    </p>
+    <div class="row-fluid">
+    <%= link_to(new_user_session_path, :class => "btn btn-primary") do%>
+        <i class="icon-user icon-white"></i>
+        Sign In
+        <% end %>
+    <%= link_to(new_user_registration_path, :class => "btn btn-success") do %>
+        <i class="icon-pencil icon-white"></i>
+        Sign up
+        <% end %>
+    <%= link_to(browse_path, :class => "btn btn-action") do %>
+        <i class="icon-search icon-white"></i>
+        Browse
+        <% end %>
 
 <h2>GeeFu is a site for sharing and updating genomics data and information on ash and ash dieback.</h2>
 
@@ -63,5 +87,5 @@
     <p>As a Rails-app GeeFu provides a RESTful interface for programatic access of the data.</p>
 
 <h2>Getting help</h2>
-    <p>Any questions, please contact <oadb@tsl.ac.uk></p>
+    <p>Any questions, please contact <a href="mailto:oadb@tsl.ac.uk">oadb@tsl.ac.uk</a></p>
     </div>
