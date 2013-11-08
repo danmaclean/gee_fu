@@ -10,7 +10,7 @@ GeeFu::Application.routes.draw do
   #authenticate :user do
   #  resources :organisms
   #  resources :genomes
-  #  resources :experiments
+    resources :experiments
   #  resources :features
   #  resources :tools
   #  resources :admin
