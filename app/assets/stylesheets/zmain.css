@@ -31,9 +31,12 @@ body {
 
 .jumbotron h1 {
 	padding: 12px;
-	text-align: center;
 	font-size: 80px;
     line-height: 1em;
+}
+
+.jumbotron .centerit {
+    text-align: center;
 }
 
 .table-striped tbody>tr:nth-child(odd)>td,.table-striped tbody>tr:nth-child(odd)>th
