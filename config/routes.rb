@@ -14,6 +14,12 @@ GeeFu::Application.routes.draw do
     #resources :features
     resources :tools
     resources :admin
+  end
+
+  resources :organisms
+  resources :genomes
+  resources :experiments
+  resources :features
 
   scope "/features/search" do
     post "/id", to: "features#search_by_id", as: :feature_search_by_id
