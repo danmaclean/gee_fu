@@ -3,7 +3,7 @@ GeeFu::Application.routes.draw do
 
   root :to => "pages#index"
 
-  get "/browse", :to => "pages#browse"
+  get "/browse", :to => "experiments#index"
   get "/signed_up", :to => "pages#signed_up", :as => :signed_up
   get 'begin' => 'pages#index'
 
@@ -40,10 +40,10 @@ GeeFu::Application.routes.draw do
   end
 end
 
-scope "/features/annoj" do
-  get "/:id", to: "features#annoj_get"
-  post "/:id", to: "features#annoj_post"
-end
+#scope "/features/annoj" do
+#  get "/:id", to: "features#annoj_get"
+#  post "/:id", to: "features#annoj_post"
+#end
 
 scope "/features/dalliance" do
   get "/part/:exid/:part", to: "features#dalliance_part"
