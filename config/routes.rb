@@ -7,13 +7,13 @@ GeeFu::Application.routes.draw do
   get "/signed_up",  :to => "pages#signed_up", :as => :signed_up
   get 'begin' => 'pages#index'
 
-  authenticate :user do
-    resources :organisms
-    resources :genomes
-    resources :experiments
-    resources :features
-    resources :tools
-    resources :admin
+  #authenticate :user do
+  #  resources :organisms
+  #  resources :genomes
+  #  resources :experiments
+  #  resources :features
+  #  resources :tools
+  #  resources :admin
 
     scope "/features/search" do
       post "/id",        to: "features#search_by_id",         as: :feature_search_by_id
