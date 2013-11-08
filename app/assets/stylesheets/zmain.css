@@ -35,6 +35,18 @@ body {
     line-height: 1em;
 }
 
+.bluewell {
+    background-color: #81BEC6;
+}
+
+.whitewell {
+    background-color: #F8F7EE;
+}
+
+.orangewell {
+    background-color: #E3CCE5;
+}
+
 .centerit {
     text-align: center;
 }
