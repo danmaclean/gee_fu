@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
 
-  before_filter :authenticate_user!, :except => [:index, :show ]
 
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
