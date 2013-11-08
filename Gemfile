@@ -11,7 +11,7 @@ gem 'bio-samtools'
 gem 'bio-svgenes'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'devise', '~> 3.0.3'
+gem 'devise', '~> 3.0.0'
 gem 'twitter-bootstrap-rails'  
 gem "flatui-rails"
 gem 'simple_form'
