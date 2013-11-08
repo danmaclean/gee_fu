@@ -7,11 +7,11 @@ GeeFu::Application.routes.draw do
   get "/signed_up",  :to => "pages#signed_up", :as => :signed_up
   get 'begin' => 'pages#index'
 
-  authenticate :user do
-    resources :organisms
-    resources :genomes
-    #resources :experiments
-    resources :features
+  #authenticate :user do
+  #  resources :organisms
+  #  resources :genomes
+  #  resources :experiments
+  #  resources :features
     resources :tools
     resources :admin
 
