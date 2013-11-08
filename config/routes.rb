@@ -8,12 +8,12 @@ GeeFu::Application.routes.draw do
   get 'begin' => 'pages#index'
 
   #authenticate :user do
-  #  resources :organisms
-  #  resources :genomes
-  #  resources :experiments
-  #  resources :features
-  #  resources :tools
-  #  resources :admin
+    resources :organisms
+    resources :genomes
+    resources :experiments
+    resources :features
+    resources :tools
+    resources :admin
 
   scope "/features/search" do
     post "/id", to: "features#search_by_id", as: :feature_search_by_id
@@ -72,7 +72,6 @@ match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :
 
 # TODO review these for security
 resources :references
-resources :experiments
 match 'features/objects' => 'features#objects'
 match 'features/depth' => 'features#depth'
 match 'tools/genomic_sequence' => 'tools#genomic_sequence'
