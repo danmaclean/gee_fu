@@ -8,10 +8,10 @@ GeeFu::Application.routes.draw do
   get 'begin' => 'pages#index'
 
   authenticate :user do
-  #  resources :organisms
-  #  resources :genomes
-  #  resources :experiments
-  #  resources :features
+    resources :organisms
+    resources :genomes
+    resources :experiments
+    resources :features
     resources :tools
     resources :admin
 
