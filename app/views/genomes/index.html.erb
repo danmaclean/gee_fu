@@ -27,7 +27,7 @@
           <td>
             <%#= link_to t('.edit', :default => t("helpers.links.edit")),
                         edit_genome_path(genome), :class => 'btn btn-mini' %>
-              <% if current_user.admin %>
+              <% if user_signed_in? && current_user.admin %>
             <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                         genome_path(genome),
                         :method => :delete,
