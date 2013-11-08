@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>3.2'
+gem 'rails', '~> 3.2'
 
 gem 'pg'
 gem 'unicorn-rails'
@@ -11,7 +11,7 @@ gem 'bio-samtools'
 gem 'bio-svgenes'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'devise'
+gem 'devise', '~> 3.1.0'
 gem 'twitter-bootstrap-rails'  
 gem 'flatui-rails'
 gem 'simple_form'

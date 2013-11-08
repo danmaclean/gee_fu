@@ -108,6 +108,8 @@ class ExperimentsController < ApplicationController
 
         if ref.nil?
           #ref = Reference.first #TODO
+          #90% of issues occur here!
+
           logger.error "------------------------------------------"
           logger.error "THE REFERENCE NAME IS WRONG, PLEASE CHECK!"
           logger.error "------------------------------------------"
