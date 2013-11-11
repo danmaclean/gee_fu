@@ -26,7 +26,7 @@
 		<%= text_field_tag :reference %>
 
 		<%= label(:start, :coord, "Enter the start and end of the search region:") %>
-		<%= text_field_tag :start, nil, placeholder: "Zero or higher" %> 
+		<%= text_field_tag :start, nil, placeholder: "One or higher" %>
 		<%= text_field_tag :end, nil, placeholder: "Higher than start value" %> 
 		<br/>
 	  <%= f.submit "Get features", :class => 'btn btn-action' %>
