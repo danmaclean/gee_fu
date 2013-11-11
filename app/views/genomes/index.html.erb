@@ -17,7 +17,6 @@
             <th><%= model_class.human_attribute_name(:build_version) %></th>
             <th><%= model_class.human_attribute_name(:meta) %></th>
             <th><%= model_class.human_attribute_name(:created_at) %></th>
-            <th><%= t '.actions', :default => t("helpers.actions") %></th>
         </tr>
         </thead>
         <tbody>
@@ -27,10 +26,6 @@
                 <td><%= genome.build_version %></td>
                 <td><%= genome.html_meta %></td>
                 <td><%= l genome.created_at.to_date, format: :gee_fu %></td>
-                <td>
-                    <%#= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_genome_path(genome), :class => 'btn btn-mini' %>
-                </td>
             </tr>
         <% end %>
         </tbody>
