@@ -20,6 +20,10 @@ body {
 
 }
 
+.active {
+    color: red;
+}
+
 .makeitwhite {
 	background-color: white;
 }
