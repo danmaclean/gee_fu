@@ -37,20 +37,22 @@
             <%= label_tag("feature_group_#{pair.join('_')}", pair[0], class: "control-label") %>
             <div class="controls">
                 <%= text_field_tag("feature[group][#{pair.to_json}]", pair[1]) %>
-                <%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>".html_safe %>
+                <% if user_signed_in? %>
+                    <%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>".html_safe %>
+                <% end %>
             </div>
         </div>
     <% end %>
     <% if user_signed_in? %>
-    <div id="group"></div>
-    <a href="#" onClick="addGroup()"; return false;>Add New Attribute</a>
-    <%= hidden_field_tag 'old_feature_id', @feature.id %>
-    <div class='form-actions'>
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")), features_path, :class => 'btn' %>
+        <div id="group"></div>
+        <a href="#" onClick="addGroup()"; return false;>Add New Attribute</a>
+        <%= hidden_field_tag 'old_feature_id', @feature.id %>
+        <div class='form-actions'>
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")), features_path, :class => 'btn' %>
 
             <%= f.button :submit, :class => 'btn-primary' %>
             <a href=http://v0311.nbi.ac.uk:8081/index.php/feature_<%= @feature.id %> class="btn">Add Wiki page</a>
-        <% end %>
+    <% end %>
     </div>
 <% end %>
 
