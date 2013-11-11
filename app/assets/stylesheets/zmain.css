@@ -8,6 +8,10 @@ body {
 	background-color: #95A5A6;
 }
 
+.well {
+    background-color: #fff;
+}
+
 .row {
     margin-right: -20px;
 }
