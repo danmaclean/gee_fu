@@ -1,36 +1,36 @@
 <div class="jumbotron centerit">
-<h1>OpenAshDieBack - GeeFu</h1>
+    <h1>OpenAshDieBack - GeeFu</h1>
 
-<p class="lead">Welcome to the OpenAshDieBack GeeFu site.</p>
+    <p class="lead">Welcome to the OpenAshDieBack GeeFu site.</p>
 
-<p class="lead">
-    You need to <%= link_to "sign in", new_user_session_path %>
-    (or <%= link_to "sign up", new_user_registration_path %>) before you can access the data.
-</p>
-
-<% if false %>
     <p class="lead">
-        Or you can
-        <%= link_to "browse", browse_path %>
-        the data that already exists.
+        You need to <%= link_to "sign in", new_user_session_path %>
+        (or <%= link_to "sign up", new_user_registration_path %>) before you can access the data.
     </p>
-<% end %>
 
-<div class="row-fluid">
-    <%= link_to(new_user_session_path, :class => "btn btn-primary") do %>
-        <i class="icon-user icon-white"></i>
-        Sign In
-    <% end %>
-    <%= link_to(new_user_registration_path, :class => "btn btn-success") do %>
-        <i class="icon-pencil icon-white"></i>
-        Sign up
-    <% end %>
     <% if false %>
-        <%= link_to(browse_path, :class => "btn btn-action") do %>
-            <i class="icon-search icon-white"></i>
-            Browse
-        <% end %>
+        <p class="lead">
+            Or you can
+            <%= link_to "browse", browse_path %>
+            the data that already exists.
+        </p>
     <% end %>
+
+    <div class="row-fluid">
+        <%= link_to(new_user_session_path, :class => "btn btn-primary") do %>
+            <i class="icon-user icon-white"></i>
+            Sign In
+        <% end %>
+        <%= link_to(new_user_registration_path, :class => "btn btn-success") do %>
+            <i class="icon-pencil icon-white"></i>
+            Sign up
+        <% end %>
+        <% if false %>
+            <%= link_to(browse_path, :class => "btn btn-action") do %>
+                <i class="icon-search icon-white"></i>
+                Browse
+            <% end %>
+        <% end %>
 
     </div>
 
@@ -43,79 +43,76 @@
     <div class="head-section">
         <h2>Services</h2>
 
-        <p>Our vision is simple. We want to create websites and applications with both high quality design and
-            easy-to-access content. The finished product will be totally unique and represent awesomeness.</p>
+        <p>GeeFu is a site for sharing and updating genomics data and information on ash and ash
+            dieback. Through this site you can</p>
     </div>
     <br>
     <br>
 
+
     <div class="row">
         <article class="span4">
-            <img alt="" title="Beautifully Simplistic" src="@routes.Assets.at(" img/Microscope.png")" >
-            <h4>Beautifully Simplistic</h4>
+            <ol>
+                <li><p>Browse and keyword search all the genomics data from
+                    <a href="http://oadb.tsl.ac.uk">The Open Ash Dieback
+                        Project</a></p></li>
 
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.
-            </p>
+                <li><p>BLAST against the sequence databases in there</p></li>
+
+                <li><p>Read the growing wiki of contributed gene information.</p></li>
+            </ol>
         </article>
         <!-- /#service_1 -->
 
         <article class="span4">
-            <img alt="" title="Development Websites" class="retina" src="@routes.Assets.at(" img/Flask.png")" >
-            <h4>Development Websites</h4>
+            <ol>
 
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.
-            </p>
+                <li><p>Contribute new analyses and annotations of genes, proteins etc</p></li>
+
+                <li><p>Add to the wiki your expert knowledge</p></li>
+
+                <li><p>Modify and update the gene and protein models based</p></li>
+            </ol>
         </article>
-        <!-- /#service_2 -->
 
-        <article class="span4">
-            <img alt="" title="Free Management &amp; Support" src="@routes.Assets.at(" img/Beaker.png")" >
-            <h4>Free Management &amp; Support</h4>
 
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book.
-            </p>
-        </article>
-        <!-- /#service_3 -->
-        <!--</div>-->
-        <!-- .container -->
+    </div>
+    <p>As you do this, you'll be given credit for every contribution you make, your details will be saved to our
+        database and counted as a contributor on the project, if you choose to share.</p>
+
+
 </section>
 
 <!--<div class="well whitewell centerit">-->
 
 
-<h2>GeeFu is a site for sharing and updating genomics data and information on ash and ash
-    dieback.</h2>
+<!--<h2>GeeFu is a site for sharing and updating genomics data and information on ash and ash-->
+<!--dieback.</h2>-->
 
-<p>Through this site you can</p>
-<ol>
-    <li><p>Browse and keyword search all the genomics data from
-        <a href="http://oadb.tsl.ac.uk">The Open Ash Dieback
-            Project</a></p></li>
+<!--<p>Through this site you can</p>-->
+<!--<ol>-->
+<!--<li><p>Browse and keyword search all the genomics data from-->
+<!--<a href="http://oadb.tsl.ac.uk">The Open Ash Dieback-->
+<!--Project</a></p></li>-->
 
-    <li><p>BLAST against the sequence databases in there</p></li>
+<!--<li><p>BLAST against the sequence databases in there</p></li>-->
 
-    <li><p>Read the growing wiki of contributed gene information.</p></li>
-</ol>
-<br>
+<!--<li><p>Read the growing wiki of contributed gene information.</p></li>-->
+<!--</ol>-->
+<!--<br>-->
 
-<p>More importantly you can also</p>
-<ol>
+<!--<p>More importantly you can also</p>-->
+<!--<ol>-->
 
-    <li><p>Contribute new analyses and annotations of genes, proteins etc</p></li>
+<!--<li><p>Contribute new analyses and annotations of genes, proteins etc</p></li>-->
 
-    <li><p>Add to the wiki your expert knowledge</p></li>
+<!--<li><p>Add to the wiki your expert knowledge</p></li>-->
 
-    <li><p>Modify and update the gene and protein models based</p></li>
-</ol>
+<!--<li><p>Modify and update the gene and protein models based</p></li>-->
+<!--</ol>-->
 
-<p>As you do this, you'll be given credit for every contribution you make, your details will be saved to our
-    database and counted as a contributor on the project, if you choose to share.</p>
+<!--<p>As you do this, you'll be given credit for every contribution you make, your details will be saved to our-->
+<!--database and counted as a contributor on the project, if you choose to share.</p>-->
 
 <!--</div>-->
 
