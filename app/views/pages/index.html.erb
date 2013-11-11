@@ -10,11 +10,13 @@
             (or <%= link_to "sign up", new_user_registration_path %>) before you can access the data.
         </p>
 
-        <!--<p class="lead">-->
-            <!--Or you can-->
-            <!--<%= link_to "browse", browse_path %>-->
-            <!--the data that already exists.-->
-        <!--</p>-->
+        <% if false %>
+            <p class="lead">
+                Or you can
+                <%= link_to "browse", browse_path %>
+                the data that already exists.
+            </p>
+        <% end %>
 
         <div class="row-fluid">
             <%= link_to(new_user_session_path, :class => "btn btn-primary") do %>
@@ -25,10 +27,12 @@
                 <i class="icon-pencil icon-white"></i>
                 Sign up
             <% end %>
-            <!--<%= link_to(browse_path, :class => "btn btn-action") do %>-->
-                <!--<i class="icon-search icon-white"></i>-->
-                <!--Browse-->
-            <!--<% end %>-->
+            <% if false %>
+                <%= link_to(browse_path, :class => "btn btn-action") do %>
+                    <i class="icon-search icon-white"></i>
+                    Browse
+                <% end %>
+            <% end %>
 
         </div>
 
