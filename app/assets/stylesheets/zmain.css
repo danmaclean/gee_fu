@@ -20,6 +20,10 @@ body {
 
 }
 
+.bold {
+    font-weight:bold;
+}
+
 .makeitwhite {
     background-color: white;
 }
