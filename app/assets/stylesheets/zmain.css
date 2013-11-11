@@ -8,6 +8,10 @@ body {
 	background-color: #95A5A6;
 }
 
+.row {
+    margin-right: -20px;
+}
+
 .jumbotron {
 
 }
