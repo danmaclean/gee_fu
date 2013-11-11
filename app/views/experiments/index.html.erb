@@ -12,7 +12,6 @@
             <th><%= model_class.human_attribute_name(:description) %></th>
             <th><%= model_class.human_attribute_name(:created_at) %></th>
             <th>Features associated</th>
-            <th><%= t '.actions', :default => t("helpers.actions") %></th>
         </tr>
         </thead>
         <tbody>
@@ -23,10 +22,6 @@
                 <td><%= experiment.description %></td>
                 <td><%= l experiment.created_at.to_date, format: :gee_fu %></td>
                 <td><%= experiment.features.count %></td>
-                <td>
-                    <%#= link_to t('.edit', :default => t("helpers.links.edit")),
-                        edit_experiment_path(experiment), :class => 'btn btn-mini' %>
-                </td>
             </tr>
         <% end %>
         </tbody>
