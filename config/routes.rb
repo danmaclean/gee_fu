@@ -75,7 +75,7 @@ GeeFu::Application.routes.draw do
 
   match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
 
-  match "/wiki" => redirect("http://geefu.oadb.tsl.ac.uk:4567"), :as => :wiki
+  match "/wiki" => redirect("http://geefu.oadb.tsl.ac.uk:8081"), :as => :wiki
 
 
 # TODO review these for security
