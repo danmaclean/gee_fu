@@ -48,11 +48,12 @@ body {
 }
 
 .bluebg{
-    background-color: #4c5f70
+    background-color: #4c5f70;
+    color: #fff;
 }
 
 .redbg{
-    background-color: #eb7260
+    background-color: #eb7260;
 }
 .centerit {
     text-align: center;
