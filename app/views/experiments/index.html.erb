@@ -39,6 +39,8 @@
         </tbody>
     </table>
 <% end %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_experiment_path,
-            :class => 'btn btn-primary' %>
+<% if user_signed_in? %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_experiment_path,
+                :class => 'btn btn-primary' %>
+<% end %>
