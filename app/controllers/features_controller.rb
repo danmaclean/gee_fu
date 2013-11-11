@@ -653,69 +653,8 @@ class FeaturesController < ApplicationController
         end
       end
     end
-    #temp = [start, 0, 0]
-    #features.each do |f|
-    # if f.start > start + 10
-    #   results << temp
-    #   start = start + 10
-    #   temp = [start, 0,0]
-    # end
-    # if f.strand.match(/\+/)
-    #   temp[1] += 1
-    # else
-    #   temp[2] += 1
-    # end
-    #end
     return results
-    #pluses = Array.new(features.last.end - features.first.start + 1, 0)
-    #minuses = Array.new(features.last.end - features.first.start + 1, 0)
-    #features.each do |f|
-    #  for i in f.start .. f.end
-    #    case f.strand
-    #    when '+'
-    #      pluses[i - start] = pluses[i - start] + 1
-    #   else
-    #      minuses[i - start] = minuses[i - start] + 1
-    #    end
-    #  end
-    #end
-    #result = Array.new
-    #while start < features.last.end
-    #  result << [start, pluses.slice!(0 .. 8).max, minuses.slice!(0 .. 8).max]
-    #  start += 10
-    #end
-    #return result
-    #hist = {}
-    #for pos in features.first.start .. features.last.end
-    #  hist[pos] = {}
-    #  hist[pos]['+'] = 0
-    #  hist[pos]['-'] = 0
-    #end
-    #features.each do |f|
-    #  for pos in f.start .. f.end
-    #    hist[pos][f.strand] = hist[pos][f.strand] + 1
-    #  end
-    #end
-    #result = hist
-    #result = []
-    ####go through the hist and send [start, plus_intens, minus_intens] for each window of bases
-    ##send max intensity in steps of ten
 
-    #start = features.first.start.to_i
-    #while start < features.last.end
-    #  plus_intens = 0
-    #  minus_intens = 0
-    #  for pos in start .. (start + 9)
-
-    #    break if pos > features.last.end
-    #    plus_intens = hist[pos]['+'] if hist[pos]['+'] > plus_intens
-    #    minus_intens = hist[pos]['-'] if hist[pos]['-'] > minus_intens
-    #  end
-
-    #  result << [start, plus_intens, minus_intens]
-    #  start += 10
-    #end
-    #return result
   end
 
   # Formatting method for range, AnnoJ only
