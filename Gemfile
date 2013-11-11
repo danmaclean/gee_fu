@@ -22,6 +22,8 @@ gem 'paper_trail', '~> 2'
 gem 'sidekiq'
 gem 'clockwork'
 
+gem 'gollum'
+
 gem 'therubyracer'
 
 gem 'sinatra'
