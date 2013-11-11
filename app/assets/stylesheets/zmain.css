@@ -20,6 +20,10 @@ body {
 	background-color: white;
 }
 
+.padrow {
+    padding: 19px;
+}
+
 .boxedin {
 	border: 1px solid #ddd;
 	-webkit-border-radius: 4px;
