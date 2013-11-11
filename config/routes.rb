@@ -38,50 +38,52 @@ GeeFu::Application.routes.draw do
   scope "/experiments" do
     get "/reference_list", to: "experiments#reference_list"
   end
-#end
+  #end
 
-#scope "/features/annoj" do
-#  get "/:id", to: "features#annoj_get"
-#  post "/:id", to: "features#annoj_post"
-#end
+  #scope "/features/annoj" do
+  #  get "/:id", to: "features#annoj_get"
+  #  post "/:id", to: "features#annoj_post"
+  #end
 
-scope "/features/dalliance" do
-  get "/part/:exid/:part", to: "features#dalliance_part"
-  get "/:exid/:part", to: "features#dalliance_get"
-  get "/:exid/:part/:featutype/", to: "features#dalliance_get"
-end
+  scope "/features/dalliance" do
+    get "/part/:exid/:part", to: "features#dalliance_part"
+    get "/:exid/:part", to: "features#dalliance_get"
+    get "/:exid/:part/:featutype/", to: "features#dalliance_get"
+  end
 
-scope "/genomes/dalliance/" do
-  #get "/:exid/:part", to: "features#dalliance_genome"
-  get "/:exid/:part/sequence", to: "features#dalliance_genome"
-end
+  scope "/genomes/dalliance/" do
+    #get "/:exid/:part", to: "features#dalliance_genome"
+    get "/:exid/:part/sequence", to: "features#dalliance_genome"
+  end
 
-scope "/users" do
-  get "/admin", to: "AdminController#index"
-end
+  scope "/users" do
+    get "/admin", to: "AdminController#index"
+  end
 
-scope "/genomes/annoj" do
-  get "/:id", to: "genomes#annoj"
-end
+  scope "/genomes/annoj" do
+    get "/:id", to: "genomes#annoj"
+  end
 
-match '/admin/:id', :to => 'admin#show', :as => :user
+  match '/admin/:id', :to => 'admin#show', :as => :user
 
-mount SequenceServer::App, :at => "sequenceserver"
+  mount SequenceServer::App, :at => "sequenceserver"
 
 
-scope "/sequenceserver" do
-  get "/get_sequence", to: "experiments#findfromss"
-end
+  scope "/sequenceserver" do
+    get "/get_sequence", to: "experiments#findfromss"
+  end
 
-match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
+  match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
+
+  match "/wiki" => redirect("http://geefu.oadb.tsl.ac.uk:4567"), :as => :wiki
 
 
 # TODO review these for security
-resources :references
-match 'features/objects' => 'features#objects'
-match 'features/depth' => 'features#depth'
-match 'tools/genomic_sequence' => 'tools#genomic_sequence'
-match 'tools/export' => 'tools#export'
-match '/:controller(/:action(/:id))'
+  resources :references
+  match 'features/objects' => 'features#objects'
+  match 'features/depth' => 'features#depth'
+  match 'tools/genomic_sequence' => 'tools#genomic_sequence'
+  match 'tools/export' => 'tools#export'
+  match '/:controller(/:action(/:id))'
 # match ':controller/:action.:format' => '#index'
 end
