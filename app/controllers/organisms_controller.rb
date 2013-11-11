@@ -75,11 +75,13 @@ class OrganismsController < ApplicationController
   # DELETE /organisms/1
   # DELETE /organisms/1.xml
   def destroy
-    if (current_user.admin)
-      @organism = Organism.find(params[:id])
-      @organism.destroy
-      respond_to do |format|
-        format.html { redirect_to(organisms_url) }
+    if (false)
+      if (current_user.admin)
+        @organism = Organism.find(params[:id])
+        @organism.destroy
+        respond_to do |format|
+          format.html { redirect_to(organisms_url) }
+        end
       end
     end
   end

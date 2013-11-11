@@ -163,7 +163,7 @@ class ExperimentsController < ApplicationController
           end
         end
         @experiment.features << feature #TODO save at each update?
-#      end
+                                        #      end
       end
     elsif @experiment.expected_file == "bam"
       @experiment.uses_bam_file = true
@@ -314,12 +314,14 @@ class ExperimentsController < ApplicationController
   end
 
   def destroy
-    if (current_user.admin)
-      @experiment = Experiment.find(params[:id])
-      @experiment.destroy
-    end
-    respond_to do |format|
-      format.html { redirect_to(experiments_url) }
+    if (false)
+      if (current_user.admin)
+        @experiment = Experiment.find(params[:id])
+        @experiment.destroy
+      end
+      respond_to do |format|
+        format.html { redirect_to(experiments_url) }
+      end
     end
   end
 
