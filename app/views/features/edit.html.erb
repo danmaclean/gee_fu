@@ -41,12 +41,13 @@
             </div>
         </div>
     <% end %>
+    <% if user_signed_in? %>
     <div id="group"></div>
     <a href="#" onClick="addGroup()"; return false;>Add New Attribute</a>
     <%= hidden_field_tag 'old_feature_id', @feature.id %>
     <div class='form-actions'>
         <%= link_to t('.cancel', :default => t("helpers.links.cancel")), features_path, :class => 'btn' %>
-        <% if user_signed_in? %>
+
             <%= f.button :submit, :class => 'btn-primary' %>
             <a href=http://v0311.nbi.ac.uk:8081/index.php/feature_<%= @feature.id %> class="btn">Add Wiki page</a>
         <% end %>
