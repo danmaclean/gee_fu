@@ -3,7 +3,7 @@
       <ul id="nav_menu" class="nav">
 
         <li> <a href="/">Home</a></li>
-        <% if current_user.admin? %>
+        <% if user_signed_in? && current_user.admin? %>
           <li><a href="<%=organisms_path%>">Samples</a></li>
         <% end %>
         <% if has_organisms? %>
