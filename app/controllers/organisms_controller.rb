@@ -3,6 +3,8 @@ class OrganismsController < ApplicationController
   # GET /organisms.xml
   before_filter :require_admin
 
+  before_filter :authenticate_user!, only: [:create, :destroy
+
   def respond(response)
     respond_to do |format|
       format.html
