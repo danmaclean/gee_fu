@@ -43,10 +43,17 @@ body {
     line-height: 1em;
 }
 
-.whitewell {
+.greybg {
     background-color: #ddd;
 }
 
+.bluebg{
+    background-color: #4c5f70
+}
+
+.redbg{
+    background-color: #eb7260
+}
 .centerit {
     text-align: center;
 }
