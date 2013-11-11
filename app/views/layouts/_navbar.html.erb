@@ -1,5 +1,3 @@
-<% if user_signed_in? %>
-
   <div class="navbar navbar-inverse">
     <div class="navbar-inner">
       <ul id="nav_menu" class="nav">
@@ -33,6 +31,7 @@
 
 
         <% end %>
+          <% if user_signed_in? %>
         <li>
         	<a href="#">
         	<i class="icon-user icon-white"></i>
@@ -52,7 +51,7 @@
                         </li>
                 </ul>
         </li>
+          <% end %>
       </ul>
     </div>
   </div>
-<% end %>
