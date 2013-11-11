@@ -2,7 +2,6 @@
 # access via url
 class ExperimentsController < ApplicationController
 
-  before_filter :ensure_admin, :only => [:destroy, :show]
 
   #before_filter :authenticate_user!, :except => [:index, :show]
 
