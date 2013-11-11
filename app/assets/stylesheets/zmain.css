@@ -36,6 +36,10 @@ body {
     padding: 45px 19px;
 }
 
+.orangetext {
+    color: #F39C12;
+}
+
 .boxedin {
     border: 1px solid #ddd;
     -webkit-border-radius: 4px;
