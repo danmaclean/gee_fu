@@ -113,10 +113,12 @@ class GenomesController < ApplicationController
 
   def destroy
     if (current_user.admin)
-      @genome = Genome.find(params[:id])
-      @genome.destroy
-      respond_to do |format|
-        format.html { redirect_to(genomes_url) }
+      if (false)
+        @genome = Genome.find(params[:id])
+        @genome.destroy
+        respond_to do |format|
+          format.html { redirect_to(genomes_url) }
+        end
       end
     end
   end

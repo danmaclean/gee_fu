@@ -1,11 +1,11 @@
 html {
-	background-color: #95A5A6;
-	height: 100%;
+    background-color: #95A5A6;
+    height: 100%;
 }
 
 body {
-	padding-top: 20px;
-	background-color: #95A5A6;
+    padding-top: 20px;
+    background-color: #95A5A6;
 }
 
 .well {
@@ -20,12 +20,8 @@ body {
 
 }
 
-.active {
-    color: red;
-}
-
 .makeitwhite {
-	background-color: white;
+    background-color: white;
 }
 
 .padrow {
@@ -33,21 +29,21 @@ body {
 }
 
 .boxedin {
-	border: 1px solid #ddd;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	padding: 20px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 20px;
 }
 
 .userAdmin {
-	font-size: 1.5em;
-	/* background-color: #BDC3C7; */
+    font-size: 1.5em;
+    /* background-color: #BDC3C7; */
 }
 
 .jumbotron h1 {
-	padding: 12px;
-	font-size: 80px;
+    padding: 12px;
+    font-size: 80px;
     line-height: 1em;
 }
 
@@ -55,26 +51,26 @@ body {
     background-color: #e6e6e6;
 }
 
-.bluebg{
+.bluebg {
     background-color: #4c5f70;
     color: #fff;
 }
 
-.lightbluebg{
+.lightbluebg {
     background-color: #548db5;
     color: #fff;
 }
 
-.redbg{
+.redbg {
     background-color: #eb7260;
 }
+
 .centerit {
     text-align: center;
 }
 
-.table-striped tbody>tr:nth-child(odd)>td,.table-striped tbody>tr:nth-child(odd)>th
-	{
-	background-color: inherit;
+.table-striped tbody>tr:nth-child(odd)>td, .table-striped tbody>tr:nth-child(odd)>th {
+    background-color: inherit;
 }
 
 /* [class^="icon-"],[class*=" icon-"] {

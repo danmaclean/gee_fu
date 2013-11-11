@@ -144,23 +144,25 @@ class FeaturesController < ApplicationController
     ## gets the feature by id and deletes it and any relationships where it is a parent
     ## this is a horrid way of doing this.. check for a better RAILS-Y way...
     if (current_user.admin)
-      feature = Feature.find(params[:id])
-      feature.children.each do |child|
-        ##remove the old feature as a parent...
-        new_parent_list = []
-        child.parents.each do |parent|
-          new_parent_list << parent unless parent.parent_feature == params[:id]
+      if (false)
+        feature = Feature.find(params[:id])
+        feature.children.each do |child|
+          ##remove the old feature as a parent...
+          new_parent_list = []
+          child.parents.each do |parent|
+            new_parent_list << parent unless parent.parent_feature == params[:id]
+          end
+          ##add the updated feature list as a parent to the child...
+          child.parents = new_parent_list
+          child.save
         end
-        ##add the updated feature list as a parent to the child...
-        child.parents = new_parent_list
-        child.save
-      end
-      if feature.destroy
-        flash[:notice] = 'Feature was successfully destroyed.'
-        redirect_to :action => :index
-      else
-        flash[:notice] = 'Feature could not be deleted'
-        redirect_to :action => :show, :id => params[:id]
+        if feature.destroy
+          flash[:notice] = 'Feature was successfully destroyed.'
+          redirect_to :action => :index
+        else
+          flash[:notice] = 'Feature could not be deleted'
+          redirect_to :action => :show, :id => params[:id]
+        end
       end
     end
   end
