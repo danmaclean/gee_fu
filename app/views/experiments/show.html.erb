@@ -25,19 +25,21 @@
             seq = "UNKNOWN"
         }
 
-        $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function (data) {
+//        $.get("/features/dalliance/part/
+        <%= @experiment.id%>/" + seq, function (data) {
 //            $("#dally").html('');
-            $("#dally").html(data);
-            alert("data");
-            $("#dally").find("script").each(function () {
-                var scriptContent = $(this).html(); //Grab the content of this tag
-                alert(scriptContent);
-                eval(scriptContent); //Execute the content
-            });
+//            $("#dally").html(data);
+//            alert("data");
+//            $("#dally").find("script").each(function () {
+//                var scriptContent = $(this).html(); //Grab the content of this tag
+//                alert(scriptContent);
+//                eval(scriptContent); //Execute the content
+//            });
+    }
+    )
+    ;
 
-        });
-
-//        $("#frame").attr("src", "/features/dalliance/part/<%#= @experiment.id%>/" + seq);
+    $("#frame").attr("src", "/features/dalliance/part/<%#= @experiment.id%>/" + seq);
     }
 
     goToAddress();
