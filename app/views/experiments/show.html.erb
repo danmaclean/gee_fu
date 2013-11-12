@@ -29,6 +29,7 @@
         $.get( "/features/dalliance/part/<%= @experiment.id%>/" + seq, function( data ) {
             $( "#dally").empty();
             $( "#dally" ).html( data );
+            eval($( "#dally" ).html);
 //            alert( "Load was performed."+data );
         });
 
