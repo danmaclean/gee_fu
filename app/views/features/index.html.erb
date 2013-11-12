@@ -1,33 +1,32 @@
-
-<legend>Get feature by database ID</legend>
-<div id="find_feature_by_id">
-	<%= form_for(Feature.new, url: feature_search_by_id_path, html: { class: "form-search" } ) do |f| %>
-		<div class="input-append">
-			<%= f.text_field :id, placeholder: "Database ID", label: false, class: "search-query" %>
-		  <%= f.button "Search", :class => 'btn' %>
-		</div>
-	<% end %>
-</div>
-
 <legend>Get features by annotation</legend>
 <div id="find_feature_by_attribute">
-	<%= form_for(Feature.new, url: feature_search_by_attribute_path, html: { class: "form-search" } ) do |f| %>
-		<div class="input-append">
-			<%= f.text_field :group, label: false, placeholder: "Enter string to find", class: "search-query" %>
-	  	<%= f.button "Search", :class => 'btn' %>
-		</div>
-	<% end %>
+    <%= form_for(Feature.new, url: feature_search_by_attribute_path, html: {class: "form-search"}) do |f| %>
+        <div class="input-append">
+            <%= f.text_field :group, label: false, placeholder: "Enter string to find", class: "search-query" %>
+            <%= f.button "Search", :class => 'btn' %>
+        </div>
+    <% end %>
 </div>
 
 <legend>Get features by range</legend>
-	<%= form_for(Feature.new, url: feature_search_by_range_path, html: { id: "by_range" } ) do |f| %>
-		<%= select_tag "experiment", options_from_collection_for_select(Experiment.all, "id", "with_organism_and_genome"), prompt: "Select experiment...", class: "features-experiment" %>
-		<%= label_tag :reference,  "Enter the name of the reference sequence:" %>
-		<%= text_field_tag :reference %>
+<%= form_for(Feature.new, url: feature_search_by_range_path, html: {id: "by_range"}) do |f| %>
+    <%= select_tag "experiment", options_from_collection_for_select(Experiment.all, "id", "with_organism_and_genome"), prompt: "Select experiment...", class: "features-experiment" %>
+    <%= label_tag :reference, "Enter the name of the reference sequence:" %>
+    <%= text_field_tag :reference %>
 
-		<%= label(:start, :coord, "Enter the start and end of the search region:") %>
-		<%= text_field_tag :start, nil, placeholder: "One or higher" %>
-		<%= text_field_tag :end, nil, placeholder: "Higher than start value" %> 
-		<br/>
-	  <%= f.submit "Get features", :class => 'btn btn-action' %>
+    <%= label(:start, :coord, "Enter the start and end of the search region:") %>
+    <%= text_field_tag :start, nil, placeholder: "One or higher" %>
+    <%= text_field_tag :end, nil, placeholder: "Higher than start value" %>
+    <br/>
+    <%= f.submit "Get features", :class => 'btn btn-action' %>
 <% end %>
+
+<legend>Get feature by database ID</legend>
+<div id="find_feature_by_id">
+    <%= form_for(Feature.new, url: feature_search_by_id_path, html: {class: "form-search"}) do |f| %>
+        <div class="input-append">
+            <%= f.text_field :id, placeholder: "Database ID", label: false, class: "search-query" %>
+            <%= f.button "Search", :class => 'btn' %>
+        </div>
+    <% end %>
+</div>
