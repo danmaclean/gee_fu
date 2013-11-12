@@ -1,11 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2'
-
 gem 'pg'
 gem 'unicorn-rails'
 gem 'foreman'
-
 gem 'bio'
 gem 'bio-samtools'
 gem 'bio-svgenes'
@@ -20,12 +18,9 @@ gem 'simple_form'
 gem 'squeel'
 gem 'foreigner'
 gem 'paper_trail', '~> 2'
-
 gem 'sidekiq'
 gem 'clockwork'
-
 gem 'gollum'
-
 gem 'sinatra'
 gem 'sequenceserver'
 
