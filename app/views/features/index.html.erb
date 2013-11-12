@@ -1,13 +1,3 @@
-<legend>Get features by annotation</legend>
-<div id="find_feature_by_attribute">
-    <%= form_for(Feature.new, url: feature_search_by_attribute_path, html: {class: "form-search"}) do |f| %>
-        <div class="input-append">
-            <%= f.text_field :group, label: false, placeholder: "Enter string to find", class: "search-query" %>
-            <%= f.button "Search", :class => 'btn' %>
-        </div>
-    <% end %>
-</div>
-
 <legend>Get features by range</legend>
 <%= form_for(Feature.new, url: feature_search_by_range_path, html: {id: "by_range"}) do |f| %>
     <%= select_tag "experiment", options_from_collection_for_select(Experiment.all, "id", "with_organism_and_genome"), prompt: "Select experiment...", class: "features-experiment" %>
@@ -20,6 +10,18 @@
     <br/>
     <%= f.submit "Get features", :class => 'btn btn-action' %>
 <% end %>
+
+<legend>Get features by annotation</legend>
+<div id="find_feature_by_attribute">
+    <%= form_for(Feature.new, url: feature_search_by_attribute_path, html: {class: "form-search"}) do |f| %>
+        <div class="input-append">
+            <%= f.text_field :group, label: false, placeholder: "Enter string to find", class: "search-query" %>
+            <%= f.button "Search", :class => 'btn' %>
+        </div>
+    <% end %>
+</div>
+
+
 
 <legend>Get feature by database ID</legend>
 <div id="find_feature_by_id">
