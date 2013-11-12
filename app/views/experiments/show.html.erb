@@ -29,19 +29,15 @@
         $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function (data) {
             $("#dally").empty();
             $("#dally").html(data);
-//            $("#dally").find("script").each(function (i) {
-//                eval($(this).text());
-//            });
-            $("#dally").find("#dallymain").each(function() {
-                alert("reloading");
+            $("#dally").find("#dallymain").each(function () {
                 var scriptContent = $(this).html(); //Grab the content of this tag
+                alert(scriptContent);
                 eval(scriptContent); //Execute the content
             });
 
-//            alert( "Load was performed."+data );
         });
 
-//        $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
+//        $("#frame").attr("src", "/features/dalliance/part/<%#= @experiment.id%>/" + seq);
     }
 
     goToAddress();
