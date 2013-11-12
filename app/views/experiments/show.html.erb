@@ -28,8 +28,10 @@
 
         $.get( "/features/dalliance/part/<%= @experiment.id%>/" + seq, function( data ) {
             $( "#dally").empty();
-            eval(data);
             $( "#dally" ).html( data );
+            $("#dally").find("script").each(function(i) {
+                eval($(this).text());
+            });
 
 //            alert( "Load was performed."+data );
         });
