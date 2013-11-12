@@ -12,8 +12,8 @@
 <br>
 
 
-<div class="well">
-    <iframe id="frame" src="" width="100%" height="400px" frameBorder="0" seamless='seamless'></iframe>
+<div class="well" id="dally">
+    <!--<iframe id="frame" src="" width="100%" height="400px" frameBorder="0" seamless='seamless'></iframe>-->
 </div>
 
 
@@ -28,8 +28,8 @@
         }
 
         $.get( "/features/dalliance/part/<%= @experiment.id%>/" + seq, function( data ) {
-            $( ".frame" ).html( data );
-            alert( "Load was performed." );
+            $( "#dally" ).html( data );
+            alert( "Load was performed."+data );
         });
 
 //        $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
