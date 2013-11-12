@@ -27,7 +27,8 @@
             seq = "UNKNOWN"
         }
 
-//        $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function (data) {
+//        $.get("/features/dalliance/part/
+        <%= @experiment.id%>/" + seq, function (data) {
 //            $("#dally").html('');
 //            $("#dally").html(data);
 //            alert("data");
@@ -38,13 +39,40 @@
 //            });
 //    });
 
-    $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
+        $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
     }
 
     goToAddress();
 
     $("#seqsearchbutton").click(function () {
         goToAddress();
+    });
+
+
+    function togglefs() {
+
+        var button = $("#togglefs");
+        var holder = $("#dally");
+
+        if (button.class().contains("fullscreen")) {
+            button.val("View Fullscreen");
+            button.toggleClass("fullscreenbutton");
+
+            holder.toggleClass("well");
+            holder.toggleClass("fullscreen");
+        } else {
+            button.val("exit");
+            button.toggleClass("fullscreenbutton");
+
+            holder.toggleClass("well");
+            holder.toggleClass("fullscreen");
+
+        }
+    }
+
+    }
+    $("#togglefs").click(function () {
+        togglefs();
     });
 
 </script>
