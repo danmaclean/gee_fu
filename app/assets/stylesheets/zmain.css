@@ -85,6 +85,20 @@ body {
     background-color: inherit;
 }
 
+.fullscreen {
+    /*Because some men just want to watch the world burn!*/
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+    background: inherit;
+}
+
 /* [class^="icon-"],[class*=" icon-"] {
 	vertical-align: inherit;
 } */
