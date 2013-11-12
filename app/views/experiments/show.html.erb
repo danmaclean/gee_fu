@@ -54,13 +54,13 @@
         var holder = $("#dally");
 
         if (button.hasClass("fullscreen")) {
-            button.val("View Fullscreen");
+            button.html("View Fullscreen");
             button.toggleClass("fullscreenbutton");
 
             holder.toggleClass("well");
             holder.toggleClass("fullscreen");
         } else {
-            button.val("exit");
+            button.html("exit");
             button.toggleClass("fullscreenbutton");
 
             holder.toggleClass("well");
