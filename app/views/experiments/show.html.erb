@@ -65,6 +65,7 @@
         $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function (data) {
 //            $("#dally").html('');
             $("#dally").html(data);
+            alert("data");
             $("#dally").find("script").each(function () {
                 var scriptContent = $(this).html(); //Grab the content of this tag
                 alert(scriptContent);
