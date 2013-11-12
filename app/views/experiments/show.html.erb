@@ -28,7 +28,7 @@
         }
 
         $.get( "/features/dalliance/part/<%= @experiment.id%>/" + seq, function( data ) {
-            $( "#frame" ).html( data );
+            $( ".frame" ).html( data );
             alert( "Load was performed." );
         });
 
