@@ -6,7 +6,7 @@
 <p>Enter the name of the reference sequence:</p>
 
 <input value="<%= @seqs.first %>" id="seqname" type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%= @seqs %>'>
-<button id="seqsearchbutton" onclick="goToAddress()" class="btn">Go</button>
+<button id="seqsearchbutton" class="btn">Go</button>
 <br>
 <br>
 
@@ -18,8 +18,6 @@
 
 
 <script type="text/javascript">
-
-
     function goToAddress() {
         alert("CLICK");
         seq = $("#seqname").val();
@@ -42,7 +40,11 @@
 //        $("#frame").attr("src", "/features/dalliance/part/<%#= @experiment.id%>/" + seq);
     }
 
-//    goToAddress();
+    goToAddress();
+
+    $("#seqsearchbutton").click(function () {
+        goToAddress();
+    });
 
 </script>
 
