@@ -32,7 +32,12 @@
             seq = "UNKNOWN"
         }
 
-        $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
+        $.get( "/features/dalliance/part/<%= @experiment.id%>/" + seq, function( data ) {
+            $( "#frame" ).html( data );
+            alert( "Load was performed." );
+        });
+
+//        $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
     }
 
     goToAddress();
