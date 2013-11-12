@@ -6,16 +6,38 @@
 <p>Enter the name of the reference sequence:</p>
 
 <input value="<%= @seqs.first %>" id="seqname" type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%= @seqs %>'>
-<a href="" id="seqsearchbutton"class="btn">Go</a>
+<a href="" id="seqsearchbutton" class="btn">Go</a>
 <br>
 <br>
 
 
 <div class="well">
-    <iframe id="frame" src="" width="100%" height="420px" frameBorder="0" seamless='seamless'></iframe>
+    <iframe id="frame" src="" width="100%" height="420px" frameBorder="0" seamless='seamless' onload="if (window.parent && window.parent.autoIframe) {window.parent.autoIframe('frame');}"></iframe>
 </div>
 
+<script type="text/javascript">
+    function autoIframe(frameId) {
+        try {
+            frame = document.getElementById(frameId);
+            innerDoc = (frame.contentDocument) ? frame.contentDocument : frame.contentWindow.document;
 
+            if (innerDoc == null) {
+                // Google Chrome
+                frame.height = document.all[frameId].clientHeight + document.all[frameId].offsetHeight +
+                        document.all[frameId].offsetTop;
+            }
+            else {
+                objToResize = (frame.style) ? frame.style : frame;
+                objToResize.height = innerDoc.body.scrollHeight + 18;
+            }
+        }
+
+        catch (err) {
+            alert('Err: ' + err.message);
+            window.status = err.message;
+        }
+    }
+</script>
 
 <script type="text/javascript">
 
