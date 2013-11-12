@@ -197,7 +197,7 @@ class FeaturesController < ApplicationController
     end
 
     if params[:end] < params[:start]
-      flash[:error] << "End value must be greater than (or equal to) start value - #{params[:start]} - #{params[:end]}"
+      flash[:error] << 'End value must be greater than (or equal to) start value'
     end
 
     if not flash[:error].empty?
@@ -236,7 +236,7 @@ class FeaturesController < ApplicationController
     flash[:error] << 'A reference sequence name must be provided' if reference.length == 0
     flash[:error] << 'Start must be a positive numeric value' if start =~ /\D/
     flash[:error] << 'End must be a positive numeric value' if _end =~ /\D/
-    flash[:error] << 'End value must be greater than (or equal to) start value' if _end < start
+    flash[:error] << 'End value must be greater than (or equal to) start value #{params[:start]} #{params[:end]}' if _end < start
 
     redirect_to(:back) and return unless flash[:error].empty?
 
