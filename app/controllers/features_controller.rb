@@ -197,7 +197,7 @@ class FeaturesController < ApplicationController
     end
 
     if params[:end] < params[:start]
-      flash[:error] << 'End value must be greater than (or equal to) start value'
+      flash[:error] << 'End value must be greater than (or equal to) start value - #{params[:start]} - #{params[:end]}'
     end
 
     if not flash[:error].empty?
