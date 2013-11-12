@@ -32,7 +32,7 @@
 //            $("#dally").find("script").each(function (i) {
 //                eval($(this).text());
 //            });
-            $("#dally").find("script").each(function() {
+            $("#dally").find("#dallymain").each(function() {
                 var scriptContent = $(this).html(); //Grab the content of this tag
                 eval(scriptContent); //Execute the content
             });
