@@ -16,9 +16,27 @@
     <iframe id="frame" src="" width="100%" height="400px" frameBorder="0" seamless='seamless'></iframe>
 </div>
 
-<%= render "/features/dalliance/part/<%= @experiment.id/" + seq %>
+<%= render "/features/dalliance/part/<%= @experiment.id/1" %>
+
+<!--<script type="text/javascript">-->
 
 
+//    function goToAddress() {
+//        seq = $("#seqname").val();
+//        if (!seq || 0 === seq.length) {
+//            seq = "UNKNOWN"
+//        }
+//
+//        $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
+//    }
+//
+//    goToAddress();
+//
+//    $("#seqsearchbutton").click(function () {
+//        goToAddress();
+//
+//    });
+<!--</script>-->
 
 <hr>
 
