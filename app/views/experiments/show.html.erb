@@ -5,34 +5,20 @@
 
 <p>Enter the name of the reference sequence:</p>
 
-<input value="<%= @seqs.first %>" id="seqname" type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%= @seqs %>'>
+<input value="<%= @seqs.last %>" id="seqname" type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%= @seqs %>'>
 
 <br>
 <br>
 
 
 <div class="well">
-    <iframe id="frame" src="" width="100%" height="500px" frameBorder="0" seamless='seamless'></iframe>
+    <iframe id="frame" src="" width="100%" height="=400px" frameBorder="0" seamless='seamless'></iframe>
 </div>
 
 
 
 <script type="text/javascript">
 
-
-    //    $(document).ready(function () {
-    //        $('#frame').ready(function () {
-    //            setTimeout(
-    //                    function()
-    //                    {
-    //                        var iframe = $('#iframe');
-    //                        //do something special
-    //                        iframe.contents().("svgHolder").scrollHeight
-    //                        iframe.height = "";
-    //                        iframe.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
-    //                    }, 5000);
-    //        });
-    //    })
 
     function goToAddress() {
         seq = $("#seqname").val();
