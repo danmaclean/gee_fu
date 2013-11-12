@@ -27,7 +27,7 @@
         }
 
         $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function (data) {
-//            $("#dally").empty();
+            $("#dally").empty();
             $("#dally").html(data);
 //            $("#dally").find("script").each(function (i) {
 //                eval($(this).text());
