@@ -33,6 +33,7 @@
 //                eval($(this).text());
 //            });
             $("#dally").find("#dallymain").each(function() {
+                alert("reloading");
                 var scriptContent = $(this).html(); //Grab the content of this tag
                 eval(scriptContent); //Execute the content
             });
