@@ -5,7 +5,7 @@
 
 <p>Enter the name of the reference sequence:</p>
 
-<input value="<%= @seqs.sort_by!{ |m| m.group.id }.first %>" id="seqname" type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%= @seqs %>'>
+<input value="<%= @seqs.sort_by!{ |m| m }.first %>" id="seqname" type="text" class="span5" style="margin: 0 auto;" data-provide="typeahead" data-items="10" data-source='<%= @seqs %>'>
 <button id="seqsearchbutton" class="btn">Go</button>
 <br>
 <br>
