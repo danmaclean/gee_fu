@@ -5,7 +5,7 @@
 	<p><%= user.email %></p>
 	
 	
-	<%= link_to 'Edit', :controller => 'admin', :action => 'edit', :id => user.id, :class => "btn btn-inverse" %>
+	<%= link_to 'Edit', {:controller => 'admin', :action => 'edit', :id => user.id}, :class => "btn btn-inverse" %>
 	
 	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
 </div>
