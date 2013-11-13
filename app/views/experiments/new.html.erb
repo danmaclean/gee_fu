@@ -26,7 +26,7 @@
 		<%=f.input :description, required: true%>
 		<%=f.input :bam_file_path, required: true, label: "BAM file of features"%>
 	  <%= f.input :genome_id, collection: Genome.all, prompt: "Select a genome build...", required: true %>
-		<%=f.input :yaml_file, as: :file, required: false, label: "YAML file of metadata about this genome", hint: "(inherits from genome if omitted)"%>
+		<%=f.input :meta, as: :string, required: false, label: "Meta data"%>
 		<%= f.hidden_field :expected_file, :value => "bam" %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
