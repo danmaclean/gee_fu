@@ -10,7 +10,7 @@
 		<%=f.input :description, required: true%>
 		<%=f.input :gff_file, as: :file, required: true, label: "GFF3 file of features"%>
 	  <%= f.input :genome_id, collection: Genome.all, prompt: "Select a genome build...", required: true %>
-		<%=f.input :yaml_file, as: :file, required: false, label: "YAML file of metadata about this genome", hint: "(inherits from genome if omitted)"%>
+        <%=f.input :meta, as: :string, required: false, label: "Meta data"%>
 	  <%= f.input :find_parents, collection: ["Yes", "No"], prompt: "Find parents", selected: "Yes", prompt: nil, label: "Find parents for the features in this file?", hint: "(Upload is quicker if all the features are parentless)" %>
 		<%= f.hidden_field :expected_file, :value => "gff" %>
   <div class="form-actions">
