@@ -1,13 +1,19 @@
 <% @users.each do |user| %>
-<div class=<% if user.admin %>"boxedin userAdmin"<% else %>"boxedin userNormal"<% end %>>
-	<p><%= user.first_name %></p>
-	<p><%= user.last_name %></p>
-	<p><%= user.email %></p>
-	
-	
-	<%= link_to 'Edit', {:controller => 'admin', :action => 'edit', :id => user.id}, :class => "btn btn-inverse" %>
+    <div class=
+                     <% if user.admin %>"boxedin userAdmin"
+    <% else %>"boxedin userNormal"
+    <% end %>>
+    <p><%= user.first_name %></p>
 
-<% if not user.admin %><a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a><%end%>
-</div>
-<hr>
+    <p><%= user.last_name %></p>
+
+    <p><%= user.email %></p>
+
+    <% if not user.admin %>
+    <%= link_to 'Edit', {:controller => 'admin', :action => 'edit', :id => user.id}, :class => "btn btn-inverse" %>
+
+    <a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+    <% end %>
+    </div>
+    <hr>
 <% end %>
