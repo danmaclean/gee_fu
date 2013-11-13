@@ -24,7 +24,7 @@
         <tbody>
         <% @experiments.each do |experiment| %>
             <tr>
-                <td><%= link_to experiment.id, experiment_path(experiment) %></td>
+                <td><%= link_to experiment.name, experiment_path(experiment) %></td>
             </tr>
         <% end %>
         </tbody>
