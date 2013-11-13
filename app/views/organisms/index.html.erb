@@ -1,7 +1,12 @@
 <%- model_class = Organism -%>
 <div class="page-header">
-    <h1><%if false %><%= t '.title', :default => model_class.model_name.human.pluralize %><%end%>Organisms</h1>
+    <h1>Organisms</h1>
 </div>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_organism_path,
+            :class => 'btn btn-primary' %>
+
 <% unless @organisms.empty? %>
     <table class="table table-striped">
         <thead>
@@ -35,6 +40,4 @@
         </tbody>
     </table>
 <% end %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_organism_path,
-            :class => 'btn btn-primary' %>
+
