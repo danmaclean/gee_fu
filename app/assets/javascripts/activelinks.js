@@ -11,7 +11,7 @@ $(document).ready(function () {
 
         $("#nav_menu").children("li").each(function () {
 //	         if($(this).children("a:first-child").attr("href") == activePage){
-            if ($(this).children("a:first-child").attr("href").indexOf(activePage) != -1) {
+            if ($(this).children("a:first-child").attr("href").indexOf(activePage) >= 0) {
                 $(this).addClass("active");
             }
         });
