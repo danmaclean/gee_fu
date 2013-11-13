@@ -18,21 +18,21 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th><%= model_class.human_attribute_name(:id) %></th>
-            <th><%= model_class.human_attribute_name(:organism) %></th>
-            <th><%= model_class.human_attribute_name(:build_version) %></th>
-            <th><%= model_class.human_attribute_name(:meta) %></th>
-            <th><%= model_class.human_attribute_name(:created_at) %></th>
+            <!--<th><%= model_class.human_attribute_name(:id) %></th>-->
+            <th><%= model_class.human_attribute_name(:experiment) %></th>
+            <!--<th><%= model_class.human_attribute_name(:build_version) %></th>-->
+            <!--<th><%= model_class.human_attribute_name(:meta) %></th>-->
+            <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
         </tr>
         </thead>
         <tbody>
         <% @experiments.each do |experiment| %>
             <tr>
-                <td><%= link_to experiment.id, experiment_path(experiment) %></td>
-                <td><%= experiment.organism %></td>
-                <td><%= experiment.build_version %></td>
-                <td><%= experiment.html_meta %></td>
-                <td><%= l experiment.created_at.to_date, format: :gee_fu %></td>
+                <!--<td><%= link_to experiment.id, experiment_path(experiment) %></td>-->
+                <td><%= experiment %></td>
+                <!--<td><%= experiment.build_version %></td>-->
+                <!--<td><%= experiment.html_meta %></td>-->
+                <!--<td><%= l experiment.created_at.to_date, format: :gee_fu %></td>-->
             </tr>
         <% end %>
         </tbody>
