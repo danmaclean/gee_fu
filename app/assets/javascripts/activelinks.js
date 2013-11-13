@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 		 var url = window.location.pathname;
 //		 var activePage = url.substring(url.lastIndexOf('/'));
-         var activePage = url.substring(data.indexOf("/", data.indexOf("/") + 1));
+         var activePage = url.substring(url.indexOf("/", url.indexOf("/") + 1));
 
          alert("DEBUG: "+activePage);
 
