@@ -36,6 +36,7 @@ class GenomesController < ApplicationController
     if Genome.exists?(params[:id])
       @genome = Genome.find(params[:id])
       @genome.meta = @genome.meta_as_data_structure
+      @experiments = @genome.experiments
       respond @genome
     else
       respond :false
