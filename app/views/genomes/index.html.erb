@@ -26,7 +26,7 @@
                 <td><%= link_to genome.id, genome_path(genome) %></td>
                 <td><%= genome.organism %></td>
                 <td><%= genome.build_version %></td>
-                <td><%= genome.html_meta %></td>
+                <td><%= genome.meta %></td>
                 <td><%= l genome.created_at.to_date, format: :gee_fu %></td>
             </tr>
         <% end %>
