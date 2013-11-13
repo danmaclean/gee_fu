@@ -18,7 +18,7 @@
         <% @experiments.each do |experiment| %>
             <tr>
                 <td><%= link_to experiment.id, experiment_path(experiment) %></td>
-                <td><%= experiment.name %></td>
+                <td><%= link_to experiment.name, experiment_path(experiment) %></td>
                 <td><%= experiment.description %></td>
                 <td><%= l experiment.created_at.to_date, format: :gee_fu %></td>
                 <td><%= experiment.features.count %></td>
