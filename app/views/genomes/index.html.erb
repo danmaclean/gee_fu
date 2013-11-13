@@ -13,7 +13,6 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th><%= model_class.human_attribute_name(:id) %></th>
             <th><%= model_class.human_attribute_name(:organism) %></th>
             <th><%= model_class.human_attribute_name(:build_version) %></th>
             <th><%= model_class.human_attribute_name(:meta) %></th>
@@ -23,8 +22,7 @@
         <tbody>
         <% @genomes.each do |genome| %>
             <tr>
-                <td><%= link_to genome.id, genome_path(genome) %></td>
-                <td><%= genome.organism %></td>
+                <td><%= link_to genome.organism, genome_path(genome) %></td>
                 <td><%= genome.build_version %></td>
                 <td><%= genome.meta %></td>
                 <td><%= l genome.created_at.to_date, format: :gee_fu %></td>
