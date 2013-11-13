@@ -6,8 +6,7 @@ $(document).ready(function () {
 		 var activePage = url.substring(url.lastIndexOf('/'));
 
 	     $("#nav_menu").children("li").each(function(){
-//	         if($(this).children("a:first-child").attr("href") == activePage){
-                 if($(this).children("a:first-child").attr("href").contain(activePage)){
+	         if($(this).children("a:first-child").attr("href") == activePage){
 	             $(this).addClass("active");
 	         }
 	     });
