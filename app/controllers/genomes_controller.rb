@@ -24,7 +24,8 @@ class GenomesController < ApplicationController
   def index #regular web request method
     @genomes = Genome.all
     @genomes.each do |gen|
-      gen.meta ? gen.meta = JSON::parse("#{gen.meta}") : nil
+      gen.meta
+
     end
     respond @genomes
   end
