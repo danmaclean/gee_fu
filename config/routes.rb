@@ -57,7 +57,7 @@ GeeFu::Application.routes.draw do
   end
 
   scope "/users" do
-    get "/admin", to: "AdminController#index"
+    get "/admin", to: "admin#index"
   end
 
   scope "/genomes/annoj" do
