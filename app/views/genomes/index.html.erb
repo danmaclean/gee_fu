@@ -22,8 +22,8 @@
         <tbody>
         <% @genomes.each do |genome| %>
             <tr>
-                <td><%= link_to genome.organism, genome_path(genome) %></td>
-                <td><%= genome.build_version %></td>
+                <td><%= genome.organism %></td>
+                <td><%= link_to genome.build_version, genome_path(genome) %></td>
                 <td><%= genome.meta %></td>
                 <td><%= l genome.created_at.to_date, format: :gee_fu %></td>
             </tr>
