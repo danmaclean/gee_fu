@@ -6,8 +6,8 @@
 	
 	
 	<%= link_to 'Edit', {:controller => 'admin', :action => 'edit', :id => user.id}, :class => "btn btn-inverse" %>
-	
-	<a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a>
+
+<% if not user.admin %><a href="#" class="btn btn-danger" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a><%end%>
 </div>
 <hr>
 <% end %>
