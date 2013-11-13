@@ -1,19 +1,21 @@
 $(document).ready(function () {
 
-	 $(function(){
+    $(function () {
 
-		 var url = window.location.pathname;
+        var url = window.location.pathname;
 //		 var activePage = url.substring(url.lastIndexOf('/'));
-         var activePage = url.substring(url.indexOf("/", url.indexOf("/") + 1));
+//         var activePage = url.substring(url.indexOf("/", url.indexOf("/") + 1));
+        var activePage = url;
 
-         alert("DEBUG: "+activePage);
+        alert("DEBUG: " + activePage);
 
-	     $("#nav_menu").children("li").each(function(){
-	         if($(this).children("a:first-child").attr("href") == activePage){
-	             $(this).addClass("active");
-	         }
-	     });
+        $("#nav_menu").children("li").each(function () {
+//	         if($(this).children("a:first-child").attr("href") == activePage){
+            if ($(this).children("a:first-child").attr("href").contains(activePage)) {
+                $(this).addClass("active");
+            }
+        });
 
-	  });
-  
+    });
+
 });
