@@ -23,10 +23,9 @@ class GenomesController < ApplicationController
   # where format = xml or js
   def index #regular web request method
     @genomes = Genome.all
-    @genomes.each do |gen|
-      gen.meta
-
-    end
+    #@genomes.each do |gen|
+    #  gen.meta
+    #end
     respond @genomes
   end
 
@@ -36,7 +35,7 @@ class GenomesController < ApplicationController
   def show
     if Genome.exists?(params[:id])
       @genome = Genome.find(params[:id])
-      @genome.meta = @genome.meta_as_data_structure
+      #@genome.meta = @genome.meta_as_data_structure
       @experiments = @genome.experiments
       respond @genome
     else
