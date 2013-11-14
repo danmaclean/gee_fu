@@ -119,42 +119,24 @@
             </TYPE>
             <TYPE id='tss'>
                 <GLYPH>
-                    <ARROW>
+                    <BOX>
                         <HEIGHT>10</HEIGHT>
-                        <FGCOLOR>purple</FGCOLOR>
-                        <PARALLEL>yes</PARALLEL>
-                        <NORTHEAST>yes</NORTHEAST>
-                        <SOUTHWEST>yes</SOUTHWEST>
-                        <LABEL>yes</LABEL>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>white</BGCOLOR>
                         <BUMP>yes</BUMP>
-                    </ARROW>
-                    <!--<BOX>-->
-                    <!--<HEIGHT>10</HEIGHT>-->
-                    <!--<FGCOLOR>black</FGCOLOR>-->
-                    <!--<BGCOLOR>white</BGCOLOR>-->
-                    <!--<BUMP>yes</BUMP>-->
-                    <!--<LABEL>no</LABEL>-->
-                    <!--</BOX>-->
+                        <LABEL>no</LABEL>
+                    </BOX>
                 </GLYPH>
             </TYPE>
             <TYPE id='tts'>
                 <GLYPH>
-                    <ARROW>
+                    <BOX>
                         <HEIGHT>10</HEIGHT>
-                        <FGCOLOR>purple</FGCOLOR>
-                        <PARALLEL>yes</PARALLEL>
-                        <NORTHEAST>yes</NORTHEAST>
-                        <SOUTHWEST>yes</SOUTHWEST>
-                        <LABEL>yes</LABEL>
+                        <FGCOLOR>black</FGCOLOR>
+                        <BGCOLOR>white</BGCOLOR>
                         <BUMP>yes</BUMP>
-                    </ARROW>
-                    <!--<BOX>-->
-                    <!--<HEIGHT>10</HEIGHT>-->
-                    <!--<FGCOLOR>black</FGCOLOR>-->
-                    <!--<BGCOLOR>white</BGCOLOR>-->
-                    <!--<BUMP>yes</BUMP>-->
-                    <!--<LABEL>no</LABEL>-->
-                    <!--</BOX>-->
+                        <LABEL>no</LABEL>
+                    </BOX>
                 </GLYPH>
             </TYPE>
         </CATEGORY>
