@@ -340,7 +340,4 @@ class ExperimentsController < ApplicationController
       redirect_to :action => "show", :id => @experiments.first
     end
   end
-  def customsscss
-
-  end
-end 
+end
