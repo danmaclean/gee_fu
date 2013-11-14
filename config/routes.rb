@@ -74,7 +74,7 @@ GeeFu::Application.routes.draw do
     get "/css/custom.css", to:"experiments#customsscss"
   end
 
-  match "/sequenceserver/css/custom.css" => redirect("http://geefu.oadb.tsl.ac.uk/sscustom.css/")
+  match "/sequenceserver/css/custom.css" => redirect("https://geefu.oadb.tsl.ac.uk/sscustom.css")
 
   match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
 
