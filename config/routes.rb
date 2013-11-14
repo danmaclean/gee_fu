@@ -71,8 +71,10 @@ GeeFu::Application.routes.draw do
 
   scope "/sequenceserver" do
     get "/get_sequence", to: "experiments#findfromss"
-    get "/css/custom.css", to:"test.css"
+    get "/css/custom.css", to:"experiments#customsscss"
   end
+
+  match "/sequenceserver/css/custom.css" => redirect("http://geefu.oadb.tsl.ac.uk/sscustom.css/")
 
   match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
 
