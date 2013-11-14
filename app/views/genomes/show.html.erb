@@ -14,12 +14,12 @@
 
 <hr>
 <h3>Experiments attached to this genome</h3>
+
 <% unless @experiments.empty? %>
 
     <table class="table table-striped">
         <thead>
         <tr>
-            <th><%= model_class.human_attribute_name(:id) %></th>
             <th><%= model_class.human_attribute_name(:name) %></th>
             <th><%= model_class.human_attribute_name(:description) %></th>
             <th><%= model_class.human_attribute_name(:created_at) %></th>
@@ -29,8 +29,7 @@
         <tbody>
         <% @experiments.each do |experiment| %>
             <tr>
-                <td><%= link_to experiment.id, experiment_path(experiment) %></td>
-                <td><%= experiment.name %></td>
+                <td><%= link_to experiment.name, experiment_path(experiment) %></td>
                 <td><%= experiment.description %></td>
                 <td><%= l experiment.created_at.to_date, format: :gee_fu %></td>
                 <td><%= experiment.features.count %></td>
@@ -38,10 +37,8 @@
         <% end %>
         </tbody>
     </table>
-
-    <% else %>
+<% else %>
     <p>None yet, Why not add one <a href="<%= experiments_path %>">HERE</a></p>
-
 <% end %>
 
 <div class="form-actions">
