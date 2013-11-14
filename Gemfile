@@ -22,7 +22,7 @@ gem 'sidekiq'
 gem 'clockwork'
 gem 'gollum'
 gem 'sinatra'
-gem 'sequenceserver'
+gem 'sequenceserver', '~> 0.8.4'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
