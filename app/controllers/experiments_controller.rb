@@ -12,7 +12,7 @@ class ExperimentsController < ApplicationController
     # Badge.give_badge
     @experiments = Experiment.all
     @experiments.each do |exp|
-      exp.meta = JSON::parse exp.meta if exp.meta
+      #exp.meta = JSON::parse exp.meta if exp.meta
     end
     respond @experiments
   end
