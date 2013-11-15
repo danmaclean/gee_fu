@@ -101,7 +101,7 @@ class GenomesController < ApplicationController
 
         gcount+=1
 
-        logger.error "adding genome entry - #{entry.entry_id} - #{gcount} of #{genomefile.size}"
+        logger.error "adding genome entry - #{entry.entry_id} - #{gcount} of #{genomefile.count}"
 
         seq = entry.to_seq
         reference = Reference.new(:name => entry.entry_id, :length => entry.length)
