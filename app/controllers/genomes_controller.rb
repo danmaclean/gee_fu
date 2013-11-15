@@ -95,7 +95,7 @@ class GenomesController < ApplicationController
 
       Bio::FastaFormat.open(@genome.fasta_file.path).each do |entry|
 
-        logger.error "adding genome entry"
+        logger.error "adding genome entry - #{entry.entry_id}"
 
         seq = entry.to_seq
         reference = Reference.new(:name => entry.entry_id, :length => entry.length)
