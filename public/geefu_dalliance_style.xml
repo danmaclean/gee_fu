@@ -93,8 +93,8 @@
                 <GLYPH>
                     <BOX>
                         <HEIGHT>10</HEIGHT>
-                        <FGCOLOR>white</FGCOLOR>
-                        <BGCOLOR>white</BGCOLOR>
+                        <FGCOLOR>transparent</FGCOLOR>
+                        <BGCOLOR>transparent</BGCOLOR>
                         <BUMP>no</BUMP>
                         <LABEL>yes</LABEL>
                     </BOX>
