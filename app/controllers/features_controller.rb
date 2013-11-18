@@ -246,6 +246,12 @@ class FeaturesController < ApplicationController
     # method for returning preformatted feature objects in a range for plotting by the javascript feature renderer. 
     # Groups features with a parent that have type in list Features::aggregate_features.
     ref = Reference.first(:conditions => {:genome_id => genome_id, :name => reference})
+
+    if ref.nil?
+      flash[:error] << 'Cound not find the selected reference.'
+      redirect_to(:back) and return unless flash[:error].empty?
+    end
+
     @start = start
     @end = _end
     @features = Feature.find_in_range_no_overlap(ref.id, start, _end, experiment.id)
