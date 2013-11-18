@@ -1,6 +1,6 @@
 <legend>Get features by range</legend>
 <%= form_for(Feature.new, url: feature_search_by_range_path, html: {id: "by_range"}) do |f| %>
-    <%= select_tag "experiment", options_from_collection_for_select(Experiment.all, "id", "with_organism_and_genome"), prompt: "Select experiment...", class: "features-experiment" %>
+    <%= select_tag "experiment", options_from_collection_for_select(Experiment.all, "id", "with_organism_and_genome"), prompt: "Select experiment...", class: "features-experiment", data-provide: "typeahead" %>
     <%= label_tag :reference, "Enter the name of the reference sequence:" %>
     <%= text_field_tag :reference %>
 
