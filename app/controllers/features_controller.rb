@@ -706,6 +706,10 @@ class FeaturesController < ApplicationController
     {:success => true}
   end
 
+  def search
+    redirect_to features_path
+  end
+
   def search_by_id
     feature_id = params[:feature][:id]
     if Feature.exists?(feature_id)
