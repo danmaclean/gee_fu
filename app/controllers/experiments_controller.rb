@@ -104,8 +104,10 @@ class ExperimentsController < ApplicationController
         end
 
         attribute = JSON.generate(record.attributes)
-        logger.error record.seqname
+        #logger.error record.seqname
         ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+
+        logger.error "upto: #{record.seqname}"
 
         if ref.nil?
           #ref = Reference.first #TODO
