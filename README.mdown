@@ -56,52 +56,6 @@ MANDRILL_APIKEY=[insert API key]
 
 The development log (log/development.log) spits out almost everything that happens in geefu. It is reccomended to add it to log rotation
 
-## Setting up AnnoJ
-The AnnoJ view requires a JSON format configuration file, to tell it about the genome and the service etc.  Gee Fu allows you to maintain a YAML file and convert it to the `RAILS_ROOT/public/javascripts/config.js` AnnoJ uses. Edit the file `RAILS_ROOT/config/config.yml` to set up the AnnoJ view.
-
-The most important are the tracks stanzas, this is where you tell AnnoJ the tracks that should be available in your browser. 
-
-There are 3 track types: 
- * ModelsTrack, for aggregated transcript style gene models 
- * RepeatsTrack, for strandless block objects like repeats and 
- * ReadsTrack, for high throughput se- quencing reads that will be be shown at various zoom-levels. The reference sequence Gee Fu provides is sent to AnnoJ as if it is a big read. Here are the different configuration options for the rest
-
- ```
- 	 id : a numeric unique id for the track
-	 name: free text name
-	 type : one of ModelsTrack , RepeatsTrack , ReadsTrack
-	 data : /features/[annoj|chromosome]/experiment_id
-	 showControls : 'true' to see the individual lane control button or leave absent
-	 height : 80  start up height of the track in pixels
-	 minHeight : 20  height of track when minimised
-	 maxHeight : 60 # height of track when maximised
-	 single : # 'true' if the track is strandless otherwise absent
-```
-
-AnnoJ requires certain metadata to understand what it is that it is supposed to be rendering. This is required at a genome and individual track level. When you create an experiment or genome you have the option to add a yml metadata file. As a minimum you should include the following information for your genome:
-
-```
-	−−−
-	institution :
-		name: Your Institute
-		logo : images/ institute_logo .png
-		url : http ://www.your_place.etc 
-	service :
-		format : Unspecified
-		title : Sample Gee Fu served browser (TAIR 9 Gene Models)
-		server : Unspecified
-		version : Vers 1
-		access: public
-		description: Free text description of the service
-	engineer:
-		name: Mick Jagger
-		email : street.fighting.man@stones.net 
-	genome:
-		version : TAIR9
-		description : Chr1 from TAIR9 
-		species : Arabidopsis thaliana
-```
-
 ## Schema
 The schema is very straightforward and easily extended. It consists of a central Features table and a many to many join table Parents that indicates which features are parents (according to their gff records) of which other features.
 
@@ -110,7 +64,3 @@ You can extend the database exactly as if it were any other Rails application. S
 
 ## Where to find more info
 If you get really frustrated with the software, feel free to complain to me `dan.maclean@tsl.ac.uk`. A lot of your initial problems will be answered in the Rails community pages, please look there if your problem looks like it might be related to Rails more directly than this particular instance of a Rails app.
-
-
-
-
