@@ -107,14 +107,14 @@ class ExperimentsController < ApplicationController
         #logger.error record.seqname
         ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
 
-        logger.error "upto: #{record.seqname}"
+        #logger.error "upto: #{record.seqname}"
 
         if ref.nil?
           #ref = Reference.first #TODO
           #90% of issues occur here!
 
           logger.error "------------------------------------------"
-          logger.error "THE REFERENCE NAME IS WRONG, PLEASE CHECK!"
+          logger.error "THE REFERENCE NAME IS WRONG, PLEASE CHECK! - #{ record.seqname } - #{genome.id}"
           logger.error "------------------------------------------"
           render :new
         end
