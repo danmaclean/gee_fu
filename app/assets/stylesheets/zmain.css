@@ -99,6 +99,12 @@ body {
     background: inherit;
 }
 
+.checkbox input, .radio input {
+opacity: 100;
+filter: alpha(opacity=100);
+
+}
+
 /* [class^="icon-"],[class*=" icon-"] {
 	vertical-align: inherit;
 } */
