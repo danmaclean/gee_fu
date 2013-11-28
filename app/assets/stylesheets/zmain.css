@@ -8,6 +8,10 @@ body {
     background-color: #95A5A6;
 }
 
+.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+width: 1000px;
+}
+
 .well {
     background-color: #fff;
 }
