@@ -338,7 +338,7 @@ class ExperimentsController < ApplicationController
 
     @experiments = Feature.where(seqid: @ssid).pluck(:experiment_id).uniq
 
-    if @experiments.length == 1
+    if @experiments.length == 1 and unless Experiment.find(@experiments.first.id).nil?
       redirect_to :action => "show", :id => @experiments.first
     end
   end
