@@ -337,10 +337,8 @@ class ExperimentsController < ApplicationController
     @ssid = params[:id]
     @ssdb = params[:db]
 
-    feats=Feature.arel_table
-    @experiments = Feature.where(feats[:gff_id].matches("%#{@ssid}%")).pluck(:experiment_id).uniq
 
-
+    @experiments = Feature.where(gff_id: @ssid).pluck(:experiment_id).uniq
 
     if @experiments.length == 1
       redirect_to :action => "show", :id => @experiments.first
