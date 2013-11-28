@@ -342,6 +342,7 @@ class ExperimentsController < ApplicationController
     @seqqs = Feature.where(seqid: @ssid).pluck(:experiment_id).uniq
 
     @experiments = @gffas + @seqqs
+    @experiments = @experiments.uniq
 
     if @experiments.length == 1
       redirect_to :action => "show", :id => @experiments.first
