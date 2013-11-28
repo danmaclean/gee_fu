@@ -338,7 +338,7 @@ class ExperimentsController < ApplicationController
     @ssdb = params[:db]
 
     feats=Feature.arel_table
-    @experiments = Feature.where(feats[:gff_id].matches("%#{ssid}%")).pluck(:experiment_id).uniq
+    @experiments = Feature.where(feats[:gff_id].matches("%#{@ssid}%")).pluck(:experiment_id).uniq
 
 
 
