@@ -190,6 +190,7 @@ class ExperimentsController < ApplicationController
   end
 
   def edit
+
     @experiment = Experiment.find(params[:id])
   end
 
@@ -336,7 +337,10 @@ class ExperimentsController < ApplicationController
     @ssid = params[:id]
     @ssdb = params[:db]
 
-    @experiments = Feature.where(gff_id: @ssid).pluck(:experiment_id).uniq
+    feats=Feature.arel_table
+    @experiments = Feature.where(feats[:gff_id].matches("%#{ssid}%")).pluck(:experiment_id).uniq
+
+
 
     if @experiments.length == 1
       redirect_to :action => "show", :id => @experiments.first
