@@ -77,10 +77,6 @@ require 'gollum/frontend/app'
   mount Precious::App, at: 'wiki'
 
 
-
-
-
-
 # TODO review these for security
   resources :references
   match 'features/objects' => 'features#objects'
