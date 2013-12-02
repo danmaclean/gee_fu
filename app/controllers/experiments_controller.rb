@@ -190,6 +190,9 @@ class ExperimentsController < ApplicationController
   end
 
   def edit
+    unless user_signed_in
+        redirect_to experiment_path(params[:id]), flash: {notice: "You must be logged in to edit."}
+    end
 
     @experiment = Experiment.find(params[:id])
   end
