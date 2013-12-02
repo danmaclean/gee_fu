@@ -71,13 +71,11 @@ GeeFu::Application.routes.draw do
 
 require 'gollum/frontend/app'
 
-Ams::Application.routes.draw do
-
   Precious::App.set(:gollum_path, Rails.root.join('wiki').to_s)
   Precious::App.set(:default_markup, :markdown) # set your favorite markup language
   Precious::App.set(:wiki_options, {:universal_toc => false})
   mount Precious::App, at: 'wiki'
-end
+
 
 
 
