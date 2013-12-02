@@ -68,7 +68,19 @@ GeeFu::Application.routes.draw do
   match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
   match "/webapollo2" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo2/"), :as => :webapollo2
 
-  match "/wiki" => redirect("http://geefu.oadb.tsl.ac.uk:8081"), :as => :wiki
+
+require 'gollum/frontend/app'
+
+Ams::Application.routes.draw do
+
+  Precious::App.set(:gollum_path, Rails.root.join('wiki').to_s)
+  Precious::App.set(:default_markup, :markdown) # set your favorite markup language
+  Precious::App.set(:wiki_options, {:universal_toc => false})
+  mount Precious::App, at: 'wiki'
+end
+
+
+
 
 
 # TODO review these for security
