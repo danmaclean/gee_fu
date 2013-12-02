@@ -51,7 +51,7 @@
             <%= link_to t('.cancel', :default => t("helpers.links.cancel")), features_path, :class => 'btn' %>
 
             <%= f.button :submit, :class => 'btn-primary' %>
-            <!--<a href=http://v0311.nbi.ac.uk:8081/index.php/<%= @feature.id %> class="btn">Add Wiki page</a>-->
+            <a href=/wiki/<%= @feature.experiment.genome.organism.local_name %>/<%= @feature.experiment.genome.build_version %>/<%= @feature.experiment.name %>/<%= @feature.id %> class="btn">Add/Edit Wiki page</a>
     <% end %>
     </div>
 <% end %>
