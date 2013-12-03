@@ -29,6 +29,19 @@ class GenomesController < ApplicationController
     respond @genomes
   end
 
+  def update
+    @genome = Genome.find(params[:id])
+
+    respond_to do |format|
+      if @genome.update_attributes(params[:genome])
+        flash[:notice] = 'Genome was successfully updated.'
+        format.html { redirect_to(@genome) }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+
   #returns metadata for a selected genome 
   # use /genome/id.format
   # where format = xml or json
