@@ -27,6 +27,10 @@ class ExperimentsController < ApplicationController
       logger.error "looking up exp: #{params[:id]}"
       @experiment = Experiment.find(params[:id])
       @seqs = @experiment.features.pluck(:seqid).uniq
+      @firstseq = params[:segment]
+      if @firstseq.nil?
+        @firstseq = @seqs.first
+      end
       #@experiment.meta = JSON::parse @experiment.meta if @experiment.meta
       respond @experiment
     else
