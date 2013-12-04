@@ -1,3 +1,7 @@
+<% if @experiments.length == 0 %>
+    <p>No experiments found that contain <%="#{@ssid}"%></p>
+    <% else %>
+
 <p>Experiments that contain <%="#{@ssid}"%></p>
 
 <% @experiments.each do |experiment| %>
@@ -5,6 +9,7 @@
 <%exp = Experiment.find(experiment)%>
 
 <p><a href="/experiments/<%= experiment %>">Experiment: #<%= "#{experiment}" %> - <%= "#{exp.name }" %> - <%= "#{exp.description}" %></a></p>
+<%end%>
 <%end%>
 
 
