@@ -51,12 +51,12 @@ class GenomesController < ApplicationController
         @genome.update_attribute(:meta, params[:meta])
       end
 
-        if @genome.update_attributes(params[:genome])
+        #if @genome.update_attributes(params[:genome])
           flash[:notice] = 'Genome was successfully updated.'
           format.html { redirect_to(@genome) }
         #else
         #  format.html { render :action => "edit" }
-        end
+        #end
       end
     end
 
