@@ -37,70 +37,76 @@
 
 <!--<h2><%= @part %> - found <%= @featcount.length %> features</h2>-->
 
-<% @featureType.each do |feat| logger.error "#{feat}" end%>
+<% @featureType.each do |feat|
+  logger.error "#{feat}"
+end %>
 
 <script language="javascript">
 
-  var b = new Browser({
-    chr:          '1',
-    viewStart:    0,
-    viewEnd:      10000,
-    cookieKey:    'KW1',
+    var b = new Browser({
+        chr: '1',
+        viewStart: 0,
+        viewEnd: 10000,
+        cookieKey: 'KW1',
 
-    coordSystem: {
-          speciesName: '<%= @experiment.name %>',
-          taxon: 746836,
-          auth: 'NCBIM',
-          version: 37
-      },
-	
-sources:     [
+        coordSystem: {
+            speciesName: '<%= @experiment.name %>',
+            taxon: 746836,
+            auth: 'NCBIM',
+            version: 37
+        },
 
-    {name:                 'Genome',
-        uri:                  '/genomes/dalliance/<%=@experiment.id%>/<%= @part %>',
-        tier_type:            'sequence',
-        provides_entrypoints: false},
+        sources: [
 
-<% if @featureType.include? "mRNA" %>
-   {name:                 'mRNA',
-    provides_entrypoints: true,
-    uri:                  '/features/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
-    features_uri:         '/features/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
-    type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
-    stylesheet_uri: '/geefu_dalliance_style.xml',
-    dasStaticFeatures: true},
+            {name: 'Genome',
+                uri: '/genomes/dalliance/<%=@experiment.id%>/<%= @part %>',
+                tier_type: 'sequence',
+                provides_entrypoints: false},
 
-    <% if @featureType.include? "mRNA"; @featureType.delete("mRNA"); end %>
-    <% if @featureType.include? "five_prime_UTR"; @featureType.delete("five_prime_UTR"); end %>
-    <% if @featureType.include? "exon"; @featureType.delete("exon"); end %>
-    <% if @featureType.include? "intron"; @featureType.delete("intron"); end %>
-    <% if @featureType.include? "three_prime_UTR"; @featureType.delete("three_prime_UTR"); end %>
+            <% if @featureType.include? "mRNA" %>
+            {name: 'mRNA',
+                provides_entrypoints: true,
+                uri: '/features/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
+                features_uri: '/features/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
+                type: ['five_prime_UTR', 'exon', 'intron', 'three_prime_UTR'],
+                stylesheet_uri: '/geefu_dalliance_style.xml',
+                dasStaticFeatures: true},
 
-<%end%>
+            <% if @featureType.include? "mRNA"; @featureType.delete("mRNA"); end %>
+            <% if @featureType.include? "five_prime_UTR"; @featureType.delete("five_prime_UTR"); end %>
+            <% if @featureType.include? "exon"; @featureType.delete("exon"); end %>
+            <% if @featureType.include? "intron"; @featureType.delete("intron"); end %>
+            <% if @featureType.include? "three_prime_UTR"; @featureType.delete("three_prime_UTR"); end %>
 
-<% @featureType.each do |feat| %>
+            <%end%>
 
-{name:                 '<%=feat%>',
-provides_entrypoints: true,
-uri:                  '/features/dalliance/<%=@experiment.id%>/<%= @part %>/<%=feat%>.xml',
-features_uri:         '/features/dalliance/<%=@experiment.id%>/<%= @part %>/<%=feat%>.xml',
-type:                 ['five_prime_UTR','exon', 'intron', 'three_prime_UTR'],
-stylesheet_uri: '/geefu_dalliance_style.xml',
-dasStaticFeatures: true},
+            <% @featureType.each do |feat| %>
 
-<%end %>
+            {name: '<%=feat%>',
+                provides_entrypoints: true,
+                uri: '/features/dalliance/<%=@experiment.id%>/<%= @part %>/<%=feat%>.xml',
+                features_uri: '/features/dalliance/<%=@experiment.id%>/<%= @part %>/<%=feat%>.xml',
+                type: ['five_prime_UTR', 'exon', 'intron', 'three_prime_UTR'],
+                stylesheet_uri: '/geefu_dalliance_style.xml',
+                dasStaticFeatures: true},
 
-],
+            <%end %>
 
-disablePoweredBy: true,
-uiPrefix: '/dalliance/',
-setDocumentTitle: false,
-});
+        ],
+
+        disablePoweredBy: true,
+        uiPrefix: '/dalliance/',
+        noTitle: true
+    });
+    b.addFeatureInfoPlugin(function(f, info) {
+        info.add('Testing', 'This is a test!');
+    });
 
 
 </script>
 
 
-<div id='svgHolder'>Dalliance genome browser goes here.  Unless you have an ancient web browser or something.</div>
+<div id='svgHolder'>Dalliance genome browser goes here. Unless you have an ancient web browser or something.</div>
 
-<a href="http://v0311.nbi.ac.uk:8080/WebApollo/jbrowse/?loc=<%= @part %>" target="_blank" class="btn">View in WebApollo</a>
+<a href="http://v0311.nbi.ac.uk:8080/WebApollo/jbrowse/?loc=<%= @part %>" target="_blank" class="btn">View in
+    WebApollo</a>

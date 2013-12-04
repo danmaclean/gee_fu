@@ -75,6 +75,8 @@ class ExperimentsController < ApplicationController
       end
 
 
+      logger.error("output of command one: #{cmdOne}")
+
       #This task is becoming a hassle, the more experiments, the longer this takes
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
