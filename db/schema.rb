@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131204140730) do
+ActiveRecord::Schema.define(:version => 20131204154317) do
 
   create_table "experiments", :force => true do |t|
     t.string   "name",                                             :null => false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20131204140730) do
     t.string   "score"
     t.string   "strand",        :limit => 1
     t.string   "phase",         :limit => 1
-    t.string   "text"
+    t.text     "group"
     t.string   "gff_id"
     t.integer  "experiment_id",              :null => false
     t.text     "sequence"
