@@ -103,7 +103,8 @@ end %>
     b.addFeatureInfoPlugin(function(f, info) {
         info.add('Testing', 'This is a test!');
         info.add('Testing', 'As is this!');
-        console.log(f.label);
+        console.log(f);
+        info.add('all', f);
     });
 
 
