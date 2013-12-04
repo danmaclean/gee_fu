@@ -6,7 +6,7 @@
     <%= f.error_notification %>
     <%= f.input :organism_id, collection: Organism.all, prompt: "Choose an organism...", required: true %>
     <%= f.input :build_version, as: :string, required: true %>
-
+    <%= f.input :fasta_file, as: :file, required: false%>
     <%= f.input :meta, as: :string, required: false %>
     <div class="form-actions">
         <%= f.button :submit, :class => 'btn-primary' %>
