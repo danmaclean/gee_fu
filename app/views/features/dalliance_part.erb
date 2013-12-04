@@ -100,10 +100,12 @@ end %>
     });
 
     b.addFeatureInfoPlugin(function(f, info) {
-        info.add('Testing', 'This is a test!');
-        info.add('Testing', 'As is this!');
         console.log(f);
-        info.add('all', f.id);
+        info.add('id', f.id);
+        info.add('segment', f.segment);
+        info.add('orientation', f.orientation);
+        info.add('type', f.type);
+        info.add('method', f.method);
     });
 
 
