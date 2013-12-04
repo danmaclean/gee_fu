@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419103854) do
+ActiveRecord::Schema.define(:version => 20131204140730) do
 
   create_table "experiments", :force => true do |t|
     t.string   "name",                                             :null => false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20130419103854) do
     t.string   "score"
     t.string   "strand",        :limit => 1
     t.string   "phase",         :limit => 1
-    t.string   "group"
+    t.string   "text"
     t.string   "gff_id"
     t.integer  "experiment_id",              :null => false
     t.text     "sequence"
@@ -152,6 +152,6 @@ ActiveRecord::Schema.define(:version => 20130419103854) do
 
   add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
 
-  add_foreign_key "genomes", "organisms", :name => "genomes_organism_id_fk"
+  add_foreign_key "genomes", "organisms", name: "genomes_organism_id_fk"
 
 end
