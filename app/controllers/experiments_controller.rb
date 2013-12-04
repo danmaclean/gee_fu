@@ -354,7 +354,7 @@ class ExperimentsController < ApplicationController
     @experiments = @experiments.uniq
 
     if @experiments.length == 1
-      redirect_to :action => "show", :id => @experiments.first
+      redirect_to :action => "show", :id => @experiments.first, segment => @ssid
     end
   end
 end
