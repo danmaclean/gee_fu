@@ -35,7 +35,7 @@ class GenomesController < ApplicationController
     respond_to do |format|
 
     updates = params[:genome]
-    logger.error("logging #{test}")
+    logger.error("logging #{updates}")
 
         if @genome.update_attributes(updates)
           flash[:notice] = 'Genome was successfully updated.'
