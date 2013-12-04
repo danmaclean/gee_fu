@@ -37,6 +37,7 @@ GeeFu::Application.routes.draw do
 
   scope "/experiments" do
     get "/reference_list", to: "experiments#reference_list"
+    get "/:id/:segment", to: "experiments#show"
   end
 
   scope "/features/dalliance" do
