@@ -101,6 +101,7 @@ end %>
 
     b.addFeatureInfoPlugin(function(f, info) {
         console.log(f);
+        info.add('DEBUG', 'DEBUG:');
         info.add('id', f.id);
         info.add('segment', f.segment);
         info.add('orientation', f.orientation);
