@@ -36,18 +36,23 @@ class GenomesController < ApplicationController
 
 
       unless params[:organism_id].nil?
+        logger.error("updating organism_id")
         @genome.update_attribute(:organism_id, params[:organism_id])
       end
       unless params[:build_version].nil?
+        logger.error("updating build_version")
         @genome.update_attribute(:build_version, params[:build_version])
       end
       unless params[:fasta_file].nil?
+        logger.error("updating fasta_file")
         @genome.update_attribute(:fasta_file, params[:fasta_file])
       end
       unless params[:build_version].nil?
+        logger.error("updating build_version")
         @genome.update_attribute(:build_version, params[:build_version])
       end
       unless params[:meta].nil?
+        logger.error("updating meta")
         @genome.update_attribute(:meta, params[:meta])
       end
 
