@@ -36,12 +36,12 @@ class GenomesController < ApplicationController
 
     logger.error("logging #{params[:genome]}")
 
-        if @genome.update_attributes(params[:genome])
+        #if @genome.update_attributes(params[:genome])
           flash[:notice] = 'Genome was successfully updated.'
           format.html { redirect_to(@genome) }
-        else
-          format.html { render :action => "edit" }
-        end
+        #else
+        #  format.html { render :action => "edit" }
+        #end
       end
     end
 
