@@ -94,6 +94,8 @@ end %>
 
         ],
 
+
+
         disablePoweredBy: true,
         uiPrefix: '/dalliance/',
         noTitle: true
@@ -102,11 +104,13 @@ end %>
     b.addFeatureInfoPlugin(function(f, info) {
         console.log(f);
         info.add('DEBUG', 'DEBUG:');
-        info.add('id', f.id);
-        info.add('segment', f.segment);
-        info.add('orientation', f.orientation);
-        info.add('type', f.type);
-        info.add('method', f.method);
+
+
+        <% @feat = Feature.find(f.id) %>
+        <%= logger.error(@feat) %>
+
+        info.add('key', 'value')
+
     });
 
 
