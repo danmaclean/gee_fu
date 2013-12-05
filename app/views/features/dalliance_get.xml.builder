@@ -3,7 +3,7 @@ xml.instruct!
     xml.GFF 'version' => '1.0' do
         xml.SEGMENT 'id' => "seg1" do
             @features.each do |feature|
-              xml.FEATURE 'id' => feature.id, 'label' => feature.feature do
+              xml.FEATURE 'id' => feature.id, 'label' => "test" do
                 xml.TYPE feature.feature ,'id' => feature.feature
                 xml.METHOD feature.source
                 xml.START feature.start
