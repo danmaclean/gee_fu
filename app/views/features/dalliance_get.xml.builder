@@ -11,6 +11,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
+                xml.GROUP JSON.parse(feature.group)
                 # logger.error "feature id #{feature.id}"
                 # logger.error "#{feature.quality}"
                 if feature.has_children?
