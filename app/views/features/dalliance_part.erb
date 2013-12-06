@@ -63,7 +63,7 @@ end %>
             {name: 'Genome',
                 uri: '/genomes/dalliance/<%=@experiment.id%>/<%= @part %>',
                 tier_type: 'sequence',
-                provides_entrypoints: trye},
+                provides_entrypoints: true},
 
             <% if @featureType.include? "mRNA" %>
             {name: 'mRNA',
