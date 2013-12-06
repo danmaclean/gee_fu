@@ -104,6 +104,8 @@ end %>
 
     b.addFeatureInfoPlugin(function (f, info) {
         console.log(f);
+        info.add("testa","testb");
+        info.add("test");
 
         $.ajax({
             type: "GET",
