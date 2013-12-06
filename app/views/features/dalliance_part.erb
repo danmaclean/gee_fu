@@ -103,9 +103,6 @@ end %>
     });
 
     b.addFeatureInfoPlugin(function (f, info) {
-        console.log(f);
-        info.add("testa","testb");
-        info.add("test");
         console.log(info);
         $.ajax({
             type: "GET",
@@ -113,13 +110,9 @@ end %>
             async: false,
             dataType: "json",
             success: function (data) {
-
                 $.each(data, function (ekey, eval) {
-                    console.log("each key " + ekey);
-                    console.log("each value " + eval);
-                    console.log(info);
-                    info.add(ekey, eval);
-                    info.title = "This is a title";
+                    info.title = ekey+" : "+eval;
+                    info.add("SCIENCE!", "BITCH!");
                 });
             }
         });
