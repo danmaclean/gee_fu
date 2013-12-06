@@ -112,21 +112,15 @@ end %>
             success: function (data) {
 //                alert(data.name) // Will alert Max
 
-                console.log(data[0]);
+                console.log(data);
 
-                $.each(data[0], function (key, value) {
-                    console.log("key" + key);
-                    console.log("value" + value);
-//                    $.each(value, function (ekey, eval) {
-//                        console.log("each key" + ekey);
-//                        console.log("each value" + eval);
-//                    });
+                $.each(value, function (ekey, eval) {
+                    console.log("each key" + ekey);
+                    console.log("each value" + eval);
+                    info.add(ekey, eval)
                 });
-
-
             }
         });
-
     });
 
 
