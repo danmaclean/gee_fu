@@ -45,6 +45,11 @@ end %>
 
 <script language="javascript">
 
+
+ //TODO ASAP
+ //jump to view start/end
+
+
     var b = new Browser({
         chr: '1',
         viewStart: 0,
@@ -104,7 +109,8 @@ end %>
 
     b.addFeatureInfoPlugin(function (f, info) {
         console.log(info);
-        info.setTitle("Hello, I am a title.");
+        info.setTitle("");
+        info.add("Type", f.type);
         $.ajax({
             type: "GET",
             url: "/features/getgroup/" + f.id,
