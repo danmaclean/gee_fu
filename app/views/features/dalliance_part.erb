@@ -114,12 +114,13 @@ end %>
 
                 console.log(data);
 
-//                $.each(data, function(arrayID,group) {
-//                    console.log(group);
+                $.each(data, function(key,value) {
+                    console.log("key"+key);
+                    console.log("value"+value);
 //                    $.each(group.EVENTS, function(eventID,eventData) {
 //                        console.log('<p>'+eventData.SHORT_DESC+'</p>');
 //                    });
-//                });
+                });
 
 
             }
