@@ -171,7 +171,7 @@ class ExperimentsController < ApplicationController
           end
         end
         @experiment.features << feature #TODO save at each update?
-                                        #      end
+        #      end
       end
     elsif @experiment.expected_file == "bam"
       @experiment.uses_bam_file = true
@@ -197,7 +197,7 @@ class ExperimentsController < ApplicationController
 
   def edit
     unless user_signed_in?
-        redirect_to experiment_path(params[:id]), flash: {notice: "You must be logged in to edit."}
+      redirect_to experiment_path(params[:id]), flash: {notice: "You must be logged in to edit."}
     end
 
     @experiment = Experiment.find(params[:id])
@@ -337,6 +337,7 @@ class ExperimentsController < ApplicationController
     end
   end
 
+
   def reference_list
     genome = Experiment.find(params[:id]).genome
     respond genome.references.collect { |x| x.name }
@@ -357,14 +358,9 @@ class ExperimentsController < ApplicationController
 
 
       #get TRUE seq_id
-
       @real_seq = @ssid
-
       @tmp_seq = Feature.where(gff_id: @ssid).first
-
       @real_seq = @tmp_seq.seqid if @tmp_seq
-
-
 
       redirect_to :action => "show", :id => @experiments.first, :segment => @real_seq
     end

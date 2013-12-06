@@ -728,4 +728,16 @@ class FeaturesController < ApplicationController
       render
     end
   end
+
+  def getIdFromGroup
+
+    featid = params[:id]
+
+    feature = Feature.find(featid)
+
+    groupp = JSON.parse(feature.group)
+
+    render json: groupp
+
+  end
 end

@@ -21,6 +21,10 @@ GeeFu::Application.routes.draw do
   resources :experiments
   resources :features
 
+  scope "features" do
+    get "/getgroup/:id", to: "features#getIdFromGroup"
+  end
+
   scope "/features/search" do
     post "/id", to: "features#search_by_id", as: :feature_search_by_id
     post "/attribute", to: "features#search_by_attribute", as: :feature_search_by_attribute

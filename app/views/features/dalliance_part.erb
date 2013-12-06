@@ -95,16 +95,31 @@ end %>
         ],
 
 
-
         disablePoweredBy: true,
         uiPrefix: '/dalliance/',
         noTitle: true
     });
 
-    b.addFeatureInfoPlugin(function(f, info) {
+    b.addFeatureInfoPlugin(function (f, info) {
         console.log(f);
 
-        info.add(f.id, f.type)
+        $.ajax({
+            type: "GET",
+            url: "/features/getgroup/" + f.id,
+            dataType: "json",
+            success: function (data) {
+//                alert(data.name) // Will alert Max
+
+                $.each(data, function(arrayID,group) {
+                    console.log(arrayID);
+//                    $.each(group.EVENTS, function(eventID,eventData) {
+//                        console.log('<p>'+eventData.SHORT_DESC+'</p>');
+//                    });
+                });
+
+
+            }
+        });
 
     });
 
