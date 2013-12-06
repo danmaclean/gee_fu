@@ -11,7 +11,7 @@ xml.instruct!
                 xml.SCORE feature.score
                 xml.ORIENTATION feature.strand
                 xml.PHASE feature.phase #0-6
-                <NOTE> note text </NOTE>
+                xml.NOTE "this is a note"
                 # logger.error "feature id #{feature.id}"
                 # logger.error "#{feature.quality}"
                 if feature.has_children?
