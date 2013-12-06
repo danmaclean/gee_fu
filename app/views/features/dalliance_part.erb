@@ -114,8 +114,8 @@ end %>
                 $.each(data, function (ekey, eval) {
                     console.log("each key " + ekey);
                     console.log("each value " + eval);
-                    info.title = "PLEASE WORK!";
-                    info.add(ekey, eval)
+                    info.add(ekey, eval);
+                    info.setTitle("PLEASE WORK!");
                 });
             }
         });
