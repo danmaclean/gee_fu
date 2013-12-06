@@ -107,21 +107,21 @@ end %>
         info.add("testa","testb");
         info.add("test");
         console.log(info);
-        $.ajax({
-            type: "GET",
-            url: "/features/getgroup/" + f.id,
-            dataType: "json",
-            success: function (data) {
-
-                $.each(data, function (ekey, eval) {
-                    console.log("each key " + ekey);
-                    console.log("each value " + eval);
-                    console.log(info);
-                    info.add(ekey, eval);
-                    info.title ="This is a title";
-                });
-            }
-        });
+//        $.ajax({
+//            type: "GET",
+//            url: "/features/getgroup/" + f.id,
+//            dataType: "json",
+//            success: function (data) {
+//
+//                $.each(data, function (ekey, eval) {
+//                    console.log("each key " + ekey);
+//                    console.log("each value " + eval);
+//                    console.log(info);
+//                    info.add(ekey, eval);
+//                    info.title = "This is a title";
+//                });
+//            }
+//        });
     });
 
 </script>
