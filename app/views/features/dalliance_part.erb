@@ -104,6 +104,7 @@ end %>
 
     b.addFeatureInfoPlugin(function (f, info) {
         console.log(info);
+        info.setTitle("Hello, I am a title.");
         $.ajax({
             type: "GET",
             url: "/features/getgroup/" + f.id,
@@ -111,7 +112,7 @@ end %>
             dataType: "json",
             success: function (data) {
                 $.each(data, function (ekey, eval) {
-                    info.title = ekey+" : "+eval;
+                    info.add(ekey,eval);
                 });
             }
         });
