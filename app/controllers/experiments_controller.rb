@@ -362,7 +362,7 @@ class ExperimentsController < ApplicationController
 
       @tmp_seq = Feature.where(gff_id: @ssid).first
 
-      @real_seq = @tmp_seq if @tmp_seq
+      @real_seq = @tmp_seq.seqid if @tmp_seq
 
 
 
