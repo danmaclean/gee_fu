@@ -738,7 +738,7 @@ class FeaturesController < ApplicationController
     groupp = JSON.parse(feature.group)
 
     #render json: groupp
-    render Hash[*groupp.flatten]
+    render :json => Hash[*groupp.flatten]
 
   end
 end
