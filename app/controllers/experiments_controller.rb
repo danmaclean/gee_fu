@@ -354,7 +354,19 @@ class ExperimentsController < ApplicationController
     @experiments = @experiments.uniq
 
     if @experiments.length == 1
-      redirect_to :action => "show", :id => @experiments.first, :segment => @ssid
+
+
+      #get TRUE seq_id
+
+      @real_seq = @ssid
+
+      @tmp_seq Feature.where(gff_id: @ssid)
+
+      @real_seq = @tmp_seq if @tmp_seq
+
+
+
+      redirect_to :action => "show", :id => @experiments.first, :segment => @real_seq
     end
   end
 end
