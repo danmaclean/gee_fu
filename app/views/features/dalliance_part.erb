@@ -110,13 +110,10 @@ end %>
             url: "/features/getgroup/" + f.id,
             dataType: "json",
             success: function (data) {
-//                alert(data.name) // Will alert Max
-
-                console.log(data);
 
                 $.each(data, function (ekey, eval) {
-                    console.log("each key" + ekey);
-                    console.log("each value" + eval);
+                    console.log("each key " + ekey);
+                    console.log("each value " + eval);
                     info.add(ekey, eval)
                 });
             }
