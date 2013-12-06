@@ -106,7 +106,8 @@ end %>
         console.log(f);
         info.add("testa","testb");
         info.add("test");
-        info.setTitle("This is a title")
+        info.setTitle("This is a title");
+        console.log(info);
         $.ajax({
             type: "GET",
             url: "/features/getgroup/" + f.id,
