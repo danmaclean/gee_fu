@@ -727,7 +727,7 @@ class FeaturesController < ApplicationController
 
       @experiments = Experiment.where(genome_id: genome_id)
 
-      @features
+      @features = Array.new
 
       @experiments.each do |exp|
         @features = @features + exp.features.all
