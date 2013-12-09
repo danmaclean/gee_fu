@@ -719,7 +719,13 @@ class FeaturesController < ApplicationController
 
       @features = Array.new
 
-      @experiments = Genome.find(genome_id).experiments.each do |exp|
+      @experiments = Genome.find(genome_id).experiments
+
+      if @experiments.count < 1
+        redirect_to feature_path, flash: {alert: "No genome found with that ID"}
+      end
+
+      @experiments.each do |exp|
 
         logger.error("loading experiment")
 
@@ -728,7 +734,7 @@ class FeaturesController < ApplicationController
       end 
 
       render
-      
+
     else
       redirect_to feature_path, flash: {alert: "No genome found with that ID"}
     end
