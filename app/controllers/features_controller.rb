@@ -723,7 +723,7 @@ class FeaturesController < ApplicationController
 
         logger.error("loading experiment")
 
-      @features << exp.features
+      @features.push(Feature.where(experiment: exp))
 
       end 
 
