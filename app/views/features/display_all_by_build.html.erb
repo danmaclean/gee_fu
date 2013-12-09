@@ -13,7 +13,7 @@
 </tr>
 
 
-<% @features.to_a.each do |feature| %>
+<% @features.each do |feature.first| %>
 <tr>
   <td><%= link_to feature.id, edit_feature_path(feature) %></td>
   <td><%= feature.seqid %></td>
