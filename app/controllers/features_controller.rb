@@ -737,7 +737,9 @@ class FeaturesController < ApplicationController
 
         logger.info("THE EX ID IS #{experiment.id}")
 
-        @features.push(Experiment.find(experiment.id).features)
+        @features << Experiment.find(experiment.id).features
+
+        logger.error "There are #{@features} features to display"
 
       end
 
