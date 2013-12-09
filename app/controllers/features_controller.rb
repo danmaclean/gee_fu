@@ -719,7 +719,7 @@ class FeaturesController < ApplicationController
 
       @features = Array.new
 
-      @experiments = Genome.find(genome_id).experiments
+      @experiments = Genome.find(genome_id).experiments.all
 
       @experiments.each do |exp|
 
