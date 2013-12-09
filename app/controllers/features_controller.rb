@@ -722,6 +722,8 @@ class FeaturesController < ApplicationController
 
       @experiments.each do |exp|
 
+logger.error("loading experiment")
+
         @features << exp.features
 
       end 
