@@ -725,15 +725,17 @@ class FeaturesController < ApplicationController
 
     genome_id = Genome.find(params[:genome_build])
 
+    genome_id = 5
+
     if Genome.exists?(genome_id)
 
       @features = Array.new
 
-      @experiments = Experiment.where(genome_id: genome_id).to_a
+      @experiments = Experiment.where(genome_id: genome_id)
 
-      @experiments.each do |exp|
+      @experiments.each do |experiment|
 
-        @features.push(exp.features.limit(1000))
+        @features.push(experiment.features.limit(10))
 
       end
 
