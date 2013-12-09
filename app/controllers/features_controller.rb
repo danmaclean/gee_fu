@@ -737,8 +737,6 @@ class FeaturesController < ApplicationController
 
       end
 
-      @features.to_a
-
       render
 
     else
