@@ -776,4 +776,9 @@ class FeaturesController < ApplicationController
     render :json => Hash[*groupp.flatten]
 
   end
+
+
+  def genome_typeahead
+
+  end
 end
