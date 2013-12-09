@@ -10,7 +10,7 @@
     <th>Created</th>
 </tr>
 
-<% @features.each do |features| %>
+<% @features.each do |feature| %>
 <tr>
   <td><%= link_to feature.id, edit_feature_path(feature) %></td>
   <td><%= feature.seqid %></td>
