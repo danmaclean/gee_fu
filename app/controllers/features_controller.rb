@@ -727,6 +727,7 @@ class FeaturesController < ApplicationController
       end 
 
       # redirect_to genome_path(genome_id)
+
       return @features
     else
       redirect_to feature_path, flash: {alert: "No genome found with that ID"}

@@ -1,0 +1,28 @@
+
+<table class='table'>
+  <tr>
+    <th>ID</th>
+    <th>Reference</th>
+    <th>Feature</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Strand</th>
+    <th>Attributes</th>
+    <th>Created</th>
+    <th>Parent IDs</th>
+</tr>
+
+
+<% @features.each do |feature| %>
+<tr>
+  <td><%= link_to feature.id, edit_feature_path(feature) %></td>
+  <td><%= feature.seqid %></td>
+  <td><%= feature.feature %></td>
+  <td><%= feature.start %></td>
+  <td><%= feature.end %></td>
+  <td><%= feature.strand %></td>
+  <td><%= presenter.attributes %></td>
+  <td><%=l feature.created_at.to_date, format: :gee_fu %></td>
+  <td><%= presenter.parent_list %></td>
+</tr>
+<% end %>
