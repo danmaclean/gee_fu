@@ -737,7 +737,7 @@ class FeaturesController < ApplicationController
 
         logger.info("THE EX ID IS #{experiment.id}")
 
-        @features.push(Experiment.find(experiment.id).features.limit(10))
+        @features.push(Experiment.find(experiment.id).features)
 
       end
 
