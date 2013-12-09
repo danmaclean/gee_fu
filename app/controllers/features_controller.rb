@@ -710,6 +710,13 @@ class FeaturesController < ApplicationController
     redirect_to features_path
   end
 
+  # TODO display all features for a given build version
+  def display_all_by_build
+    
+
+
+  end
+
   def search_by_id
     feature_id = params[:feature][:id]
     if Feature.exists?(feature_id)
