@@ -42,9 +42,7 @@
         
         <%= select_tag "genome build", options_from_collection_for_select(Genome.all, "id", "build_version"), prompt: "Select genome build...", class: "features-experiment" %>
 
-        <div class="input-append">
-            <%= f.text_field :id, placeholder: "Genome", label: false, class: "search-query" %>
-            <%= f.button "Search", :class => 'btn' %>
-        </div>
+        <%= f.submit "Get features", :class => 'btn btn-action' %>
+
     <% end %>
 </div>
