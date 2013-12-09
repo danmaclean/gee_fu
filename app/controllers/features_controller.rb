@@ -732,8 +732,6 @@ class FeaturesController < ApplicationController
       @features = Array.new
 
 
-
-
       @experiments = Experiment.where(genome_id: genome_id)
 
       @experiments.each do |experiment|
@@ -741,9 +739,8 @@ class FeaturesController < ApplicationController
         logger.info("THE EX ID IS #{experiment.id}")
 
 
-        @features.push(Feature.where(experiment_id: experiment.id))
+        @features.push(Feature.where(experiment_id: experiment.id).limit(100))
 
-        @features.merge(Experiment.find(experiment.id).features)
 
 
       end
