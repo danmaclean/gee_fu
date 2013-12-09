@@ -721,27 +721,15 @@ class FeaturesController < ApplicationController
       pageNo = 0
     end
 
-
-
     genome_id = Genome.find(params[:genome_build])
 
-    genome_id = 5
-
     if Genome.exists?(genome_id)
-
-      @features = Array.new
-
 
       @experiments = Experiment.where(genome_id: genome_id)
 
       @experiments.each do |experiment|
 
-        logger.info("THE EX ID IS #{experiment.id}")
-
-
-        @features<<Feature.where(experiment_id: experiment.id).take(100)
-
-      end
+       end
 
       render
 

@@ -12,8 +12,8 @@
     <th>Parent IDs</th>
 </tr>
 
-
-<% @features.each do |feature| %>
+<% @experiments.each do |experiment|
+<% experiment.features.limit(100).each do |feature| %>
 <% logger.error("COUNTING #{feature.count}") %>
 <tr>
   <td><%= link_to feature.id, edit_feature_path(feature) %></td>
@@ -26,4 +26,5 @@
   <td><%=l feature.created_at.to_date, format: :gee_fu %></td>
   <td><%= presenter.parent_list %></td>
 </tr>
+<% end %>
 <% end %>
