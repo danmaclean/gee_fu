@@ -40,7 +40,7 @@
 <div id="display_all_by_build">
     <%= form_for(Genome.new, url: feature_display_all_by_build_path, html: {class: "form-search"}) do |f| %>
         
-        <%= select_tag "genome build", options_from_collection_for_select(Genome.all, "id"), prompt: "Select genome build...", class: "features-experiment" %>
+        <%= select_tag "genome build", options_from_collection_for_select(Genome.all, "id", "id"), prompt: "Select genome build...", class: "features-experiment" %>
 
         <div class="input-append">
             <%= f.text_field :id, placeholder: "Genome", label: false, class: "search-query" %>
