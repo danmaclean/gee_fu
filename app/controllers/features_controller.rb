@@ -723,6 +723,8 @@ class FeaturesController < ApplicationController
 
     genome_id = Genome.find(params[:genome_build])
 
+    genomeName = genome_id.build_version
+
     if Genome.exists?(genome_id)
 
       @experiments = Experiment.where(genome_id: genome_id)
