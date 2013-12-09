@@ -714,17 +714,16 @@ class FeaturesController < ApplicationController
   def display_all_by_build
 
     genome_id = Genome.find(params[:genome_build])
-    if Genome.exists?(genome_id)
 
-      @experiments = Genome.find(genome_id).experiments
+    if Genome.exists?(genome_id)
 
       @features = Array.new
 
-      @experiments.each do |exp|
+      @experiments = Genome.find(genome_id).experiments.each do |exp|
 
-logger.error("loading experiment")
+        logger.error("loading experiment")
 
-        @features << exp.features
+      @features << exp.features
 
       end 
 
