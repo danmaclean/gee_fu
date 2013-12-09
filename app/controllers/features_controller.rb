@@ -718,15 +718,13 @@ class FeaturesController < ApplicationController
 
       @experiments = Genome.find(genome_id).experiments
 
-      @features = nil
+      @features = Array.new
 
       @experiments.each do |exp|
 
         @features << exp.features
 
       end 
-
-      # redirect_to genome_path(genome_id)
 
       return @features
     else
