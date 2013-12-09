@@ -721,7 +721,7 @@ class FeaturesController < ApplicationController
 
       @experiments = Genome.find(genome_id).experiments
 
-      @experiments.each.do |exp|
+      @experiments.each do |exp|
 
         @features.push(exp.features.limit(1000))
 
