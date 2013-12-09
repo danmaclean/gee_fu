@@ -729,9 +729,10 @@ class FeaturesController < ApplicationController
 
     if Genome.exists?(genome_id)
 
-      # @features = Array.new
+      @features = Array.new
 
-      @features = ActiveRecord::Relation
+
+
 
       @experiments = Experiment.where(genome_id: genome_id)
 
@@ -739,11 +740,11 @@ class FeaturesController < ApplicationController
 
         logger.info("THE EX ID IS #{experiment.id}")
 
-        # @features << Experiment.find(experiment.id).features
+
+        @features.push(Feature.where(experiment_id: experiment.id))
 
         @features.merge(Experiment.find(experiment.id).features)
 
-        # logger.error "There are #{@features.count} features to display"
 
       end
 
