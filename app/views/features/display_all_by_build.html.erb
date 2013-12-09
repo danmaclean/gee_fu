@@ -14,6 +14,7 @@
 
 
 <% @features.each do |feature| %>
+<% logger.error("#{feature}") %>
 <tr>
   <td><%= link_to feature.id, edit_feature_path(feature) %></td>
   <td><%= feature.seqid %></td>
