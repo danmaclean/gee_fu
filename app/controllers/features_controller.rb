@@ -730,7 +730,7 @@ class FeaturesController < ApplicationController
       @features = Array.new
 
       @experiments.each do |exp|
-        @features = @features + exp.features.all
+        @features = @features + exp.features.limit(50)
       end
 
       @features = @features.uniq
