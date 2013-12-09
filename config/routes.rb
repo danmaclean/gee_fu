@@ -29,6 +29,7 @@ GeeFu::Application.routes.draw do
     post "/id", to: "features#search_by_id", as: :feature_search_by_id
     post "/attribute", to: "features#search_by_attribute", as: :feature_search_by_attribute
     post "/summary", to: "features#summary", as: :feature_search_by_range
+    post "/genome/typeahead", to: "features#genome_typeahead"
     #TODO
     post "/build", to: "features#display_all_by_build", as: :feature_display_all_by_build
   end
