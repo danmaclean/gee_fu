@@ -10,8 +10,7 @@
     <th>Created</th>
 </tr>
 
-<% @experiments.each do |experiment| %>
-<% experiment.features.limit(100).each do |feature| %>
+<% @features.each do |features| %>
 <tr>
   <td><%= link_to feature.id, edit_feature_path(feature) %></td>
   <td><%= feature.seqid %></td>
@@ -21,5 +20,4 @@
   <td><%= feature.strand %></td>
   <td><%=l feature.created_at.to_date, format: :gee_fu %></td>
 </tr>
-<% end %>
 <% end %>

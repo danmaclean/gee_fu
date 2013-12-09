@@ -727,9 +727,13 @@ class FeaturesController < ApplicationController
 
       @experiments = Experiment.where(genome_id: genome_id)
 
-      @experiments.each do |experiment|
+      @features
 
-       end
+      @experiments.each do |exp|
+        @features = @features + exp.features.all
+      end
+
+      @features = @features.uniq
 
       render
 
