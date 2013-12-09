@@ -713,7 +713,7 @@ class FeaturesController < ApplicationController
   # TODO display all features for a given build version
   def display_all_by_build
 
-    PER_PAGE = 100
+    @@PER_PAGE = 100
 
     pageNo = params[:pageNo]
 
