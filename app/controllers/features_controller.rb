@@ -739,9 +739,7 @@ class FeaturesController < ApplicationController
         logger.info("THE EX ID IS #{experiment.id}")
 
 
-        @features.push(Feature.where(experiment_id: experiment.id).limit(100))
-
-
+        @features<<Feature.where(experiment_id: experiment.id).take(100)
 
       end
 
