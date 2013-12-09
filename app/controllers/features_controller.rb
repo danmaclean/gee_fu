@@ -713,7 +713,7 @@ class FeaturesController < ApplicationController
   # TODO display all features for a given build version
   def display_all_by_build
 
-    genome_id = Genome.find(params[:id])
+    genome_id = Genome.find(params[:genome_build])
     if Genome.exists?(genome_id)
       redirect_to genome_path(genome_id)
     else
