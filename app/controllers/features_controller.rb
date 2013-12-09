@@ -721,17 +721,11 @@ class FeaturesController < ApplicationController
 
       @experiments = Genome.find(genome_id).experiments
 
-      # if @experiments.count == 1
-      #   redirect_to feature_path, flash: {alert: "No genome found with that ID"}
-      # end
+      @experiments.each.do |exp|
 
-      @experiments.each do |exp|
+        @features.push(exp.features.limit(1000))
 
-        logger.error("loading experiment")
-
-      @features.push(Feature.where(experiment: exp).limit(1000))
-
-      end 
+      end
 
       render
 
