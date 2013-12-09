@@ -721,9 +721,9 @@ class FeaturesController < ApplicationController
 
       @experiments = Genome.find(genome_id).experiments
 
-      if @experiments.count < 1
-        redirect_to feature_path, flash: {alert: "No genome found with that ID"}
-      end
+      # if @experiments.count == 1
+      #   redirect_to feature_path, flash: {alert: "No genome found with that ID"}
+      # end
 
       @experiments.each do |exp|
 
