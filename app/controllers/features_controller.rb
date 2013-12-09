@@ -715,9 +715,21 @@ class FeaturesController < ApplicationController
 
     genome_id = Genome.find(params[:genome_build])
     if Genome.exists?(genome_id)
-      redirect_to genome_path(genome_id)
+
+      @experiments = Genome.find(genome_id).experiments
+
+      @features = nil
+
+      @experiments.each do |exp|
+
+        @features << exp.features
+
+      end 
+
+      # redirect_to genome_path(genome_id)
+      return @features
     else
-      redirect_to genome_path, flash: {alert: "No genome found with that ID"}
+      redirect_to feature_path, flash: {alert: "No genome found with that ID"}
     end
 
   end
