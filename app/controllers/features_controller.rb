@@ -729,7 +729,7 @@ class FeaturesController < ApplicationController
 
       @features = Array.new
 
-      @experiments = Experiment.where(genome_id: genome_id)
+      @experiments = Experiment.where(genome_id: genome_id).to_a
 
       @experiments.each do |exp|
 
