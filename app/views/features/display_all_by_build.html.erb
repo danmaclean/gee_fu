@@ -14,7 +14,7 @@
 
 
 <% @features.each do |feature| %>
-<% logger.error("#{feature}") %>
+<% logger.error("COUNTING #{feature.count}") %>
 <tr>
   <td><%= link_to feature.id, edit_feature_path(feature) %></td>
   <td><%= feature.seqid %></td>
