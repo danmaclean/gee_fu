@@ -12,7 +12,7 @@
     <th>Parent IDs</th>
 </tr>
 
-<% @experiments.each do |experiment|
+<% @experiments.each do |experiment| %>
 <% experiment.features.limit(100).each do |feature| %>
 <% logger.error("COUNTING #{feature.count}") %>
 <tr>
