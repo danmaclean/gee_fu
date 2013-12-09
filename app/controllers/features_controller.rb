@@ -735,7 +735,7 @@ class FeaturesController < ApplicationController
 
       @experiments.each do |experiment|
 
-        @features.push(experiment.features.limit(10))
+        @features.push(Experiment.find(experiment.id).features.limit(10))
 
       end
 
