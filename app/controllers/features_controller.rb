@@ -739,7 +739,7 @@ class FeaturesController < ApplicationController
 
         @features << Experiment.find(experiment.id).features
 
-        logger.error "There are #{@features} features to display"
+        logger.error "There are #{@features.count} features to display"
 
       end
 
