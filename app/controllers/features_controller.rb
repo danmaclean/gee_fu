@@ -713,13 +713,23 @@ class FeaturesController < ApplicationController
   # TODO display all features for a given build version
   def display_all_by_build
 
+    PER_PAGE = 100
+
+    pageNo = params[:pageNo]
+
+    if pageNo.nil?
+      pageNo = 0
+    end
+
+
+
     genome_id = Genome.find(params[:genome_build])
 
     if Genome.exists?(genome_id)
 
       @features = Array.new
 
-      @experiments = Genome.find(genome_id).experiments.all
+      @experiments = Experiment.where(genome_id: genome_id)
 
       @experiments.each do |exp|
 
