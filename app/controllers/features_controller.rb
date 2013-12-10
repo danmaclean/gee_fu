@@ -767,6 +767,7 @@ class FeaturesController < ApplicationController
   def getIdFromGroup
 
     featid = params[:id]
+    genome_id = params[:genome_build]
 
     feature = Feature.find(featid)
 
@@ -781,7 +782,7 @@ class FeaturesController < ApplicationController
   def genome_typeahead
     query = params[:query]
 
-    @reference = Reference.where("name LIKE :prefix", prefix: "#{query}%").uniq.pluck(:name)
+    @reference = Genome.find(genome_id).references.where("name LIKE :prefix", prefix: "#{query}%").uniq.pluck(:name)
 
     render json: @reference
   end
