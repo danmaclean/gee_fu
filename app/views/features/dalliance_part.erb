@@ -109,7 +109,7 @@ end %>
 
     b.addFeatureInfoPlugin(function (f, info) {
         console.log(info);
-        info.setTitle("|");
+        info.setTitle("&zwnj;");
         info.add("Type", f.type);
         $.ajax({
             type: "GET",
