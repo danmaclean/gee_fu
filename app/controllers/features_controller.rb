@@ -781,7 +781,11 @@ class FeaturesController < ApplicationController
   def genome_typeahead
     query = params[:query]
 
-     @reference = Reference.where(["name LIKE :tag", {:tag => query}]) 
+@search = Reference.new_search(query)
+@search.condition.field_starts_with = "prefix"
+@reference = @search.all
+
+     # @reference = Reference.where(["name LIKE :tag", {:tag => query}]) 
 
      render json: @reference
   end
