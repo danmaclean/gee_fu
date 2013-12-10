@@ -782,7 +782,7 @@ class FeaturesController < ApplicationController
     query = params[:query]
     genome_id = params[:genome_build]
 
-    @reference = Genome.find(genome_id).references.where("name LIKE :prefix", prefix: "#{query}%").uniq.pluck(:name).limit(4)
+    @reference = Genome.find(genome_id).references.where("name LIKE :prefix", prefix: "#{query}%").uniq.pluck(:name).limit(10)
 
     render json: @reference
   end
