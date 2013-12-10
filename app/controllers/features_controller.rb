@@ -781,7 +781,7 @@ class FeaturesController < ApplicationController
   def genome_typeahead
     query = params[:query]
 
-    @reference = eference.where("name LIKE :prefix", prefix: "#{query}%")
+    @reference = Reference.where("name LIKE :prefix", prefix: "#{query}%")
 
     render json: @reference
   end
