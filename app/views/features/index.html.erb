@@ -40,10 +40,8 @@
 <div id="display_all_by_build">
     <%= form_for(Genome.new, url: feature_display_all_by_build_path, html: {class: "form-search"}) do |f| %>
         
-        <%= select_tag "genome_build", options_from_collection_for_select(Genome.all, "id", "build_version"), prompt: "Select genome build...", class: "features-experiment" %>
-        <p>TODO need list of references by genome build  =  more ajax fun</p>
-        
-        <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="typeahead">
+        <%= select_tag "genome_build", options_from_collection_for_select(Genome.all, "id", "build_version"), prompt: "Select genome build...", class: "features-experiment" %>        
+        <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="typeahead" placeholder: "Enter reference name">
 
 <br>
 <br>
