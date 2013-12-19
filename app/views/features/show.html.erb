@@ -30,5 +30,14 @@
 <% end %>
 <% end %>
 
+	<% unless @badge_id.nil? %>
 
-<script src="/Credit/src/frontend/cheeves.js"></script>
+	<script src="/Credit/src/frontend/cheeves.js"></script>
+
+        <script>
+        	<% if user_signed_in? %>
+            	cheeves.update("http://127.0.0.1:3000", <%= current_user.email %>,@badge_id);
+        	<% end %>
+        </script>
+
+    <% end %>
