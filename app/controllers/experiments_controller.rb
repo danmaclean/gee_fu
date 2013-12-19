@@ -48,8 +48,9 @@ class ExperimentsController < ApplicationController
   def create
     require 'bio'
     expID = nil;
-    @experiment = Experiment.new(params[:experiment]) #TODO save experiment here?
+    @experiment = Experiment.new(params[:experiment])
     @experiment.save
+    logger.error "#{@experiment}"
     expID = @experiment.id
     genome = Genome.find(params[:experiment][:genome_id])
 
