@@ -9,7 +9,6 @@ class FeaturesController < ApplicationController
 
   def edit
     @feature = Feature.find(params[:id])
-    @badge_id = 6
   end
 
   def update
@@ -125,6 +124,7 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.save and old_feature.destroy
+        @badge_id = 6
         flash[:notice] = 'New feature was successfully created.'
         format.html { redirect_to :action => :show, :id => @feature.id }
       else
