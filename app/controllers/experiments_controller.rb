@@ -88,9 +88,9 @@ class ExperimentsController < ApplicationController
 
       #TODO return here? bg-job?
 
-    unless @experiment.save {
+    unless @experiment.save 
       return :new
-    } 
+    end
 
 
     logger.error "experiment: #{@experiment}"
