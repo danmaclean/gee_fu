@@ -91,12 +91,12 @@ class ExperimentsController < ApplicationController
     unless @experiment.save 
       return :new
     end
-
-
     logger.error "experiment: #{@experiment}"
     expID = @experiment.id
+    path = @experiment.gff_file.path
+    find_parents = @experiment.find_parents
 
-      File.open("#{@experiment.gff_file.path}").each do |line|
+      File.open("#{path}").each do |line|
         next if line =~ /^#/
         break if line =~ /^##fasta/ or line =~ /^>/
         record = Bio::GFF::GFF3::Record.new(line)
@@ -159,7 +159,7 @@ class ExperimentsController < ApplicationController
         ###sort out the Parents if any, but only connects up the parent via the first gff id
 
 
-        if @experiment.find_parents
+        if find_parents
           parents = record.attributes.select { |a| a.first == 'Parent' }
           if !parents.empty?
             parents.each do |label, parentFeature_gff_id|
@@ -186,8 +186,8 @@ class ExperimentsController < ApplicationController
         # @experiment.features << feature #TODO save at each update?
         #      end
       end
-    elsif @experiment.expected_file == 'bam'
-      @experiment.uses_bam_file = true
+    elsif Experiment.find(expID).expected_file == 'bam'
+      Experiment.find(expID).uses_bam_file = true
 
 #      cmdZero = `ln -s #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/`
 #      bamFileName = File.basename(@experiment.bam_file_path)
@@ -201,7 +201,7 @@ class ExperimentsController < ApplicationController
     end
 
     # if @experiment.save
-      redirect_to experiment_path(@experiment), flash: {notice: 'Experiment was successfully created.'}
+      redirect_to experiment_path(Experiment.find(expID)), flash: {notice: 'Experiment was successfully created.'}
     # else
       # render :new
     # end
