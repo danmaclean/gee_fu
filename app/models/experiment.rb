@@ -1,6 +1,8 @@
 class Experiment < ActiveRecord::Base
   include Concerns::Versioning
 
+after_save :test_me
+
   has_many :features, :dependent => :destroy
   belongs_to :genome
 
@@ -11,6 +13,11 @@ class Experiment < ActiveRecord::Base
   attr_accessible :name, :description, :gff_file, :bam_file_path, :genome_id, :find_parents, :expected_file, :meta, :yaml_file
 
   has_paper_trail
+
+def test_me
+     puts self.id
+     logger.error("#{self.id}")
+   end
 
   def gff_file_or_bam_file_path_is_provided
     if self.expected_file == "gff"
