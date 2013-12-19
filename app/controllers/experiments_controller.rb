@@ -50,7 +50,7 @@ class ExperimentsController < ApplicationController
     expID = nil;
     @experiment = Experiment.new(params[:experiment])
     @experiment.save
-    logger.error "#{@experiment}"
+    logger.error "#{@experiment.id}"
     expID = @experiment.id
     genome = Genome.find(params[:experiment][:genome_id])
 
