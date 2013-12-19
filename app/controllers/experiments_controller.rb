@@ -71,20 +71,20 @@ class ExperimentsController < ApplicationController
 
       typeText = ''
 
-      if File.readlines(@experiment.gff_file.path).grep(/mRNA/).size > 0
-        # do something
-        logger.error 'It is mRNA'
-        cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/`
-      else
-        logger.error 'Its not mRNA'
-        cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
-      end
+      # if File.readlines(@experiment.gff_file.path).grep(/mRNA/).size > 0
+      #   # do something
+      #   logger.error 'It is mRNA'
+      #   cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/`
+      # else
+      #   logger.error 'Its not mRNA'
+      #   cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
+      # end
 
 
-      logger.error("output of command one: #{cmdOne}")
+      # logger.error("output of command one: #{cmdOne}")
 
       #This task is becoming a hassle, the more experiments, the longer this takes
-      cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
+      # cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
       #TODO return here? bg-job?
 
