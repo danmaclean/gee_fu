@@ -15,7 +15,7 @@ def self.getCard(url, emai, badge)
 
 var getter = url+"/cards/update/"+email+"/"+badge;
 
-uri = URI(gettervar getter = url+"/badges/"+badge;)
+uri = URI(getter)
 req = Net::HTTP.get(uri)
 json = JSON.parse(req)
 
