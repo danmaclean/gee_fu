@@ -69,7 +69,7 @@ class FeaturesController < ApplicationController
         if (parentFeats)
           parentFeats.each do |pf|
             parent = nil
-            parent = Parent.where(parent_feature: pf.id)
+            parent = Parent.where(parent_feature: pf.id).first
             # parent = Parent.all(:conditions => {:parent_feature => pf.id})
             if parent
               parent.save
