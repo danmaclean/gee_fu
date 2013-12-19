@@ -26,7 +26,7 @@
     <%unless params[:badge_id].nil?%>
         <% if user_signed_in? %>
             console.log("running cheves");
-            cheeves.update("http://127.0.0.1:3000", <%= current_user.email %>,params[:badge_id]);
+            cheeves.update("http://127.0.0.1:3000", <%= current_user.email %>,<%=params[:badge_id]%>);
         <% end %>
     <%end%>
 
