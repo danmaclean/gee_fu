@@ -6,10 +6,10 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     
-    <!-- <%unless @badge_id.nil?%> -->
+    <%unless @badge_id.nil?%>
         <script>console.log("loading cheves");</script>
-        <script src="/Credit/src/backend/cheeves.js"></script>
-    <!-- <%end%> -->
+        <script src="/Credit/src/frontend/cheeves.js"></script>
+    <%end%>
 </head>
 <body>
 
