@@ -196,11 +196,11 @@ class ExperimentsController < ApplicationController
 #      logger.debug "cmdOne #{cmdOne}"
     end
 
-    if @experiment.save
+    # if @experiment.save
       redirect_to experiment_path(@experiment), flash: {notice: 'Experiment was successfully created.'}
-    else
-      render :new
-    end
+    # else
+      # render :new
+    # end
 
   end
 
