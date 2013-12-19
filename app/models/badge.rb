@@ -18,7 +18,7 @@ var getter = url+"/cards/update/"+email+"/"+badge;
 uri = URI(getter)
 req = Net::HTTP.get(uri)
 json = JSON.parse(req)
-
+puts json
 end
 
 def self.getBadge(url, badge)
@@ -26,9 +26,9 @@ def self.getBadge(url, badge)
 var getter = url+"/badges/"+badge;
 
 uri = URI(getter)
-req = Net::HTTP.get(url)
-JSON.parse(req)
-
+req = Net::HTTP.get(uri)
+json = JSON.parse(req)
+puts json
 end
 
 # class Badge
