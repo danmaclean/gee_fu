@@ -1,3 +1,32 @@
+class Badge
+require 'net/http'
+require "rubygems"
+require "json"
+
+
+def goget(url, email, badge)
+
+card = getCard(url, email, badge)
+badge = getBadge(url, badge)
+
+end
+
+def getCard(url, emai, badge)
+
+uri = URI(url)
+req = Net::HTTP.get(uri)
+json = JSON.parse(req)
+
+end
+
+def getBadge(url, badge)
+
+uri = URI(url)
+req = Net::HTTP.get(url)
+JSON.parse(req)
+
+end
+
 # class Badge
 # def give_badge
 # # gen badge
