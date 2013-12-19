@@ -9,6 +9,7 @@ class FeaturesController < ApplicationController
 
   def edit
     @feature = Feature.find(params[:id])
+    @badge_id = 6
   end
 
   def update
