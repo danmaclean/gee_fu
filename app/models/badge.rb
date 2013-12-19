@@ -23,6 +23,8 @@ end
 
 def self.getBadge(url, badge)
 
+puts "getting badge"
+
 var getter = url+"/badges/"+badge;
 
 uri = URI(getter)
