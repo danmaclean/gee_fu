@@ -6,7 +6,10 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     
-
+    <!-- <%unless @badge_id.nil?%> -->
+        <script>console.log("loading cheves");</script>
+        <script src="/Credit/src/backend/cheeves.js"></script>
+    <!-- <%end%> -->
 </head>
 <body>
 
@@ -19,6 +22,13 @@
 </div>
 
 <script>
+
+    <%unless @badge_id.nil?%>
+        <% if user_signed_in? %>
+            console.log("running cheves");
+            cheeves.update("http://127.0.0.1:3000", <%= current_user.email %>,@badge_id);
+        <% end %>
+    <%end%>
 
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
