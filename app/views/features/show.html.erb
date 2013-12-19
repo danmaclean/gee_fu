@@ -29,3 +29,19 @@
 	</table>
 <% end %>
 <% end %>
+
+
+<%unless @badge_id.nil?%>
+        <script>console.log("loading cheves");
+        <script src="/Credit/src/backend/cheeves.js"></script>
+
+ <%unless @badge_id.nil?%>
+        <% if user_signed_in? %>
+            console.log("running cheves");
+            cheeves.update("http://127.0.0.1:3000", <%= current_user.email %>,@badge_id);
+        <% end %>
+    <%end%>
+
+        </script>
+        
+    <%end%>
