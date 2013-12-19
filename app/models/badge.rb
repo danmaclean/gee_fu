@@ -27,6 +27,7 @@ var getter = url+"/badges/"+badge;
 
 uri = URI(getter)
 req = Net::HTTP.get(uri)
+puts req
 json = JSON.parse(req)
 puts json
 end
