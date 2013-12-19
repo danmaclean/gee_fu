@@ -124,12 +124,11 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.save and old_feature.destroy
-        @badge_id = 6
         flash[:notice] = 'New feature was successfully created.'
         format.html { redirect_to :action => :show, :id => @feature.id }
       else
         flash[:notice] = 'New feature failed to save...'
-        format.html { redirect_to :action => :edit, :id => params[:old_feature_id] }
+        format.html { redirect_to :action => :edit, :id => params[:old_feature_id], badge_id: 6 }
       end
     end
   end
