@@ -1,4 +1,4 @@
-class Badge
+class Badge extend self
 require 'net/http'
 require "rubygems"
 require "json"
