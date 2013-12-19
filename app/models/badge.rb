@@ -11,7 +11,7 @@ badge = getBadge(url, badge)
 
 end
 
-def self.getCard(url, emai, badge)
+def self.getCard(url, email, badge)
 
 getter = "#{url}/cards/update/#{email}/#{badge}";
 
