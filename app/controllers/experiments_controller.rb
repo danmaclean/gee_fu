@@ -181,6 +181,7 @@ class ExperimentsController < ApplicationController
           end
         end
 
+        # This is where the magic happens! 
         Experiment.find(expID).features.push(feature)
 
         # @experiment.features << feature #TODO save at each update?
