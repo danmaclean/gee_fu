@@ -13,25 +13,22 @@ end
 
 def self.getCard(url, emai, badge)
 
-var getter = url+"/cards/update/"+email+"/"+badge;
+getter = url+"/cards/update/"+email+"/"+badge;
 
 uri = URI(getter)
 req = Net::HTTP.get(uri)
 json = JSON.parse(req)
-puts json
 end
 
 def self.getBadge(url, badge)
 
 puts "getting badge"
 
-var getter = url+"/badges/"+badge;
+getter = url+"/badges/"+badge;
 
 uri = URI(getter)
 req = Net::HTTP.get(uri)
-puts req
 json = JSON.parse(req)
-puts json
 end
 
 # class Badge
