@@ -49,9 +49,7 @@ class ExperimentsController < ApplicationController
     require 'bio'
     expID = nil;
     @experiment = Experiment.new(params[:experiment])
-    @experiment.save
-    logger.error "#{@experiment.id}"
-    expID = @experiment.first.id
+    
     genome = Genome.find(params[:experiment][:genome_id])
 
     if genome.nil?
@@ -89,6 +87,10 @@ class ExperimentsController < ApplicationController
       cmdTwo = `#{WebApolloAppPath}/jbrowse/bin/generate-names.pl --out #{WebApolloAppPath}/jbrowse/data`
 
       #TODO return here? bg-job?
+
+    @experiment.save
+    logger.error "experiment: #{@experiment}"
+    expID = @experiment.id
 
       File.open("#{@experiment.gff_file.path}").each do |line|
         next if line =~ /^#/
