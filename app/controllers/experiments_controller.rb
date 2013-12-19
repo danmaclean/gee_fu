@@ -88,7 +88,11 @@ class ExperimentsController < ApplicationController
 
       #TODO return here? bg-job?
 
-    @experiment.save
+    unless @experiment.save {
+      return :new
+    } 
+
+
     logger.error "experiment: #{@experiment}"
     expID = @experiment.id
 
