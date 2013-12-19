@@ -64,11 +64,13 @@ class FeaturesController < ApplicationController
     puts "parents are #{parents}"
     if !parents.empty?
       parents.each do |label, parentFeature_gff_id|
-        parentFeats = Feature.all(:conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"])
+        # parentFeats = Feature.all(:conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"])
+        parentFeats = Feature.where(gff_id: parentFeature_gff_id)
         if (parentFeats)
           parentFeats.each do |pf|
             parent = nil
-            parent = Parent.all(:conditions => {:parent_feature => pf.id})
+            parent = Parent.where(parent_feature: pf.id)
+            # parent = Parent.all(:conditions => {:parent_feature => pf.id})
             if parent
               parent.save
             else
