@@ -163,7 +163,7 @@ class ExperimentsController < ApplicationController
           parents = record.attributes.select { |a| a.first == 'Parent' }
           if !parents.empty?
             parents.each do |label, parentFeature_gff_id|
-              parentFeats = Feature.find(:all, :conditions => ['gff_id = ?' "#{ parentFeature_gff_id }"])
+              parentFeats = Feature.where(gff_id: parentFeature_gff_id)
               if (parentFeats)
                 parentFeats.each do |pf|
                   parent = nil
