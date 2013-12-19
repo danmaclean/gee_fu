@@ -47,11 +47,14 @@ class ExperimentsController < ApplicationController
 
   def create
     require 'bio'
+    expID = nil;
     @experiment = Experiment.new(params[:experiment]) #TODO save experiment here?
+    @experiment.save
+    expID = @experiment.id
     genome = Genome.find(params[:experiment][:genome_id])
 
     if genome.nil?
-      logger.error "ERROR: There is no genome!"
+      logger.error 'ERROR: There is no genome!'
     end
 
     #format the meta data string from a provided yaml file or get it from the parent genome
@@ -65,16 +68,16 @@ class ExperimentsController < ApplicationController
 
       logger.debug "DEBUG: Going to pass #{@experiment.gff_file.path} to WebApollo as a GFF"
 
-      filenamebase = @experiment.name.downcase.tr(" ", "_")
+      filenamebase = @experiment.name.downcase.tr(' ', '_')
 
-      typeText = ""
+      typeText = ''
 
       if File.readlines(@experiment.gff_file.path).grep(/mRNA/).size > 0
         # do something
-        logger.error "It is mRNA"
+        logger.error 'It is mRNA'
         cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --type mRNA --out #{WebApolloAppPath}/jbrowse/data/`
       else
-        logger.error "Its not mRNA"
+        logger.error 'Its not mRNA'
         cmdOne = `#{WebApolloAppPath}/jbrowse/bin/flatfile-to-json.pl --gff #{@experiment.gff_file.path} --getSubFeatures --trackLabel #{filenamebase} --out #{WebApolloAppPath}/jbrowse/data/`
       end
 
@@ -111,7 +114,7 @@ class ExperimentsController < ApplicationController
 
         attribute = JSON.generate(record.attributes)
         #logger.error record.seqname
-        ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{genome.id}"])
+        ref = Reference.first(:conditions => ['name = ? AND genome_id = ?', "#{ record.seqname }", "#{genome.id}"])
 
         #logger.error "upto: #{record.seqname}"
 
@@ -119,9 +122,9 @@ class ExperimentsController < ApplicationController
           #ref = Reference.first #TODO
           #90% of issues occur here!
 
-          logger.error "------------------------------------------"
+          logger.error '------------------------------------------'
           logger.error "THE REFERENCE NAME IS WRONG, PLEASE CHECK! - #{ record.seqname } - #{genome.id}"
-          logger.error "------------------------------------------"
+          logger.error '------------------------------------------'
           render :new
         end
 
@@ -153,7 +156,7 @@ class ExperimentsController < ApplicationController
           parents = record.attributes.select { |a| a.first == 'Parent' }
           if !parents.empty?
             parents.each do |label, parentFeature_gff_id|
-              parentFeats = Feature.find(:all, :conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"])
+              parentFeats = Feature.find(:all, :conditions => ['gff_id = ?' "#{ parentFeature_gff_id }"])
               if (parentFeats)
                 parentFeats.each do |pf|
                   parent = nil
@@ -170,10 +173,13 @@ class ExperimentsController < ApplicationController
             end
           end
         end
-        @experiment.features << feature #TODO save at each update?
+
+        Experiment.find(expID).features.push(feature)
+
+        # @experiment.features << feature #TODO save at each update?
         #      end
       end
-    elsif @experiment.expected_file == "bam"
+    elsif @experiment.expected_file == 'bam'
       @experiment.uses_bam_file = true
 
 #      cmdZero = `ln -s #{@experiment.bam_file_path} {WebApolloAppPath}/jbrowse/data/bam/`
@@ -188,7 +194,7 @@ class ExperimentsController < ApplicationController
     end
 
     if @experiment.save
-      redirect_to experiment_path(@experiment), flash: {notice: "Experiment was successfully created."}
+      redirect_to experiment_path(@experiment), flash: {notice: 'Experiment was successfully created.'}
     else
       render :new
     end
@@ -197,7 +203,7 @@ class ExperimentsController < ApplicationController
 
   def edit
     unless user_signed_in?
-      redirect_to experiment_path(params[:id]), flash: {notice: "You must be logged in to edit."}
+      redirect_to experiment_path(params[:id]), flash: {notice: 'You must be logged in to edit.'}
     end
 
     @experiment = Experiment.find(params[:id])
@@ -212,7 +218,7 @@ class ExperimentsController < ApplicationController
     @experiment.yaml_file = params[:experiment][:yaml_file]
     @experiment.gff_file = params[:experiment][:gff_file]
     @experiment.expected_file = params[:experiment][:expected_file]
-    if params[:experiment][:find_parents] == "find_parents"
+    if params[:experiment][:find_parents] == 'find_parents'
       @experiment.find_parents = true
     else
       @experiment.find_parents = false
@@ -276,7 +282,7 @@ class ExperimentsController < ApplicationController
 
       attribute = JSON.generate(record.attributes)
 
-      ref = Reference.first(:conditions => ["name = ? AND genome_id = ?", "#{ record.seqname }", "#{experiment.genome_id}"])
+      ref = Reference.first(:conditions => ['name = ? AND genome_id = ?', "#{ record.seqname }", "#{experiment.genome_id}"])
 
       feature = Feature.new(
           :group => "#{attribute}",
@@ -303,7 +309,7 @@ class ExperimentsController < ApplicationController
         parents = record.attributes.select { |a| a.first == 'Parent' }
         if !parents.empty?
           parents.each do |label, parentFeature_gff_id|
-            parentFeats = Feature.all(:conditions => ["gff_id = ?", "#{ parentFeature_gff_id }"])
+            parentFeats = Feature.all(:conditions => ['gff_id = ?', "#{ parentFeature_gff_id }"])
             if (parentFeats)
               parentFeats.each do |pf|
                 parent = nil
@@ -362,7 +368,7 @@ class ExperimentsController < ApplicationController
       @tmp_seq = Feature.where(gff_id: @ssid).first
       @real_seq = @tmp_seq.seqid if @tmp_seq
 
-      redirect_to :action => "show", :id => @experiments.first, :segment => @real_seq
+      redirect_to :action => 'show', :id => @experiments.first, :segment => @real_seq
     end
   end
 end
