@@ -20,7 +20,7 @@ getter = "#{url}/cards/update/#{email}/#{badge}";
 uri = URI(getter)
 req = Net::HTTP.get(uri)
 # json = req.to_json
-return req
+return req.to_s.html_safe
 end
 
 def self.getBadge(url, badge)
@@ -30,7 +30,7 @@ getter = "#{url}/badges/#{badge}";
 uri = URI(getter)
 req = Net::HTTP.get(uri)
 # json = req.to_json
-return req
+return req.to_s.html_safe
 end
 
 end
