@@ -22,8 +22,6 @@ end
 
 def self.getBadge(url, badge)
 
-puts "getting badge"
-
 getter = "#{url}/badges/#{badge}";
 
 uri = URI(getter)
