@@ -28,8 +28,8 @@
         <% if user_signed_in? %>
             console.log("running cheves");
 
-            <% url = params[:url] %>
-            <% email = params[:email] %>
+            <% url = "http://127.0.0.1:3000" %>
+            <% email = current_user.email %>
             <% badgep = params[:badge] %>
 
             card = <%= Badge.getCard(url, email, badgep) %>
