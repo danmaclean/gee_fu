@@ -6,7 +6,7 @@
     <%= label_tag :reference, "Enter the name of the reference sequence:" %>
     <!-- <%= text_field_tag :reference %> -->
 
-    <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="reference" name="reference" placeholder="Enter reference name">
+    <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="reference" name="reference" autocomplete="off" placeholder="Enter reference name">
 
     <%= label(:start, :coord, "Enter the start and end of the search region:") %>
     <%= text_field_tag :start, nil, placeholder: "One or higher" %>
@@ -42,7 +42,7 @@
         
         <%= select_tag "genome_build", options_from_collection_for_select(Genome.all, "id", "build_version"), prompt: "Select genome build...", class: "features-experiment" %>
         <!-- <label for="typeahead">Start typing the name of a reference within the selected genome:</label> -->
-        <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="typeahead" placeholder="Enter reference name">
+        <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" autocomplete="off" id="typeahead" placeholder="Enter reference name">
         <br>
         <%= f.submit "Get features", :class => 'btn btn-action' %>
 
