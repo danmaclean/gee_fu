@@ -121,12 +121,17 @@ class FeaturesController < ApplicationController
     predecessor.save
     @feature.predecessors = [predecessor] + old_feature.predecessors
 
+url = "http://127.0.0.1:3000"
+email = "wookoouk@gmail.com"
+badge = 6
+
+card = Badge.getCard(url, email, badge)
+badge = Badge.getBadge(url, badge)
 
     respond_to do |format|
       if @feature.save and old_feature.destroy
-        @badge_id = 6 #TODO
         flash[:notice] = 'New feature was successfully created.'
-        format.html { redirect_to :action => :show, :id => @feature.id, badge_id: 6 }
+        format.html { redirect_to :action => :show, :id => @feature.id, card: card, badge: badge }
       else
         flash[:notice] = 'New feature failed to save...'
         format.html { redirect_to :action => :edit, :id => params[:old_feature_id] }
