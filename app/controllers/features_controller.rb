@@ -125,8 +125,8 @@ url = "http://127.0.0.1:3000"
 email = "wookoouk@gmail.com"
 badge = 6
 
-card = Badge.getCard(url, email, badge)
-badge = Badge.getBadge(url, badge)
+card = Badge.getCard(url, email, badge).to_json
+badge = Badge.getBadge(url, badge).to_json
 
     respond_to do |format|
       if @feature.save and old_feature.destroy
