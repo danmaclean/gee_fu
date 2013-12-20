@@ -63,7 +63,7 @@ $('#typeahead').typeahead({
 
 $('#reference').typeahead({
     source: function (query, process) {
-        return $.get('/features/search/genome/typeahead', { query: query, genome_build: $("#genome_build").val() }, function (data) {
+        return $.get('/features/search/genome/typeahead', { query: query, genome_build: $("#experiment").val() }, function (data) {
             return process(data);
         });
     }
