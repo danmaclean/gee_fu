@@ -26,8 +26,13 @@
     <%unless params[:badge].nil?%>
         <% if user_signed_in? %>
             console.log("running cheves");
-            card = Badge.getCard(params[:url], params[:email], params[:badge]).to_json
-            badge = Badge.getBadge(params[:url], params[:badge]).to_json
+
+            <% url = params[:url] %>
+            <% email = params[:email] %>
+            <% badgep = params[:badge] %>
+
+            card = Badge.getCard(<%=url%>, <%=email%>, <%=badgep%>).to_json
+            badge = Badge.getBadge(<%=url%>, <%=badgep%>).to_json
             cheeves.manualUpdate(card, badge);
         <% end %>
     <% end %>
