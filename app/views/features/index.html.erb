@@ -4,7 +4,9 @@
 
 
     <%= label_tag :reference, "Enter the name of the reference sequence:" %>
-    <%= text_field_tag :reference %>
+    <!-- <%= text_field_tag :reference %> -->
+
+    <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="reference" placeholder="Enter reference name">
 
     <%= label(:start, :coord, "Enter the start and end of the search region:") %>
     <%= text_field_tag :start, nil, placeholder: "One or higher" %>
@@ -23,8 +25,6 @@
         </div>
     <% end %>
 </div>
-
-
 
 <legend>Get feature by database ID</legend>
 <div id="find_feature_by_id">
@@ -61,5 +61,12 @@ $('#typeahead').typeahead({
     }
 });
 
+$('#reference').typeahead({
+    source: function (query, process) {
+        return $.get('/features/search/genome/typeahead', { query: query, genome_build: $("#genome_build").val() }, function (data) {
+            return process(data);
+        });
+    }
+});
 
 </script>
