@@ -6,7 +6,7 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     
-    <%unless params[:badge_id].nil?%>
+    <%unless params[:card].nil?%>
         <script>console.log("loading cheves");</script>
         <script src="/Credit/src/frontend/cheeves.js"></script>
     <%end%>
@@ -23,10 +23,12 @@
 
 <script>
 
-    <%unless params[:badge_id].nil?%>
+    <%unless params[:card].nil?%>
         <% if user_signed_in? %>
             console.log("running cheves");
-            cheeves.update("http://127.0.0.1:3000", "<%= current_user.email %>",<%=params[:badge_id]%>);
+            card = params[:card]
+            badge = params[:badge]
+            cheeves.manualUpdate(card, badge);
         <% end %>
     <% end %>
 
