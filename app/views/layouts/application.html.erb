@@ -26,8 +26,8 @@
     <%unless params[:card].nil?%>
         <% if user_signed_in? %>
             console.log("running cheves");
-            card = params[:card]
-            badge = params[:badge]
+            card = Badge.getCard(url, email, badge).to_json
+            badge = Badge.getBadge(url, badge).to_json
             cheeves.manualUpdate(card, badge);
         <% end %>
     <% end %>

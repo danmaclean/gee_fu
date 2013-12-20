@@ -19,7 +19,7 @@ getter = "#{url}/cards/update/#{email}/#{badge}";
 
 uri = URI(getter)
 req = Net::HTTP.get(uri)
-json = req.to_json
+# json = req.to_json
 return req
 end
 
@@ -29,7 +29,7 @@ getter = "#{url}/badges/#{badge}";
 
 uri = URI(getter)
 req = Net::HTTP.get(uri)
-json = req.to_json
+# json = req.to_json
 return req
 end
 

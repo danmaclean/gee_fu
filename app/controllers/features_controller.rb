@@ -131,7 +131,7 @@ badge = Badge.getBadge(url, badge).to_json
     respond_to do |format|
       if @feature.save and old_feature.destroy
         flash[:notice] = 'New feature was successfully created.'
-        format.html { redirect_to :action => :show, :id => @feature.id, card: card, badge: badge }
+        format.html { redirect_to :action => :show, :id => @feature.id, url: url, email: email, badge: badge }
       else
         flash[:notice] = 'New feature failed to save...'
         format.html { redirect_to :action => :edit, :id => params[:old_feature_id] }
