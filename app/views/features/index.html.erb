@@ -6,7 +6,7 @@
     <%= label_tag :reference, "Enter the name of the reference sequence:" %>
     <!-- <%= text_field_tag :reference %> -->
 
-    <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="reference" placeholder="Enter reference name">
+    <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" id="reference" name="reference" placeholder="Enter reference name">
 
     <%= label(:start, :coord, "Enter the start and end of the search region:") %>
     <%= text_field_tag :start, nil, placeholder: "One or higher" %>
