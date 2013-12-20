@@ -31,8 +31,8 @@
             <% email = params[:email] %>
             <% badgep = params[:badge] %>
 
-            card = <%= Badge.getCard(url, email, badgep).to_json %>
-            badge = <%= Badge.getBadge(url, badgep).to_json %>
+            card = <%= Badge.getCard(url, email, badgep) %>
+            badge = <%= Badge.getBadge(url, badgep) %>
             cheeves.manualUpdate(card, badge);
         <% end %>
     <% end %>
