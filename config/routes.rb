@@ -62,8 +62,8 @@ GeeFu::Application.routes.draw do
   end
 
   scope "/badges" do
-    get "badge/:badge", to: ""
-    get "card/:email/:badge", to: ""
+    get "badge/:badge", to: "PagesController#getbadge"
+    get "card/:email/:badge", to: "PagesController#getcard"
   end
 
   scope "/genomes/annoj" do
