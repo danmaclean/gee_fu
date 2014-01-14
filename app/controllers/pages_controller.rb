@@ -11,4 +11,15 @@ class PagesController < ApplicationController
   def browse
     render layout: false
   end
+
+  def getcard
+  	url = "http://127.0.0.1:3000"
+  	Badge.getCard(url, params[:email], params[:badge])
+  end
+
+  def getbadge
+  	url = "http://127.0.0.1:3000"
+	Badge.getBadge(url, params[:badge])
+  end
+
 end

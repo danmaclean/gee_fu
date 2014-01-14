@@ -61,6 +61,11 @@ GeeFu::Application.routes.draw do
     get "/admin", to: "admin#index"
   end
 
+  scope "/badges" do
+    get "badge/:badge", to: ""
+    get "card/:email/:badge", to: ""
+  end
+
   scope "/genomes/annoj" do
     get "/:id", to: "genomes#annoj"
   end
