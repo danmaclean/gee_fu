@@ -63,8 +63,11 @@ GeeFu::Application.routes.draw do
 
   scope "/badges" do
     get "/badge/:badge", to: "Pages#getbadge"
-    get "/card/:email/:badge", to: "Pages#getcard"
+    # get "/card/:email/:badge", to: "Pages#getcard"
   end
+
+match "/badges/card/:email/:badge" => "Pages#getcard",
+    :constraints => { :email => /.+@.+\..*/ }
 
   scope "/genomes/annoj" do
     get "/:id", to: "genomes#annoj"
