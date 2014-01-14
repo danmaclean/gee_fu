@@ -14,12 +14,14 @@ class PagesController < ApplicationController
 
   def getcard
   	url = "http://127.0.0.1:3000"
-  	Badge.getCard(url, params[:email], params[:badge])
+  	@card = Badge.getCard(url, params[:email], params[:badge])
+  	render json: @card
   end
 
   def getbadge
   	url = "http://127.0.0.1:3000"
-	Badge.getBadge(url, params[:badge])
+	@badge = Badge.getBadge(url, params[:badge])
+	render json: @badge
   end
 
 end
