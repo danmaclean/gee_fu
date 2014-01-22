@@ -1,6 +1,6 @@
 class SimpleDepth < Hash
-  def initialize(start,stop,sequence,features)
-    start= start.to_i 
+  def initialize(start, stop, sequence, features)
+    start= start.to_i
     stop = stop.to_i
     start.upto(stop) do |x|
       self[x] = Position.new(x)
@@ -8,14 +8,14 @@ class SimpleDepth < Hash
     features.each do |f|
       f.start.upto(f.end) do |pos|
         next if pos < start or pos > stop
-       ##use the feature sequence if provided, allow mismatches but not gaps..
+        ##use the feature sequence if provided, allow mismatches but not gaps..
         sequence = f.sequence.match(/\w/) ? f.sequence : sequence
         begin #get the base and increment the count
           base = sequence[(pos - f.start) - 1, 1].upcase
           self[pos].update(base, f.strand)
         rescue
           self[pos].errors += 1
-        end   
+        end
       end
     end
 
@@ -26,14 +26,14 @@ class SimpleDepth < Hash
       end
       result.to_xml
     end
-  
+
   end
 end
 
 
 class Position
   attr_accessor :A, :C, :G, :T, :position, :coverage, :errors
-  
+
   def initialize(pos)
     @position = pos
     @A = {:plus => 0, :minus => 0, :total => 0}
@@ -44,13 +44,13 @@ class Position
     @errors = 0 #a variable that counts the number of non-ACGT bases, X, N, -, etc 
   end
 
-  def update(base,strand)
+  def update(base, strand)
     strand = strand == '+' ? :plus : :minus
     self.send(base)[strand] += 1
     self.send(base)[:total] += 1
     self.coverage += 1
   end
-  
+
   def to_hash
     hash = {}
     hash['A'] = self.A

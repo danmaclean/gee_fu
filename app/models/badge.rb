@@ -1,9 +1,36 @@
-# class Badge
-# def give_badge
-# # gen badge
-#   assert_url = HTTParty.post("http://playbadges.tsl.ac.uk/api",
-#     :headers => { "recipient" => current_user.email, "evidence" => "http://www.example.org", "badgeId" => "1"},
-#     :basic_auth => {:username => "martin.page@tsl.ac.uk", :password => "B0nF1rE"})
-#  # redirect to receive badge
-#  # //TODO
-# end
+class Badge
+require 'net/http'
+require "rubygems"
+require "json"
+
+
+def self.goGet(url, email, badge)
+
+card = getCard(url, email, badge)
+badge = getBadge(url, badge)
+
+bundle = card + badge
+return bundle
+end
+
+def self.getCard(url, email, badge)
+
+getter = "#{url}/cards/update/#{email}/#{badge}";
+
+uri = URI(getter)
+req = Net::HTTP.get(uri)
+# json = req.to_json
+return req.to_s.html_safe
+end
+
+def self.getBadge(url, badge)
+
+getter = "#{url}/badges/#{badge}";
+
+uri = URI(getter)
+req = Net::HTTP.get(uri)
+# json = req.to_json
+return req.to_s.html_safe
+end
+
+end

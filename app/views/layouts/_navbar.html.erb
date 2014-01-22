@@ -1,53 +1,71 @@
-<% if user_signed_in? %>
+<div class="navwrapper">
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <ul id="nav_menu" class="nav">
 
-  <div class="navbar navbar-inverse">
-    <div class="navbar-inner">
-      <ul id="nav_menu" class="nav">
+                <li><a href="/">Home</a></li>
+                <% if user_signed_in? && current_user.admin? %>
+                    <li><a href="<%= organisms_path %>">Organisms</a></li>
+                <% end %>
+                <% if has_organisms? %>
+                    <li><a href="<%= genomes_path %>">Genome Builds</a></li>
+                    <li><a href="<%= experiments_path %>">Annotation Experiments</a></li>
+                    <li><a href="<%= features_path %>">Features</a></li>
+                    <li><a href="#">Tools</a>
 
-        <li> <a href="/">Home</a></li>
-        <% if current_user.admin? %>
-          <li><a href="<%=organisms_path%>">Samples</a></li>
-        <% end %>
-        <% if has_organisms? %>
-          <li><a href="<%=genomes_path%>">Genome Builds</a></li>
-          <li><a href="<%=experiments_path%>">Annotation Experiments</a></li>
-          <li><a href="<%=features_path%>">Features</a></li>
-          <li><a href="/tools">Tools</a>
+                        <ul>
+                            <li>
+                                <a href="/sequenceserver" target="_blank">SequenceServer</a>
+                            </li>
+                            <!-- <li>
+                                    <li>
+                                      <a href="/browse" target="_blank">Gee Fu Browse</a>
+                                  </li>
+                            </li> -->
+                            <li>
+                            <li>
+                                <a href="/webapollo" target="_blank">WebApollo - Chalara</a>
+                            </li>
+                            <li>
+                                <a href="/webapollo2" target="_blank">WebApollo - Ash</a>
+                            </li>
+                            <li>
+                                <a href="/wiki" target="_blank">Wiki</a>
+                            </li>
 
-                <ul>
-                    	<li>
-                              <a href="/sequenceserver">SequenceServer</a>
-                      </li>
-                        <li>
-                            	<li>
-                                  <a href="/browse" target="_blank">Gee Fu Browse</a>
-                              </li>
-                        </li>
-                        <li>
-                            	<li>
-                                  <a href="/webapollo" target="_blank">WebApollo</a>
-                              </li>
-                        </li>
+                    </li>
+                    </ul>
+                    </li>
+
+
+                <% end %>
+                <% if user_signed_in? %>
+                    <li>
+                        <a href="#">
+                            <i class="icon-user icon-white"></i>
+                            Signed In
+                        </a>
+                        <ul>
+                            <% if current_user.admin? %>
+                                <li>
+                                    <a href=/users/admin><i class="icon-wrench icon-white"></i> Admin</a>
+                                </li>
+                            <% end %>
+                            <li>
+                                <a href=<%= edit_user_registration_path %>><i class="icon-wrench icon-white"></i> My
+                                    Account</a>
+                            </li>
+                            <li>
+                                <a href=<%= destroy_user_session_path %>>Sign Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                <% else %>
+                    <li>
+                        <%= link_to "Sign In", new_user_session_path, { :class=>"bold bluebg" } %>
+                    </li>
+                <% end %>
                 </ul>
-        </li>
-
-
-        <% end %>
-        <li>
-        	<a href="#">
-        	<i class="icon-user icon-white"></i>
-        		 Signed In
-        	</a>
-                <ul>
-                    	<li>
-                            	<a href=<%=edit_user_registration_path%>><i class="icon-wrench icon-white"></i> My Account</a>
-                        </li>
-                        <li>
-                            	<a href=<%=destroy_user_session_path%>>Sign Out</a>
-                        </li>
-                </ul>
-        </li>
-      </ul>
+                </div>
     </div>
-  </div>
-<% end %>
+</div>

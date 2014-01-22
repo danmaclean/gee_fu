@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+
+
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -11,6 +13,6 @@ class User < ActiveRecord::Base
   has_paper_trail
 
   def full_name_with_email
-    "#{first_name} #{last_name} (#{email})" 
+    "#{first_name} #{last_name} (#{email})"
   end
 end

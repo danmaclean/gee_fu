@@ -1,51 +1,58 @@
 <script>
-current_id = 0;
-function removeGroup(id_to_remove){
-	  var full_id = "#" + id_to_remove;
-      $(full_id).remove(); 
-}
+    current_id = 0;
+    function removeGroup(id_to_remove) {
+        var full_id = "#" + id_to_remove;
+        $(full_id).remove();
+    }
 
-function makeID(){
-	current_id = current_id + 1;
-	return current_id;
-}
+    function makeID() {
+        current_id = current_id + 1;
+        return current_id;
+    }
 
-function addGroup(){
-	var group_id = makeID();
-	var key_id = makeID();
-	var value_id = makeID();
-	
-	$('#group').append('<div class="attribute" id="' + group_id + '"> <input type="text" value="Enter key" id="' + key_id +'" name="feature[new_group]['+ key_id + '][key]"/> <input type="text" value="Enter value" id="'+ value_id + '" name="feature[new_group]['+ key_id + '][value]"/><a href=# onclick="removeGroup(' + group_id + ');"  >remove</a></div>');
-}
+    function addGroup() {
+        var group_id = makeID();
+        var key_id = makeID();
+        var value_id = makeID();
+
+        $('#group').append('<div class="attribute" id="' + group_id + '"> <input type="text" value="Enter key" id="' + key_id + '" name="feature[new_group][' + key_id + '][key]"/> <input type="text" value="Enter value" id="' + value_id + '" name="feature[new_group][' + key_id + '][value]"/><a href=# onclick="removeGroup(' + group_id + ');"  >remove</a></div>');
+    }
 </script>
 
-<legend>Editing <%=@feature.feature%> ID <%=@feature.id%></legend>
-<%= simple_form_for @feature, html: { class: "form-horizontal" } do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :seqid, label: "Reference" %>
-  <%= f.input :source %>
-  <%= f.input :feature, label: "Feature Type" %>
-  <%= f.input :start, as: :string, label: "Start Position" %>
-  <%= f.input :end, as: :string, label: "End Position" %>
-  <%= f.input :score %>
-  <%= f.input :strand, as: :radio_buttons, collection: ["+", "-" ], item_wrapper_class: "inline" %>
-	<%= f.input :phase %>
-	<legend>Group Attributes:</legend>
-	<% JSON.parse(@feature.group).each do |pair| %>
-		<div class='control-group' id="<%=pair.join('_')%>">
-			<%= label_tag("feature_group_#{pair.join('_')}", pair[0], class: "control-label" ) %>
-			<div class="controls">
-			<%= text_field_tag("feature[group][#{pair.to_json}]", pair[1])  %>
-			<%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>".html_safe %>
-			</div>
-		</div>
-	<% end %>
-	<div id="group"></div>
-	<a href="#" onClick="addGroup()"; return false;>Add New Attribute</a>
-	<%=	hidden_field_tag 'old_feature_id', @feature.id %>
-<div class='form-actions'>
-	<%= link_to t('.cancel', :default => t("helpers.links.cancel")), features_path, :class => 'btn' %>
-	<%= f.button :submit, :class => 'btn-primary' %>
-</div>
+<legend>Editing <%= @feature.feature %> ID <%= @feature.id %></legend>
+
+<%= simple_form_for @feature, html: {class: "form-horizontal"} do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :seqid, label: "Reference" %>
+    <%= f.input :source %>
+    <%= f.input :feature, label: "Feature Type" %>
+    <%= f.input :start, as: :string, label: "Start Position" %>
+    <%= f.input :end, as: :string, label: "End Position" %>
+    <%= f.input :score %>
+    <%= f.input :strand, as: :radio_buttons, collection: ["+", "-"], item_wrapper_class: "inline" %>
+    <%= f.input :phase %>
+    <legend>Group Attributes:</legend>
+    <% JSON.parse(@feature.group).each do |pair| %>
+        <div class='control-group' id="<%= pair.join('_') %>">
+            <%= label_tag("feature_group_#{pair.join('_')}", pair[0], class: "control-label") %>
+            <div class="controls">
+                <%= text_field_tag("feature[group][#{pair.to_json}]", pair[1]) %>
+                <% if user_signed_in? %>
+                    <!--<%= "<a href=# onclick=\"removeGroup('#{pair.join('_') + '_div'}');\" >remove</a>".html_safe %>-->
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+    <% if user_signed_in? %>
+        <div id="group"></div>
+        <a href="#" onClick="addGroup()"; return false;>Add New Attribute</a>
+        <%= hidden_field_tag 'old_feature_id', @feature.id %>
+        <div class='form-actions'>
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")), features_path, :class => 'btn' %>
+
+            <%= f.button :submit, :class => 'btn-primary' %>
+            <a href="/wiki/<%= @feature.experiment.genome.organism.local_name %>/<%= @feature.experiment.genome.build_version %>/<%= @feature.experiment.name %>/<%= @feature.id %>" class="btn">Add/Edit Wiki page</a>
+    <% end %>
+    </div>
 <% end %>
 

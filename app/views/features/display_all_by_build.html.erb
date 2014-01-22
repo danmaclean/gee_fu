@@ -1,0 +1,25 @@
+
+<h2><%=@genomeName%></h2>
+
+<table class='table'>
+  <tr>
+    <th>ID</th>
+    <th>Reference</th>
+    <th>Feature</th>
+    <th>Start</th>
+    <th>End</th>
+    <th>Strand</th>
+    <th>Created</th>
+</tr>
+
+<% @features.each do |feature| %>
+<tr>
+  <td><%= link_to feature.id, edit_feature_path(feature) %></td>
+  <td><%= feature.seqid %></td>
+  <td><%= feature.feature %></td>
+  <td><%= feature.start %></td>
+  <td><%= feature.end %></td>
+  <td><%= feature.strand %></td>
+  <td><%=l feature.created_at.to_date, format: :gee_fu %></td>
+</tr>
+<% end %>
