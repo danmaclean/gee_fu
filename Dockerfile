@@ -9,7 +9,7 @@ run \curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled --ru
 # TEST - bypass interactice screen when going to folder with .rvmrc
 # run rvm 1.9.3 --rvmrc
 run rvm_trust_rvmrcs_flag=1
-run rvm use ruby-1.9.3-p286@gee_fu --create
+run rvm ruby-1.9.3-p286@gee_fu --create
 
 # need to pass a .env file to the app.
 add . /opt/geefu
