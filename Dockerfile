@@ -1,3 +1,5 @@
+# DOCKER-VERSION 0.3.4
+
 from ubuntu:12.04
 
 maintainer wookoouk "wookoouk@gmail.com"

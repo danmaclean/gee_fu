@@ -39,6 +39,8 @@
 
 
                 <% end %>
+            </ul>
+            <ul id="nav_menu" class="nav pull-right">
                 <% if user_signed_in? %>
                     <li>
                         <a href="#">
@@ -65,7 +67,7 @@
                         <%= link_to "Sign In", new_user_session_path, { :class=>"bold bluebg" } %>
                     </li>
                 <% end %>
-                </ul>
-                </div>
+            </ul>
+        </div>
     </div>
 </div>
