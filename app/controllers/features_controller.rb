@@ -780,6 +780,14 @@ badge = 6
 
   end
 
+def experiment_typeahead
+    query = params[:query]
+    experiment_id = params[:experiment_build]
+
+    @reference = Experiment.find(experiment_id).genome.references.where("name LIKE :prefix", prefix: "#{query}%").limit(10).uniq.pluck(:name)
+
+    render json: @reference
+  end
 
   def genome_typeahead
     query = params[:query]

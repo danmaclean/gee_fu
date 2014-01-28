@@ -30,7 +30,7 @@ GeeFu::Application.routes.draw do
     post "/attribute", to: "features#search_by_attribute", as: :feature_search_by_attribute
     post "/summary", to: "features#summary", as: :feature_search_by_range
     get "/genome/typeahead", to: "features#genome_typeahead"
-    #TODO
+    get "/experiment/typeahead", to: "features#experiment_typeahead"
     post "/build", to: "features#display_all_by_build", as: :feature_display_all_by_build
   end
 
