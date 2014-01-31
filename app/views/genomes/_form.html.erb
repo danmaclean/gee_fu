@@ -9,5 +9,6 @@
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 genomes_path, :class => 'btn' %>
+                <a href="/wiki/<%= @genome.organism.local_name.downcase %>/<%= @genome.build_version.downcase %>" class="btn">Add/Edit Wiki page</a>
   </div>
 <% end %>
