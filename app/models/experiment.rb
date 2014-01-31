@@ -14,10 +14,17 @@ after_save :test_me
 
   has_paper_trail
 
+def mem_safe_destroy
+  self.features.find_each(batch_size: 500) do |exp|
+    exp.destroy
+  end
+  self.destroy
+end
+
 def test_me
-     puts self.id
-     logger.error("#{self.id}")
-   end
+  puts self.id
+  logger.error("#{self.id}")
+end
 
   def gff_file_or_bam_file_path_is_provided
     if self.expected_file == "gff"

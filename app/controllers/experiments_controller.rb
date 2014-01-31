@@ -11,6 +11,7 @@ class ExperimentsController < ApplicationController
   def index
     # Badge.give_badge
     @experiments = Experiment.all
+    @experiments = @experiments.sort_by {|exp| exp.genome.organism}
     @experiments.each do |exp|
       #exp.meta = JSON::parse exp.meta if exp.meta
     end
