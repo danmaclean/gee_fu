@@ -49,4 +49,5 @@
                 genomes_path, :class => 'btn' %>
     <%#= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_genome_path(@genome), :class => 'btn' %>
+              <a href="/wiki/<%= @genome.organism.local_name.downcase %>/<%= @genome.build_version.downcase %>" class="btn">Add/Edit Wiki page</a>
 </div>
