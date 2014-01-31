@@ -268,7 +268,7 @@ badge = 6
     num_tracks_needed = 1
 
     begin
-      p = Bio::Graphics::Page.new(:width => 800, :height => 150, :number_of_intervals => 10)
+      p = Bio::Graphics::Page.new(:width => 1000, :height => 150, :number_of_intervals => 10)
 
       #separate features into mRNA or gene features
 
