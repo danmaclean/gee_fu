@@ -726,8 +726,9 @@ badge = 6
 
 # get genome from selected id
     genome_id = Genome.find(params[:genome_build])
+    reference_obj = Reference.where(name: params[:typeahead])
 
-unless genome_id.nil?
+unless reference.nil? && genome_id.nil?
 
 # get the name of the genome
       @genomeName = genome_id.build_version
@@ -742,7 +743,7 @@ unless genome_id.nil?
 # loop through each experiment in @experiments and pull out the features
       @experiments.each do |exp|
 # possible .limit(50) this
-        @features.concat exp.features.limit(50)
+        @features.concat exp.features.where(reference_id: reference_obj).limit(50)
 
       # @features = @features.uniq
     end
