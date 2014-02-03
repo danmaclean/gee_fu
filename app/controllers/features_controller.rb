@@ -717,7 +717,7 @@ features = [f]
   def display_all_by_build
 
     genome = Genome.find(params[:genome_build])
-    reference = Reference.where(name: params[:build_name])
+    reference = Reference.where(name: params[:build_name]).first
 
     unless reference.nil? && genome.nil?
       reference_id = reference.id
