@@ -740,7 +740,7 @@ badge = 6
 # loop through each experiment in @experiments and pull out the features
       @experiments.each do |exp|
 # possible .limit(50) this
-        @features << exp.features.limit(50)
+        @features.concat exp.features.limit(50)
 
       # @features = @features.uniq
 
