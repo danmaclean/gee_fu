@@ -716,29 +716,37 @@ badge = 6
   # TODO display all features for a given build version
   def display_all_by_build
 
-    @@PER_PAGE = 100
+    # @@PER_PAGE = 100
 
-    pageNo = params[:pageNo]
+    # pageNo = params[:pageNo]
 
-    if pageNo.nil?
-      pageNo = 0
-    end
+    # if pageNo.nil?
+    #   pageNo = 0
+    # end
 
+# get genome from selected id
     genome_id = Genome.find(params[:genome_build])
 
-    @genomeName = genome_id.build_version
-
+# check it exists
     if Genome.exists?(genome_id)
 
-      @experiments = Experiment.where(genome_id: genome_id)
+# get the name of the genome
+      @genomeName = genome_id.build_version
 
+# get all experiments attached to the genome
+      # @experiments = Experiment.where(genome_id: genome_id)
+      @experiments = genome_id.experiments
+
+# create a new/empty array
       @features = Array.new
 
+# loop through each experiment in @experiments and pull out the features
       @experiments.each do |exp|
-        @features = @features + exp.features.limit(50)
+# possible .limit(50) this
+        @features << exp.features.uniq
       end
 
-      @features = @features.uniq
+      # @features = @features.uniq
 
       render
 
