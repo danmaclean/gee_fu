@@ -103,25 +103,25 @@ class FeaturesController < ApplicationController
 
     ##setup the predecessor record from the old feature... 
     predecessor = Predecessor.new(
-        :seqid => old_feature.seqid,
-        :source => old_feature.source,
-        :feature => old_feature.feature,
-        :start => old_feature.start,
-        :end => old_feature.end,
-        :score => old_feature.score,
-        :strand => old_feature.strand,
-        :phase => old_feature.phase,
-        :gff_id => old_feature.gff_id,
-        :reference_id => old_feature.reference_id,
-        :experiment_id => old_feature.experiment_id,
-        :created_at => old_feature.created_at,
-        :group => old_feature.group,
-        :old_id => old_feature.id
-    )
+      :seqid => old_feature.seqid,
+      :source => old_feature.source,
+      :feature => old_feature.feature,
+      :start => old_feature.start,
+      :end => old_feature.end,
+      :score => old_feature.score,
+      :strand => old_feature.strand,
+      :phase => old_feature.phase,
+      :gff_id => old_feature.gff_id,
+      :reference_id => old_feature.reference_id,
+      :experiment_id => old_feature.experiment_id,
+      :created_at => old_feature.created_at,
+      :group => old_feature.group,
+      :old_id => old_feature.id
+      )
     predecessor.save
     @feature.predecessors = [predecessor] + old_feature.predecessors
 
-badge = 6
+    badge = 6
 
     respond_to do |format|
       if @feature.save and old_feature.destroy
@@ -275,91 +275,91 @@ badge = 6
       genes = @features.select { |x| x.feature == 'gene' }
       if not genes.empty?
         gene_track = p.add_track(:glyph => :directed,
-                                 :fill_color => :green_white_radial,
-                                 :label => false
-        )
+         :fill_color => :green_white_radial,
+         :label => false
+         )
         # mrna_track = p.add_track(:glyph => :transcript,
         #                          :exon_fill_color => :red_white_h,
         #                          :utr_fill_color => :blue_white_h
         #                          )
-        genes.each do |gene|
-          feat = Bio::Graphics::MiniFeature.new(:start => gene.start,
-                                                :end => gene.end,
-                                                :strand => gene.strand,
-                                                :id => gene.gff_id)
-          gene_track.add(feat)
-        end
+genes.each do |gene|
+  feat = Bio::Graphics::MiniFeature.new(:start => gene.start,
+    :end => gene.end,
+    :strand => gene.strand,
+    :id => gene.gff_id)
+  gene_track.add(feat)
+end
+end
+
+proteins = @features.select { |x| x.feature == 'protein' }
+
+if not proteins.empty?
+  protein_track = p.add_track(
+    :glyph => :generic,
+    :fill_color => :yellow_white_radial,
+    :label => false
+    )
+  proteins.each do |protein|
+    feat = Bio::Graphics::MiniFeature.new(:start => protein.start,
+      :end => protein.end,
+      :id => protein.gff_id
+      )
+    protein_track.add(feat)
+  end
+end
+
+
+mrnas = @features.select { |x| x.feature == 'mRNA' }
+@mrnas = mrnas
+if not mrnas.empty?
+  mrna_track = p.add_track(:glyph => :transcript,
+   :exon_fill_color => :red_white_h,
+   :utr_fill_color => :blue_white_h,
+   :label => false,
+   :gap_marker => 'angled'
+   )
+  mrnas.each do |m|
+    exons = []
+    utrs = []
+    m.children.each do |d|
+      if d.feature == 'exon'
+        exons << d.start
+        exons << d.end
       end
-
-      proteins = @features.select { |x| x.feature == 'protein' }
-
-      if not proteins.empty?
-        protein_track = p.add_track(
-            :glyph => :generic,
-            :fill_color => :yellow_white_radial,
-            :label => false
-        )
-        proteins.each do |protein|
-          feat = Bio::Graphics::MiniFeature.new(:start => protein.start,
-                                                :end => protein.end,
-                                                :id => protein.gff_id
-          )
-          protein_track.add(feat)
-        end
+      if d.feature == 'five_prime_UTR' or d.feature == 'three_prime_UTR'
+        utrs << d.start
+        utrs << d.end
       end
+      exons.sort!
+      utrs.sort!
+    end
+    @exons = exons
+    @utrs = utrs
 
-
-      mrnas = @features.select { |x| x.feature == 'mRNA' }
-      @mrnas = mrnas
-      if not mrnas.empty?
-        mrna_track = p.add_track(:glyph => :transcript,
-                                 :exon_fill_color => :red_white_h,
-                                 :utr_fill_color => :blue_white_h,
-                                 :label => false,
-                                 :gap_marker => 'angled'
-        )
-        mrnas.each do |m|
-          exons = []
-          utrs = []
-          m.children.each do |d|
-            if d.feature == 'exon'
-              exons << d.start
-              exons << d.end
-            end
-            if d.feature == 'five_prime_UTR' or d.feature == 'three_prime_UTR'
-              utrs << d.start
-              utrs << d.end
-            end
-            exons.sort!
-            utrs.sort!
-          end
-          @exons = exons
-          @utrs = utrs
-
-          if exons.empty?
-            exons = [m.start, m.end]
-          end
-
-          if utrs.empty?
-            utrs = [m.start, m.end]
-          end
-          feat = Bio::Graphics::MiniFeature.new(
-              :start => m.start,
-              :end => m.end,
-              :strand => m.strand,
-              :exons => exons,
-              :utrs => utrs,
-              :id => m.gff_id
-          )
-          mrna_track.add(feat)
-        end
-      end
-      @svg = p.get_markup
-    rescue
-      @svg = ""
+    if exons.empty?
+      exons = [m.start, m.end]
     end
 
+    if utrs.empty?
+      utrs = [m.start, m.end]
+    end
+    feat = Bio::Graphics::MiniFeature.new(
+      :start => m.start,
+      :end => m.end,
+      :strand => m.strand,
+      :exons => exons,
+      :utrs => utrs,
+      :id => m.gff_id
+      )
+    mrna_track.add(feat)
   end
+end
+@svg = p.get_markup
+rescue
+  @svg = ""
+end
+
+end
 
   #Standard REST request method 
   #returns a hash summarising depth of feature object coverage for a nucleotides between start and stop on reference in experiment id
@@ -405,9 +405,9 @@ badge = 6
                                                   #        positions['region_total'] += 1
                                                   #    end
                                                   #  end
-    end
-    respond(positions)
-  end
+                                                end
+                                                respond(positions)
+                                              end
 
   #Standard REST request method 
   #returns array of feature objects within or overlapping the given start and end on the reference in experiment
@@ -487,10 +487,10 @@ badge = 6
   def annoj_get
     logger.error "About to: #{params[:annoj_action]}"
     case params[:annoj_action]
-      when "syndicate"
-        @response = syndicate(params[:id])
-      when "describe"
-        @response = describe(params["id"])
+    when "syndicate"
+      @response = syndicate(params[:id])
+    when "describe"
+      @response = describe(params["id"])
     end
     logger.error "#ANNOJ: #{@response}"
     render :json => @response, :layout => false
@@ -498,10 +498,10 @@ badge = 6
 
   def annoj_post
     case params[:annoj_action]
-      when "range"
-        @response = range(params['assembly'], params['left'], params['right'], params[:id], params['bases'], params['pixels'])
-      when "lookup"
-        @response = lookup(params["query"], params[:id])
+    when "range"
+      @response = range(params['assembly'], params['left'], params['right'], params[:id], params['bases'], params['pixels'])
+    when "lookup"
+      @response = lookup(params["query"], params[:id])
     end
     render :json => @response, :layout => false
   end
@@ -520,10 +520,10 @@ badge = 6
       end #CGI.parse(URI.parse(request.url).query)
       annoj_params.each_pair { |k, v| annoj_params[k] = v.to_s }
       case annoj_params['action']
-        when "syndicate"
-          @response = syndicate(params[:id])
-        when "describe"
-          @response = [] ##to be done... 
+      when "syndicate"
+        @response = syndicate(params[:id])
+      when "describe"
+        @response = [] ##to be done... 
       end
       render :json => @response, :layout => false
     elsif request.post?
@@ -539,24 +539,24 @@ badge = 6
         sequence = Reference.first(:conditions => {:genome_id => params[:id], :name => annoj_params['assembly']}).sequence.sequence
         subseq = sequence[annoj_params['left'].to_i - 3..annoj_params['right'].to_i - 3]
         f = LightFeature.new(
-            :group => '.',
-            :feature => 'chromosome',
-            :source => '.',
-            :start => annoj_params['left'].to_i,
-            :end => annoj_params['right'].to_i,
-            :strand => '+',
-            :phase => '.',
-            :seqid => annoj_params['assembly'],
-            :score => '.',
-            :experiment_id => nil,
-            :gff_id => nil,
-            :sequence => "#{subseq}",
-            :quality => nil,
-            :reference_id => nil
-        )
-        zoom_factor = annoj_params['bases'].to_i / annoj_params['pixels'].to_i
-        response = new_response
-        features = [f]
+          :group => '.',
+          :feature => 'chromosome',
+          :source => '.',
+          :start => annoj_params['left'].to_i,
+          :end => annoj_params['right'].to_i,
+          :strand => '+',
+          :phase => '.',
+          :seqid => annoj_params['assembly'],
+          :score => '.',
+          :experiment_id => nil,
+          :gff_id => nil,
+          :sequence => "#{subseq}",
+          :quality => nil,
+          :reference_id => nil
+          )
+zoom_factor = annoj_params['bases'].to_i / annoj_params['pixels'].to_i
+response = new_response
+features = [f]
         #@response = #range(annoj_params['assembly'], annoj_params['left'], annoj_params['right'], params[:id], annoj_params['bases'], annoj_params['pixels'])
         if zoom_factor >= 10
           hist_data = get_histogram(features)
@@ -716,46 +716,18 @@ badge = 6
   # TODO display all features for a given build version
   def display_all_by_build
 
-    # @@PER_PAGE = 100
-
-    # pageNo = params[:pageNo]
-
-    # if pageNo.nil?
-    #   pageNo = 0
-    # end
-
-# get genome from selected id
     genome = Genome.find(params[:genome_build])
     reference = Reference.where(name: params[:build_name])
 
-unless reference.nil? && genome.nil?
-
-reference_id = reference.id
-# get the name of the genome
+    unless reference.nil? && genome.nil?
+      reference_id = reference.id
       @genomeName = genome.build_version
-
-# get all experiments attached to the genome
-      # @experiments = Experiment.where(genome_id: genome_id)
       @experiments = genome.experiments
-
-# create a new/empty array
       @features = Array.new
 
-# loop through each experiment in @experiments and pull out the features
       @experiments.each do |exp|
-
-Feature.find_by_sql(
-          "select * from features where
-       reference_id = '#{reference_id}' and 
-       start <= '#{stop}' and 
-       end >= '#{start}' and 
-       experiment_id = '#{experiment_id}'  
-       order by start asc, end desc"
-      )
-
         @features.concat exp.features.where(reference_id: reference_id)
-        # @features = @features.uniq
-    end
+      end
 
       render
 
@@ -797,7 +769,7 @@ Feature.find_by_sql(
 
   end
 
-def experiment_typeahead
+  def experiment_typeahead
     query = params[:query]
     experiment_id = params[:experiment_build]
 
