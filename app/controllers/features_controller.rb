@@ -725,8 +725,8 @@ badge = 6
     # end
 
 # get genome from selected id
-    genome_id = Genome.find(params[:genome_build])
-    reference = Reference.where(name: params[:typeahead])
+    genome_id = Genome.find(params[:genome_build]).first
+    reference = Reference.where(name: params[:typeahead]).first
 
 unless reference.nil? && genome_id.nil?
 
