@@ -727,9 +727,6 @@ badge = 6
 # get genome from selected id
     genome_id = Genome.find(params[:genome_build])
 
-# check it exists
-    if Genome.exists?(genome_id)
-
 # get the name of the genome
       @genomeName = genome_id.build_version
 
@@ -743,9 +740,7 @@ badge = 6
 # loop through each experiment in @experiments and pull out the features
       @experiments.each do |exp|
 # possible .limit(50) this
-        # @features << exp.features.limit(50)
-        @features = @features + exp.features.limit(50)
-      end
+        @features << exp.features.limit(50)
 
       # @features = @features.uniq
 
