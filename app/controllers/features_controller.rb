@@ -728,7 +728,7 @@ badge = 6
     genome = Genome.find(params[:genome_build])
     reference = Reference.where(name: params[:build_name])
 
-unless reference.nil? && genome.nil?
+if Reference.exists(reference) && Genome.exists(genome)
 
 reference_id = reference.id
 # get the name of the genome
