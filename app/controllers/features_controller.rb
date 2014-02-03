@@ -743,7 +743,7 @@ unless reference.nil? && genome_id.nil?
 # loop through each experiment in @experiments and pull out the features
       @experiments.each do |exp|
 # possible .limit(50) this
-        @features.concat exp.features.where(reference_id: reference).limit(50)
+        @features.concat exp.features.where(reference_id: reference.id).limit(50)
 
       # @features = @features.uniq
     end
