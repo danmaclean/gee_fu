@@ -42,7 +42,7 @@
         
         <%= select_tag "genome_build", options_from_collection_for_select(Genome.all, "id", "build_version"), prompt: "Select genome build...", class: "features-experiment" %>
         <!-- <label for="typeahead">Start typing the name of a reference within the selected genome:</label> -->
-        <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" autocomplete="off" id="typeahead" placeholder="Enter reference name">
+        <input type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" data-items="4" autocomplete="off" id="typeahead" placeholder="Enter reference name" name="build_name">
         <br>
         <%= f.submit "Get features", :class => 'btn btn-action' %>
 
