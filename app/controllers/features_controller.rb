@@ -727,6 +727,8 @@ badge = 6
 # get genome from selected id
     genome_id = Genome.find(params[:genome_build])
 
+unless genome_id.nil?
+
 # get the name of the genome
       @genomeName = genome_id.build_version
 
@@ -743,6 +745,7 @@ badge = 6
         @features.concat exp.features.limit(50)
 
       # @features = @features.uniq
+    end
 
       render
 
