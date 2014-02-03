@@ -725,24 +725,35 @@ badge = 6
     # end
 
 # get genome from selected id
-    genome_id = Genome.find(params[:genome_build])
+    genome = Genome.find(params[:genome_build])
     reference = Reference.where(name: params[:typeahead])
 
-unless reference.nil? && genome_id.nil?
+unless reference.nil? && genome.nil?
 
+reference_id = reference.id
 # get the name of the genome
-      @genomeName = genome_id.build_version
+      @genomeName = genome.build_version
 
 # get all experiments attached to the genome
       # @experiments = Experiment.where(genome_id: genome_id)
-      @experiments = genome_id.experiments
+      @experiments = genome.experiments
 
 # create a new/empty array
       @features = Array.new
 
 # loop through each experiment in @experiments and pull out the features
       @experiments.each do |exp|
-        @features.concat exp.features.where(reference_id: reference.first.id)
+
+Feature.find_by_sql(
+          "select * from features where
+       reference_id = '#{reference_id}' and 
+       start <= '#{stop}' and 
+       end >= '#{start}' and 
+       experiment_id = '#{experiment_id}'  
+       order by start asc, end desc"
+      )
+
+        @features.concat exp.features.where(reference_id: reference_id)
         # @features = @features.uniq
     end
 
