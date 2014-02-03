@@ -713,7 +713,7 @@ features = [f]
     redirect_to features_path
   end
 
-  # TODO display all features for a given build version
+  # display all features for a given build version
   def display_all_by_build
 
     genome = Genome.find(params[:genome_build])
