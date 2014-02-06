@@ -81,8 +81,8 @@ match "/badges/card/:email/:badge" => "Pages#getcard",
     get "/get_sequence", to: "experiments#findfromss"
   end
 
-  match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
-  match "/webapollo2" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo2/"), :as => :webapollo2
+  # match "/webapollo" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo/"), :as => :webapollo
+  # match "/webapollo2" => redirect("http://geefu.oadb.tsl.ac.uk:8080/WebApollo2/"), :as => :webapollo2
 
 
 require 'gollum/frontend/app'
