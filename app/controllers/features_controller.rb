@@ -719,7 +719,7 @@ features = [f]
     genome = Genome.find(params[:genome_build])
     reference = Reference.where(name: params[:build_name]).first
 
-    unless reference == nil && reference.empty? && genome.nil?
+    if !reference.nil? && !reference.empty? && !genome.nil? && && !genome.nil?
       reference_id = reference.id
       @genomeName = genome.build_version
       @experiments = genome.experiments
