@@ -12,7 +12,7 @@
 
 
 <div class="well" id="dally">
-    <iframe id="frame" src="" width="100%" height="400px" frameBorder="0" seamless='seamless'></iframe>
+    <!-- <iframe id="frame" src="" width="100%" height="400px" frameBorder="0" seamless='seamless'></iframe> -->
     <br>
     <button id="togglefs" class="btn btn-info">Toggle Fullscreen</button>
 </div>
@@ -21,6 +21,11 @@
 
 
 <script type="text/javascript">
+
+$.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function(data){
+            $("#frammer").html(data);
+        });
+
     function goToAddress() {
 //        alert("CLICK");
         seq = $("#seqname").val();
@@ -42,11 +47,9 @@
         // $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
 
         $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function(data){
-            $("#frammer").html(data);
+            $("#dally").html(data);
         });
     }
-
-<div id="frammer"></div>
 
     goToAddress();
 
