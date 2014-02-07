@@ -251,7 +251,7 @@ class FeaturesController < ApplicationController
     ref = Reference.first(:conditions => {:genome_id => genome_id, :name => reference})
 
     if ref.nil?
-      flash[:error] << 'Cound not find the selected reference.'
+      flash[:error] << 'Selected reference could not be found in the current genome'
       redirect_to(:back) and return unless flash[:error].empty?
     end
 
@@ -732,7 +732,7 @@ features = [f]
       render
 
     else
-      redirect_to features_path, flash: {alert: "This reference ID could not be found in the current genome"}
+      redirect_to features_path, flash: {alert: "Selected reference could not be found in the current genome"}
     end
 
   end
