@@ -41,7 +41,7 @@
 
         // $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
 
-        $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function(data){
+        $.get("/features/dalliance/part/2/" + seq, function(data){
             $("#frame").html(data);
         });
     }
