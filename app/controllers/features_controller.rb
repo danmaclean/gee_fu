@@ -732,7 +732,7 @@ features = [f]
       render
 
     else
-      redirect_to feature_path, flash: {alert: "No genome found with that ID"}
+      redirect_to features_path, flash: {alert: "No genome found with that ID"}
     end
 
   end
