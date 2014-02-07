@@ -39,8 +39,14 @@
 //            });
 //    });
 
-        $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
+        // $("#frame").attr("src", "/features/dalliance/part/<%= @experiment.id%>/" + seq);
+
+        $.get("/features/dalliance/part/<%= @experiment.id%>/" + seq, function(data){
+            $("#frammer").html(data);
+        });
     }
+
+<div id="frammer"></div>
 
     goToAddress();
 
