@@ -795,7 +795,7 @@ features = [f]
     sequence_id = params[:sequence]
 
     # get features from experiment where experiment id and sequence id match params
-    features = Experiment.find(experiment_id).features.where(sequence: sequence_id)
+    features = Experiment.find(experiment_id).features.where(seqid: sequence_id)
 
     # find feature with lowest start point
     @highest = features.max_by(&:start)
