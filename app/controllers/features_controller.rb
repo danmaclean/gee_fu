@@ -786,4 +786,23 @@ features = [f]
 
     render json: @reference
   end
+
+
+  def entrypoints
+    # /genomes/dalliance/32/Cf746836_TGAC_s1v1_scaffold_5/entry_points
+
+    experiment_id = params[:experiment]
+    sequence_id = params[:sequence]
+
+    # get features from experiment where experiment id and sequence id match params
+    features = Experiment.find(experiment_id).where(sequence: sequence_id)
+
+    # find feature with lowest start point
+    highest = features.max_by(&:start)
+
+    # find feature with highest start point
+    lowest = features.min_by(&:start)
+
+  end
+
 end

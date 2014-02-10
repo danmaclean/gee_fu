@@ -38,6 +38,8 @@ GeeFu::Application.routes.draw do
     post "/sequence", to: "tools#genomic_sequence", as: :tools_genomic_sequence
   end
 
+
+
   scope "/genomes" do
     get "/reference_list", to: "genomes#reference_list"
   end
@@ -55,6 +57,7 @@ GeeFu::Application.routes.draw do
 
   scope "/genomes/dalliance/" do
     get "/:exid/:part/sequence", to: "features#dalliance_genome"
+    get ":experiment/:sequence/entry_points", to: "features#entrypoints"
   end
 
   scope "/users" do
