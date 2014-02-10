@@ -16,6 +16,5 @@ xml.instruct!
   xml.DASGFF do
      xml.FEATURE 'ENTRY_POINTS' => feature.id, 'start' => highest, 'end' => lowest do
         # xml.SEGMENT 'id' => "seg1"
-      end
     end
   end
