@@ -3,7 +3,7 @@ xml.instruct!
     xml.GFF 'version' => '1.0' do
         xml.SEGMENT 'id' => "seg1" do
             @features.each do |feature|
-              label = JSON.parse(Feature.find(312013).group)[0][1]
+              label = JSON.parse(feature.group)[0][1]
               xml.FEATURE 'id' => feature.id, 'label' => label do
                 xml.TYPE feature.feature ,'id' => feature.feature
                 xml.METHOD feature.source
