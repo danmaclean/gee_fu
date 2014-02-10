@@ -67,8 +67,9 @@ end %>
 
             {name: 'Genome',
                 uri: '/genomes/dalliance/<%=@experiment.id%>/<%= @part %>',
-                tier_type: 'sequence',
-                provides_entrypoints: true},
+                // tier_type: 'sequence',
+                // provides_entrypoints: true
+            },
 
             <% if @featureType.include? "mRNA" %>
             {name: 'mRNA',
@@ -77,6 +78,8 @@ end %>
                 features_uri: '/features/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
                 type: ['five_prime_UTR', 'exon', 'intron', 'three_prime_UTR'],
                 stylesheet_uri: '/geefu_dalliance_style.xml',
+                tier_type: 'sequence',
+                provides_entrypoints: true,
                 dasStaticFeatures: true},
 
             <% if @featureType.include? "mRNA"; @featureType.delete("mRNA"); end %>
