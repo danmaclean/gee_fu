@@ -803,6 +803,8 @@ features = [f]
     # find feature with highest start point
     lowest = features.min_by(&:start)
 
+    render :dalliance_entry_points
+
   end
 
 end
