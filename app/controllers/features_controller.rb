@@ -788,7 +788,7 @@ features = [f]
   end
 
 
-  def entrypoints
+  def dalliance_entry_points
     # /genomes/dalliance/32/Cf746836_TGAC_s1v1_scaffold_5/entry_points
 
     experiment_id = params[:experiment]
