@@ -64,3 +64,7 @@ You can extend the database exactly as if it were any other Rails application. S
 
 ## Where to find more info
 If you get really frustrated with the software, feel free to complain to me `dan.maclean@tsl.ac.uk`. A lot of your initial problems will be answered in the Rails community pages, please look there if your problem looks like it might be related to Rails more directly than this particular instance of a Rails app.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/wookoouk/gee_fu/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
