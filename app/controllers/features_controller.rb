@@ -798,7 +798,7 @@ features = [f]
     features = Experiment.find(experiment_id).features.where(seqid: sequence_id)
 
     # find feature with lowest start point
-    @highest = features.max_by(&:start).start
+    @highest = features.max_by(&:start).start+1
 
     # find feature with highest start point
     @lowest = features.min_by(&:start).end

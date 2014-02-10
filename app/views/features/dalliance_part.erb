@@ -72,7 +72,6 @@ end %>
 
             <% if @featureType.include? "mRNA" %>
             {name: 'mRNA',
-//                provides_entrypoints: true,
                 uri: '/features/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
                 features_uri: '/features/dalliance/<%=@experiment.id%>/<%= @part %>.xml',
                 type: ['five_prime_UTR', 'exon', 'intron', 'three_prime_UTR'],
