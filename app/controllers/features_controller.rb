@@ -798,10 +798,10 @@ features = [f]
     features = Experiment.find(experiment_id).features.where(seqid: sequence_id)
 
     # find feature with lowest start point
-    @highest = features.max_by(&:end).start
+    @highest = features.max_by(&:end).end
 
     # find feature with highest start point
-    @lowest = features.min_by(&:start).end
+    @lowest = features.min_by(&:start).start
 
     render :dalliance_entry_points
 
