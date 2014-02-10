@@ -11,3 +11,11 @@
 #     <SEGMENT type="Supercontig" id="GL000194.1" start="1" stop="191469" orientation="+" subparts="yes">GL000194.1</SEGMENT>
 #   </ENTRY_POINTS>
 # </DASEP>
+
+xml.instruct!
+  xml.DASGFF do
+     xml.FEATURE 'ENTRY_POINTS' => feature.id, 'start' => highest, 'end' => lowest do
+        # xml.SEGMENT 'id' => "seg1"
+      end
+    end
+  end
