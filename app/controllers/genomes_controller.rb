@@ -117,9 +117,8 @@ class GenomesController < ApplicationController
 
       genomefile.each do |entry|
 
-        logger.error "!!!!!#{genomefile.count} genes!!!!!!"
-
-        logger.error "adding genome entry - #{entry.entry_id} of #{genomefile.count}"
+        # logger.error "adding genome entry - #{entry.entry_id} of #{genomefile.count}"
+        logger.error "#{genomefile.count}"
 
         seq = entry.to_seq
         reference = Reference.new(:name => entry.entry_id, :length => entry.length)
