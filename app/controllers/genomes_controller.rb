@@ -113,16 +113,16 @@ class GenomesController < ApplicationController
         cmdComplete = "FAILED, Please add manually"
       end
 
-      genomefile = Bio::FastaFormat.open(@genome.fasta_file.path)
+      @@genomefile = Bio::FastaFormat.open(@genome.fasta_file.path)
 
-      logger.error "count #{genomefile}"
-      logger.error "count #{genomefile.count}"
-      logger.error "count #{genomefile.count}"
+      logger.error "count #{@@genomefile}"
+      logger.error "count #{@@genomefile.count}"
+      logger.error "count #{@@genomefile.count}"
 
-      genomefile.each do |entry|
+      @@genomefile.each do |entry|
 
         # logger.error "adding genome entry - #{entry.entry_id} of #{genomefile.count}"
-        logger.error "#{genomefile.count}"
+        logger.error "#{@@genomefile.count}"
 
         seq = entry.to_seq
         reference = Reference.new(:name => entry.entry_id, :length => entry.length)
