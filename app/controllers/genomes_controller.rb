@@ -98,24 +98,26 @@ class GenomesController < ApplicationController
     #add the reference objects and sequence objects for this file...
     if @genome.fasta_file
 
-      # cmdOne = system('#{WebApolloPath}/tools/user/extract_seqids_from_fasta.pl -p Annotations- -i #{@genome.fasta_file.path} -o /data/webapollo/scratch/seqids.txt')
-      # cmdTwo = system('#{WebApolloPath}/tools/user/add_tracks.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -t /data/webapollo/scratch/seqids.txt')
-      # cmdThree = system('#{WebApolloPath}/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /data/webapollo/scratch/seqids.txt -r -w -m')
-      # cmdFour = system('#{WebApolloAppPath}/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path}')
+      cmdOne = system('#{WebApolloPath}/tools/user/extract_seqids_from_fasta.pl -p Annotations- -i #{@genome.fasta_file.path} -o /data/webapollo/scratch/seqids.txt')
+      cmdTwo = system('#{WebApolloPath}/tools/user/add_tracks.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -t /data/webapollo/scratch/seqids.txt')
+      cmdThree = system('#{WebApolloPath}/tools/user/set_track_permissions.pl -D web_apollo_users -U web_apollo_users_admin -P web_apollo_users_admin -u web_apollo_admin -t /data/webapollo/scratch/seqids.txt -r -w -m')
+      cmdFour = system('#{WebApolloAppPath}/jbrowse/bin/prepare-refseqs.pl --fasta #{@genome.fasta_file.path}')
 
-      # logger.debug "cmdOne #{cmdOne}"
-      # logger.debug "cmdTwo #{cmdTwo}"
-      # logger.debug "cmdThree #{cmdThree}"
-      # logger.debug "cmdFour #{cmdFour}"
+      logger.debug "cmdOne #{cmdOne}"
+      logger.debug "cmdTwo #{cmdTwo}"
+      logger.debug "cmdThree #{cmdThree}"
+      logger.debug "cmdFour #{cmdFour}"
 
-      # cmdComplete = "SUCCESSFUL"
-      # if (!cmdOne || !cmdTwo || !cmdThree || !cmdFour)
-      #   cmdComplete = "FAILED, Please add manually"
-      # end
+      cmdComplete = "SUCCESSFUL"
+      if (!cmdOne || !cmdTwo || !cmdThree || !cmdFour)
+        cmdComplete = "FAILED, Please add manually"
+      end
 
       genomefile = Bio::FastaFormat.open(@genome.fasta_file.path)
 
       genomefile.each do |entry|
+
+        logger.error "!!!!!#{genomefile.count} genes!!!!!!"
 
         logger.error "adding genome entry - #{entry.entry_id} of #{genomefile.count}"
 
