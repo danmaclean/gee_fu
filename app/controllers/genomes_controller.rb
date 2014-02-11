@@ -115,6 +115,10 @@ class GenomesController < ApplicationController
 
       genomefile = Bio::FastaFormat.open(@genome.fasta_file.path)
 
+      logger.error "#count {genomefile}"
+      logger.error "#count {genomefile}"
+      logger.error "#count {genomefile}"
+
       genomefile.each do |entry|
 
         # logger.error "adding genome entry - #{entry.entry_id} of #{genomefile.count}"
