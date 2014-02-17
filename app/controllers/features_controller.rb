@@ -470,6 +470,9 @@ end
       @features = Feature.where(experiment_id: @eid, feature: ["mRNA", "five_prime_UTR", "exon", "intron", "three_prime_UTR"], seqid: @part)
       logger.error "------------------------------------ found #{@features.length} features"
     end
+    respond do |format|
+      format.xml
+    end
   end
 
   #def dallience_reference
