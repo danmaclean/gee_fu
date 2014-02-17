@@ -50,9 +50,9 @@ GeeFu::Application.routes.draw do
   end
 
   scope "/features/dalliance" do
-    get "/part/:exid/:part", to: "features#dalliance_part",:constraints => { :part => /.*/ }
-    get "/:exid/:part", to: "features#dalliance_get",:constraints => { :part => /.*/ }
-    get "/:exid/:part/:featutype/", to: "features#dalliance_get",:constraints => { :part => /.*/ }
+    get "/part/:exid/:part", to: "features#dalliance_part",:constraints => { :part => /.xml/ }
+    get "/:exid/:part", to: "features#dalliance_get",:constraints => { :part => /.xml/ }
+    get "/:exid/:part/:featutype/", to: "features#dalliance_get",:constraints => { :part => /.xml/ }
   end
 
   scope "/genomes/dalliance/" do
