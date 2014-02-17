@@ -462,7 +462,7 @@ end
     @eid = params[:exid]
     @part = params[:part]
     @featuretype = params[:featutype]
-    @part = @part.sub(/^.xml/, '')
+    @part = @part.sub(/.xml/, '')
     if !@featuretype.nil?
       logger.error "-------------------------------- feature type = #{params[:featutype]}"
       @features = Feature.where(experiment_id: @eid, feature: @featuretype, seqid: @part)
