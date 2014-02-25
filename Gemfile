@@ -41,5 +41,6 @@ group :test do
   gem 'rb-fsevent'
   gem 'fakefs', :require => "fakefs/safe"
   gem 'timecop'
+  gem 'rspec-rails', '~> 2.0'
 end
 
