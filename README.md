@@ -77,4 +77,4 @@ Ubuntu/Debian: `sudo /etc/init.d/httpd/restart`
 
 Centos: `sudo /etc/init.d/apach2/restart`
 
-OSX`sudo /usr/sbin/apachectl restart`
+OSX: `sudo /usr/sbin/apachectl restart`
