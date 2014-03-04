@@ -21,7 +21,7 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
 
 [Ubuntu/Debian](doc/ubuntu.md)
 
-[Mac OSX](doc/osx.md)
+[OSX](doc/osx.md)
 
 Windows (Coming Soon!)
 
@@ -57,8 +57,19 @@ MANDRILL_APIKEY=[insert API key]
 
 ### Start GeeFu
 
-#### With Rake
+##### With Rake
+`bundle exec rails server`
 
-#### With Upstart
+##### With Foreman
+`foreman start`
+##### With Passenger
+[Install Passenger](http://www.modrails.com/documentation/Users%20guide%20Apache.html#installation)
 
-#### With Passenger
+[Link to Apache config]()
+
+
+Ubuntu/Debian: `sudo /etc/init.d/httpd/restart`
+
+Centos: `sudo /etc/init.d/apach2/restart`
+
+OSX`sudo /usr/sbin/apachectl restart`
