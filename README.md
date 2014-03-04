@@ -22,6 +22,14 @@ YellowRust (Available Soon)
 
 ## Full Install
 
+### Hosting
+
+You can install GeeFu almost anywhere, on a local machine, VM or in then cloud, below are a few reccomendations:
+* [Linode](https://www.linode.com/) - Cheep($20 p/m) hosting, very easy to set up.
+* [AWS](http://aws.amazon.com/) - Cheep (free option available), not so easy to set up.
+* [Heroku](https://www.heroku.com/) - Cheep (free option available), [easy to setup](heroku.md)
+* [VirtualBox](https://www.virtualbox.org/) - Run the site from your local machine, for testing.
+
 ### Dependencies:
 
 [Ubuntu/Debian](doc/ubuntu.md)
