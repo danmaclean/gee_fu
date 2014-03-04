@@ -10,11 +10,12 @@ Gee Fu is ideally suited to serving large amounts of data such as those from hig
 Gee Fu is capable of receiving and handling requests from AnnoJ , a web service based viewing engine for genomic data. It can return JSON data which AnnoJ is able to render. We anticipate being able to serve up data in formats suitable for different applications as development progresses and we become aware of other rendering engines and web services that request data. 
 
 
-## Quick Install
-* Install Docker.
-* 
+## Demo Install (not advised for production)
+* Install [Docker](https://www.docker.io/gettingstarted/#h_installation)
+* Get the Dockerfile TODO
+* Run the image TODO
 
-## Setting up Gee Fu
+## Full Install
 
 ### Dependencies:
 
@@ -56,3 +57,8 @@ MANDRILL_APIKEY=[insert API key]
 
 ### Start GeeFu
 
+#### With Rake
+
+#### With Upstart
+
+#### With Passenger
