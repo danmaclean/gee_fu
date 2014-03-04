@@ -10,24 +10,26 @@ Gee Fu is ideally suited to serving large amounts of data such as those from hig
 Gee Fu is capable of receiving and handling requests from AnnoJ , a web service based viewing engine for genomic data. It can return JSON data which AnnoJ is able to render. We anticipate being able to serve up data in formats suitable for different applications as development progresses and we become aware of other rendering engines and web services that request data. 
 
 
+## Guick Install
+
 ## Setting up Gee Fu
 
 * Install [rvm](https://rvm.io/) using:
   `\curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled --ruby=1.9.3-p286`
-* Install redis (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
-  `brew install redis`
-* Follow instructions given by `brew info redis` to have launchd start redis at login
-* Install git (on OSX with [homebrew](http://mxcl.github.io/homebrew/) use)
+* Install redis
+* Install git
   `brew install git`
-* Install postgres (on OSX use [PostgresApp](http://postgresapp.com/))
+* Install postgres
 * Clone the GeeFU repo
-  `git clone git://github.com/danmaclean/gee_fu.git .`
+  `git clone git://github.com/danmaclean/gee_fu.git geefu`
 * `cd gee_fu`
 * Accept the .rvmrc as trusted
 * Install bundler
   `gem install bundler`
 * Setup the repo
   `bundle install`
+
+
 * Signup for a [Mandrill](http://mandrill.com/) account and grab an API key
 * Create a .env file in the root folder with:
 
