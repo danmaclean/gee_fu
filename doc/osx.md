@@ -7,9 +7,10 @@
   `brew install redis`
 
 * Follow instructions given by `brew info redis` to have launchd start Redis at login
-* 
+
 * Install Postgres using:
 `brew install postgresql`
+
 * Follow instructions given by `brew info postgresql` to have launchd start Postgres at login
 
 ## [Return to setup](/README.md#get-geefu)
