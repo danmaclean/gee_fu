@@ -16,28 +16,27 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
 
 ## Setting up Gee Fu
 
-[Ubuntu/Debian](docs/ubuntu.md)
+###Dependencies:
 
-[Mac OSX](docs/osx.md)
+[Ubuntu/Debian](doc/ubuntu.md)
 
-[Windows](docs/windows.md)
+[Mac OSX](doc/osx.md)
 
+Windows (Coming Soon!)
 
-* Install [rvm](https://rvm.io/) using:
-  `\curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled --ruby=1.9.3-p286`
-* Install redis
-* Install git
-* Install postgres
+###Get GeeFu:
+
 * Clone the GeeFU repo
   `git clone git://github.com/danmaclean/gee_fu.git geefu`
 * `cd geefu`
 * Accept the .rvmrc as trusted
+
+###Configure GeeFu:
+
 * Install bundler
   `gem install bundler`
 * Setup the repo
   `bundle install`
-
-
 * Signup for a [Mandrill](http://mandrill.com/) account and grab an API key
 * Create a .env file in the root folder with:
 
