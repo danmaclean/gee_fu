@@ -45,7 +45,7 @@ Windows (Coming Soon!)
 * Sign up for a [Mandrill](http://mandrill.com/) account and grab an API key
 * Create a .env file in the root folder with:
 
-```
+```shell
 EMAIL_SENDER=My Name <me@example.com>
 MANDRILL_USERNAME=me@example.com
 MANDRILL_APIKEY=[insert API key]
@@ -63,18 +63,31 @@ MANDRILL_APIKEY=[insert API key]
 ### Start GeeFu
 
 ##### With Rake
-`bundle exec rails server`
+```shell
+bundle exec rails server
+```
 
 ##### With Foreman
-`foreman start`
+```shell
+foreman start
+```
 ##### With Passenger
 [Install Passenger](http://www.modrails.com/documentation/Users%20guide%20Apache.html#installation)
 
 [Link to Apache config]()
 
 
-Ubuntu/Debian: `sudo /etc/init.d/httpd/restart`
+Ubuntu/Debian: 
+```shell
+sudo /etc/init.d/httpd/restart
+```
 
-Centos: `sudo /etc/init.d/apach2/restart`
+Centos: 
+```shell
+sudo /etc/init.d/apach2/restart
+```
 
-OSX: `sudo /usr/sbin/apachectl restart`
+OSX: 
+```shell
+sudo /usr/sbin/apachectl restart
+```
