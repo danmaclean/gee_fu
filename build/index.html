@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Readme Docs</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/prettify.css">
+    <link rel="stylesheet" href="css/docs.css">
+  </head>
+</html>
+<body data-spy="scroll" data-target="#docs-navbar" data-offset="81">
+  <div id="spacer"></div>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container"><a href="/" class="brand">Readme Docs</a>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="span2">
+        <div id="docs-navbar" data-spy="affix">
+          <div class="row">
+            <div class="span2">
+              <ul class="nav nav-pills nav-stacked">Gee Fu is an application that holds Gene Feature data. It has been designed with the needs of researchers wanting to keep, share and annotate sequence and feature data.
+Gee Fu is a Ruby on Rails based RESTful web-service application that stores and serves sequence assembly and genome feature data on request. 
+              </ul><small class="muted">Generated with <a href="https://github.com/getprove/node-bootstrap-readme-docs">readme-docs</a></small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span10">
+
+<p>GeeFu can be used as a base that can be easily extended into fuller customised web-applications using the powerful Rails framework.</p>
+<p>Gee Fu is ideally suited to serving large amounts of data such as those from high-throughput sequencing experiments via bio-samtools and BAM files. </p>
+<p>Gee Fu is capable of receiving and handling requests from AnnoJ , a web service based viewing engine for genomic data. It can return JSON data which AnnoJ is able to render. We anticipate being able to serve up data in formats suitable for different applications as development progresses and we become aware of other rendering engines and web services that request data. </p>
+<hr><h2 id="quick-install"><a href="#quick-install" name="quick-install" id="quick-install">Quick Install</a></h2>
+<ul>
+<li>Install Docker.</li>
+<li></li>
+</ul>
+<hr><h2 id="setting-up-gee-fu"><a href="#setting-up-gee-fu" name="setting-up-gee-fu" id="setting-up-gee-fu">Setting up Gee Fu</a></h2>
+<hr><h3 id="dependencies-"><a href="#dependencies" name="dependencies" id="dependencies">Dependencies:</a></h3>
+<p><a href="doc/ubuntu.md">Ubuntu/Debian</a></p>
+<p><a href="doc/osx.md">Mac OSX</a></p>
+<p>Windows (Coming Soon!)</p>
+<hr><h3 id="get-geefu-"><a href="#get-geefu" name="get-geefu" id="get-geefu">Get GeeFu:</a></h3>
+<ul>
+<li>Clone the GeeFU repo: <code>git clone git://github.com/wookoouk/gee_fu.git geefu</code></li>
+<li>Go into geefu folder: <code>cd geefu</code></li>
+<li>Accept the .rvmrc as trusted</li>
+</ul>
+<hr><h3 id="configure-geefu-"><a href="#configure-geefu" name="configure-geefu" id="configure-geefu">Configure GeeFu:</a></h3>
+<ul>
+<li>Install bundler
+<code>gem install bundler</code></li>
+<li>Set up the repo
+<code>bundle install</code></li>
+<li>Sign up for a <a href="http://mandrill.com/">Mandrill</a> account and grab an API key</li>
+<li>Create a .env file in the root folder with:</li>
+</ul>
+<pre class="prettyprint linenums"><code>EMAIL_SENDER=My Name &lt;me@example.com&gt;
+MANDRILL_USERNAME=me@example.com
+MANDRILL_APIKEY=[insert API key]</code></pre>
+<ul>
+<li>Update &#39;config.action_mailer.default_url_options&#39; inside &#39;config/environments/development.rb&#39; to reflect your sites base URL.</li>
+<li>Create a Postgres user called gee_fu with no password</li>
+<li>Change the attributes of Postgres user gee_fu to allow database creation <code>ALTER USER gee_fu CREATEDB;</code></li>
+<li>Run <code>rake db:setup</code></li>
+<li>Follow the instructions at README_FOR_DATA.mdown</li>
+<li>Start the gee-fu server with <code>foreman start</code></li>
+<li>Visit <a href="http://localhost:5000">http://localhost:5000</a></li>
+<li>Once you&#39;ve signed up as the first user use <code>rake admin:set email=me@example.com</code> to set your account as an admin to be able add Organisms</li>
+</ul>
+<hr><h3 id="start-geefu"><a href="#start-geefu" name="start-geefu" id="start-geefu">Start GeeFu</a></h3>
+
+      </div>
+    </div>
+  </div>
+  <script src="js/vendor/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <script src="js/vendor/prettify.js"></script>
+  <script src="js/vendor/jquery.ba-hashchange.js"></script>
+  <script src="js/vendor/jquery.scrollTo.js"></script>
+  <script src="js/vendor/bootstrap-adjust-hash.js"></script>
+  <script src="js/main.js"></script>
+</body>

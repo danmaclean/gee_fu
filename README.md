@@ -16,7 +16,7 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
 
 ## Setting up Gee Fu
 
-###Dependencies:
+### Dependencies:
 
 [Ubuntu/Debian](doc/ubuntu.md)
 
@@ -24,20 +24,19 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
 
 Windows (Coming Soon!)
 
-###Get GeeFu:
+### Get GeeFu:
 
-* Clone the GeeFU repo
-  `git clone git://github.com/danmaclean/gee_fu.git geefu`
-* `cd geefu`
+* Clone the GeeFU repo: `git clone git://github.com/wookoouk/gee_fu.git geefu`
+* Go into geefu folder: `cd geefu`
 * Accept the .rvmrc as trusted
 
-###Configure GeeFu:
+### Configure GeeFu:
 
 * Install bundler
   `gem install bundler`
-* Setup the repo
+* Set up the repo
   `bundle install`
-* Signup for a [Mandrill](http://mandrill.com/) account and grab an API key
+* Sign up for a [Mandrill](http://mandrill.com/) account and grab an API key
 * Create a .env file in the root folder with:
 
 ```
@@ -53,5 +52,7 @@ MANDRILL_APIKEY=[insert API key]
 * Follow the instructions at README_FOR_DATA.mdown
 * Start the gee-fu server with `foreman start`
 * Visit http://localhost:5000
-* Once you've signed up as the first user use `rake admin:set email=me@example.com` to set your account as an admin to add Organisms
+* Once you've signed up as the first user use `rake admin:set email=me@example.com` to set your account as an admin to be able add Organisms
+
+### Start GeeFu
 
