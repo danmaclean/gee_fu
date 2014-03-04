@@ -16,6 +16,13 @@ Gee Fu is capable of receiving and handling requests from AnnoJ , a web service 
 
 ## Setting up Gee Fu
 
+[Ubuntu/Debian](docs/ubuntu.md)
+
+[Mac OSX](docs/osx.md)
+
+[Windows](docs/windows.md)
+
+
 * Install [rvm](https://rvm.io/) using:
   `\curl -L https://get.rvm.io | bash -s stable --rails --autolibs=enabled --ruby=1.9.3-p286`
 * Install redis
